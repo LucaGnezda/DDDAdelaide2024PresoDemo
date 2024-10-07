@@ -32,31 +32,31 @@ class ObservableCore {
 
         let handler = (path = []) => ({
             get(target, property, reciever) {
-                //console.log(`Proxied Get.`);
 
                 if (typeof property === 'symbol'){
-                    //console.log(`Proxied Get. Getting ${target.constructor.name}.UnknownSymbol`);
+                    Log.trace(`Proxied Get. Getting ${target.constructor.name}.UnknownSymbol`, "PROXY");
                 }
                 else {
-                    //console.log(`Proxied Get. Getting ${target.constructor.name}.${property}`);
+                    Log.trace(`Proxied Get. Getting ${target.constructor.name}.${property}`, "PROXY");
                 }
 
-                // return from subproxies if already existing, or create then the target property is an object and not yet a proxy.
+                // return from subproxies if they already exist, otherwise create then the target property is an object and not yet a proxy.
                 if (property === '_isProxy') {
                     return true;
                 }
-                else if (typeof target[property] === 'object' && !target[property]._isProxy) {
-                    console.log(`Sub object proxy created for ${target[property].constructor.name} in parent object ${self.originatingObject.constructor.name}`)
+                // or if its an object without a proxy, create one
+                else if (target[property] != null && typeof target[property] === 'object' && !target[property]._isProxy) {
+                    Log.debug(`Sub object proxy created for ${target[property].constructor.name} in parent object ${self.originatingObject.constructor.name}`, "PROXY");
                     target[property] = new Proxy(target[property], handler(path.concat(property)));
                 }
                 
-                // use reflect to ensure the get works correctly in all use cases.
+                // or return the data. Use reflect to ensure the get works correctly in all use cases.
                 return Reflect.get(target, property, reciever);
             },
 
             set(target, property, newValue, reciever) {
                 
-                console.log(`PROXY(${self.#originatingObject.constructor.name}.ObservableData): Proxied Set. Update observed for ${target.constructor.name}.${property} from ${target[property]} to ${newValue}`);
+                Log.debug(`(${self.#originatingObject.constructor.name}.ObservableData): Proxied Set. Update observed for ${target.constructor.name}.${property} from ${target[property]} to ${newValue}`, "PROXY");
 
                 let oldValue = target[property];
 
@@ -64,7 +64,7 @@ class ObservableCore {
                 
                 // compare the sorted json strings of the old and new structure, if we're making no change, then just return. Sorting is essential in the comparison to avoid misinterpreting differing property orders as different objects.
                 if (newValueJSON == JSONstringifyOrder(target[property])) {
-                    console.log(`  No change event required`);
+                    Log.debug(`  No change event required`, "PROXY");
                     return true;
                 }
 
@@ -74,8 +74,10 @@ class ObservableCore {
                 //  - We can't accidently form proxies around proxies, or absorb proxies from other things, especially for nested objects
                 //  - Behaviour will be consistent and predictable across proxies, arrays and objects.
                 // Its a reasonable solution considering these are supposed to be simple data structures anyway.
-                newValue = JSON.parse(newValueJSON);
-
+                if (newValue != null) {
+                    newValue = JSON.parse(newValueJSON);
+                }
+                
                 let result = Reflect.set(target, property, newValue, reciever);
                 
                 if (self.#notificationStatus == NotificationStatus.Active && self.subscribers.length > 0 && newValue != oldValue) {
@@ -89,18 +91,18 @@ class ObservableCore {
                             event.oldValue = oldValue;
                             event.newValue = newValue;
 
-                            console.log(`  Propagating change event to subscribers`);
+                            Log.debug(`  Propagating change event to subscribers`, "PROXY");
                             self.subscribers.map(obj => obj.callback(event));
                             break;
 
                         case NotificationMode.ObjectNotifyOnEmit:
-                            console.log(`  Backlog change event for later propagation.`);
+                            Log.debug(`  Backlog change event for later propagation.`, "PROXY");
                             self.notificationRequired();
                             break;
 
                         default:
                             // Shouldn't be here!!!!
-                            console.log("Error: Invalid NotificationMode")
+                            Log.debug("Error: Invalid NotificationMode", "PROXY")
 
                     }
                 }
@@ -109,7 +111,7 @@ class ObservableCore {
             },
         });
 
-        console.log(`Object proxy created for ${this.data.constructor.name} in parent object ${self.#originatingObject.constructor.name}`)
+        Log.debug(`Object proxy created for ${this.data.constructor.name} in parent object ${self.#originatingObject.constructor.name}`, "PROXY");
         self.dataProxy = new Proxy(this.data, handler());
 
     }
@@ -119,7 +121,7 @@ class ObservableCore {
     }
 
     set originatingObject(val) {
-        console.log(`${this.dataProxy.constructor.name} in ${this.constructor.name} assigned to parent ${val.constructor.name}`)
+        Log.debug(`${this.dataProxy.constructor.name} in ${this.constructor.name} assigned to parent ${val.constructor.name}`, "PROXY")
         this.#originatingObject = val;
     }
 
@@ -214,12 +216,12 @@ class ObservableCore {
         this.#pendingNotification = true;
     }
 
-    emitNotifications() {
-        if (this.#pendingNotification) {
+    emitNotifications(isforced) {
+        if (this.#pendingNotification || isforced) {
 
             this.#pendingNotification = false;
 
-            console.log(`STORE: Emitting notifications in ${this.constructor.name} for ${this.originatingObject.constructor.name}`);
+            Log.debug(`Emitting notifications in ${this.constructor.name} for ${this.originatingObject.constructor.name}`, "STORE");
 
             let event = new ObservableDataEvent();
             event.notificationMode = NotificationMode.ObjectNotifyOnEmit;
@@ -228,7 +230,18 @@ class ObservableCore {
             event.oldValue = null;
             event.newValue = null;
 
-            this.#subscribers.map(obj => obj.callback(event));
+            if (typeof isforced == "string") {  
+                // If a string was provided, use it as a key to target the recipient by id
+                this.#subscribers.map(obj => obj.subscriber.id == isforced ? obj.callback(event) : null);
+            }
+            else if (typeof isforced == "object") {
+                // If an object was provided, use it as a key to target the recipient
+                this.#subscribers.map(obj => obj.subscriber == isforced ? obj.callback(event) : null);
+            }
+            else { 
+                // Otherwise notify everyone
+                this.#subscribers.map(obj => obj.callback(event));
+            }
         }
         
     }

@@ -25,7 +25,7 @@ class ObservablesDictionary {
         }
     }
 
-    add(key, obj) {
+    add(key) {
         if (key in this) {
             return null
         }
@@ -44,39 +44,43 @@ class ObservablesDictionary {
         delete this[key];
     }
 
-    emitNotifications() {
+    emitNotifications(isforced) {
         for (var property in this) {
-            try {
-                this[property].emitNotifications();
+            if (typeof this[property].emitNotifications !== "undefined") {
+                this[property].emitNotifications(isforced);
             }
-            catch {
+            else {
                 // Ignore
-                console.log("Error: Object in observable dictionary does not have an emitNotificationsMethod() or the method threw an error.")
+                Log.warn("Object in observable dictionary does not have an emitNotificationsMethod().", "DICTIONARY")
             }
         }
     }
 
     enableAllNotifications() {
         for (var property in this) {
-            try {
+            if (typeof this[property].emitNotifications !== "undefined") {
                 this[property].notificationStatus = NotificationStatus.Active;
             }
-            catch {
+            else {
                 // Ignore
-                console.log("Error: Object in observable dictionary does not have an notificationStatus setter or the method threw an error.")
+                Log.error("Object in observable dictionary does not have an notificationStatus setter.", "DICTIONARY")
             }
         }
     }
 
     disableAllNotifications() {
         for (var property in this) {
-            try {
+            if (typeof this[property].emitNotifications !== "undefined") {
                 this[property].notificationStatus = NotificationStatus.Inactive;
             }
-            catch {
+            else {
                 // Ignore
-                console.log("Error: Object in observable dictionary does not have an notificationStatus setter or the method threw an error.")
+                Log.error("Object in observable dictionary does not have an notificationStatus setter.", "DICTIONARY")
             }
         }
+    }
+
+    toArray() {
+        return Object.values(this).map(e => e.observableData);
     }
 }

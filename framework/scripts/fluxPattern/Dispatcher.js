@@ -21,11 +21,11 @@ class Dispatcher {
     dispatch(action) {
 
         if (action.constructor.name != Action.name) {
-            console.log("Error: parameter provided is not an Action. Ignoring request.");
+            Log.warn("Parameter provided is not an Action. Ignoring request.", "DISPATCHER");
             return;
         }
         
-        console.log(`DISPATCHER: Dispatching action ${action.type} with payload ${action.payload}`)
+        Log.debug(`Dispatching action ${action.type} with payload ${action.payload}`, "DISPATCHER");
         this.#registeredHandlers.map(e => e.handler[e.actionRouterName](action));
     }
 
@@ -37,22 +37,22 @@ class Dispatcher {
     addDispatchHandler(obj, actionRouterName) {
 
         if (typeof obj != "object") {
-            console.log("Error: Hander must be an object. Unable to register");
+            Log.error("Hander must be an object. Unable to register", "DISPATCHER");
             return;
         }
 
         if (isEmptyOrNull(actionRouterName)) {
-            console.log("Error: No routing method provided. Unable to register");
+            Log.error("No routing method provided. Unable to register", "DISPATCHER");
             return;
         }
 
         if (obj[actionRouterName] == null) {
-            console.log("Error: Routing method does not exist. Unable to register");
+            Log.error("Routing method does not exist. Unable to register", "DISPATCHER");
             return;
         }
 
         if (typeof obj[actionRouterName] != "function") {
-            console.log("Error: Routing target is not a method. Unable to register");
+            Log.error("Routing target is not a method. Unable to register", "DISPATCHER");
             return;
         }
         
@@ -60,6 +60,7 @@ class Dispatcher {
             this.#registeredHandlers.push({handler:obj, actionRouterName: actionRouterName});
         }
     }
+
 
     /**
      * returns a dispatcher callback that passes a payload based on callback arguments.

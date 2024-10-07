@@ -3,44 +3,52 @@
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline';" />
 
         <!-- Styles -->
+        <link rel="stylesheet" type="text/css" href="./app/styles/Base.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/Testing.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCSlideBackground.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCSlideDeck.css">
 
-        <!-- Libraries -->
-        <script src="./scripts/libs/customComponents/CCBase.js"></script>
-        <script src="./scripts/libs/customComponents/CCObservableBase.js"></script>
+        <!-- Framework -->
+        <script defer src="./framework/scripts/customComponents/CCBase.js"></script>
+        <script defer src="./framework/scripts/customComponents/CCObservableBase.js"></script>
 
-        <script src="./scripts/libs/enums/Enum.js"></script>
+        <script defer src="./framework/scripts/enums/Enum.js"></script>
 
-        <script src="./scripts/libs/observables/ObservableEnums.js"></script>
-        <script src="./scripts/libs/observables/Observable.js"></script>
-        <script src="./scripts/libs/observables/ObservableCore.js"></script>
-        <script src="./scripts/libs/observables/ObservableData.js"></script>
-        <script src="./scripts/libs/observables/ObservableDataEvent.js"></script>
-        <script src="./scripts/libs/observables/ObservablesDictionary.js"></script>
+        <script defer src="./framework/scripts/fluxPattern/Action.js"></script>
+        <script defer src="./framework/scripts/fluxPattern/Dispatcher.js"></script>
+        <script defer src="./framework/scripts/fluxPattern/Store.js"></script>
 
-        <script src="./scripts/libs/fluxPattern/Action.js"></script>
-        <script src="./scripts/libs/fluxPattern/Dispatcher.js"></script>
-        <script src="./scripts/libs/fluxPattern/Store.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableEnums.js"></script>
+        <script defer src="./framework/scripts/observables/Observable.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableCore.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableData.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableDataEvent.js"></script>
+        <script defer src="./framework/scripts/observables/ObservablesDictionary.js"></script>
 
-        <script src="./scripts/libs/helpers/Helpers.js"></script>
+        <script defer src="./framework/scripts/logging/LoggingEnums.js"></script>
+        <script defer src="./framework/scripts/logging/Log.js"></script>
+
+        <script defer src="./framework/scripts/helpers/Helpers.js"></script>
 
         <!-- ActionHandlers -->
-        <script src="./scripts/actionHandlers/AppActionHandler.js"></script>
+        <script defer src="./app/scripts/actionHandlers/PresentationActionHandler.js"></script>
 
         <!-- Components -->
-        <script src="./scripts/components/CCbutton.js"></script>
-        <script src="./scripts/components/CCLabel.js"></script>
-    
-        <!-- Controllers -->
-        <script src="./scripts/controllers/StartupController.js"></script>
+        <script defer src="./app/scripts/components/CCSlideBackground.js"></script> 
+        <script defer src="./app/scripts/components/CCSlideDeck.js"></script>        
 
         <!-- Services -->
-        <script src="./scripts/services/ComponentRegistry.js"></script>
-        <script src="./scripts/services/Listner.js"></script>
+        <script defer src="./app/scripts/services/App.js"></script>
+        <script defer src="./app/scripts/services/AppService.js"></script>
+        <script defer src="./app/scripts/services/ComponentRegistry.js"></script>
 
 
     </head>
-    <body onload="StartupController.initialise()">
+    <body onload="AppService.Initialise()">
         <div id="ComponentRoot">
-        </div>        
+            <div id="Backgrounds" style="display: none;">
+                <div class="TestBackground">
+            </div>
+        </div>     
     </body>
 </html>

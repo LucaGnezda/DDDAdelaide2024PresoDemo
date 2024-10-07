@@ -1,0 +1,9 @@
+.TestBackgroundContent {
+    background: url("../assets/TaptuBrand.svg");
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    position: absolute;
+    transition: all 1.0s ease-in-out;
+}
