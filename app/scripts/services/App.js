@@ -17,6 +17,6 @@ class App {
 
     // referecned components
     static components = {
-        slideDeck: null
+        presentation: null
     };
 }

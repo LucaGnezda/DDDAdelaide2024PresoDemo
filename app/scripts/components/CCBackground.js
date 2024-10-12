@@ -1,6 +1,6 @@
 "use strict";
 
-class CCSlideBackground extends CCBase {
+class CCBackground extends CCBase {
 
     /**
      * Member attributes
@@ -8,7 +8,7 @@ class CCSlideBackground extends CCBase {
 
     #elements = {
         backgroundRoot: null,
-        backgroundModifier: null,
+        backgroundTransformer: null,
         backgroundContent: null
     };
 
@@ -21,7 +21,7 @@ class CCSlideBackground extends CCBase {
 
     static #htmlTemplate = `
         <div class="CCSlideBackgroundRoot" data-background-root>
-            <div class="CCSlideBackgroundModifier" data-background-modifier>
+            <div class="CCSlideBackgroundTransformer" data-background-transformer>
                 <div class="CCSlideBackgroundContent" data-background-content></div>
             </div>
         </div>
@@ -59,10 +59,10 @@ class CCSlideBackground extends CCBase {
      */
     #initialiseComponent() {
 
-        let fragment = getDOMFragmentFromString(CCSlideBackground.#htmlTemplate);
+        let fragment = getDOMFragmentFromString(CCBackground.#htmlTemplate);
 
         this.#elements.backgroundRoot = fragment.querySelector('[data-background-root]');
-        this.#elements.backgroundModifier = fragment.querySelector('[data-background-modifier]');
+        this.#elements.backgroundTransformer = fragment.querySelector('[data-background-transformer]');
         this.#elements.backgroundContent = fragment.querySelector('[data-background-content]');
         
         this.appendChild(fragment);
@@ -77,32 +77,50 @@ class CCSlideBackground extends CCBase {
      * Public Methods
      */
 
-    setBackgroundContentClass(className) {
+    contentClass(className) {
         this.#elements.backgroundContent.className = className;
     }
 
-    setBackgroundSlidingRange(xPages, yPages) {
+    positionRange(xPages, yPages) {
         this.#elements.backgroundContent.style.width = (xPages * 100).toString() + '%';
         this.#elements.backgroundContent.style.height = (yPages * 100).toString() + '%';
         this.#elements.backgroundContent.style.left = '-0%';
         this.#elements.backgroundContent.style.top = '-0%';
     }
 
-    slideTo(pageX, pageY) {
+    position(pageX, pageY) {
         this.#elements.backgroundContent.style.left = (-pageX * 100).toString() + '%';
         this.#elements.backgroundContent.style.top = (-pageY * 100).toString() + '%';
     }
 
-    transitionIn() {
-        this.#elements.backgroundRoot.className = "CCSlideBackgroundRoot";
+    transformationClass(cssClass) {
+        this.#elements.backgroundTransformer.className = "CCBackgroundTransformerDefault";
+        if (cssClass != null) {
+            this.#elements.backgroundTransformer.classList.add(cssClass);
+        }
     }
 
-    transitionOut(className) {
-        this.#elements.backgroundRoot.classList.add(className);
+    transitionStyle(style) {
+        this.#elements.backgroundContent.style.transition = style;
+        this.#elements.backgroundTransformer.style.transition = style;
+        this.#elements.backgroundRoot.style.transition = style;
+    }
+
+    transitionDuration(sec) {
+        if (typeof sec == "number") {
+            sec = sec + "s";
+        }
+        this.#elements.backgroundContent.style.transitionDuration = sec;
+        this.#elements.backgroundTransformer.style.transitionDuration = sec;
+        this.#elements.backgroundRoot.style.transitionDuration = sec;
     }
 
     hide() {
-    
+        this.#elements.backgroundRoot.classList.add("Hide");
+    }
+
+    show() {
+        this.#elements.backgroundRoot.classList.remove("Hide");
     }
 
     render() {

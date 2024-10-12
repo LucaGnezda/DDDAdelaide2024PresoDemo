@@ -1,19 +1,19 @@
-cc-slidedeck {
+cc-presentation {
     display: contents;
 }
 
-.CCSlideDeckRoot {
+.CCPresentationRoot {
     width: 100%;
     height: 100%;
 }
 
-.CCSlideDeckBackgrounds {
+.CCPresentationBackgroundsContainer {
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.CCSlideDeckContentLayers {
+.CCPresentationPagesContainer {
     width: 100%;
     height: 100%;
     position: relative;
