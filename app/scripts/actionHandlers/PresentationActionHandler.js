@@ -8,7 +8,7 @@ class PresentationActionHandler {
 
         switch (action.type) {
 
-            case "Presentation_PageTransition":
+            case "App_PageTransition":
                 this.transitionPage(action.payload);
                 break;
             
@@ -40,7 +40,7 @@ class PresentationActionHandler {
 
         }
             
-        App.components.presentation.activePage = payload.transitionToPage;
+        App.activePage = payload.transitionToPage;
 
     }
 

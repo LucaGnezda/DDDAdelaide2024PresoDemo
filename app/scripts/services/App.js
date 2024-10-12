@@ -10,13 +10,17 @@ class App {
     static store = null;
     static dispatcher = null;
 
-    // referenced elements 
+    // Core dispatch callbacks
+    static navigationCallback = null;
+
+    // Referenced elements 
     static elements = {
-        
+        pagesContainer: null,
+        backgroundsContainer: null
     };
 
-    // referecned components
-    static components = {
-        presentation: null
-    };
+    // Referecned components
+    static pages = {};
+    static backgrounds = {};
+    static activePage = null;
 }

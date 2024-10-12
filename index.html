@@ -39,22 +39,22 @@
 
         <!-- Components -->
         <script defer src="./app/scripts/components/CCBackground.js"></script>
-        <script defer src="./app/scripts/components/CCPage.js"></script>  
-        <script defer src="./app/scripts/components/CCPresentation.js"></script>        
+        <script defer src="./app/scripts/components/CCPage.js"></script>        
 
         <!-- Services -->
         <script defer src="./app/scripts/services/AnimatorService.js"></script> 
         <script defer src="./app/scripts/services/App.js"></script>
+        <script defer src="./app/scripts/services/BackgroundFactory.js"></script> 
         <script defer src="./app/scripts/services/AppService.js"></script>
         <script defer src="./app/scripts/services/ComponentRegistry.js"></script>
+        <script defer src="./app/scripts/services/PageFactory.js"></script> 
 
 
     </head>
     <body onload="AppService.Initialise()">
-        <div id="ComponentRoot">
-            <div id="Backgrounds" style="display: none;">
-                <div class="TestBackground">
-            </div>
-        </div>     
+        <div class="CCPresentationRoot">
+            <div id="BackgroundsContainer" class="CCPresentationBackgroundsContainer"></div>
+            <div id="PagesContainer" class="CCPresentationPagesContainer"></div>
+        </div>
     </body>
 </html>
