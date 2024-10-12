@@ -20,25 +20,9 @@ class PresentationActionHandler {
 
     transitionPage(payload) {
 
-        switch (payload.usingTransition) {
-
-            case PageTransition.SlideLeft:
-                AnimatorService.slideOutroToLeft(payload.transitionFromPage);
-                AnimatorService.updateBackground();
-                AnimatorService.slideIntroFromRight(payload.transitionToPage);
-
-            case PageTransition.SlideRight:
-                AnimatorService.slideOutroToRight(payload.transitionFromPage);
-                AnimatorService.updateBackground();
-                AnimatorService.slideIntroFromLeft(payload.transitionToPage);
-                
-            case PageTransition.None:
-            default:
-                AnimatorService.hide(payload.transitionFromPage);
-                AnimatorService.updateBackground();
-                AnimatorService.show(payload.transitionToPage);
-
-        }
+        AnimatorService.pageOutro(payload.transitionFromPage);
+        AnimatorService.transitionBackground(payload.transitionFromPage, payload.transitionToPage, payload.usingTransition, payload.withDuration);
+        AnimatorService.pageIntro(payload.transitionFromPage);
             
         App.activePage = payload.transitionToPage;
 

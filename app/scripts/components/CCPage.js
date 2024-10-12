@@ -7,23 +7,25 @@ class CCPage extends CCBase {
      */
 
     #elements = {
-
+        pageRoot: null
     };
 
     #propertybag = {
         title: null,
-        background: null,
+        backgroundId: null,
         backgroundX: null,
         backgroundY: null,
         backgroundTransformer: null,
         nextPage: null,
         previousPage: null,
         transitionForward: null,
-        transitionBack: null
+        transitionForwardDuration: null,
+        transitionBack: null,
+        transitionBackDuration: null
     };
 
     static #htmlTemplate = `
-        <div></div>
+        <div class="CCPageRoot" data-page-root></div>
     `
 
     /**
@@ -74,15 +76,44 @@ class CCPage extends CCBase {
         return this.#propertybag.transitionBack;
     }
 
+    get transitionForwardDuration() {
+        return this.#propertybag.transitionForwardDuration;
+    }
+
+    get transitionBackDuration() {
+        return this.#propertybag.transitionBackDuration;
+    } 
+
+    get backgroundId() {
+        return this.#propertybag.backgroundId;
+    }
+
+    get backgroundX() {
+        return this.#propertybag.backgroundX;
+    }
+
+    get backgroundY() {
+        return this.#propertybag.backgroundY
+    }
+    
+    get backgroundTransformer() {
+        return this.#propertybag.background;
+    }
+
     /**
      * Private Methods
      */
-    #initialiseComponent() {
+    #ConfirmUXIsInitialised() {
 
-        let fragment = getDOMFragmentFromString(CCPage.#htmlTemplate);
-        
-        this.appendChild(fragment);
+        if (this.children.length == 0) {
 
+            let fragment = getDOMFragmentFromString(CCPage.#htmlTemplate);
+
+            this.#elements.pageRoot = fragment.querySelector('[data-page-root]');
+
+            this.appendChild(fragment);
+
+        }
     }
 
     #initialiseAttributes() {
@@ -97,14 +128,14 @@ class CCPage extends CCBase {
 
     }
 
-    background(background, pageX, pageY, transformerClass) {
-        this.#propertybag.background = background;
+    background(backgroundId, pageX, pageY, transformerClass) {
+        this.#propertybag.backgroundId = backgroundId;
         this.#propertybag.backgroundX = pageX;
         this.#propertybag.backgroundY = pageY;
         this.#propertybag.backgroundTransformer = transformerClass;
     }
 
-    next(page, transitionForward, transitionBack) {
+    next(page, transitionForward, transitionBack, duration) {
 
         if (page.constructor.name != "CCPage") {
             Log.error('Page is not of type CCPage', "COMPONENT");
@@ -114,14 +145,15 @@ class CCPage extends CCBase {
         if (transitionForward != null) {
             this.#propertybag.nextPage = page;
             this.#propertybag.transitionForward = transitionForward;
+            this.#propertybag.transitionForwardDuration = duration;
         }
 
         if (transitionBack != null) {
-            page.previous(this, transitionBack)
+            page.previous(this, transitionBack, duration)
         }
     }
 
-    previous(page, transitionBack) {
+    previous(page, transitionBack, duration) {
 
         if (page.constructor.name != "CCPage") {
             Log.error('Page is not of type CCPage', "COMPONENT");
@@ -130,6 +162,14 @@ class CCPage extends CCBase {
 
         this.#propertybag.previousPage = page;
         this.#propertybag.transitionBack = transitionBack;
+        this.#propertybag.transitionBackDuration = duration;
+    }
+
+    setContents(source) {
+
+        this.#ConfirmUXIsInitialised();
+        this.#elements.pageRoot.append(...source);
+
     }
 
      /**
@@ -137,7 +177,7 @@ class CCPage extends CCBase {
      */
      connectedCallback() {
 
-        this.#initialiseComponent();
+        this.#ConfirmUXIsInitialised();
         this.#initialiseAttributes();
         this.render();
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");

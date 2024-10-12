@@ -5,10 +5,61 @@ cc-background {
 .CCBackgroundRoot {
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
     left: -0%;
     top: -0%;
     overflow: hidden;
+    opacity: 1;
+}
+
+.CCBackgroundRoot.WithFadeIn {
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCBackgroundRoot.WithFadeOut {
+    opacity: 0;
+}
+
+.CCBackgroundRoot.EnterFromLeft {
+    @starting-style {
+        left: -100%;
+    }
+}
+
+.CCBackgroundRoot.EnterFromRight {
+    @starting-style {
+        left: 100%;
+    }
+}
+
+.CCBackgroundRoot.EnterFromTop {
+    @starting-style {
+        top: -100%;
+    }
+}
+
+.CCBackgroundRoot.EnterFromBottom {
+    @starting-style {
+        top: 100%;
+    }
+}
+
+.CCBackgroundRoot.ExitToLeft {
+    left: -100%;
+}
+
+.CCBackgroundRoot.ExitToRight {
+    left: 100%;
+}
+
+.CCBackgroundRoot.ExitToTop {
+    top: -100%;
+}
+
+.CCBackgroundRoot.ExitToBotton {
+    top: 100%;
 }
 
 .CCBackgroundRoot.Hide {
@@ -27,5 +78,5 @@ cc-background {
     background-position: center;
     width: 400%;
     height: 200%;
-    position: absolute;
+    position: relative;
 }

@@ -15,7 +15,8 @@ class AppService {
         AppService.InitialiseCoreEventBindings();
         
         // Define Presentation
-        AppService.DefinePresentation();
+        AppService.DefinePresentationStructure();
+        AppService.LoadPresentationContent();
 
         Log.debug("AppService.Initialise - Complete", "APPSERVICE");
     }
@@ -50,31 +51,48 @@ class AppService {
 
     }
 
-    static DefinePresentation() {
+    static DefinePresentationStructure() {
 
         let backgroundFactory = new BackgroundFactory(App.backgrounds, App.elements.backgroundsContainer);
         let pageFactory = new PageFactory(App.pages, App.elements.pagesContainer);
 
         // Define & configure Backgrounds
-        backgroundFactory.newBackground("taptuBackground");
+        backgroundFactory.newBackground("taptuBackground1");
+        backgroundFactory.newBackground("taptuBackground2");
         
-        App.backgrounds.taptuBackground.contentClass("TestBackgroundContent");
-        App.backgrounds.taptuBackground.positionRange(3, 1);
-        App.backgrounds.taptuBackground.transitionStyle("all 1.0s ease-in-out");
+        App.backgrounds.taptuBackground1.contentClass("TestBackgroundContent1");
+        App.backgrounds.taptuBackground1.contentPositionRange(3, 1);
+        App.backgrounds.taptuBackground1.transitionStyle("all 1.0s ease-in-out");
+
+        App.backgrounds.taptuBackground2.contentClass("TestBackgroundContent2");
+        App.backgrounds.taptuBackground2.contentPositionRange(1, 1);
+        App.backgrounds.taptuBackground2.transitionStyle("all 1.0s ease-in-out");
 
         // Define Pages & their Backgrounds
-        pageFactory.newPage("intro1", "taptuBackground", 0.0, 0, null);
-        pageFactory.newPage("intro2", "taptuBackground", 0.2, 0, null);
-        pageFactory.newPage("intro3", "taptuBackground", 0.4, 0, null);
-        pageFactory.newPage("hub");
+        pageFactory.newPage("intro1", "taptuBackground1", 0.0, 0, null);
+        pageFactory.newPage("intro2", "taptuBackground1", 0.2, 0, null);
+        pageFactory.newPage("intro3", "taptuBackground1", 0.4, 0, null);
+        pageFactory.newPage("hub", "taptuBackground2");
 
         // Interrelate Pages with transitions
-        App.pages.intro1.next(App.pages.intro2, PageTransition.SlideLeft, PageTransition.SlideRight, 2);
-        App.pages.intro2.next(App.pages.intro3, PageTransition.SlideLeft, PageTransition.SlideRight, 2);
-        App.pages.intro3.next(App.pages.hub, PageTransition.SlideLeft, null, 2);
+        App.pages.intro1.next(App.pages.intro2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.intro2.next(App.pages.intro3, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.intro3.next(App.pages.hub, PageTransition.FadeSlideUp, null, 1);
 
+        // Set page 1
         App.activePage = App.pages.intro1;
+        App.backgrounds[App.activePage.backgroundId].show();
 
+    }
+
+    static LoadPresentationContent() {
+
+        for (let property in App.pages) {
+            let source = document.querySelector(`data[value='${property}']`);
+            if (source != null) {
+                App.pages[property].setContents(source.childNodes);
+            }
+        }
     }
 
     static keydownCallback(keyEvent) {
@@ -88,9 +106,10 @@ class AppService {
                 let event = {};
                 event.originatingObject = this;
                 event.originatingEvent = keyEvent;
-                event.transitionFromPage = this.activePage;
-                event.transitionToPage = this.activePage.nextPage;
-                event.usingTransition = this.activePage.transitionForward;
+                event.transitionFromPage = App.activePage;
+                event.transitionToPage = App.activePage.nextPage;
+                event.usingTransition = App.activePage.transitionForward;
+                event.withDuration = App.activePage.transitionForwardDuration;
 
                 App.navigationCallback(event);
 
@@ -102,7 +121,8 @@ class AppService {
                 event.originatingEvent = keyEvent;
                 event.transitionFromPage = App.activePage;
                 event.transitionToPage = App.activePage.previousPage;
-                event.usingTransition = App.activePage.transitionBackward;
+                event.usingTransition = App.activePage.transitionBack;
+                event.withDuration = App.activePage.transitionBackDuration;
 
                 App.navigationCallback(event);
 
@@ -124,6 +144,7 @@ class AppService {
                 event.transitionFromPage = App.activePage;
                 event.transitionToPage = App.activePage.nextPage;
                 event.usingTransition = App.activePage.transitionForward;
+                event.withDuration = App.activePage.transitionForwardDuration;
 
                 App.navigationCallback(event);
 

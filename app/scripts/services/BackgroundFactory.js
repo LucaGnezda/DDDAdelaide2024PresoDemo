@@ -25,6 +25,7 @@ class BackgroundFactory {
 
         let component = document.createElement("cc-background");
         component.id = id;
+        component.hide();
         
         if (this.#intoLibrary != null) {
             this.#intoLibrary[id] = component;

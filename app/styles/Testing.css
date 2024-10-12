@@ -1,8 +1,20 @@
-.TestBackgroundContent {
+.TestBackgroundContent1 {
     background: url("../assets/TaptuBrand.svg");
     background-size: 100% auto;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: #323436;
+    opacity: 0.3;
+    position: absolute;
+    transition: all 1.0s ease-in-out;
+}
+
+.TestBackgroundContent2 {
+    background: url("../assets/TaptuBrand.svg");
+    background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #323436;
     opacity: 0.3;
     position: absolute;
     transition: all 1.0s ease-in-out;
@@ -14,4 +26,16 @@
 
 .TestTransformer2 {
     transform: rotate(20deg);
+}
+
+.PageTitle {
+    color: #ffffff;
+    font-size: 8vmin;
+    text-align: center;
+}
+
+.PageContents {
+    color: #ffffff;
+    font-size: 5vmin;
+    padding: 5vmin 5vmin;
 }
