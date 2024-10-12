@@ -3,8 +3,10 @@
 class ComponentRegistry {
 
     static registerComponents() {
-        customElements.define("cc-slidedeck", CCSlideDeck);
-        customElements.define("cc-slidebackground", CCSlideBackground);
+        customElements.define("cc-background", CCBackground);
+        customElements.define("cc-page", CCPage);
+        customElements.define("cc-presentation", CCPresentation);
+        
     }
 
 }
