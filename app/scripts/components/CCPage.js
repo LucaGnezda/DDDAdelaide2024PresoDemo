@@ -221,9 +221,7 @@ class CCPage extends CCBase {
      */
 
     render() {
-        if (this.#propertybag.initialPageContents instanceof NodeList) {
-            
-        }
+        // No dynamic rendering required.
     }
 
     background(backgroundId, pageX, pageY, transformerClass) {
