@@ -17,7 +17,14 @@ class App {
     // Referenced elements 
     static elements = {
         pagesContainer: null,
-        backgroundsContainer: null
+        backgroundsContainer: null,
+        uxButton: null,
+        logicButton: null,
+        dataButton: null,
+        appModelContainer: null,
+        appModelElementUX: null,
+        appModelElementLogic: null,
+        appModelElementData: null
     };
 
     // Referecned components
