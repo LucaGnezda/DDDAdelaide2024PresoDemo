@@ -1,0 +1,22 @@
+.CCAppModelElementRoot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.CCAppModelElementIcon {
+    width: 15vmin;
+    height: 15vmin;
+}
+
+.CCAppModelElementIcon.Grey {
+    filter: invert(80%) sepia(47%) saturate(0%) hue-rotate(141deg) brightness(104%) contrast(71%);
+}
+
+.CCAppModelElementIcon.Green {
+    filter: invert(48%) sepia(76%) saturate(2629%) hue-rotate(117deg) brightness(92%) contrast(101%);
+}
+
+.CCAppModelElementIconcontainer.Hide {
+    display: none;
+}

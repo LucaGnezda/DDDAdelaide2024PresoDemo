@@ -20,7 +20,11 @@ class App {
         backgroundsContainer: null,
         uxButton: null,
         logicButton: null,
-        dataButton: null
+        dataButton: null,
+        appModelContainer: null,
+        appModelElementUX: null,
+        appModelElementLogic: null,
+        appModelElementData: null
     };
 
     // Referecned components

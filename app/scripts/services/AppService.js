@@ -160,13 +160,39 @@ class AppService {
 
     static InitialiseInteractiveContent() {
 
-        App.uxButton = document.getElementById("UserExperienceButton");
-        App.logicButton = document.getElementById("LogicButton");
-        App.dataButton = document.getElementById("DataButton");
+        // Hub edit page
+        App.elements.uxButton = document.getElementById("UserExperienceButton");
+        App.elements.logicButton = document.getElementById("LogicButton");
+        App.elements.dataButton = document.getElementById("DataButton");
 
-        App.uxButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_UXButton_OnClick"));
-        App.logicButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_LogicButton_OnClick"));
-        App.dataButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_DataButton_OnClick"));
+        App.elements.uxButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_UXButton_OnClick"));
+        App.elements.logicButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_LogicButton_OnClick"));
+        App.elements.dataButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_DataButton_OnClick"));
+
+        // Hub page
+        App.elements.appModelContainer = document.getElementById("AppModel");
+
+        App.elements.appModelElementUX = document.createElement("cc-appmodelelement");
+        App.elements.appModelElementLogic = document.createElement("cc-appmodelelement");
+        App.elements.appModelElementData = document.createElement("cc-appmodelelement");
+
+        App.elements.appModelContainer.appendChild(App.elements.appModelElementUX);
+        App.elements.appModelContainer.appendChild(App.elements.appModelElementLogic);
+        App.elements.appModelContainer.appendChild(App.elements.appModelElementData);
+
+        App.elements.appModelElementUX.title = "UX";
+        App.elements.appModelElementUX.knownIconSrc  = "./app/assets/web-design.svg";
+
+        App.elements.appModelElementLogic.title = "Logic";
+        App.elements.appModelElementLogic.knownIconSrc  = "./app/assets/programming.svg";
+
+        App.elements.appModelElementData.title = "Data";
+        App.elements.appModelElementData.knownIconSrc  = "./app/assets/database.svg";
+
+        App.store.appModel["UX"].addSubscriber(App.elements.appModelElementUX, AppModel_AppModelElement_OnStoreChanged);
+        App.store.appModel["Logic"].addSubscriber(App.elements.appModelElementLogic, AppModel_AppModelElement_OnStoreChanged);
+        App.store.appModel["Data"].addSubscriber(App.elements.appModelElementData, AppModel_AppModelElement_OnStoreChanged);
+        
 
     }
 

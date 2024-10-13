@@ -66,6 +66,13 @@
     height: 25%;
 }
 
+.TestFlexLarge {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 60%;
+}
+
 .TestButton {
     align-self: center;
     display: flex;
@@ -108,3 +115,4 @@
     opacity: 0.5;
     box-shadow: none;
 }
+
