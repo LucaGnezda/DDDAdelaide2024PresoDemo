@@ -254,7 +254,7 @@ class AppService {
 
             let event = {};
             event.originatingObject = this;
-            event.originatingEvent = keyEvent;
+            event.originatingEvent = clickEvent;
             event.transitionFromPage = App.activePage;
             event.transitionToPage = App.activePage.nextPage;
             event.usingTransition = App.activePage.transitionForward;
