@@ -12,6 +12,8 @@ class CCPage extends CCBase {
     };
 
     #propertybag = {
+        animationSteps: null,
+        currentAnimationStep: null,
         backgroundId: null,
         backgroundX: null,
         backgroundY: null,
@@ -94,6 +96,14 @@ class CCPage extends CCBase {
         return this.#propertybag.background;
     }
 
+    get hasForwardAnimationsRemaining() {
+        return (this.#propertybag.animationSteps != null && this.#propertybag.animationSteps.length - this.#propertybag.currentAnimationStep > 0);
+    }
+
+    get hasBackAnimationsRemaining() {
+        return (this.#propertybag.animationSteps != null && this.#propertybag.currentAnimationStep > 0);
+    }
+
     /**
      * Private Methods
      */
@@ -128,13 +138,92 @@ class CCPage extends CCBase {
         this.#elements.pageRoot.classList.remove("withFadeIn", "WithFadeOut");
     }
 
+    #isValidAminationStructure(definition) {
+        
+        let s, step;
+        let i, item;
+        
+        if (!(definition instanceof Array)) {
+            return false;
+        }
+        for (s in definition) {
+            step = definition[s];
+            if (step.add != null) {
+                if (!(step.add instanceof Array)) {
+                    return false
+                }
+                for (i in step.add) {
+                    item = step.add[i];
+                    if (!(item instanceof Object)) {
+                        return false
+                    }
+                    if (typeof item.key != "string") {
+                        return false
+                    }
+                    if (!(item.classes instanceof Array)) {
+                        return false
+                    }
+                }
+                for (i in step.remove) {
+                    item = step.remove[i];
+                    if (!(item instanceof Object)) {
+                        return false
+                    }
+                    if (typeof item.key != "string") {
+                        return false
+                    }
+                    if (!(item.classes instanceof Array)) {
+                        return false
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    #processAnimationStep(stepToAnimate, inReverse = false) {
+        let i, key, classArray, elements, e, element;
+
+        for (i in stepToAnimate.add) {
+            key = stepToAnimate.add[i].key;
+            classArray = stepToAnimate.add[i].classes;
+            elements = [...this.#elements.pageTransformer.querySelectorAll(`[${key}]`)];
+            for (e in elements) {
+                element = elements[e];
+                if (inReverse) {
+                    element.classList.remove(...classArray);
+                }
+                else {
+                    element.classList.add(...classArray);
+                }
+            }
+        }
+
+        for (i in stepToAnimate.remove) {
+            key = stepToAnimate.remove[i].key;
+            classArray = stepToAnimate.remove[i].classes;
+            elements = [...this.#elements.pageTransformer.querySelectorAll(`[${key}]`)];
+            for (e in elements) {
+                element = elements[e];
+                if (inReverse) {
+                    element.classList.add(...classArray);
+                }
+                else {
+                    element.classList.remove(...classArray);
+                }
+            }
+        }
+    }
+
 
     /**
      * Public Methods
      */
 
     render() {
-
+        if (this.#propertybag.initialPageContents instanceof NodeList) {
+            
+        }
     }
 
     background(backgroundId, pageX, pageY, transformerClass) {
@@ -179,6 +268,81 @@ class CCPage extends CCBase {
         this.#confirmUXIsInitialised();
         this.#elements.pageTransformer.append(...source);
 
+    }
+
+    setAnimation(definition) {
+        
+        this.#confirmUXIsInitialised();
+        
+        if (!this.#isValidAminationStructure(definition)) {
+            Log.warn(`${this.constructor.name}, was unable to set animation as the datastructure was non-conformant.`, "COMPONENT");
+            return;
+        }
+
+        this.#propertybag.animationSteps = definition;
+        this.#propertybag.currentAnimationStep = 0;
+
+    }
+
+    resetAnimationInitial() {
+
+        this.#confirmUXIsInitialised();
+
+        if (this.#propertybag.animationSteps != null) {
+
+            // note we're setting it to length NOT length - 1, because this signifies 'after the last animation'
+            this.#propertybag.currentAnimationStep = this.#propertybag.animationSteps.length;
+
+            for (let i = this.#propertybag.animationSteps.length - 1; i >= 0; i--) {
+                this.stepAnimationBack();
+            }
+        }
+    }
+
+    resetAnimationFinal() {
+        
+        this.#confirmUXIsInitialised();
+
+        if (this.#propertybag.animationSteps != null) {
+
+            // note we're setting it to 0, because this signifies 'before the first animation'
+            this.#propertybag.currentAnimationStep = 0;
+            
+            for (let i = 0; i < this.#propertybag.animationSteps.length; i++) {
+                this.stepAnimationForward();
+            }
+        }
+    }
+
+    stepAnimationForward() {
+
+        this.#confirmUXIsInitialised();
+        
+        if (this.#propertybag.animationSteps != null) {
+            if (this.#propertybag.currentAnimationStep >= this.#propertybag.animationSteps.length) {
+                // nothing left to animate
+                return;
+            }
+
+            this.#processAnimationStep(this.#propertybag.animationSteps[this.#propertybag.currentAnimationStep]);
+            this.#propertybag.currentAnimationStep++;
+        }
+    }
+
+    stepAnimationBack() {
+        
+        this.#confirmUXIsInitialised();
+        
+        if (this.#propertybag.animationSteps != null) {
+            if (this.#propertybag.currentAnimationStep <= 0) {
+                // nothing left to animate
+                return;
+            }
+
+            this.#propertybag.currentAnimationStep--;
+            this.#processAnimationStep(this.#propertybag.animationSteps[this.#propertybag.currentAnimationStep], true);
+        }
+        
     }
 
     usingTransition(duration, timingFunction, delay) {

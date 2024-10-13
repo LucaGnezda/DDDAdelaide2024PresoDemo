@@ -11,7 +11,8 @@ class App {
     static dispatcher = null;
 
     // Core dispatch callbacks
-    static navigationCallback = null;
+    static pageNavigationCallback = null;
+    static pageAnimationCallback = null;
 
     // Referenced elements 
     static elements = {
