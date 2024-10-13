@@ -15,8 +15,14 @@ class AppService {
         AppService.InitialiseCoreEventBindings();
         
         // Define Presentation
-        AppService.DefinePresentationStructure();
+        AppService.DefinePresentationPagesAndBackgrounds();
         AppService.LoadPresentationContent();
+        AppService.DefineInPageAnimations();
+        AppService.InitialiseInteractiveContent();
+        AppService.InterrelatePages();
+
+        AppService.ActivateFirstPage();
+
 
         Log.debug("AppService.Initialise - Complete", "APPSERVICE");
     }
@@ -52,7 +58,7 @@ class AppService {
 
     }
 
-    static DefinePresentationStructure() {
+    static DefinePresentationPagesAndBackgrounds() {
 
         let backgroundFactory = new BackgroundFactory(App.backgrounds, App.elements.backgroundsContainer);
         let pageFactory = new PageFactory(App.pages, App.elements.pagesContainer);
@@ -84,7 +90,25 @@ class AppService {
         pageFactory.newPage("intro7", "taptuBackground2");
         pageFactory.newPage("intro8", "taptuBackground2");
         pageFactory.newPage("intro9", "taptuBackground2");
+        pageFactory.newPage("hub", "taptuBackground1", 0, 0, null);
+        pageFactory.newPage("hubedit", "taptuBackground1", 1, 0, null);
 
+    }
+
+    static LoadPresentationContent() {
+
+        for (let property in App.pages) {
+            let source = document.querySelector(`data[value='${property}']`);
+            if (source != null) {
+                App.pages[property].setContents(source.childNodes);
+            }
+        }
+
+        document.getElementById("ContentSource").remove();
+    }
+
+    static DefineInPageAnimations() {
+        
         // Add animations to Pages
         App.pages.intro2.setAnimation(
             [
@@ -114,6 +138,12 @@ class AppService {
                 },
             ]
         )
+    }
+
+    static InitialiseInteractiveContent() {
+
+    }
+    static InterrelatePages() {
 
         // Interrelate Pages with transitions
         App.pages.intro1.next(App.pages.intro2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
@@ -124,8 +154,14 @@ class AppService {
         App.pages.intro6.next(App.pages.intro7, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1);
         App.pages.intro7.next(App.pages.intro8, PageTransition.FadeSlideUp, PageTransition.FadeSlideDown, 1);
         App.pages.intro8.next(App.pages.intro9, PageTransition.None, PageTransition.None, 1);
+        App.pages.intro9.next(App.pages.hub, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.hub.next(App.pages.hubedit, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
 
-        // Set page 1
+    }
+
+    static ActivateFirstPage() {
+
+        // Activate and transition page 1
         App.activePage = App.pages.intro1;
         App.backgrounds[App.activePage.backgroundId].transitionDuration(2);
         App.backgrounds[App.activePage.backgroundId].withFadeIn();
@@ -134,18 +170,6 @@ class AppService {
         App.activePage.withFadeIn();
         App.activePage.show();
 
-    }
-
-    static LoadPresentationContent() {
-
-        for (let property in App.pages) {
-            let source = document.querySelector(`data[value='${property}']`);
-            if (source != null) {
-                App.pages[property].setContents(source.childNodes);
-            }
-        }
-
-        document.getElementById("ContentSource").remove();
     }
 
     static keydownCallback(keyEvent) {
