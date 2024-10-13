@@ -13,6 +13,9 @@ class AppService {
         AppService.InitialiseAppEventProcessing();
         AppService.IndexKeyDOMElements();
         AppService.InitialiseCoreEventBindings();
+
+        // Add Data to Store
+        AppService.LoadStore();
         
         // Define Presentation
         AppService.DefinePresentationPagesAndBackgrounds();
@@ -55,6 +58,21 @@ class AppService {
 
         App.pageNavigationCallback = App.dispatcher.newEventDispatchCallback("App_PageTransition");
         App.pageAnimationCallback = App.dispatcher.newEventDispatchCallback("App_PageAnimation");
+
+    }
+
+    static LoadStore() {
+
+        App.store.addObservablesDictionary("appModel");
+
+        let uxData = App.store.appModel.add("UX");
+        uxData.observableData.isUnlocked = false;
+
+        let logicData = App.store.appModel.add("Logic");
+        logicData.observableData.isUnlocked = false;
+
+        let dataData = App.store.appModel.add("Data");
+        dataData.observableData.isUnlocked = false;
 
     }
 
@@ -142,7 +160,17 @@ class AppService {
 
     static InitialiseInteractiveContent() {
 
+        App.uxButton = document.getElementById("UserExperienceButton");
+        App.logicButton = document.getElementById("LogicButton");
+        App.dataButton = document.getElementById("DataButton");
+
+        App.uxButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_UXButton_OnClick"));
+        App.logicButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_LogicButton_OnClick"));
+        App.dataButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_DataButton_OnClick"));
+
     }
+
+
     static InterrelatePages() {
 
         // Interrelate Pages with transitions
