@@ -4,6 +4,10 @@ body {
     overflow: hidden;
 }
 
+.ContentSource {
+    display: none;
+}
+
 .PresentationBackgroundsContainer {
     width: 100%;
     height: 100%;

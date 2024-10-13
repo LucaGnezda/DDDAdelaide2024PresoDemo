@@ -15,6 +15,8 @@ const PageTransition = AsEnum(
         FadeSlideRight:    6,
         FadeSlideUp:       7,
         FadeSlideDown:     8,
-        Fade:              9
+        Fade:              9,
+        ZoomIn:           10,
+        ZoomOut:          11
     }
 );

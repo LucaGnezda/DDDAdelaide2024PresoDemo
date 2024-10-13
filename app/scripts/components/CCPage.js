@@ -7,11 +7,11 @@ class CCPage extends CCBase {
      */
 
     #elements = {
-        pageRoot: null
+        pageRoot: null,
+        pageTransformer: null
     };
 
     #propertybag = {
-        title: null,
         backgroundId: null,
         backgroundX: null,
         backgroundY: null,
@@ -21,11 +21,13 @@ class CCPage extends CCBase {
         transitionForward: null,
         transitionForwardDuration: null,
         transitionBack: null,
-        transitionBackDuration: null
+        transitionBackDuration: null,
     };
 
     static #htmlTemplate = `
-        <div class="CCPageRoot" data-page-root></div>
+        <div class="CCPageRoot" data-page-root>
+            <div class="CCPageTransformer" data-page-transformer></div>
+        </div>
     `
 
     /**
@@ -52,14 +54,6 @@ class CCPage extends CCBase {
     /**
      * Getters & Setters
      */
-    get title() {
-        return this.#propertybag.title;
-    }
-
-    set title(title) {
-        this.#propertybag.title = title;
-    }
-
     get nextPage() {
         return this.#propertybag.nextPage;
     }
@@ -103,13 +97,14 @@ class CCPage extends CCBase {
     /**
      * Private Methods
      */
-    #ConfirmUXIsInitialised() {
+    #confirmUXIsInitialised() {
 
         if (this.children.length == 0) {
 
             let fragment = getDOMFragmentFromString(CCPage.#htmlTemplate);
 
             this.#elements.pageRoot = fragment.querySelector('[data-page-root]');
+            this.#elements.pageTransformer = fragment.querySelector('[data-page-transformer]');
 
             this.appendChild(fragment);
 
@@ -119,6 +114,20 @@ class CCPage extends CCBase {
     #initialiseAttributes() {
 
     }
+
+    #resetPositionalClasses() {
+        this.#elements.pageRoot.classList.remove("EnterFromLeft", "EnterFromRight", "EnterFromTop", "EnterFromBottom");
+        this.#elements.pageRoot.classList.remove("ExitToLeft", "ExitToRight", "ExitToTop", "ExitToBottom");
+    }
+
+    #resetTransformationalClasses() {
+        this.#elements.pageTransformer.classList.remove("WithZoomInEntry", "WithZoomOutEntry", "WithZoomInExit", "WithZoomOutExit");
+    }
+
+    #resetFadingClasses() {
+        this.#elements.pageRoot.classList.remove("withFadeIn", "WithFadeOut");
+    }
+
 
     /**
      * Public Methods
@@ -167,9 +176,144 @@ class CCPage extends CCBase {
 
     setContents(source) {
 
-        this.#ConfirmUXIsInitialised();
-        this.#elements.pageRoot.append(...source);
+        this.#confirmUXIsInitialised();
+        this.#elements.pageTransformer.append(...source);
 
+    }
+
+    usingTransition(duration, timingFunction, delay) {
+
+        this.#confirmUXIsInitialised();
+
+        if (typeof duration == "number") {
+            duration = duration + "s";
+        }
+
+        if (typeof delay == "number") {
+            delay = delay + "s";
+        }
+        
+        this.#elements.pageTransformer.style.transitionDuration = duration;
+        this.#elements.pageTransformer.style.transitionTimingFunction = timingFunction;
+        this.#elements.pageTransformer.style.transitionDelay = delay;
+        this.#elements.pageRoot.style.transitionDuration = duration;
+        this.#elements.pageRoot.style.transitionTimingFunction = timingFunction;
+        this.#elements.pageRoot.style.transitionDelay = delay;
+
+    }
+
+    hide() {
+        this.#confirmUXIsInitialised();
+        this.#elements.pageRoot.classList.add("Hide");
+    }
+
+    show() {
+        this.#confirmUXIsInitialised();
+        this.#elements.pageRoot.classList.remove("Hide");
+    }
+
+    withZoomInEntry() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+        this.#elements.pageTransformer.classList.add("WithZoomInEntry");
+    }
+
+    withZoomOutEntry() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+        this.#elements.pageTransformer.classList.add("WithZoomOutEntry");
+    }
+
+    withZoomInExit() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+        this.#elements.pageTransformer.classList.add("WithZoomInExit");
+    }
+
+    withZoomOutExit() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+        this.#elements.pageTransformer.classList.add("WithZoomOutExit");
+    }
+
+    withoutZoom() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+    }
+
+    withFadeIn() {
+        this.#confirmUXIsInitialised();
+        this.#resetFadingClasses()
+        this.#elements.pageRoot.classList.add("withFadeIn");
+    }
+
+    withoutFadeIn() {
+        this.#confirmUXIsInitialised();
+        this.#resetFadingClasses()
+    }
+
+    withFadeOut() {
+        this.#confirmUXIsInitialised();
+        this.#resetFadingClasses()
+        this.#elements.pageRoot.classList.add("WithFadeOut");
+    }
+
+    withoutFadeOut() {
+        this.#confirmUXIsInitialised();
+        this.#resetFadingClasses()
+    }
+
+    enterLeft() {
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
+        this.#elements.pageRoot.classList.add("EnterFromLeft");
+    }
+
+    enterRight() {
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
+        this.#elements.pageRoot.classList.add("EnterFromRight");
+    }
+
+    enterTop() {
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
+        this.#elements.pageRoot.classList.add("EnterFromTop");
+    }
+
+    enterBottom() {
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
+        this.#elements.pageRoot.classList.add("EnterFromBottom");
+    }
+
+    exitLeft() {
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
+        this.#elements.pageRoot.classList.add("ExitToLeft");
+    }
+
+    exitRight() {
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
+        this.#elements.pageRoot.classList.add("ExitToRight");
+    }
+
+    exitTop() {
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
+        this.#elements.pageRoot.classList.add("ExitToTop");
+    }
+
+    exitBottom() {
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
+        this.#elements.pageRoot.classList.add("ExitToBottom");
+    }
+
+    inPlace() {
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
     }
 
      /**
@@ -177,7 +321,7 @@ class CCPage extends CCBase {
      */
      connectedCallback() {
 
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         this.#initialiseAttributes();
         this.render();
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
