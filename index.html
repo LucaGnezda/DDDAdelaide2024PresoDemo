@@ -5,9 +5,9 @@
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="./app/styles/Base.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/Testing.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCAppModelElement.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCBackground.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCPage.css">
-        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCPresentation.css">
 
         <!-- Framework -->
         <script defer src="./framework/scripts/customComponents/CCBase.js"></script>
@@ -37,7 +37,11 @@
         <!-- ActionHandlers -->
         <script defer src="./app/scripts/actionHandlers/PresentationActionHandler.js"></script>
 
+        <!-- Bindings -->
+        <script defer src="./app/scripts/bindings/StoreToComponentBindings.js"></script>
+
         <!-- Components -->
+        <script defer src="./app/scripts/components/CCAppModelElement.js"></script>
         <script defer src="./app/scripts/components/CCBackground.js"></script>
         <script defer src="./app/scripts/components/CCPage.js"></script>        
 
@@ -148,6 +152,19 @@
                         <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
                         <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
                     </ul>
+                </div>
+            </data>
+            <data value="hub">
+                <div class="PageTitle">Hub</div>
+                <div id="AppModel" class="PageContents TestFlexLarge">
+                </div>
+            </data>
+            <data value="hubedit">
+                <div class="PageTitle">Hub Edit</div>
+                <div class="PageContents TestFlex">
+                    <div id="UserExperienceButton" class="TestButton Filled Show">User Experience</div>
+                    <div id="LogicButton" class="TestButton Filled Show">Logic</div>
+                    <div id="DataButton" class="TestButton Filled Show">Data</div>
                 </div>
             </data>
         </div>

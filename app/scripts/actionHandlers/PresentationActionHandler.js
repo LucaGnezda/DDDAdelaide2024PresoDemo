@@ -8,12 +8,24 @@ class PresentationActionHandler {
 
         switch (action.type) {
 
+            case "App_PageAnimation":
+                this.animatePage(action.payload);
+                break;
+
             case "App_PageTransition":
                 this.transitionPage(action.payload);
                 break;
 
-            case "App_PageAnimation":
-                this.animatePage(action.payload);
+            case "HubEdit_UXButton_OnClick":
+                this.unlockUX();
+                break;
+            
+            case "HubEdit_LogicButton_OnClick":
+                this.unlockLogic();
+                break;
+
+            case "HubEdit_DataButton_OnClick":
+                this.unlockData();
                 break;
             
             default:
@@ -46,6 +58,21 @@ class PresentationActionHandler {
             
         App.activePage = payload.transitionToPage;
 
+    }
+
+    unlockUX() {
+        App.store.appModel["UX"].observableData.isUnlocked = true;
+        App.store.appModel.emitNotifications();
+    }
+
+    unlockLogic() {
+        App.store.appModel["Logic"].observableData.isUnlocked = true;
+        App.store.appModel.emitNotifications();
+    }
+
+    unlockData() {
+        App.store.appModel["Data"].observableData.isUnlocked = true;
+        App.store.appModel.emitNotifications();
     }
 
 }

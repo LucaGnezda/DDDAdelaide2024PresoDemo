@@ -13,10 +13,19 @@ class AppService {
         AppService.InitialiseAppEventProcessing();
         AppService.IndexKeyDOMElements();
         AppService.InitialiseCoreEventBindings();
+
+        // Add Data to Store
+        AppService.LoadStore();
         
         // Define Presentation
-        AppService.DefinePresentationStructure();
+        AppService.DefinePresentationPagesAndBackgrounds();
         AppService.LoadPresentationContent();
+        AppService.DefineInPageAnimations();
+        AppService.InitialiseInteractiveContent();
+        AppService.InterrelatePages();
+
+        AppService.ActivateFirstPage();
+
 
         Log.debug("AppService.Initialise - Complete", "APPSERVICE");
     }
@@ -52,7 +61,22 @@ class AppService {
 
     }
 
-    static DefinePresentationStructure() {
+    static LoadStore() {
+
+        App.store.addObservablesDictionary("appModel");
+
+        let uxData = App.store.appModel.add("UX");
+        uxData.observableData.isUnlocked = false;
+
+        let logicData = App.store.appModel.add("Logic");
+        logicData.observableData.isUnlocked = false;
+
+        let dataData = App.store.appModel.add("Data");
+        dataData.observableData.isUnlocked = false;
+
+    }
+
+    static DefinePresentationPagesAndBackgrounds() {
 
         let backgroundFactory = new BackgroundFactory(App.backgrounds, App.elements.backgroundsContainer);
         let pageFactory = new PageFactory(App.pages, App.elements.pagesContainer);
@@ -84,7 +108,25 @@ class AppService {
         pageFactory.newPage("intro7", "taptuBackground2");
         pageFactory.newPage("intro8", "taptuBackground2");
         pageFactory.newPage("intro9", "taptuBackground2");
+        pageFactory.newPage("hub", "taptuBackground1", 0, 0, null);
+        pageFactory.newPage("hubedit", "taptuBackground1", 1, 0, null);
 
+    }
+
+    static LoadPresentationContent() {
+
+        for (let property in App.pages) {
+            let source = document.querySelector(`data[value='${property}']`);
+            if (source != null) {
+                App.pages[property].setContents(source.childNodes);
+            }
+        }
+
+        document.getElementById("ContentSource").remove();
+    }
+
+    static DefineInPageAnimations() {
+        
         // Add animations to Pages
         App.pages.intro2.setAnimation(
             [
@@ -114,6 +156,48 @@ class AppService {
                 },
             ]
         )
+    }
+
+    static InitialiseInteractiveContent() {
+
+        // Hub edit page
+        App.elements.uxButton = document.getElementById("UserExperienceButton");
+        App.elements.logicButton = document.getElementById("LogicButton");
+        App.elements.dataButton = document.getElementById("DataButton");
+
+        App.elements.uxButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_UXButton_OnClick"));
+        App.elements.logicButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_LogicButton_OnClick"));
+        App.elements.dataButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_DataButton_OnClick"));
+
+        // Hub page
+        App.elements.appModelContainer = document.getElementById("AppModel");
+
+        App.elements.appModelElementUX = document.createElement("cc-appmodelelement");
+        App.elements.appModelElementLogic = document.createElement("cc-appmodelelement");
+        App.elements.appModelElementData = document.createElement("cc-appmodelelement");
+
+        App.elements.appModelContainer.appendChild(App.elements.appModelElementUX);
+        App.elements.appModelContainer.appendChild(App.elements.appModelElementLogic);
+        App.elements.appModelContainer.appendChild(App.elements.appModelElementData);
+
+        App.elements.appModelElementUX.title = "UX";
+        App.elements.appModelElementUX.knownIconSrc  = "./app/assets/web-design.svg";
+
+        App.elements.appModelElementLogic.title = "Logic";
+        App.elements.appModelElementLogic.knownIconSrc  = "./app/assets/programming.svg";
+
+        App.elements.appModelElementData.title = "Data";
+        App.elements.appModelElementData.knownIconSrc  = "./app/assets/database.svg";
+
+        App.store.appModel["UX"].addSubscriber(App.elements.appModelElementUX, AppModel_AppModelElement_OnStoreChanged);
+        App.store.appModel["Logic"].addSubscriber(App.elements.appModelElementLogic, AppModel_AppModelElement_OnStoreChanged);
+        App.store.appModel["Data"].addSubscriber(App.elements.appModelElementData, AppModel_AppModelElement_OnStoreChanged);
+        
+
+    }
+
+
+    static InterrelatePages() {
 
         // Interrelate Pages with transitions
         App.pages.intro1.next(App.pages.intro2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
@@ -124,8 +208,14 @@ class AppService {
         App.pages.intro6.next(App.pages.intro7, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1);
         App.pages.intro7.next(App.pages.intro8, PageTransition.FadeSlideUp, PageTransition.FadeSlideDown, 1);
         App.pages.intro8.next(App.pages.intro9, PageTransition.None, PageTransition.None, 1);
+        App.pages.intro9.next(App.pages.hub, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.hub.next(App.pages.hubedit, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
 
-        // Set page 1
+    }
+
+    static ActivateFirstPage() {
+
+        // Activate and transition page 1
         App.activePage = App.pages.intro1;
         App.backgrounds[App.activePage.backgroundId].transitionDuration(2);
         App.backgrounds[App.activePage.backgroundId].withFadeIn();
@@ -134,18 +224,6 @@ class AppService {
         App.activePage.withFadeIn();
         App.activePage.show();
 
-    }
-
-    static LoadPresentationContent() {
-
-        for (let property in App.pages) {
-            let source = document.querySelector(`data[value='${property}']`);
-            if (source != null) {
-                App.pages[property].setContents(source.childNodes);
-            }
-        }
-
-        document.getElementById("ContentSource").remove();
     }
 
     static keydownCallback(keyEvent) {
@@ -230,7 +308,7 @@ class AppService {
 
             let event = {};
             event.originatingObject = this;
-            event.originatingEvent = keyEvent;
+            event.originatingEvent = clickEvent;
             event.transitionFromPage = App.activePage;
             event.transitionToPage = App.activePage.nextPage;
             event.usingTransition = App.activePage.transitionForward;
