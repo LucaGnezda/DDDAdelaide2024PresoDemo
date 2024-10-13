@@ -25,6 +25,7 @@ class PageFactory {
 
         let component = document.createElement("cc-page");
         component.id = id;
+        component.hide();
         component.background(background, pageX, pageY, transformerClass);
 
         if (this.#intoLibrary != null) {

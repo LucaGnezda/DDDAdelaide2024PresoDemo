@@ -10,4 +10,86 @@ cc-page {
     top: -0%;
     overflow: hidden;
     opacity: 1;
+    transition-behavior: allow-discrete;
 }
+
+.CCPageRoot.Hide {
+    display: none;
+}
+
+.CCPageRoot.WithFadeIn {
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCPageRoot.WithFadeOut {
+    opacity: 0;
+}
+
+.CCPageRoot.EnterFromLeft {
+    @starting-style {
+        left: -100%;
+    }
+}
+
+.CCPageRoot.EnterFromRight {
+    @starting-style {
+        left: 100%;
+    }
+}
+
+.CCPageRoot.EnterFromTop {
+    @starting-style {
+        top: -100%;
+    }
+}
+
+.CCPageRoot.EnterFromBottom {
+    @starting-style {
+        top: 100%;
+    }
+}
+
+.CCPageRoot.ExitToLeft {
+    left: -100%;
+}
+
+.CCPageRoot.ExitToRight {
+    left: 100%;
+}
+
+.CCPageRoot.ExitToTop {
+    top: -100%;
+}
+
+.CCPageRoot.ExitToBottom {
+    top: 100%;
+}
+
+.CCPageTransformer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.CCPageTransformer.WithZoomInEntry {
+    @starting-style {
+        transform: scale(0.1, 0.1);
+    }
+}
+
+.CCPageTransformer.WithZoomOutEntry {
+    @starting-style {
+        transform: scale(10, 10);
+    }
+}
+
+.CCPageTransformer.WithZoomInExit {
+    transform: scale(10, 10);
+}
+
+.CCPageTransformer.WithZoomOutExit {
+    transform: scale(0.1, 0.1);
+}
+

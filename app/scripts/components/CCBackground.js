@@ -22,7 +22,7 @@ class CCBackground extends CCBase {
 
     static #htmlTemplate = `
         <div class="CCBackgroundRoot" data-background-root>
-            <div class="CCBackgroundTransformerDefault" data-background-transformer>
+            <div class="CCBackgroundTransformer" data-background-transformer>
                 <div class="CCBackgroundContent" data-background-content></div>
             </div>
         </div>
@@ -58,7 +58,7 @@ class CCBackground extends CCBase {
     /**
      * Private Methods
      */
-    #ConfirmUXIsInitialised() {
+    #confirmUXIsInitialised() {
 
         if (this.children.length == 0) {
 
@@ -78,16 +78,29 @@ class CCBackground extends CCBase {
 
     }
 
+    #resetPositionalClasses() {
+        this.#elements.backgroundRoot.classList.remove("EnterFromLeft", "EnterFromRight", "EnterFromTop", "EnterFromBottom");
+        this.#elements.backgroundRoot.classList.remove("ExitToLeft", "ExitToRight", "ExitToTop", "ExitToBottom");
+    }
+
+    #resetTransformationalClasses() {
+        this.#elements.backgroundTransformer.classList.remove("WithZoomInEntry", "WithZoomOutEntry", "WithZoomInExit", "WithZoomOutExit");
+    }
+
+    #resetFadingClasses() {
+        this.#elements.backgroundRoot.classList.remove("withFadeIn", "WithFadeOut");
+    }
+
     /**
      * Public Methods
      */
     contentClass(className) {
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         this.#elements.backgroundContent.className = className;
     }
 
     contentPositionRange(xPages, yPages) {
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         this.#elements.backgroundContent.style.width = (xPages * 100).toString() + '%';
         this.#elements.backgroundContent.style.height = (yPages * 100).toString() + '%';
         this.#elements.backgroundContent.style.left = '-0%';
@@ -95,27 +108,27 @@ class CCBackground extends CCBase {
     }
 
     contentPosition(pageX, pageY) {
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         this.#elements.backgroundContent.style.left = (-pageX * 100).toString() + '%';
         this.#elements.backgroundContent.style.top = (-pageY * 100).toString() + '%';
     }
 
     rootPosition(left, top) {
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         this.#elements.backgroundRoot.style.left = left;
         this.#elements.backgroundRoot.style.top = top;
     }
 
     transformationClass(cssClass) {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundTransformer.className = "CCBackgroundTransformerDefault";
+        this.#confirmUXIsInitialised();
+        this.#elements.backgroundTransformer.className = "CCBackgroundTransformer";
         if (cssClass != null) {
             this.#elements.backgroundTransformer.classList.add(cssClass);
         }
     }
 
     transitionStyle(style) {
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         this.#elements.backgroundContent.style.transition = style;
         this.#elements.backgroundTransformer.style.transition = style;
         this.#elements.backgroundRoot.style.transition = style;
@@ -124,7 +137,7 @@ class CCBackground extends CCBase {
     }
 
     transitionDuration(sec) {
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         if (sec == null) {
             sec = this.#propertybag.defaultTransitionDuration;
         }
@@ -138,145 +151,117 @@ class CCBackground extends CCBase {
     }
 
     hide() {
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         this.#elements.backgroundRoot.classList.add("Hide");
     }
 
     show() {
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         this.#elements.backgroundRoot.classList.remove("Hide");
     }
 
-    withfadeIn() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.add("WithFadeIn");
-        this.#elements.backgroundRoot.classList.remove("WithFadeOut");
+    withZoomInEntry() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+        this.#elements.backgroundTransformer.classList.add("WithZoomInEntry");
     }
 
-    withoutfadeIn() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("WithFadeIn");
-        this.#elements.backgroundRoot.classList.remove("WithFadeOut");
+    withZoomOutEntry() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+        this.#elements.backgroundTransformer.classList.add("WithZoomOutEntry");
     }
 
-    withfadeOut() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("WithFadeIn");
+    withZoomInExit() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+        this.#elements.backgroundTransformer.classList.add("WithZoomInExit");
+    }
+
+    withZoomOutExit() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+        this.#elements.backgroundTransformer.classList.add("WithZoomOutExit");
+    }
+
+    withoutZoom() {
+        this.#confirmUXIsInitialised();
+        this.#resetTransformationalClasses()
+    }
+
+    withFadeIn() {
+        this.#confirmUXIsInitialised();
+        this.#resetFadingClasses()
+        this.#elements.backgroundRoot.classList.add("withFadeIn");
+    }
+
+    withoutFadeIn() {
+        this.#confirmUXIsInitialised();
+        this.#resetFadingClasses()
+    }
+
+    withFadeOut() {
+        this.#confirmUXIsInitialised();
+        this.#resetFadingClasses()
         this.#elements.backgroundRoot.classList.add("WithFadeOut");
     }
 
-    withoutfadeOut() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("WithFadeIn");
-        this.#elements.backgroundRoot.classList.remove("WithFadeOut");
+    withoutFadeOut() {
+        this.#confirmUXIsInitialised();
+        this.#resetFadingClasses()
     }
 
     enterLeft() {
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
         this.#elements.backgroundRoot.classList.add("EnterFromLeft");
-        this.#elements.backgroundRoot.classList.remove("EnterFromRight");
-        this.#elements.backgroundRoot.classList.remove("EnterFromTop");
-        this.#elements.backgroundRoot.classList.remove("EnterFromBottom");
-        this.#elements.backgroundRoot.classList.remove("ExitToLeft");
-        this.#elements.backgroundRoot.classList.remove("ExitToRight");
-        this.#elements.backgroundRoot.classList.remove("ExitToTop");
-        this.#elements.backgroundRoot.classList.remove("ExitToBottom");
     }
 
     enterRight() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("EnterFromLeft");
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
         this.#elements.backgroundRoot.classList.add("EnterFromRight");
-        this.#elements.backgroundRoot.classList.remove("EnterFromTop");
-        this.#elements.backgroundRoot.classList.remove("EnterFromBottom");
-        this.#elements.backgroundRoot.classList.remove("ExitToLeft");
-        this.#elements.backgroundRoot.classList.remove("ExitToRight");
-        this.#elements.backgroundRoot.classList.remove("ExitToTop");
-        this.#elements.backgroundRoot.classList.remove("ExitToBottom");
     }
 
     enterTop() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("EnterFromLeft");
-        this.#elements.backgroundRoot.classList.remove("EnterFromRight");
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
         this.#elements.backgroundRoot.classList.add("EnterFromTop");
-        this.#elements.backgroundRoot.classList.remove("EnterFromBottom");
-        this.#elements.backgroundRoot.classList.remove("ExitToLeft");
-        this.#elements.backgroundRoot.classList.remove("ExitToRight");
-        this.#elements.backgroundRoot.classList.remove("ExitToTop");
-        this.#elements.backgroundRoot.classList.remove("ExitToBottom");
     }
 
     enterBottom() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("EnterFromLeft");
-        this.#elements.backgroundRoot.classList.remove("EnterFromRight");
-        this.#elements.backgroundRoot.classList.remove("EnterFromTop");
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
         this.#elements.backgroundRoot.classList.add("EnterFromBottom");
-        this.#elements.backgroundRoot.classList.remove("ExitToLeft");
-        this.#elements.backgroundRoot.classList.remove("ExitToRight");
-        this.#elements.backgroundRoot.classList.remove("ExitToTop");
-        this.#elements.backgroundRoot.classList.remove("ExitToBottom");
     }
 
     exitLeft() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("EnterFromLeft");
-        this.#elements.backgroundRoot.classList.remove("EnterFromRight");
-        this.#elements.backgroundRoot.classList.remove("EnterFromTop");
-        this.#elements.backgroundRoot.classList.remove("EnterFromBottom");
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
         this.#elements.backgroundRoot.classList.add("ExitToLeft");
-        this.#elements.backgroundRoot.classList.remove("ExitToRight");
-        this.#elements.backgroundRoot.classList.remove("ExitToTop");
-        this.#elements.backgroundRoot.classList.remove("ExitToBottom");
     }
 
     exitRight() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("EnterFromLeft");
-        this.#elements.backgroundRoot.classList.remove("EnterFromRight");
-        this.#elements.backgroundRoot.classList.remove("EnterFromTop");
-        this.#elements.backgroundRoot.classList.remove("EnterFromBottom");
-        this.#elements.backgroundRoot.classList.remove("ExitToLeft");
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
         this.#elements.backgroundRoot.classList.add("ExitToRight");
-        this.#elements.backgroundRoot.classList.remove("ExitToTop");
-        this.#elements.backgroundRoot.classList.remove("ExitToBottom");
     }
 
     exitTop() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("EnterFromLeft");
-        this.#elements.backgroundRoot.classList.remove("EnterFromRight");
-        this.#elements.backgroundRoot.classList.remove("EnterFromTop");
-        this.#elements.backgroundRoot.classList.remove("EnterFromBottom");
-        this.#elements.backgroundRoot.classList.remove("ExitToLeft");
-        this.#elements.backgroundRoot.classList.remove("ExitToRight");
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
         this.#elements.backgroundRoot.classList.add("ExitToTop");
-        this.#elements.backgroundRoot.classList.remove("ExitToBottom");
     }
 
     exitBottom() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("EnterFromLeft");
-        this.#elements.backgroundRoot.classList.remove("EnterFromRight");
-        this.#elements.backgroundRoot.classList.remove("EnterFromTop");
-        this.#elements.backgroundRoot.classList.remove("EnterFromBottom");
-        this.#elements.backgroundRoot.classList.remove("ExitToLeft");
-        this.#elements.backgroundRoot.classList.remove("ExitToRight");
-        this.#elements.backgroundRoot.classList.remove("ExitToTop");
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
         this.#elements.backgroundRoot.classList.add("ExitToBottom");
     }
 
     inPlace() {
-        this.#ConfirmUXIsInitialised();
-        this.#elements.backgroundRoot.classList.remove("EnterFromLeft");
-        this.#elements.backgroundRoot.classList.remove("EnterFromRight");
-        this.#elements.backgroundRoot.classList.remove("EnterFromTop");
-        this.#elements.backgroundRoot.classList.remove("EnterFromBottom");
-        this.#elements.backgroundRoot.classList.remove("ExitToLeft");
-        this.#elements.backgroundRoot.classList.remove("ExitToRight");
-        this.#elements.backgroundRoot.classList.remove("ExitToTop");
-        this.#elements.backgroundRoot.classList.remove("ExitToBottom");
+        this.#confirmUXIsInitialised();
+        this.#resetPositionalClasses();
     }
 
     render() {
@@ -288,7 +273,7 @@ class CCBackground extends CCBase {
      */
      connectedCallback() {
 
-        this.#ConfirmUXIsInitialised();
+        this.#confirmUXIsInitialised();
         this.#initialiseAttributes();
         this.render();
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
