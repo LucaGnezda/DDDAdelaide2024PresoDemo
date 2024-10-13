@@ -39,3 +39,22 @@
     font-size: 5vmin;
     padding: 5vmin 5vmin;
 }
+
+
+.Fadeable {
+    transition: all 0.5s ease-in-out;
+    transition-behavior: allow-discrete;
+}
+
+.Fadeable.Show {
+    opacity: 1;
+
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.Hide {
+    display: none;
+    opacity: 0;
+}

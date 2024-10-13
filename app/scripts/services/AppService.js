@@ -47,7 +47,8 @@ class AppService {
         document.body.addEventListener("keydown", this.keydownCallback);
         document.body.addEventListener("click", this.clickCallback);
 
-        App.navigationCallback = App.dispatcher.newEventDispatchCallback("App_PageTransition");
+        App.pageNavigationCallback = App.dispatcher.newEventDispatchCallback("App_PageTransition");
+        App.pageAnimationCallback = App.dispatcher.newEventDispatchCallback("App_PageAnimation");
 
     }
 
@@ -83,6 +84,36 @@ class AppService {
         pageFactory.newPage("intro7", "taptuBackground2");
         pageFactory.newPage("intro8", "taptuBackground2");
         pageFactory.newPage("intro9", "taptuBackground2");
+
+        // Add animations to Pages
+        App.pages.intro2.setAnimation(
+            [
+                {
+                    add: [
+                        {key:"data-line1", classes:["Show"]},
+                    ],
+                    remove: [
+                        {key:"data-line1", classes:["Hide"]},
+                    ] 
+                },
+                {
+                    add: [
+                        {key:"data-line2", classes:["Show"]},
+                    ],
+                    remove: [
+                        {key:"data-line2", classes:["Hide"]},
+                    ] 
+                },
+                {
+                    add: [
+                        {key:"data-line3", classes:["Show"]},
+                    ],
+                    remove: [
+                        {key:"data-line3", classes:["Hide"]},
+                    ] 
+                },
+            ]
+        )
 
         // Interrelate Pages with transitions
         App.pages.intro1.next(App.pages.intro2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
@@ -121,9 +152,20 @@ class AppService {
 
         Log.debug(`${this.constructor.name} captured keydown event`, "APPSERVICE");
 
-        if (App.navigationCallback != null) {
+        if (keyEvent.key == "ArrowRight") {
 
-            if (keyEvent.key == "ArrowRight" && App.activePage.nextPage != null) {
+            if (App.activePage.hasForwardAnimationsRemaining && App.pageAnimationCallback != null) {
+
+                let event = {};
+                event.originatingObject = this;
+                event.originatingEvent = keyEvent;
+                event.activePage = App.activePage;
+                event.inReverse = false;
+
+                App.pageAnimationCallback(event);
+
+            }
+            else if (App.activePage.nextPage != null && App.pageNavigationCallback != null) {
 
                 let event = {};
                 event.originatingObject = this;
@@ -132,11 +174,26 @@ class AppService {
                 event.transitionToPage = App.activePage.nextPage;
                 event.usingTransition = App.activePage.transitionForward;
                 event.withDuration = App.activePage.transitionForwardDuration;
+                event.inReverse = false;
 
-                App.navigationCallback(event);
+                App.pageNavigationCallback(event);
 
             }
-            else if (keyEvent.key == "ArrowLeft" && App.activePage.previousPage != null) {
+        }
+        else if (keyEvent.key == "ArrowLeft") {
+
+            if (App.activePage.hasBackAnimationsRemaining && App.pageAnimationCallback != null) {
+
+                let event = {};
+                event.originatingObject = this;
+                event.originatingEvent = keyEvent;
+                event.activePage = App.activePage;
+                event.inReverse = true;
+
+                App.pageAnimationCallback(event);
+
+            }
+            else if (App.activePage.previousPage != null && App.pageNavigationCallback != null) {
 
                 let event = {};
                 event.originatingObject = this;
@@ -145,10 +202,12 @@ class AppService {
                 event.transitionToPage = App.activePage.previousPage;
                 event.usingTransition = App.activePage.transitionBack;
                 event.withDuration = App.activePage.transitionBackDuration;
+                event.inReverse = true;
 
-                App.navigationCallback(event);
+                App.pageNavigationCallback(event);
 
             }
+
         }
     }
 
@@ -156,21 +215,30 @@ class AppService {
 
         Log.debug(`${this.constructor.name} captured click event`, "APPSERVICE");
 
-        if (App.navigationCallback != null) {
+        if (App.activePage.hasForwardAnimationsRemaining && App.pageAnimationCallback != null) {
 
-            if (App.activePage.nextPage != null) {
+            let event = {};
+            event.originatingObject = this;
+            event.originatingEvent = keyEvent;
+            event.activePage = App.activePage;
+            event.inReverse = false;
 
-                let event = {};
-                event.originatingObject = this;
-                event.originatingEvent = clickEvent;
-                event.transitionFromPage = App.activePage;
-                event.transitionToPage = App.activePage.nextPage;
-                event.usingTransition = App.activePage.transitionForward;
-                event.withDuration = App.activePage.transitionForwardDuration;
+            App.pageAnimationCallback(event);
 
-                App.navigationCallback(event);
+        }
+        else if (App.activePage.nextPage != null && App.pageNavigationCallback != null) {
 
-            }
+            let event = {};
+            event.originatingObject = this;
+            event.originatingEvent = keyEvent;
+            event.transitionFromPage = App.activePage;
+            event.transitionToPage = App.activePage.nextPage;
+            event.usingTransition = App.activePage.transitionForward;
+            event.withDuration = App.activePage.transitionForwardDuration;
+            event.inReverse = false;
+
+            App.pageNavigationCallback(event);
+
         }
     }
 }
