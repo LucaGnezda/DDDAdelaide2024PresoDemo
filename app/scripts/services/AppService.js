@@ -297,7 +297,7 @@ class AppService {
 
             let event = {};
             event.originatingObject = this;
-            event.originatingEvent = keyEvent;
+            event.originatingEvent = clickEvent;
             event.activePage = App.activePage;
             event.inReverse = false;
 
