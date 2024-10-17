@@ -25,33 +25,34 @@ class Log {
     }
 
     static error(msg) {
-        Log.#log("ERROR | ", msg, LogLevel.Error, null);
+        Log.#log("Error", "color:#ffffff; background: #be333f", msg, LogLevel.Error, null);
     }
 
     static warn(msg, category) {
-        Log.#log(" Warn | ", msg, LogLevel.Warning, category);
+        Log.#log(" Warn", "color:#ec9e30;", msg, LogLevel.Warning, category);
     }
 
     static info(msg, category) {
-        Log.#log(" Info | ", msg, LogLevel.Infomation, category);
+        Log.#log(" Info", "color:#238ddd;", msg, LogLevel.Infomation, category);
     }
 
     static debug(msg, category) {
-        Log.#log("Debug | ", msg, LogLevel.Debug, category);
+        Log.#log("Debug", "color:#a0a0a0;", msg, LogLevel.Debug, category);
     }
 
     static trace(msg, category) {
-        Log.#log("Trace | ", msg, LogLevel.Trace, category);
+        Log.#log("Trace", "color:#808080;", msg, LogLevel.Trace, category);
     }
 
-    static #log(prefix, msg, level, category) {
+    static #log(prefix, prefixStyle, msg, level, category) {
         if (Log.#logLevel >= level) {
             if (category == null) {
-                console.log(prefix + msg);
+                console.log("%c" + prefix + "%c | " + msg, prefixStyle, "");
             }
             else if (Log.#logCategories.length == 0 || Log.#logCategories.includes(category)) {
-                console.log(prefix + "[" + category + "] " + msg);
+                console.log("%c" + prefix + "%c | [" + category + "] " + msg, prefixStyle, "");
             }
         }
     }
 }
+
