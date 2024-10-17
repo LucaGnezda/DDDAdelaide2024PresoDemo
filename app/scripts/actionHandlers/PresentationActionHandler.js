@@ -36,25 +36,25 @@ class PresentationActionHandler {
 
     animatePage(payload) {
         if (payload.inReverse) {
-            payload.activePage.stepAnimationBack();
+            payload.activePage.content.stepAnimationBack();
         }
         else {
-            payload.activePage.stepAnimationForward();
+            payload.activePage.content.stepAnimationForward();
         }
     }
 
     transitionPage(payload) {
 
         if (payload.inReverse) {
-            payload.transitionToPage.resetAnimationFinal();
+            payload.transitionToPage.content.resetAnimationFinal();
         }
         else {
-            payload.transitionToPage.resetAnimationInitial();
+            payload.transitionToPage.content.resetAnimationInitial();
         }
         
-        AnimatorService.pageOutro(payload.transitionFromPage, payload.usingTransition, payload.withDuration);
-        AnimatorService.transitionBackground(payload.transitionFromPage, payload.transitionToPage, payload.usingTransition, payload.withDuration);
-        AnimatorService.pageIntro(payload.transitionToPage, payload.usingTransition, payload.withDuration);
+        AnimatorService.pageOutro(payload.transitionFromPage.content, payload.usingTransition, payload.withDuration);
+        AnimatorService.transitionBackground(payload.transitionFromPage.background, payload.transitionToPage.background, payload.transitionToPage.backgroundX, payload.transitionToPage.backgroundY, payload.transitionToPage.backgroundTransformer, payload.usingTransition, payload.withDuration);
+        AnimatorService.pageIntro(payload.transitionToPage.content, payload.usingTransition, payload.withDuration);
             
         App.activePage = payload.transitionToPage;
 

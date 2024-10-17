@@ -214,16 +214,14 @@ class AnimatorService {
 
     }
 
-    static transitionBackground(fromPage, toPage, usingTransition, duration) {
+    static transitionBackground(currentBG, toBG, toX, toY, toTransformer, usingTransition, duration) {
 
-        let currentBG = App.backgrounds[fromPage.backgroundId];
-        let toBG = App.backgrounds[toPage.backgroundId];
+        toBG.usingContentPosition(toX, toY);
+        toBG.usingTransformationClass(toTransformer);
 
-        if (fromPage.backgroundId == toPage.backgroundId) {
+        if (currentBG == toBG) {
 
-            currentBG.contentPosition(toPage.backgroundX, toPage.backgroundY);
-            currentBG.transformationClass(toPage.backgroundTransformer);
-            currentBG.transitionDuration(duration);
+            toBG.usingTransition(duration, "ease-in-out", 0);
 
         }
         else {
@@ -231,12 +229,12 @@ class AnimatorService {
             switch (usingTransition) {
 
                 case PageTransition.SlideLeft:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.exitLeft();
                     currentBG.withoutFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.enterRight();
                     toBG.withoutFadeIn();
                     toBG.withoutZoom();
@@ -244,12 +242,12 @@ class AnimatorService {
                     break;
     
                 case PageTransition.SlideRight:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.exitRight();
                     currentBG.withoutFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.enterLeft();
                     toBG.withoutFadeIn();
                     toBG.withoutZoom();
@@ -257,12 +255,12 @@ class AnimatorService {
                     break;
 
                 case PageTransition.SlideUp:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.exitTop();
                     currentBG.withoutFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.enterBottom();
                     toBG.withoutFadeIn();
                     toBG.withoutZoom();
@@ -270,12 +268,12 @@ class AnimatorService {
                     break;
 
                 case PageTransition.SlideDown:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.exitBottom();
                     currentBG.withoutFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.enterTop();
                     toBG.withoutFadeIn();
                     toBG.withoutZoom();
@@ -283,12 +281,12 @@ class AnimatorService {
                     break;
 
                 case PageTransition.FadeSlideLeft:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.exitLeft();
                     currentBG.withFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.enterRight();
                     toBG.withFadeIn();
                     toBG.withoutZoom();
@@ -296,12 +294,12 @@ class AnimatorService {
                     break;
     
                 case PageTransition.FadeSlideRight:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.exitRight();
                     currentBG.withFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.enterLeft();
                     toBG.withFadeIn();
                     toBG.withoutZoom();
@@ -309,12 +307,12 @@ class AnimatorService {
                     break;
 
                 case PageTransition.FadeSlideUp:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.exitTop();
                     currentBG.withFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.enterBottom();
                     toBG.withFadeIn();
                     toBG.withoutZoom();
@@ -322,12 +320,12 @@ class AnimatorService {
                     break;
 
                 case PageTransition.FadeSlideDown:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.exitBottom();
                     currentBG.withFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.enterTop();
                     toBG.withFadeIn();
                     toBG.withoutZoom();
@@ -335,12 +333,12 @@ class AnimatorService {
                     break;
 
                 case PageTransition.Fade:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.inPlace();
                     currentBG.withFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.inPlace();
                     toBG.withFadeIn();
                     toBG.withoutZoom();
@@ -348,12 +346,12 @@ class AnimatorService {
                     break;
 
                 case PageTransition.ZoomIn:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.inPlace();
                     currentBG.withFadeOut();
                     currentBG.withZoomInExit();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.inPlace();
                     toBG.withFadeIn();
                     toBG.withZoomInEntry();
@@ -361,12 +359,12 @@ class AnimatorService {
                     break;
 
                 case PageTransition.ZoomOut:
-                    currentBG.transitionDuration(duration);
+                    currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.inPlace();
                     currentBG.withFadeOut();
                     currentBG.withZoomOutExit();
                     currentBG.hide();
-                    toBG.transitionDuration(duration);
+                    toBG.usingTransition(duration, "ease-in-out", 0);
                     toBG.inPlace();
                     toBG.withFadeIn();
                     toBG.withZoomOutEntry();
@@ -375,12 +373,12 @@ class AnimatorService {
                 
                 case PageTransition.None:
                 default:
-                    currentBG.transitionDuration(0);
+                    currentBG.usingTransition(0, "linear", 0);
                     currentBG.inPlace();
                     currentBG.withoutFadeOut();
                     currentBG.withoutZoom();
                     currentBG.hide();
-                    toBG.transitionDuration(0);
+                    toBG.usingTransition(0, "linear", 0);
                     toBG.inPlace();
                     toBG.withoutFadeIn();
                     toBG.withoutZoom();
@@ -390,9 +388,4 @@ class AnimatorService {
         }
 
     }
-
-    static swapBackground() {
-
-    }
-    
 }

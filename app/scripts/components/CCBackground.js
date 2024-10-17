@@ -13,11 +13,7 @@ class CCBackground extends CCBase {
     };
 
     #propertybag = {
-        backgroundColor: "#ffffff",
-        backgroundImage: null,
-        slidewith: 1,
-        slideheight: 1,
-        defaultTransitionDuration: 1
+        
     }
 
     static #htmlTemplate = `
@@ -94,12 +90,12 @@ class CCBackground extends CCBase {
     /**
      * Public Methods
      */
-    contentClass(className) {
+    setContentClass(className) {
         this.#confirmUXIsInitialised();
         this.#elements.backgroundContent.className = className;
     }
 
-    contentPositionRange(xPages, yPages) {
+    setContentPositionRange(xPages, yPages) {
         this.#confirmUXIsInitialised();
         this.#elements.backgroundContent.style.width = (xPages * 100).toString() + '%';
         this.#elements.backgroundContent.style.height = (yPages * 100).toString() + '%';
@@ -107,19 +103,19 @@ class CCBackground extends CCBase {
         this.#elements.backgroundContent.style.top = '-0%';
     }
 
-    contentPosition(pageX, pageY) {
+    usingContentPosition(pageX, pageY) {
         this.#confirmUXIsInitialised();
         this.#elements.backgroundContent.style.left = (-pageX * 100).toString() + '%';
         this.#elements.backgroundContent.style.top = (-pageY * 100).toString() + '%';
     }
 
-    rootPosition(left, top) {
+    usingRootPosition(left, top) {
         this.#confirmUXIsInitialised();
         this.#elements.backgroundRoot.style.left = left;
         this.#elements.backgroundRoot.style.top = top;
     }
 
-    transformationClass(cssClass) {
+    usingTransformationClass(cssClass) {
         this.#confirmUXIsInitialised();
         this.#elements.backgroundTransformer.className = "CCBackgroundTransformer";
         if (cssClass != null) {
@@ -127,27 +123,26 @@ class CCBackground extends CCBase {
         }
     }
 
-    transitionStyle(style) {
+    usingTransition(duration, timingFunction, delay) {
         this.#confirmUXIsInitialised();
-        this.#elements.backgroundContent.style.transition = style;
-        this.#elements.backgroundTransformer.style.transition = style;
-        this.#elements.backgroundRoot.style.transition = style;
-        this.#elements.backgroundRoot.style.transitionBehavior = "allow-discrete";
-        this.#propertybag.defaultTransitionDuration = this.#elements.backgroundRoot.style.transitionDuration;
-    }
 
-    transitionDuration(sec) {
-        this.#confirmUXIsInitialised();
-        if (sec == null) {
-            sec = this.#propertybag.defaultTransitionDuration;
+        if (typeof duration == "number") {
+            duration = duration + "s";
         }
-        
-        if (typeof sec == "number") {
-            sec = sec + "s";
+
+        if (typeof delay == "number") {
+            delay = delay + "s";
         }
-        this.#elements.backgroundContent.style.transitionDuration = sec;
-        this.#elements.backgroundTransformer.style.transitionDuration = sec;
-        this.#elements.backgroundRoot.style.transitionDuration = sec;
+
+        this.#elements.backgroundContent.style.transitionDuration = duration;
+        this.#elements.backgroundContent.style.transitionTimingFunction = timingFunction;
+        this.#elements.backgroundContent.style.transitionDelay = delay;
+        this.#elements.backgroundTransformer.style.transitionDuration = duration;
+        this.#elements.backgroundTransformer.style.transitionTimingFunction = timingFunction;
+        this.#elements.backgroundTransformer.style.transitionDelay = delay;
+        this.#elements.backgroundRoot.style.transitionDuration = duration;
+        this.#elements.backgroundRoot.style.transitionTimingFunction = timingFunction;
+        this.#elements.backgroundRoot.style.transitionDelay = delay;
     }
 
     hide() {

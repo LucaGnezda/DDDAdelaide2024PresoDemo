@@ -100,7 +100,7 @@ class Dispatcher {
 
                 // stopProp
                 if (stopPropagationIfDispatched) {
-                    event.stopPropagation = true;
+                    event.stopPropagation();
                 }
 
                 App.dispatcher.dispatch(new Action(actionType, event));

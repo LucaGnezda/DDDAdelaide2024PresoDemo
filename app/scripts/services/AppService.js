@@ -18,11 +18,10 @@ class AppService {
         AppService.LoadStore();
         
         // Define Presentation
-        AppService.DefinePresentationPagesAndBackgrounds();
+        AppService.DefinePresentation();
         AppService.LoadPresentationContent();
         AppService.DefineInPageAnimations();
         AppService.InitialiseInteractiveContent();
-        AppService.InterrelatePages();
 
         AppService.ActivateFirstPage();
 
@@ -76,49 +75,82 @@ class AppService {
 
     }
 
-    static DefinePresentationPagesAndBackgrounds() {
+    static DefinePresentation() {
 
-        let backgroundFactory = new BackgroundFactory(App.backgrounds, App.elements.backgroundsContainer);
-        let pageFactory = new PageFactory(App.pages, App.elements.pagesContainer);
+        let factory = new PresentationFactory(App.pages, App.pageContent, App.backgrounds, App.elements.pagesContainer, App.elements.backgroundsContainer);
 
         // Define & configure Backgrounds
-        backgroundFactory.newBackground("taptuBackground1");
-        backgroundFactory.newBackground("taptuBackground2");
-        backgroundFactory.newBackground("taptuBackground2Alt");
+        factory.newBackground("taptuBackground1");
+        factory.newBackground("taptuBackground2");
+        factory.newBackground("taptuBackground2Alt");
         
-        App.backgrounds.taptuBackground1.contentClass("TestBackgroundContent1");
-        App.backgrounds.taptuBackground1.contentPositionRange(3, 1);
-        App.backgrounds.taptuBackground1.transitionStyle("all 1.0s ease-in-out");
+        App.backgrounds.taptuBackground1.setContentClass("TestBackgroundContent1");
+        App.backgrounds.taptuBackground1.setContentPositionRange(3, 1);
 
-        App.backgrounds.taptuBackground2.contentClass("TestBackgroundContent2");
-        App.backgrounds.taptuBackground2.contentPositionRange(1, 1);
-        App.backgrounds.taptuBackground2.transitionStyle("all 1.0s ease-in-out");
+        App.backgrounds.taptuBackground2.setContentClass("TestBackgroundContent2");
+        App.backgrounds.taptuBackground2.setContentPositionRange(1, 1);
 
-        App.backgrounds.taptuBackground2Alt.contentClass("TestBackgroundContent2");
-        App.backgrounds.taptuBackground2Alt.contentPositionRange(1, 1);
-        App.backgrounds.taptuBackground2Alt.transitionStyle("all 1.0s ease-in-out");
+        App.backgrounds.taptuBackground2Alt.setContentClass("TestBackgroundContent2");
+        App.backgrounds.taptuBackground2Alt.setContentPositionRange(1, 1);
 
-        // Define Pages & their Backgrounds
-        pageFactory.newPage("intro1", "taptuBackground1", 0.0, 0, null);
-        pageFactory.newPage("intro2", "taptuBackground1", 0.2, 0, null);
-        pageFactory.newPage("intro3", "taptuBackground1", 0.4, 0, null);
-        pageFactory.newPage("intro4", "taptuBackground2");
-        pageFactory.newPage("intro5", "taptuBackground2");
-        pageFactory.newPage("intro6", "taptuBackground2Alt");
-        pageFactory.newPage("intro7", "taptuBackground2");
-        pageFactory.newPage("intro8", "taptuBackground2");
-        pageFactory.newPage("intro9", "taptuBackground2");
-        pageFactory.newPage("hub", "taptuBackground1", 0, 0, null);
-        pageFactory.newPage("hubedit", "taptuBackground1", 1, 0, null);
+        // Define Pages Content
+        factory.newPageContent("intro1");
+        factory.newPageContent("intro2");
+        factory.newPageContent("intro3");
+        factory.newPageContent("intro4");
+        factory.newPageContent("intro5");
+        factory.newPageContent("intro6");
+        factory.newPageContent("intro7");
+        factory.newPageContent("intro8");
+        factory.newPageContent("intro9");
+        factory.newPageContent("hub");
+        factory.newPageContent("hubedit");
+
+        // Define PageNodes
+        factory.newPageNode("intro1");
+        factory.newPageNode("intro2");
+        factory.newPageNode("intro3");
+        factory.newPageNode("intro4");
+        factory.newPageNode("intro5");
+        factory.newPageNode("intro6");
+        factory.newPageNode("intro7");
+        factory.newPageNode("intro8");
+        factory.newPageNode("intro9");
+        factory.newPageNode("hub");
+        factory.newPageNode("hubedit");
+
+        App.pages.intro1.setPageContentAndBackground(App.pageContent.intro1, App.backgrounds.taptuBackground1, 0.0, 0, null);
+        App.pages.intro2.setPageContentAndBackground(App.pageContent.intro2, App.backgrounds.taptuBackground1, 0.2, 0, null);
+        App.pages.intro3.setPageContentAndBackground(App.pageContent.intro3, App.backgrounds.taptuBackground1, 0.4, 0, null);
+        App.pages.intro4.setPageContentAndBackground(App.pageContent.intro4, App.backgrounds.taptuBackground2);
+        App.pages.intro5.setPageContentAndBackground(App.pageContent.intro5, App.backgrounds.taptuBackground2);
+        App.pages.intro6.setPageContentAndBackground(App.pageContent.intro6, App.backgrounds.taptuBackground2Alt);
+        App.pages.intro7.setPageContentAndBackground(App.pageContent.intro7, App.backgrounds.taptuBackground2);
+        App.pages.intro8.setPageContentAndBackground(App.pageContent.intro8, App.backgrounds.taptuBackground2);
+        App.pages.intro9.setPageContentAndBackground(App.pageContent.intro9, App.backgrounds.taptuBackground2);
+        App.pages.hub.setPageContentAndBackground(App.pageContent.hub, App.backgrounds.taptuBackground1, 0.0, 0, null);
+        App.pages.hubedit.setPageContentAndBackground(App.pageContent.hubedit, App.backgrounds.taptuBackground1, 1.0, 0, null);
+
+        // Interrelate Pages with transitions
+        App.pages.intro1.setNextPage(App.pages.intro2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.intro2.setNextPage(App.pages.intro3, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.intro3.setNextPage(App.pages.intro4, PageTransition.ZoomOut, PageTransition.ZoomIn, 1);
+        App.pages.intro4.setNextPage(App.pages.intro5, PageTransition.Fade, PageTransition.Fade, 1);
+        App.pages.intro5.setNextPage(App.pages.intro6, PageTransition.SlideUp, PageTransition.SlideDown, 1);
+        App.pages.intro6.setNextPage(App.pages.intro7, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1);
+        App.pages.intro7.setNextPage(App.pages.intro8, PageTransition.FadeSlideUp, PageTransition.FadeSlideDown, 1);
+        App.pages.intro8.setNextPage(App.pages.intro9, PageTransition.None, PageTransition.None, 1);
+        App.pages.intro9.setNextPage(App.pages.hub, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.hub.setNextPage(App.pages.hubedit, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
 
     }
 
     static LoadPresentationContent() {
 
-        for (let property in App.pages) {
-            let source = document.querySelector(`data[value='${property}']`);
+        for (let name in App.pages) {
+            let source = document.querySelector(`data[value='${name}']`);
             if (source != null) {
-                App.pages[property].setContents(source.childNodes);
+                App.pageContent[name].setContents(source.childNodes);
             }
         }
 
@@ -128,7 +160,7 @@ class AppService {
     static DefineInPageAnimations() {
         
         // Add animations to Pages
-        App.pages.intro2.setAnimation(
+        App.pageContent.intro2.setAnimation(
             [
                 {
                     add: [
@@ -165,9 +197,9 @@ class AppService {
         App.elements.logicButton = document.getElementById("LogicButton");
         App.elements.dataButton = document.getElementById("DataButton");
 
-        App.elements.uxButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_UXButton_OnClick"));
-        App.elements.logicButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_LogicButton_OnClick"));
-        App.elements.dataButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_DataButton_OnClick"));
+        App.elements.uxButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_UXButton_OnClick", true));
+        App.elements.logicButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_LogicButton_OnClick", true));
+        App.elements.dataButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_DataButton_OnClick", true));
 
         // Hub page
         App.elements.appModelContainer = document.getElementById("AppModel");
@@ -196,33 +228,16 @@ class AppService {
 
     }
 
-
-    static InterrelatePages() {
-
-        // Interrelate Pages with transitions
-        App.pages.intro1.next(App.pages.intro2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.intro2.next(App.pages.intro3, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.intro3.next(App.pages.intro4, PageTransition.ZoomOut, PageTransition.ZoomIn, 1);
-        App.pages.intro4.next(App.pages.intro5, PageTransition.Fade, PageTransition.Fade, 1);
-        App.pages.intro5.next(App.pages.intro6, PageTransition.SlideUp, PageTransition.SlideDown, 1);
-        App.pages.intro6.next(App.pages.intro7, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1);
-        App.pages.intro7.next(App.pages.intro8, PageTransition.FadeSlideUp, PageTransition.FadeSlideDown, 1);
-        App.pages.intro8.next(App.pages.intro9, PageTransition.None, PageTransition.None, 1);
-        App.pages.intro9.next(App.pages.hub, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.hub.next(App.pages.hubedit, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-
-    }
-
     static ActivateFirstPage() {
 
         // Activate and transition page 1
         App.activePage = App.pages.intro1;
-        App.backgrounds[App.activePage.backgroundId].transitionDuration(2);
-        App.backgrounds[App.activePage.backgroundId].withFadeIn();
-        App.backgrounds[App.activePage.backgroundId].show();
-        App.activePage.usingTransition(1, "ease-in", 0);
-        App.activePage.withFadeIn();
-        App.activePage.show();
+        App.activePage.background.usingTransition(1, "ease-in", 0);
+        App.activePage.background.withFadeIn();
+        App.activePage.background.show();
+        App.activePage.content.usingTransition(1, "ease-in", 0);
+        App.activePage.content.withFadeIn();
+        App.activePage.content.show();
 
     }
 
@@ -232,7 +247,7 @@ class AppService {
 
         if (keyEvent.key == "ArrowRight") {
 
-            if (App.activePage.hasForwardAnimationsRemaining && App.pageAnimationCallback != null) {
+            if (App.activePage.content.hasForwardAnimationsRemaining && App.pageAnimationCallback != null) {
 
                 let event = {};
                 event.originatingObject = this;
@@ -260,7 +275,7 @@ class AppService {
         }
         else if (keyEvent.key == "ArrowLeft") {
 
-            if (App.activePage.hasBackAnimationsRemaining && App.pageAnimationCallback != null) {
+            if (App.activePage.content.hasBackAnimationsRemaining && App.pageAnimationCallback != null) {
 
                 let event = {};
                 event.originatingObject = this;
@@ -293,7 +308,7 @@ class AppService {
 
         Log.debug(`${this.constructor.name} captured click event`, "APPSERVICE");
 
-        if (App.activePage.hasForwardAnimationsRemaining && App.pageAnimationCallback != null) {
+        if (App.activePage.content.hasForwardAnimationsRemaining && App.pageAnimationCallback != null) {
 
             let event = {};
             event.originatingObject = this;
