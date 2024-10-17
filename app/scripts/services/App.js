@@ -28,7 +28,9 @@ class App {
     };
 
     // Referecned components
-    static pages = {};
+    static pageContent = {};
     static backgrounds = {};
+    static pages = {};
+
     static activePage = null;
 }

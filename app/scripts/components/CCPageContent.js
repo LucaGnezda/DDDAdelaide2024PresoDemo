@@ -1,6 +1,6 @@
 "use strict";
 
-class CCPage extends CCBase {
+class CCPageContent extends CCBase {
 
     /**
      * Member attributes
@@ -14,16 +14,6 @@ class CCPage extends CCBase {
     #propertybag = {
         animationSteps: null,
         currentAnimationStep: null,
-        backgroundId: null,
-        backgroundX: null,
-        backgroundY: null,
-        backgroundTransformer: null,
-        nextPage: null,
-        previousPage: null,
-        transitionForward: null,
-        transitionForwardDuration: null,
-        transitionBack: null,
-        transitionBackDuration: null,
     };
 
     static #htmlTemplate = `
@@ -56,46 +46,6 @@ class CCPage extends CCBase {
     /**
      * Getters & Setters
      */
-    get nextPage() {
-        return this.#propertybag.nextPage;
-    }
-
-    get previousPage() {
-        return this.#propertybag.previousPage;
-    }
-
-    get transitionForward() {
-        return this.#propertybag.transitionForward;
-    }
-
-    get transitionBack() {
-        return this.#propertybag.transitionBack;
-    }
-
-    get transitionForwardDuration() {
-        return this.#propertybag.transitionForwardDuration;
-    }
-
-    get transitionBackDuration() {
-        return this.#propertybag.transitionBackDuration;
-    } 
-
-    get backgroundId() {
-        return this.#propertybag.backgroundId;
-    }
-
-    get backgroundX() {
-        return this.#propertybag.backgroundX;
-    }
-
-    get backgroundY() {
-        return this.#propertybag.backgroundY
-    }
-    
-    get backgroundTransformer() {
-        return this.#propertybag.background;
-    }
-
     get hasForwardAnimationsRemaining() {
         return (this.#propertybag.animationSteps != null && this.#propertybag.animationSteps.length - this.#propertybag.currentAnimationStep > 0);
     }
@@ -111,7 +61,7 @@ class CCPage extends CCBase {
 
         if (this.children.length == 0) {
 
-            let fragment = getDOMFragmentFromString(CCPage.#htmlTemplate);
+            let fragment = getDOMFragmentFromString(CCPageContent.#htmlTemplate);
 
             this.#elements.pageRoot = fragment.querySelector('[data-page-root]');
             this.#elements.pageTransformer = fragment.querySelector('[data-page-transformer]');
@@ -222,43 +172,6 @@ class CCPage extends CCBase {
 
     render() {
         // No dynamic rendering required.
-    }
-
-    background(backgroundId, pageX, pageY, transformerClass) {
-        this.#propertybag.backgroundId = backgroundId;
-        this.#propertybag.backgroundX = pageX;
-        this.#propertybag.backgroundY = pageY;
-        this.#propertybag.backgroundTransformer = transformerClass;
-    }
-
-    next(page, transitionForward, transitionBack, duration) {
-
-        if (page.constructor.name != "CCPage") {
-            Log.error('Page is not of type CCPage', "COMPONENT");
-            return;
-        }
-
-        if (transitionForward != null) {
-            this.#propertybag.nextPage = page;
-            this.#propertybag.transitionForward = transitionForward;
-            this.#propertybag.transitionForwardDuration = duration;
-        }
-
-        if (transitionBack != null) {
-            page.previous(this, transitionBack, duration)
-        }
-    }
-
-    previous(page, transitionBack, duration) {
-
-        if (page.constructor.name != "CCPage") {
-            Log.error('Page is not of type CCPage', "COMPONENT");
-            return;
-        }
-
-        this.#propertybag.previousPage = page;
-        this.#propertybag.transitionBack = transitionBack;
-        this.#propertybag.transitionBackDuration = duration;
     }
 
     setContents(source) {
