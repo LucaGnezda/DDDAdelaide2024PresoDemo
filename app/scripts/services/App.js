@@ -18,13 +18,14 @@ class App {
     static elements = {
         pagesContainer: null,
         backgroundsContainer: null,
-        uxButton: null,
-        logicButton: null,
-        dataButton: null,
-        appModelContainer: null,
-        appModelElementUX: null,
-        appModelElementLogic: null,
-        appModelElementData: null
+        componentsButton: null,
+        eventBindingButton: null,
+        dispatchActionHandlingButton: null,
+        storeButton: null,
+        dataBindingButton: null,
+        loggingButton: null,
+        observablesButton: null,
+        demoButton: null,
     };
 
     // Referecned components

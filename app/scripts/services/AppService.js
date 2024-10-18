@@ -64,15 +64,6 @@ class AppService {
 
         App.store.addObservablesDictionary("appModel");
 
-        let uxData = App.store.appModel.add("UX");
-        uxData.observableData.isUnlocked = false;
-
-        let logicData = App.store.appModel.add("Logic");
-        logicData.observableData.isUnlocked = false;
-
-        let dataData = App.store.appModel.add("Data");
-        dataData.observableData.isUnlocked = false;
-
     }
 
     static DefinePresentation() {
@@ -80,69 +71,141 @@ class AppService {
         let factory = new PresentationFactory(App.pages, App.pageContent, App.backgrounds, App.elements.pagesContainer, App.elements.backgroundsContainer);
 
         // Define & configure Backgrounds
-        factory.newBackground("taptuBackground1");
-        factory.newBackground("taptuBackground2");
-        factory.newBackground("taptuBackground2Alt");
-        
-        App.backgrounds.taptuBackground1.setContentClass("TestBackgroundContent1");
-        App.backgrounds.taptuBackground1.setContentPositionRange(3, 1);
-
-        App.backgrounds.taptuBackground2.setContentClass("TestBackgroundContent2");
-        App.backgrounds.taptuBackground2.setContentPositionRange(1, 1);
-
-        App.backgrounds.taptuBackground2Alt.setContentClass("TestBackgroundContent2");
-        App.backgrounds.taptuBackground2Alt.setContentPositionRange(1, 1);
+        factory.newBackground("introBackground");
+        factory.newBackground("hubBackground");
+        factory.newBackground("sectionBackground1");
+        factory.newBackground("demoBackground");
 
         // Define Pages Content
         factory.newPageContent("intro1");
         factory.newPageContent("intro2");
         factory.newPageContent("intro3");
-        factory.newPageContent("intro4");
-        factory.newPageContent("intro5");
-        factory.newPageContent("intro6");
-        factory.newPageContent("intro7");
-        factory.newPageContent("intro8");
-        factory.newPageContent("intro9");
-        factory.newPageContent("hub");
-        factory.newPageContent("hubedit");
 
-        // Define PageNodes
+        factory.newPageContent("hub");
+
+        factory.newPageContent("logging1");
+
+        factory.newPageContent("components1");
+        factory.newPageContent("components2");
+
+        factory.newPageContent("observables1");
+        factory.newPageContent("observables2");
+
+        factory.newPageContent("store1");
+        factory.newPageContent("store2");
+
+        factory.newPageContent("eventBinding1");
+
+        factory.newPageContent("dispatchActionHandling1");
+        factory.newPageContent("dispatchActionHandling2");
+        factory.newPageContent("dispatchActionHandling3");
+
+        factory.newPageContent("dataBinding1");
+
+        factory.newPageContent("demo");
+
+        // Define Pages
         factory.newPageNode("intro1");
         factory.newPageNode("intro2");
         factory.newPageNode("intro3");
-        factory.newPageNode("intro4");
-        factory.newPageNode("intro5");
-        factory.newPageNode("intro6");
-        factory.newPageNode("intro7");
-        factory.newPageNode("intro8");
-        factory.newPageNode("intro9");
-        factory.newPageNode("hub");
-        factory.newPageNode("hubedit");
 
-        App.pages.intro1.setPageContentAndBackground(App.pageContent.intro1, App.backgrounds.taptuBackground1, 0.0, 0, null);
-        App.pages.intro2.setPageContentAndBackground(App.pageContent.intro2, App.backgrounds.taptuBackground1, 0.2, 0, null);
-        App.pages.intro3.setPageContentAndBackground(App.pageContent.intro3, App.backgrounds.taptuBackground1, 0.4, 0, null);
-        App.pages.intro4.setPageContentAndBackground(App.pageContent.intro4, App.backgrounds.taptuBackground2);
-        App.pages.intro5.setPageContentAndBackground(App.pageContent.intro5, App.backgrounds.taptuBackground2);
-        App.pages.intro6.setPageContentAndBackground(App.pageContent.intro6, App.backgrounds.taptuBackground2Alt);
-        App.pages.intro7.setPageContentAndBackground(App.pageContent.intro7, App.backgrounds.taptuBackground2);
-        App.pages.intro8.setPageContentAndBackground(App.pageContent.intro8, App.backgrounds.taptuBackground2);
-        App.pages.intro9.setPageContentAndBackground(App.pageContent.intro9, App.backgrounds.taptuBackground2);
-        App.pages.hub.setPageContentAndBackground(App.pageContent.hub, App.backgrounds.taptuBackground1, 0.0, 0, null);
-        App.pages.hubedit.setPageContentAndBackground(App.pageContent.hubedit, App.backgrounds.taptuBackground1, 1.0, 0, null);
+        factory.newPageNode("hub");
+
+        factory.newPageNode("logging1");
+
+        factory.newPageNode("components1");
+        factory.newPageNode("components2");
+
+        factory.newPageNode("observables1");
+        factory.newPageNode("observables2");
+
+        factory.newPageNode("store1");
+        factory.newPageNode("store2");
+
+        factory.newPageNode("eventBinding1");
+
+        factory.newPageNode("dispatchActionHandling1");
+        factory.newPageNode("dispatchActionHandling2");
+        factory.newPageNode("dispatchActionHandling3");
+
+        factory.newPageNode("dataBinding1");
+
+        factory.newPageNode("demo");
+        
+        // Configure Backgrounds
+        App.backgrounds.introBackground.setContentClass("TestBackgroundContent1");
+        App.backgrounds.introBackground.setContentPositionRange(3, 1);
+
+        App.backgrounds.hubBackground.setContentClass("TestBackgroundContent2");
+        App.backgrounds.hubBackground.setContentPositionRange(1, 1);
+
+        App.backgrounds.sectionBackground1.setContentClass("TestBackgroundContent1");
+        App.backgrounds.sectionBackground1.setContentPositionRange(3, 1);
+
+        App.backgrounds.demoBackground.setContentClass("TestBackgroundContent2");
+        App.backgrounds.demoBackground.setContentPositionRange(1, 1);        
+
+        // Configure Pages
+        App.pages.intro1.setPageContentAndBackground(App.pageContent.intro1, App.backgrounds.introBackground, 0.0, 0, null);
+        App.pages.intro2.setPageContentAndBackground(App.pageContent.intro2, App.backgrounds.introBackground, 0.2, 0, null);
+        App.pages.intro3.setPageContentAndBackground(App.pageContent.intro3, App.backgrounds.introBackground, 0.4, 0, null);
+
+        App.pages.hub.setPageContentAndBackground(App.pageContent.hub, App.backgrounds.hubBackground);
+
+        App.pages.logging1.setPageContentAndBackground(App.pageContent.logging1, App.backgrounds.sectionBackground1, 0.0, 0, null);
+
+        App.pages.components1.setPageContentAndBackground(App.pageContent.components1, App.backgrounds.sectionBackground1, 0.0, 0, null);
+        App.pages.components2.setPageContentAndBackground(App.pageContent.components2, App.backgrounds.sectionBackground1, 0.2, 0, null);
+
+        App.pages.observables1.setPageContentAndBackground(App.pageContent.observables1, App.backgrounds.sectionBackground1, 0.0, 0, null);
+        App.pages.observables2.setPageContentAndBackground(App.pageContent.observables2, App.backgrounds.sectionBackground1, 0.2, 0, null);
+
+        App.pages.store1.setPageContentAndBackground(App.pageContent.store1, App.backgrounds.sectionBackground1, 0.0, 0, null);
+        App.pages.store2.setPageContentAndBackground(App.pageContent.store2, App.backgrounds.sectionBackground1, 0.2, 0, null);
+
+        App.pages.eventBinding1.setPageContentAndBackground(App.pageContent.eventBinding1, App.backgrounds.sectionBackground1, 0.4, 0, null);
+
+        App.pages.dispatchActionHandling1.setPageContentAndBackground(App.pageContent.dispatchActionHandling1, App.backgrounds.sectionBackground1, 0.0, 0, null);
+        App.pages.dispatchActionHandling2.setPageContentAndBackground(App.pageContent.dispatchActionHandling2, App.backgrounds.sectionBackground1, 0.2, 0, null);
+        App.pages.dispatchActionHandling3.setPageContentAndBackground(App.pageContent.dispatchActionHandling3, App.backgrounds.sectionBackground1, 0.4, 0, null);
+
+        App.pages.dataBinding1.setPageContentAndBackground(App.pageContent.dataBinding1, App.backgrounds.sectionBackground1, 0.4, 0, null);
+
+        App.pages.demo.setPageContentAndBackground(App.pageContent.demo, App.backgrounds.demoBackground);
+
 
         // Interrelate Pages with transitions
         App.pages.intro1.setNextPage(App.pages.intro2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
         App.pages.intro2.setNextPage(App.pages.intro3, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.intro3.setNextPage(App.pages.intro4, PageTransition.ZoomOut, PageTransition.ZoomIn, 1);
-        App.pages.intro4.setNextPage(App.pages.intro5, PageTransition.Fade, PageTransition.Fade, 1);
-        App.pages.intro5.setNextPage(App.pages.intro6, PageTransition.SlideUp, PageTransition.SlideDown, 1);
-        App.pages.intro6.setNextPage(App.pages.intro7, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1);
-        App.pages.intro7.setNextPage(App.pages.intro8, PageTransition.FadeSlideUp, PageTransition.FadeSlideDown, 1);
-        App.pages.intro8.setNextPage(App.pages.intro9, PageTransition.None, PageTransition.None, 1);
-        App.pages.intro9.setNextPage(App.pages.hub, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.hub.setNextPage(App.pages.hubedit, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.intro3.setNextPage(App.pages.hub, PageTransition.Fade, PageTransition.Fade, 1);
 
+        App.pages.logging1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
+        App.pages.logging1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+
+        App.pages.components1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
+        App.pages.components1.setNextPage(App.pages.components2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.components2.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+
+        App.pages.observables1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
+        App.pages.observables1.setNextPage(App.pages.observables2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.observables2.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+
+        App.pages.store1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
+        App.pages.store1.setNextPage(App.pages.store2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.store2.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+
+        App.pages.eventBinding1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
+        App.pages.eventBinding1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+
+        App.pages.dispatchActionHandling1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
+        App.pages.dispatchActionHandling1.setNextPage(App.pages.dispatchActionHandling2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.dispatchActionHandling2.setNextPage(App.pages.dispatchActionHandling3, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
+        App.pages.dispatchActionHandling3.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+
+        App.pages.dataBinding1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
+        App.pages.dataBinding1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+
+        App.pages.demo.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
     }
 
     static LoadPresentationContent() {
@@ -160,6 +223,7 @@ class AppService {
     static DefineInPageAnimations() {
         
         // Add animations to Pages
+        /*
         App.pageContent.intro2.setAnimation(
             [
                 {
@@ -188,43 +252,29 @@ class AppService {
                 },
             ]
         )
+        */
     }
 
     static InitialiseInteractiveContent() {
 
-        // Hub edit page
-        App.elements.uxButton = document.getElementById("UserExperienceButton");
-        App.elements.logicButton = document.getElementById("LogicButton");
-        App.elements.dataButton = document.getElementById("DataButton");
-
-        App.elements.uxButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_UXButton_OnClick", true));
-        App.elements.logicButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_LogicButton_OnClick", true));
-        App.elements.dataButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("HubEdit_DataButton_OnClick", true));
-
         // Hub page
-        App.elements.appModelContainer = document.getElementById("AppModel");
+        App.elements.componentsButton = document.getElementById("ComponentsButton");
+        App.elements.eventBindingButton = document.getElementById("EventBindingButton");
+        App.elements.dispatchActionHandlingButton = document.getElementById("DispatchActionHandlingButton");
+        App.elements.storeButton = document.getElementById("StoreButton");
+        App.elements.dataBindingButton = document.getElementById("DataBindingButton");
+        App.elements.loggingButton = document.getElementById("LoggingButton");
+        App.elements.observablesButton = document.getElementById("ObservablesButton");
+        App.elements.demoButton = document.getElementById("DemoButton");
 
-        App.elements.appModelElementUX = document.createElement("cc-appmodelelement");
-        App.elements.appModelElementLogic = document.createElement("cc-appmodelelement");
-        App.elements.appModelElementData = document.createElement("cc-appmodelelement");
-
-        App.elements.appModelContainer.appendChild(App.elements.appModelElementUX);
-        App.elements.appModelContainer.appendChild(App.elements.appModelElementLogic);
-        App.elements.appModelContainer.appendChild(App.elements.appModelElementData);
-
-        App.elements.appModelElementUX.title = "UX";
-        App.elements.appModelElementUX.knownIconSrc  = "./app/assets/web-design.svg";
-
-        App.elements.appModelElementLogic.title = "Logic";
-        App.elements.appModelElementLogic.knownIconSrc  = "./app/assets/programming.svg";
-
-        App.elements.appModelElementData.title = "Data";
-        App.elements.appModelElementData.knownIconSrc  = "./app/assets/database.svg";
-
-        App.store.appModel["UX"].addSubscriber(App.elements.appModelElementUX, AppModel_AppModelElement_OnStoreChanged);
-        App.store.appModel["Logic"].addSubscriber(App.elements.appModelElementLogic, AppModel_AppModelElement_OnStoreChanged);
-        App.store.appModel["Data"].addSubscriber(App.elements.appModelElementData, AppModel_AppModelElement_OnStoreChanged);
-        
+        App.elements.componentsButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_ComponentsButton_OnClick", true));
+        App.elements.eventBindingButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_EventBindingButton_OnClick", true));
+        App.elements.dispatchActionHandlingButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DispatchActionHandlingButton_OnClick", true));
+        App.elements.storeButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_StoreButton_OnClick", true));
+        App.elements.dataBindingButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DataBindingButton_OnClick", true));
+        App.elements.loggingButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_LoggingButton_OnClick", true));
+        App.elements.observablesButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_ObservablesButton_OnClick", true));
+        App.elements.demoButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DemoButton_OnClick", true));
 
     }
 

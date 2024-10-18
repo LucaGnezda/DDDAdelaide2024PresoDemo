@@ -16,16 +16,36 @@ class PresentationActionHandler {
                 this.transitionPage(action.payload);
                 break;
 
-            case "HubEdit_UXButton_OnClick":
-                this.unlockUX();
+            case "Hub_ComponentsButton_OnClick":
+                this.ZoomInToSection("components1");
                 break;
             
-            case "HubEdit_LogicButton_OnClick":
-                this.unlockLogic();
+            case "Hub_EventBindingButton_OnClick":
+                this.ZoomInToSection("eventBinding1");
                 break;
 
-            case "HubEdit_DataButton_OnClick":
-                this.unlockData();
+            case "Hub_DispatchActionHandlingButton_OnClick":
+                this.ZoomInToSection("dispatchActionHandling1");
+                break;
+
+            case "Hub_StoreButton_OnClick":
+                this.ZoomInToSection("store1");
+                break;
+
+            case "Hub_DataBindingButton_OnClick":
+                this.ZoomInToSection("dataBinding1");
+                break;
+
+            case "Hub_LoggingButton_OnClick":
+                this.ZoomInToSection("logging1");
+                break;
+
+            case "Hub_ObservablesButton_OnClick":
+                this.ZoomInToSection("observables1");
+                break;
+
+            case "Hub_DemoButton_OnClick":
+                this.ZoomInToSection("demo");
                 break;
             
             default:
@@ -60,9 +80,15 @@ class PresentationActionHandler {
 
     }
 
-    unlockUX() {
-        App.store.appModel["UX"].observableData.isUnlocked = true;
-        App.store.appModel.emitNotifications();
+    ZoomInToSection(section) {
+        
+        App.pages.components1.content.resetAnimationInitial();
+        
+        AnimatorService.pageOutro(App.activePage.content, PageTransition.ZoomIn, 1);
+        AnimatorService.transitionBackground(App.activePage.background, App.pages[section].background, 0, 0, null, PageTransition.ZoomIn, 1);
+        AnimatorService.pageIntro(App.pages[section].content, PageTransition.ZoomIn, 1);
+
+        App.activePage = App.pages[section];
     }
 
     unlockLogic() {
