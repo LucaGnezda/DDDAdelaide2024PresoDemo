@@ -66,7 +66,7 @@ class PresentationFactory {
         if (this.#addPageContentToDOMElement != null) {
             this.#addPageContentToDOMElement.appendChild(component);
         }
-
+        
         return component;
 
     }

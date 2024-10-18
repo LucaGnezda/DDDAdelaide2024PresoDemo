@@ -4,7 +4,7 @@ class AppService {
 
     static Initialise() {
         
-        Log.setLoggingLevel(LogLevel.Debug);
+        Log.setLoggingLevel(LogLevel.Trace);
         Log.debug("AppService.Initialise - Begin", "APPSERVICE");
 
         // Bootstrap
@@ -57,6 +57,7 @@ class AppService {
 
         App.pageNavigationCallback = App.dispatcher.newEventDispatchCallback("App_PageTransition");
         App.pageAnimationCallback = App.dispatcher.newEventDispatchCallback("App_PageAnimation");
+        App.pageOverlayCallback = App.dispatcher.newEventDispatchCallback("App_OverlayAnimation");
 
     }
 
@@ -213,6 +214,12 @@ class AppService {
         for (let name in App.pages) {
             let source = document.querySelector(`data[value='${name}']`);
             if (source != null) {
+                if (source.hasAttribute("data-overlay")) {
+                    let source = document.querySelector(`data[value='${name}_overlay']`);
+                    if (source != null) {
+                        App.pageContent[name].setOverlay(source.childNodes);
+                    }
+                }
                 App.pageContent[name].setContents(source.childNodes);
             }
         }
@@ -351,6 +358,30 @@ class AppService {
 
             }
 
+        }
+        else if (keyEvent.key == "ArrowUp") {
+            if (App.activePage.content.hasOverlay && App.pageOverlayCallback != null) {
+                let event= {};
+                event.originatingObject = this;
+                event.originatingEvent = keyEvent;
+                event.usingAction = 'open';
+                event.page = App.activePage
+                event.withDuration = 1;
+                
+                App.pageOverlayCallback(event)
+            }
+        }
+        else if (keyEvent.key == "ArrowDown") {
+            if (App.activePage.content.hasOverlay && App.pageOverlayCallback != null) {
+                let event= {};
+                event.originatingObject = this;
+                event.originatingEvent = keyEvent;
+                event.usingAction = 'close';
+                event.page = App.activePage;
+                event.withDuration = 1;
+                
+                App.pageOverlayCallback(event)
+            }
         }
     }
 

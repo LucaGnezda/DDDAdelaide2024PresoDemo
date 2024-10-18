@@ -13,6 +13,7 @@ class App {
     // Core dispatch callbacks
     static pageNavigationCallback = null;
     static pageAnimationCallback = null;
+    static pageOverlayCallback = null;
 
     // Referenced elements 
     static elements = {

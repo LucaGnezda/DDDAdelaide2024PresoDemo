@@ -39,7 +39,7 @@ class PageNode {
     get content() {
         return this.#pageContent;
     }
-
+    
     get nextPage() {
         return this.#nextNode;
     }
@@ -87,7 +87,7 @@ class PageNode {
     get backgroundTransformer() {
         return this.#backgroundTransformer;
     }
-
+    
     /**
      * Public Methods
      */
@@ -97,7 +97,7 @@ class PageNode {
             Log.error('Page is not of type CCPage', "PAGENODE");
             return;
         }
-
+        
         this.#pageContent = pageContent;
     }
 
