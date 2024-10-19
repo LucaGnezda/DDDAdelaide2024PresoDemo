@@ -17,7 +17,7 @@ class PresentationActionHandler {
                 break;
                 
             case "App_OverlayAnimation":
-                this.openPageOverlay(action.payload);
+                this.transitionPageOverlay(action.payload);
                 break;
 
             case "Hub_ComponentsButton_OnClick":
@@ -84,8 +84,8 @@ class PresentationActionHandler {
 
     }
     
-    openPageOverlay(payload) {
-        AnimatorService.transitionPageOverlay(payload.usingAction, payload.page.content, payload.page.overlay, payload.withDuration);
+    transitionPageOverlay(payload) {
+        AnimatorService.transitionPageOverlay(payload.usingAction, payload.page.content, payload.withDuration);
     }
 
     ZoomInToSection(section) {

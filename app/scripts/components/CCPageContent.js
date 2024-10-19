@@ -16,6 +16,7 @@ class CCPageContent extends CCBase {
     #propertybag = {
         animationSteps: null,
         currentAnimationStep: null,
+        hasOverlay: false,
     };
 
     static #htmlTemplate = `
@@ -58,7 +59,7 @@ class CCPageContent extends CCBase {
     }
     
     get hasOverlay() {
-        return !!this.#elements.pageOverlay
+        return this.#propertybag.hasOverlay;
     }
     
     /**
@@ -184,23 +185,13 @@ class CCPageContent extends CCBase {
     setContents(source) {
         this.#confirmUXIsInitialised();
         this.#elements.pagePrimary.append(...source);
+        this.hide('pageOverlay');
     }
     
     setOverlay(source) {
         this.#confirmUXIsInitialised();
         this.#elements.pageOverlay.append(...source);
-
-        let indicator = document.createElement('li');
-        indicator.innerText = '?';
-        indicator.style = `
-            color: white;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            list-style: none;
-        `
-
-        this.#elements.pagePrimary.appendChild(indicator);
+        this.#propertybag.hasOverlay = true;
         this.hide('pageOverlay');
     }
 
@@ -280,7 +271,6 @@ class CCPageContent extends CCBase {
     }
 
     usingTransition(duration, timingFunction, delay) {
-
         this.#confirmUXIsInitialised();
 
         if (typeof duration == "number") {
@@ -297,13 +287,34 @@ class CCPageContent extends CCBase {
         this.#elements.pageRoot.style.transitionDuration = duration;
         this.#elements.pageRoot.style.transitionTimingFunction = timingFunction;
         this.#elements.pageRoot.style.transitionDelay = delay;
+
+        // clear these for normal transitions, for some reason I don't currently understand the 
+        // animation is replaying even without the properies being updated.
+        this.#elements.pagePrimary.style.transitionDuration = '0s';
+        this.#elements.pagePrimary.style.transitionTimingFunction = 'none';
+        this.#elements.pagePrimary.style.transitionDelay = '0s';
+        this.#elements.pageOverlay.style.transitionDuration = '0s';
+        this.#elements.pageOverlay.style.transitionTimingFunction = 'none';
+        this.#elements.pageOverlay.style.transitionDelay = '0s';
+    }
+    
+    usingOverlayTransition(duration, timingFunction, delay) {
+        this.#confirmUXIsInitialised();
+
+        if (typeof duration == "number") {
+            duration = duration + "s";
+        }
+
+        if (typeof delay == "number") {
+            delay = delay + "s";
+        }
+        
         this.#elements.pagePrimary.style.transitionDuration = duration;
         this.#elements.pagePrimary.style.transitionTimingFunction = timingFunction;
         this.#elements.pagePrimary.style.transitionDelay = delay;
         this.#elements.pageOverlay.style.transitionDuration = duration;
         this.#elements.pageOverlay.style.transitionTimingFunction = timingFunction;
         this.#elements.pageOverlay.style.transitionDelay = delay;
-
     }
 
     hide(element = 'pageRoot') {

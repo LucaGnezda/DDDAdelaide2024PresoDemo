@@ -389,22 +389,21 @@ class AnimatorService {
     }
         
     static transitionPageOverlay(action, page, duration) {
-        let halfDuration = duration / 2;
         
         switch (action) {
             case 'open':
-                page.usingTransition(halfDuration, "ease-out", 0);
+                page.usingOverlayTransition(duration, "ease-out", 0);
                 page.exitTop('pagePrimary');
                 page.hide('pagePrimary');
-                page.usingTransition(halfDuration, "ease-in", halfDuration);
+                page.usingOverlayTransition(duration, "ease-in", 0);
                 page.enterBottom('pageOverlay');
                 page.show('pageOverlay');
                 break;
             case 'close':
-                page.usingTransition(halfDuration, "ease-out", 0);
+                page.usingOverlayTransition(duration, "ease-out", 0);
                 page.exitBottom('pageOverlay');
                 page.hide('pageOverlay');
-                page.usingTransition(halfDuration, "ease-in", halfDuration);
+                page.usingOverlayTransition(duration, "ease-in", 0);
                 page.enterTop('pagePrimary');
                 page.show('pagePrimary');
                 break;
