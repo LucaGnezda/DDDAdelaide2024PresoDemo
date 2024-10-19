@@ -214,7 +214,7 @@ class AppService {
         for (let name in App.pages) {
             let source = document.querySelector(`data[value='${name}']`);
             if (source != null) {
-                if (source.hasAttribute("data-overlay")) {
+                if (source.hasAttribute("data-hasoverlay")) {
                     let overlaySource = document.querySelector(`data[value='${name}_overlay']`);
                     if (overlaySource != null) {
                         App.pageContent[name].setOverlay(overlaySource.childNodes);
@@ -230,7 +230,6 @@ class AppService {
     static DefineInPageAnimations() {
         
         // Add animations to Pages
-        /*
         App.pageContent.intro2.setAnimation(
             [
                 {
@@ -259,7 +258,6 @@ class AppService {
                 },
             ]
         )
-        */
     }
 
     static InitialiseInteractiveContent() {
