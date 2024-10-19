@@ -215,9 +215,9 @@ class AppService {
             let source = document.querySelector(`data[value='${name}']`);
             if (source != null) {
                 if (source.hasAttribute("data-overlay")) {
-                    let source = document.querySelector(`data[value='${name}_overlay']`);
-                    if (source != null) {
-                        App.pageContent[name].setOverlay(source.childNodes);
+                    let overlaySource = document.querySelector(`data[value='${name}_overlay']`);
+                    if (overlaySource != null) {
+                        App.pageContent[name].setOverlay(overlaySource.childNodes);
                     }
                 }
                 App.pageContent[name].setContents(source.childNodes);
