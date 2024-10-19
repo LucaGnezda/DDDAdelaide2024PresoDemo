@@ -336,27 +336,6 @@ class CCPageContent extends CCBase {
         this.#elements.pageOverlay.style.transitionTimingFunction = overlayTimingFunction;
         this.#elements.pageOverlay.style.transitionDelay = overlayDelay;
     }
-    
-    /*
-    usingOverlayTransition(duration, timingFunction, delay) {
-        this.#confirmUXIsInitialised();
-
-        if (typeof duration == "number") {
-            duration = duration + "s";
-        }
-
-        if (typeof delay == "number") {
-            delay = delay + "s";
-        }
-        
-        this.#elements.pagePrimary.style.transitionDuration = duration;
-        this.#elements.pagePrimary.style.transitionTimingFunction = timingFunction;
-        this.#elements.pagePrimary.style.transitionDelay = delay;
-        this.#elements.pageOverlay.style.transitionDuration = duration;
-        this.#elements.pageOverlay.style.transitionTimingFunction = timingFunction;
-        this.#elements.pageOverlay.style.transitionDelay = delay;
-    }
-    */    
 
     hide(element = 'pageRoot') {
         this.#confirmUXIsInitialised();
