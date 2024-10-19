@@ -14,6 +14,7 @@ class CCPageContent extends CCBase {
     };
 
     #propertybag = {
+        animationEnabled: null,
         animationSteps: null,
         currentAnimationStep: null,
         hasOverlay: false,
@@ -51,11 +52,11 @@ class CCPageContent extends CCBase {
      * Getters & Setters
      */
     get hasForwardAnimationsRemaining() {
-        return (this.#propertybag.animationSteps != null && this.#propertybag.animationSteps.length - this.#propertybag.currentAnimationStep > 0);
+        return (this.#propertybag.animationEnabled && this.#propertybag.animationSteps != null && this.#propertybag.animationSteps.length - this.#propertybag.currentAnimationStep > 0);
     }
 
     get hasBackAnimationsRemaining() {
-        return (this.#propertybag.animationSteps != null && this.#propertybag.currentAnimationStep > 0);
+        return (this.#propertybag.animationEnabled && this.#propertybag.animationSteps != null && this.#propertybag.currentAnimationStep > 0);
     }
     
     get hasOverlay() {
@@ -145,7 +146,7 @@ class CCPageContent extends CCBase {
         for (i in stepToAnimate.add) {
             key = stepToAnimate.add[i].key;
             classArray = stepToAnimate.add[i].classes;
-            elements = [...this.#elements.pageTransformer.querySelectorAll(`[${key}]`)];
+            elements = [...this.#elements.pagePrimary.querySelectorAll(`[${key}]`)];
             for (e in elements) {
                 element = elements[e];
                 if (inReverse) {
@@ -160,7 +161,7 @@ class CCPageContent extends CCBase {
         for (i in stepToAnimate.remove) {
             key = stepToAnimate.remove[i].key;
             classArray = stepToAnimate.remove[i].classes;
-            elements = [...this.#elements.pageTransformer.querySelectorAll(`[${key}]`)];
+            elements = [...this.#elements.pagePrimary.querySelectorAll(`[${key}]`)];
             for (e in elements) {
                 element = elements[e];
                 if (inReverse) {
@@ -204,6 +205,7 @@ class CCPageContent extends CCBase {
             return;
         }
 
+        this.#propertybag.animationEnabled = (definition != null);
         this.#propertybag.animationSteps = definition;
         this.#propertybag.currentAnimationStep = 0;
 
@@ -270,6 +272,14 @@ class CCPageContent extends CCBase {
         
     }
 
+    disableAnimation() {
+        this.#propertybag.animationEnabled = false;
+    }
+
+    enableAnimation() {
+        this.#propertybag.animationEnabled = true;
+    }
+
     usingTransition(duration, timingFunction, delay) {
         this.#confirmUXIsInitialised();
 
@@ -288,33 +298,43 @@ class CCPageContent extends CCBase {
         this.#elements.pageRoot.style.transitionTimingFunction = timingFunction;
         this.#elements.pageRoot.style.transitionDelay = delay;
 
-        // clear these for normal transitions, for some reason I don't currently understand the 
-        // animation is replaying even without the properies being updated.
-        this.#elements.pagePrimary.style.transitionDuration = '0s';
-        this.#elements.pagePrimary.style.transitionTimingFunction = 'none';
-        this.#elements.pagePrimary.style.transitionDelay = '0s';
-        this.#elements.pageOverlay.style.transitionDuration = '0s';
-        this.#elements.pageOverlay.style.transitionTimingFunction = 'none';
-        this.#elements.pageOverlay.style.transitionDelay = '0s';
+        // Disable overlay transitions while the page itself is transitioning in.
+        this.#elements.pagePrimary.style.transition = null;
+        this.#elements.pageOverlay.style.transition = null;
+
     }
-    
-    usingOverlayTransition(duration, timingFunction, delay) {
+
+    usingOverlayTransition(primaryDuration, primaryTimingFunction, primaryDelay, overlayDuration, overlayTimingFunction, overlayDelay) {
         this.#confirmUXIsInitialised();
 
-        if (typeof duration == "number") {
-            duration = duration + "s";
+        if (typeof primaryDuration == "number") {
+            primaryDuration = primaryDuration + "s";
         }
 
-        if (typeof delay == "number") {
-            delay = delay + "s";
+        if (typeof primaryDelay == "number") {
+            primaryDelay = primaryDelay + "s";
+        }
+
+        if (overlayDuration == null) {
+            overlayDuration = primaryDuration;
+        } 
+        else if (typeof overlayDuration == "number") {
+            overlayDuration = overlayDuration + "s";
+        }
+
+        if (overlayDelay == null) {
+            overlayDelay = primaryDelay;
+        } 
+        else if (typeof overlayDelay == "number") {
+            overlayDelay = overlayDelay + "s";
         }
         
-        this.#elements.pagePrimary.style.transitionDuration = duration;
-        this.#elements.pagePrimary.style.transitionTimingFunction = timingFunction;
-        this.#elements.pagePrimary.style.transitionDelay = delay;
-        this.#elements.pageOverlay.style.transitionDuration = duration;
-        this.#elements.pageOverlay.style.transitionTimingFunction = timingFunction;
-        this.#elements.pageOverlay.style.transitionDelay = delay;
+        this.#elements.pagePrimary.style.transitionDuration = primaryDuration;
+        this.#elements.pagePrimary.style.transitionTimingFunction = primaryTimingFunction;
+        this.#elements.pagePrimary.style.transitionDelay = primaryDelay;
+        this.#elements.pageOverlay.style.transitionDuration = overlayDuration;
+        this.#elements.pageOverlay.style.transitionTimingFunction = overlayTimingFunction;
+        this.#elements.pageOverlay.style.transitionDelay = overlayDelay;
     }
 
     hide(element = 'pageRoot') {
