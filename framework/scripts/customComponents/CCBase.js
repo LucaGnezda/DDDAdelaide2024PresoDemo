@@ -4,7 +4,7 @@ class CCBase extends HTMLElement {
     
     id = null;
 
-    constructor(state) {
+    constructor() {
         super();
     }
 }

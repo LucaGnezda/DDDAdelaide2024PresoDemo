@@ -164,7 +164,6 @@ class CCAppModelElement extends CCObservableBase {
     }
 
     dataChangedCallback(event) {
-
         this.render();
         Log.debug(`Data change callback on component ${event.originatingObject.constructor.name} with id:${event.originatingObject.id} updated property ${event.path} from ${event.oldValue} to ${event.newValue}`, "COMPONENT");
     }

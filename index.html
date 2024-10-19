@@ -8,6 +8,8 @@
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCAppModelElement.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCBackground.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCPageContent.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCDemoObservableElement.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCDemoObservingElement.css">
 
         <!-- Framework -->
         <script defer src="./framework/scripts/customComponents/CCBase.js"></script>
@@ -36,6 +38,7 @@
 
         <!-- ActionHandlers -->
         <script defer src="./app/scripts/actionHandlers/PresentationActionHandler.js"></script>
+        <script defer src="./app/scripts/actionHandlers/DemoActionHandler.js"></script>
 
         <!-- Bindings -->
         <script defer src="./app/scripts/bindings/StoreToComponentBindings.js"></script>
@@ -44,6 +47,8 @@
         <script defer src="./app/scripts/components/CCAppModelElement.js"></script>
         <script defer src="./app/scripts/components/CCBackground.js"></script>
         <script defer src="./app/scripts/components/CCPageContent.js"></script>        
+        <script defer src="./app/scripts/components/CCDemoObservableElement.js"></script>        
+        <script defer src="./app/scripts/components/CCDemoObservingElement.js"></script>        
 
         <!-- Services -->
         <script defer src="./app/scripts/services/AnimatorService.js"></script> 
@@ -158,7 +163,15 @@
             </data>
             <data value="demo">
                 <div class="PageTitle">Demo</div>
-                <div class="PageContents">
+                <div class="PageContents DemoPage">
+                    <div class="DemoPage Section">
+                        <cc-demoObservableElement></cc-demoObservableElement>
+                    </div>
+                    <div class="DemoPage Section">
+                        <cc-demoObservingElement></cc-demoObservingElement>
+                        <cc-demoObservingElement></cc-demoObservingElement>
+                        <cc-demoObservingElement></cc-demoObservingElement>
+                    </div>
                 </div>
             </data>
         </div>
