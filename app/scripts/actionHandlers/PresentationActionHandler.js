@@ -92,9 +92,9 @@ class PresentationActionHandler {
         
         App.pages.components1.content.resetAnimationInitial();
         
-        AnimatorService.pageOutro(App.activePage.content, PageTransition.ZoomIn, 1);
-        AnimatorService.transitionBackground(App.activePage.background, App.pages[section].background, 0, 0, null, PageTransition.ZoomIn, 1);
-        AnimatorService.pageIntro(App.pages[section].content, PageTransition.ZoomIn, 1);
+        AnimatorService.pageOutro(App.activePage.content, PageTransition.ZoomIn, 1.75);
+        AnimatorService.transitionBackground(App.activePage.background, App.pages[section].background, 0, 0, null, PageTransition.ZoomIn, 1.75);
+        AnimatorService.pageIntro(App.pages[section].content, PageTransition.ZoomIn, 1.75);
 
         App.activePage = App.pages[section];
     }

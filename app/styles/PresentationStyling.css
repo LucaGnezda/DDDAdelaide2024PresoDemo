@@ -1,21 +1,10 @@
-.TestBackgroundContent1 {
-    background: url("../assets/TaptuBrand.svg");
-    background-size: 100% auto;
+.PageBackground {
+    background: url("../assets/images/DarkNetwork.png");
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-color: #323436;
-    opacity: 0.3;
-    position: absolute;
-    transition: all 1.0s ease-in-out;
-}
-
-.TestBackgroundContent2 {
-    background: url("../assets/TaptuBrand.svg");
-    background-size: 100% auto;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #323436;
-    opacity: 0.3;
+    opacity: 0.5;
     position: absolute;
     transition: all 1.0s ease-in-out;
 }
@@ -30,14 +19,17 @@
 
 .PageTitle {
     color: #ffffff;
+    padding: 5vmin 0vmin 0vmin 0vmin;
     font-size: 8vmin;
     text-align: center;
+    font-family: "Alpha Echo";
 }
 
 .PageContents {
     color: #ffffff;
-    font-size: 5vmin;
-    padding: 5vmin 5vmin;
+    font-size: 4.5vmin;
+    padding: 0vmin 8vmin 0vmin 8vmin;
+    font-family: "Nunito";
 }
 
 
