@@ -2,7 +2,9 @@ cc-page {
     display: contents;
 }
 
-.CCPageRoot {
+.CCPageRoot, 
+.CCPageOverlay, 
+.CCPagePrimary {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -13,7 +15,17 @@ cc-page {
     transition-behavior: allow-discrete;
 }
 
-.CCPageRoot.Hide {
+.CCPageRoot .OverlayIndicator {
+    color: white;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    list-style: none;
+}
+
+.CCPageRoot.Hide, 
+.CCPageOverlay.Hide,
+.CCPagePrimary.Hide {
     display: none;
 }
 
@@ -39,13 +51,17 @@ cc-page {
     }
 }
 
-.CCPageRoot.EnterFromTop {
+.CCPageRoot.EnterFromTop,
+.CCPageOverlay.EnterFromTop,
+.CCPagePrimary.EnterFromTop {
     @starting-style {
         top: -100%;
     }
 }
 
-.CCPageRoot.EnterFromBottom {
+.CCPageRoot.EnterFromBottom, 
+.CCPageOverlay.EnterFromBottom, 
+.CCPagePrimary.EnterFromBottom {
     @starting-style {
         top: 100%;
     }
@@ -59,11 +75,15 @@ cc-page {
     left: 100%;
 }
 
-.CCPageRoot.ExitToTop {
+.CCPageRoot.ExitToTop,
+.CCPageOverlay.ExitToTop,
+.CCPagePrimary.ExitToTop {
     top: -100%;
 }
 
-.CCPageRoot.ExitToBottom {
+.CCPageRoot.ExitToBottom, 
+.CCPageOverlay.ExitToBottom, 
+.CCPagePrimary.ExitToBottom {
     top: 100%;
 }
 
