@@ -4,7 +4,9 @@ class AnimatorService {
     
     static pageOutro(fromPage, usingTransition, duration) {
 
+        let oneQtrDuration = duration / 4;
         let halfDuration = duration / 2;
+        let threeQtrDuration = (3 * duration) / 4;
 
         switch (usingTransition) {
 
@@ -81,7 +83,7 @@ class AnimatorService {
                 break;
 
             case PageTransition.ZoomIn:
-                fromPage.usingTransition(duration, "ease-in", 0);
+                fromPage.usingTransition(threeQtrDuration, "ease-in", 0);
                 fromPage.inPlace();
                 fromPage.withFadeOut();
                 fromPage.withZoomInExit();
@@ -89,7 +91,7 @@ class AnimatorService {
                 break;
 
             case PageTransition.ZoomOut:
-                fromPage.usingTransition(duration, "ease-in", 0);
+                fromPage.usingTransition(threeQtrDuration, "ease-in", 0);
                 fromPage.inPlace();
                 fromPage.withFadeOut();
                 fromPage.withZoomOutExit();
@@ -110,7 +112,9 @@ class AnimatorService {
 
     static pageIntro(toPage, usingTransition, duration) {
 
+        let oneQtrDuration = duration / 4;
         let halfDuration = duration / 2;
+        let threeQtrDuration = (3 * duration) / 4;
 
         switch (usingTransition) {
 
@@ -187,7 +191,7 @@ class AnimatorService {
                 break;
 
             case PageTransition.ZoomIn:
-                toPage.usingTransition(duration, "ease-out", 0);
+                toPage.usingTransition(threeQtrDuration, "ease-out", oneQtrDuration);
                 toPage.inPlace();
                 toPage.withFadeIn();
                 toPage.withZoomInEntry();
@@ -195,7 +199,7 @@ class AnimatorService {
                 break;
 
             case PageTransition.ZoomOut:
-                toPage.usingTransition(duration, "ease-out", 0);
+                toPage.usingTransition(threeQtrDuration, "ease-out", oneQtrDuration);
                 toPage.inPlace();
                 toPage.withFadeIn();
                 toPage.withZoomOutEntry();

@@ -134,41 +134,41 @@ class AppService {
         factory.newPageNode("demo");
         
         // Configure Backgrounds
-        App.backgrounds.introBackground.setContentClass("TestBackgroundContent1");
-        App.backgrounds.introBackground.setContentPositionRange(3, 1);
+        App.backgrounds.introBackground.setContentClass("PageBackground");
+        App.backgrounds.introBackground.setContentPositionRange(1.6, 1);
 
-        App.backgrounds.hubBackground.setContentClass("TestBackgroundContent2");
+        App.backgrounds.hubBackground.setContentClass("PageBackground");
         App.backgrounds.hubBackground.setContentPositionRange(1, 1);
 
-        App.backgrounds.sectionBackground1.setContentClass("TestBackgroundContent1");
+        App.backgrounds.sectionBackground1.setContentClass("PageBackground");
         App.backgrounds.sectionBackground1.setContentPositionRange(3, 1);
 
-        App.backgrounds.demoBackground.setContentClass("TestBackgroundContent2");
+        App.backgrounds.demoBackground.setContentClass("PageBackground");
         App.backgrounds.demoBackground.setContentPositionRange(1, 1);        
 
         // Configure Pages
         App.pages.intro1.setPageContentAndBackground(App.pageContent.intro1, App.backgrounds.introBackground, 0.0, 0, null);
-        App.pages.intro2.setPageContentAndBackground(App.pageContent.intro2, App.backgrounds.introBackground, 0.2, 0, null);
-        App.pages.intro3.setPageContentAndBackground(App.pageContent.intro3, App.backgrounds.introBackground, 0.4, 0, null);
+        App.pages.intro2.setPageContentAndBackground(App.pageContent.intro2, App.backgrounds.introBackground, 0.3, 0, null);
+        App.pages.intro3.setPageContentAndBackground(App.pageContent.intro3, App.backgrounds.introBackground, 0.6, 0, null);
 
         App.pages.hub.setPageContentAndBackground(App.pageContent.hub, App.backgrounds.hubBackground);
 
         App.pages.logging1.setPageContentAndBackground(App.pageContent.logging1, App.backgrounds.sectionBackground1, 0.0, 0, null);
 
         App.pages.components1.setPageContentAndBackground(App.pageContent.components1, App.backgrounds.sectionBackground1, 0.0, 0, null);
-        App.pages.components2.setPageContentAndBackground(App.pageContent.components2, App.backgrounds.sectionBackground1, 0.2, 0, null);
+        App.pages.components2.setPageContentAndBackground(App.pageContent.components2, App.backgrounds.sectionBackground1, 0.3, 0, null);
 
         App.pages.observables1.setPageContentAndBackground(App.pageContent.observables1, App.backgrounds.sectionBackground1, 0.0, 0, null);
-        App.pages.observables2.setPageContentAndBackground(App.pageContent.observables2, App.backgrounds.sectionBackground1, 0.2, 0, null);
+        App.pages.observables2.setPageContentAndBackground(App.pageContent.observables2, App.backgrounds.sectionBackground1, 0.3, 0, null);
 
         App.pages.store1.setPageContentAndBackground(App.pageContent.store1, App.backgrounds.sectionBackground1, 0.0, 0, null);
-        App.pages.store2.setPageContentAndBackground(App.pageContent.store2, App.backgrounds.sectionBackground1, 0.2, 0, null);
+        App.pages.store2.setPageContentAndBackground(App.pageContent.store2, App.backgrounds.sectionBackground1, 0.3, 0, null);
 
         App.pages.eventBinding1.setPageContentAndBackground(App.pageContent.eventBinding1, App.backgrounds.sectionBackground1, 0.4, 0, null);
 
         App.pages.dispatchActionHandling1.setPageContentAndBackground(App.pageContent.dispatchActionHandling1, App.backgrounds.sectionBackground1, 0.0, 0, null);
-        App.pages.dispatchActionHandling2.setPageContentAndBackground(App.pageContent.dispatchActionHandling2, App.backgrounds.sectionBackground1, 0.2, 0, null);
-        App.pages.dispatchActionHandling3.setPageContentAndBackground(App.pageContent.dispatchActionHandling3, App.backgrounds.sectionBackground1, 0.4, 0, null);
+        App.pages.dispatchActionHandling2.setPageContentAndBackground(App.pageContent.dispatchActionHandling2, App.backgrounds.sectionBackground1, 0.3, 0, null);
+        App.pages.dispatchActionHandling3.setPageContentAndBackground(App.pageContent.dispatchActionHandling3, App.backgrounds.sectionBackground1, 0.6, 0, null);
 
         App.pages.dataBinding1.setPageContentAndBackground(App.pageContent.dataBinding1, App.backgrounds.sectionBackground1, 0.4, 0, null);
 
@@ -176,37 +176,37 @@ class AppService {
 
 
         // Interrelate Pages with transitions
-        App.pages.intro1.setNextPage(App.pages.intro2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.intro2.setNextPage(App.pages.intro3, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.intro3.setNextPage(App.pages.hub, PageTransition.Fade, PageTransition.Fade, 1);
+        App.pages.intro1.setNextPage(App.pages.intro2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+        App.pages.intro2.setNextPage(App.pages.intro3, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+        App.pages.intro3.setNextPage(App.pages.hub, PageTransition.Fade, PageTransition.Fade, 2);
 
-        App.pages.logging1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
-        App.pages.logging1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+        App.pages.logging1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
+        App.pages.logging1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1.75);
 
-        App.pages.components1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
-        App.pages.components1.setNextPage(App.pages.components2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.components2.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+        App.pages.components1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
+        App.pages.components1.setNextPage(App.pages.components2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.75);
+        App.pages.components2.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1.75);
 
-        App.pages.observables1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
-        App.pages.observables1.setNextPage(App.pages.observables2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.observables2.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+        App.pages.observables1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
+        App.pages.observables1.setNextPage(App.pages.observables2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.75);
+        App.pages.observables2.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1.75);
 
-        App.pages.store1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
-        App.pages.store1.setNextPage(App.pages.store2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.store2.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+        App.pages.store1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
+        App.pages.store1.setNextPage(App.pages.store2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.75);
+        App.pages.store2.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1.75);
 
-        App.pages.eventBinding1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
-        App.pages.eventBinding1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+        App.pages.eventBinding1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
+        App.pages.eventBinding1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1.75);
 
-        App.pages.dispatchActionHandling1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
-        App.pages.dispatchActionHandling1.setNextPage(App.pages.dispatchActionHandling2, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.dispatchActionHandling2.setNextPage(App.pages.dispatchActionHandling3, PageTransition.SlideLeft, PageTransition.SlideRight, 1);
-        App.pages.dispatchActionHandling3.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+        App.pages.dispatchActionHandling1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
+        App.pages.dispatchActionHandling1.setNextPage(App.pages.dispatchActionHandling2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+        App.pages.dispatchActionHandling2.setNextPage(App.pages.dispatchActionHandling3, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+        App.pages.dispatchActionHandling3.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1.75);
 
-        App.pages.dataBinding1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
-        App.pages.dataBinding1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1);
+        App.pages.dataBinding1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
+        App.pages.dataBinding1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1.75);
 
-        App.pages.demo.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1);
+        App.pages.demo.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
     }
 
     static LoadPresentationContent() {
