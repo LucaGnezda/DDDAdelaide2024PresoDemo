@@ -99,14 +99,4 @@ class PresentationActionHandler {
         App.activePage = App.pages[section];
     }
 
-    unlockLogic() {
-        App.store.appModel["Logic"].observableData.isUnlocked = true;
-        App.store.appModel.emitNotifications();
-    }
-
-    unlockData() {
-        App.store.appModel["Data"].observableData.isUnlocked = true;
-        App.store.appModel.emitNotifications();
-    }
-
 }
