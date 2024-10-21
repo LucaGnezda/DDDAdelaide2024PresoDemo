@@ -165,12 +165,12 @@
                 <div class="PageTitle">Demo</div>
                 <div class="PageContents DemoPage">
                     <div class="DemoPage Section">
-                        <cc-demoObservableElement></cc-demoObservableElement>
+                        <cc-demoObservableElement id="DemoObservableElement"></cc-demoObservableElement>
                     </div>
                     <div class="DemoPage Section">
-                        <cc-demoObservingElement></cc-demoObservingElement>
-                        <cc-demoObservingElement></cc-demoObservingElement>
-                        <cc-demoObservingElement></cc-demoObservingElement>
+                        <cc-demoObservingElement id="DemoObservingElement1" [data-input-threshold]="3" [data-input-color]="red"></cc-demoObservingElement>
+                        <cc-demoObservingElement id="DemoObservingElement2" [data-input-threshold]="5" [data-input-color]="blue"></cc-demoObservingElement>
+                        <cc-demoObservingElement id="DemoObservingElement3" [data-input-threshold]="7" [data-input-color]="green"></cc-demoObservingElement>
                     </div>
                 </div>
             </data>

@@ -52,15 +52,6 @@ class CCDemoObservableElement extends CCObservableBase {
         }
     }
     
-    #setupEventCallbacks() {
-        if (App.dispatcher) {
-            this.updateCallback = App.dispatcher.newEventDispatchCallback("DemoObservableElement_UpdateButton_Click")
-            this.#elements.updateButton.addEventListener("click", this.updateButtonClick.bind(this), true);
-            this.resetCallback = App.dispatcher.newEventDispatchCallback("DemoObservableElement_ResetButton_Click")
-            this.#elements.resetButton.addEventListener("click", this.resetButtonClick.bind(this), true);
-        }
-    }
-    
     #initialiseAttributes() { }
     
     /**
@@ -76,7 +67,6 @@ class CCDemoObservableElement extends CCObservableBase {
     connectedCallback() {
         this.#confirmUXIsInitialised();
         this.#initialiseAttributes();
-        this.#setupEventCallbacks();
 
         this.notificationStatus = NotificationStatus.Active;
 
@@ -95,6 +85,7 @@ class CCDemoObservableElement extends CCObservableBase {
     
     #updateCallback = null;
     set updateCallback(fn) {
+        this.#elements.updateButton.addEventListener("click", this.updateButtonClick.bind(this), true);
         this.#updateCallback = fn;
     }
     updateButtonClick() {
@@ -104,6 +95,7 @@ class CCDemoObservableElement extends CCObservableBase {
     
     #resetCallback = null;
     set resetCallback(fn) {
+        this.#elements.resetButton.addEventListener("click", this.resetButtonClick.bind(this), true);
         this.#resetCallback = fn;
     }
     resetButtonClick() {

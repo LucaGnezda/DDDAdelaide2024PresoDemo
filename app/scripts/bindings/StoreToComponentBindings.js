@@ -9,3 +9,9 @@ let AppModel_AppModelElement_OnStoreChanged = function(event) {
         }                 
     }
 }
+
+let Demo_DemoObservingElement_OnClickCountChanged = function(event) {
+    Log.debug(`Component Data Listener Callback Extension`, "COMPONENT BINDING");
+    event.newValue = event.originatingObject.observableData.demoClickCount;
+    this.dataChangedCallback(event)
+}

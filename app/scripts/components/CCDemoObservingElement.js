@@ -7,6 +7,8 @@ class CCDemoObservingElement extends CCBase {
     
     #propertyBag = {
         count: 0,
+        threshold: null,
+        color: null,
     }
     
     static #htmlTemplate = `
@@ -20,7 +22,6 @@ class CCDemoObservingElement extends CCBase {
         if (isEmptyOrNull(this.id)) {
             this.id = crypto.randomUUID();
         }
-        
     }
     
     /**
@@ -38,12 +39,29 @@ class CCDemoObservingElement extends CCBase {
         }
     }
     
-    #initialiseAttributes() { }
+    #initialiseAttributes() {
+        if (!this.hasAttribute("[data-input-threshold]")) {
+            Log.warn("Input: 'threshold' not set, assuming intentional setting to 'null'.", "COMPONENT");
+        }
+
+        if (!this.hasAttribute("[data-input-color]")) {
+            Log.warn("Input: 'color' not set, assuming intentional setting to 'null'.", "COMPONENT");
+        }
+
+        this.#propertyBag.threshold = this.getAttribute("[data-input-threshold]");
+        this.#propertyBag.color = this.getAttribute("[data-input-color]");
+    }
     
     /**
      * Public Methods
      */
-    render() { }
+    render() {
+        if (this.#propertyBag.count % this.#propertyBag.threshold == 0 && this.#propertyBag.count != 0) {
+            this.#elements.root.style.backgroundColor = this.#propertyBag.color;
+        } else {
+            this.#elements.root.style.backgroundColor = null;
+        }
+    }
     
     /**
     * Callbacks
@@ -51,10 +69,6 @@ class CCDemoObservingElement extends CCBase {
     connectedCallback() {
         this.#confirmUXIsInitialised();
         this.#initialiseAttributes();
-
-        if (App.store) {
-            App.store.demo.addSubscriber(this, this.dataChangedCallback);    
-        }
 
         this.render();
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
@@ -65,7 +79,8 @@ class CCDemoObservingElement extends CCBase {
     }
 
     dataChangedCallback(event) {
+        this.#propertyBag.count = event.newValue;
         this.render();
-        Log.debug(`Data change callback on component ${event.originatingObject.constructor.name} with id:${event.originatingObject.id} updated property ${event.path} from ${event.oldValue} to ${event.newValue}`, "COMPONENT");
+        Log.debug(`Data change callback on component ${event.originatingObject.constructor.name} with new value ${event.newValue}`, "COMPONENT");
     }
 }

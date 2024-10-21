@@ -33,6 +33,7 @@ class App {
     static pageContent = {};
     static backgrounds = {};
     static pages = {};
+    static components = {};
 
     static activePage = null;
 }
