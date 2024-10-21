@@ -450,6 +450,16 @@ class CCPageContent extends CCBase {
         this.#confirmUXIsInitialised();
         this.#resetPositionalClasses();
     }
+    
+    fadeTo(element = "pageRoot", value) {
+        this.#confirmUXIsInitialised();
+        if (typeof value === 'number') {
+            this.#elements[element].style.opacity = value + "%";
+        } else {
+            this.#elements[element].style.opacity = value;
+        }
+        this.#elements[element].classList.add("FadeTo");
+    }
 
      /**
      * Callbacks

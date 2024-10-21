@@ -399,19 +399,17 @@ class AnimatorService {
         switch (action) {
             case 'open':
                 page.disableAnimation();
-                page.usingOverlayTransition(halfDuration, "ease-in", 0, halfDuration, "ease-out", halfDuration);
-                page.exitTop('pagePrimary');
-                page.hide('pagePrimary');
+                page.usingOverlayTransition(halfDuration, "ease-in", 0, halfDuration, "ease-out", 0);
                 page.enterBottom('pageOverlay');
                 page.show('pageOverlay');
+                page.fadeTo('pagePrimary', 50);
                 break;
             case 'close':
                 page.enableAnimation();
-                page.usingOverlayTransition(halfDuration, "ease-out", halfDuration, halfDuration, "ease-in", 0);
+                page.usingOverlayTransition(halfDuration, "ease-out", 0 , halfDuration, "ease-in", 0);
                 page.exitBottom('pageOverlay');
                 page.hide('pageOverlay');
-                page.enterTop('pagePrimary');
-                page.show('pagePrimary');
+                page.fadeTo('pagePrimary', 100);
                 break;
         }
     }
