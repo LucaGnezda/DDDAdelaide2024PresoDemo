@@ -332,9 +332,20 @@ class AppService {
         Log.debug(`${this.constructor.name} captured keydown event`, "APPSERVICE");
 
         if (keyEvent.key == "ArrowRight") {
-            
             if (App.activePage.content.overlayState == 'open') {
-                return;
+                if (!App.activePage.content.hasForwardAnimationsRemaining("pageOverlay")) {
+                    return;
+                }
+
+                let event = {};
+                event.originatingObject = this;
+                event.originatingEvent = keyEvent;
+                event.usingAction = 'animate';
+                event.activePage = App.activePage;
+                event.inReverse = false;
+                
+                App.pageOverlayCallback(event)
+                return
             }
 
             if (App.activePage.content.hasForwardAnimationsRemaining() && App.pageAnimationCallback != null) {
@@ -366,17 +377,18 @@ class AppService {
         else if (keyEvent.key == "ArrowLeft") {
 
             if (App.activePage.content.overlayState == 'open') {
-                if (App.activePage.content.hasOverlay && App.pageOverlayCallback != null) {
-                    let event= {};
-                    event.originatingObject = this;
-                    event.originatingEvent = keyEvent;
-                    event.usingAction = 'close';
-                    event.page = App.activePage;
-                    event.withDuration = 1;
-                    
-                    App.pageOverlayCallback(event)
+                if (!App.activePage.content.hasBackAnimationsRemaining("pageOverlay")) {
+                    return;
                 }
 
+                let event = {};
+                event.originatingObject = this;
+                event.originatingEvent = keyEvent;
+                event.usingAction = 'animate';
+                event.activePage = App.activePage;
+                event.inReverse = true;
+                
+                App.pageOverlayCallback(event)
                 return;
             }
 
@@ -407,53 +419,27 @@ class AppService {
 
         }
         else if (keyEvent.key == "ArrowUp") {
-            if (App.activePage.content.overlayState == 'open') {
-                if (!App.activePage.content.hasForwardAnimationsRemaining("pageOverlay")) {
-                    return;
-                }
-
-                let event = {};
+            if (App.activePage.content.hasOverlay && App.pageOverlayCallback != null) {
+                let event= {};
                 event.originatingObject = this;
                 event.originatingEvent = keyEvent;
-                event.usingAction = 'animate';
-                event.activePage = App.activePage;
-                event.inReverse = false;
+                event.usingAction = 'open';
+                event.page = App.activePage
+                event.withDuration = 1;
                 
                 App.pageOverlayCallback(event)
-            } else {
-                if (App.activePage.content.hasOverlay && App.pageOverlayCallback != null) {
-                    let event= {};
-                    event.originatingObject = this;
-                    event.originatingEvent = keyEvent;
-                    event.usingAction = 'open';
-                    event.page = App.activePage
-                    event.withDuration = 1;
-                    
-                    App.pageOverlayCallback(event)
-                }
             }
         }
         else if (keyEvent.key == "ArrowDown") {
-            if (App.activePage.content.overlayState == 'open' && App.activePage.content.hasBackAnimationsRemaining("pageOverlay")) {
-                let event = {};
+            if (App.activePage.content.hasOverlay && App.pageOverlayCallback != null) {
+                let event= {};
                 event.originatingObject = this;
                 event.originatingEvent = keyEvent;
-                event.usingAction = 'animate';
-                event.activePage = App.activePage;
-                event.inReverse = true;
+                event.usingAction = 'close';
+                event.page = App.activePage;
+                event.withDuration = 1;
                 
                 App.pageOverlayCallback(event)
-            } else {
-                if (App.activePage.content.hasOverlay && App.pageOverlayCallback != null) {
-                    let event= {};
-                    event.originatingObject = this;
-                    event.originatingEvent = keyEvent;
-                    event.usingAction = 'close';
-                    event.page = App.activePage;
-                    event.withDuration = 1;
-                    
-                    App.pageOverlayCallback(event)
-                }
             }
         }
     }
