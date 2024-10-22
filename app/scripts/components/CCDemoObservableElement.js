@@ -7,6 +7,11 @@ class CCDemoObservableElement extends CCObservableBase {
         resetButton: null,
         count: null,
     }
+
+    #propertybag = {
+        updateCallback: null,
+        resetCallback: null,
+    }
     
     static #htmlTemplate = `
         <div id="CCDemoObservableElementRoot" class="CCDemoObservableElement" data-element-root> 
@@ -31,6 +36,19 @@ class CCDemoObservableElement extends CCObservableBase {
 
         // initialise the observables data structure
         this.observableData.clickCount = 0;
+    }
+    
+    /**
+     * Getters and Setters
+     */
+    set resetCallback(fn) {
+        this.#elements.resetButton.addEventListener("click", this.resetButtonClick.bind(this), true);
+        this.#propertybag.resetCallback = fn;
+    }
+    
+    set updateCallback(fn) {
+        this.#elements.updateButton.addEventListener("click", this.updateButtonClick.bind(this), true);
+        this.#propertybag.updateCallback = fn;
     }
     
     /**
@@ -83,23 +101,13 @@ class CCDemoObservableElement extends CCObservableBase {
         Log.debug(`Data change callback on component ${event.originatingObject.constructor.name} with id:${event.originatingObject.id} updated property ${event.path} from ${event.oldValue} to ${event.newValue}`, "COMPONENT");
     }
     
-    #updateCallback = null;
-    set updateCallback(fn) {
-        this.#elements.updateButton.addEventListener("click", this.updateButtonClick.bind(this), true);
-        this.#updateCallback = fn;
-    }
     updateButtonClick() {
         this.observableData.clickCount += 1;
-        this.#updateCallback();
+        this.#propertybag.updateCallback();
     }
     
-    #resetCallback = null;
-    set resetCallback(fn) {
-        this.#elements.resetButton.addEventListener("click", this.resetButtonClick.bind(this), true);
-        this.#resetCallback = fn;
-    }
     resetButtonClick() {
         this.observableData.clickCount = 0;
-        this.#resetCallback();
+        this.#propertybag.resetCallback();
     }
 }
