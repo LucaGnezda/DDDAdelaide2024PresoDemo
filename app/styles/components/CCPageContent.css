@@ -15,6 +15,10 @@ cc-page {
     transition-behavior: allow-discrete;
 }
 
+.CCPageOverlay {
+    backdrop-filter: blur(40px);
+}
+
 .CCPageRoot .OverlayIndicator {
     color: white;
     position: absolute;
@@ -29,13 +33,17 @@ cc-page {
     display: none;
 }
 
-.CCPageRoot.WithFadeIn {
+.CCPageRoot.WithFadeIn,
+.CCPageOverlay.WithFadeIn,
+.CCPagePrimary.WithFadeIn {
     @starting-style {
         opacity: 0;
     }
 }
 
-.CCPageRoot.WithFadeOut {
+.CCPageRoot.WithFadeOut,
+.CCPageOverlay.WithFadeOut,
+.CCPagePrimary.WithFadeOut {
     opacity: 0;
 }
 

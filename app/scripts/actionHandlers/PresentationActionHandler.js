@@ -67,13 +67,24 @@ class PresentationActionHandler {
         }
     }
 
+    animateOverlay(payload) {
+        if (payload.inReverse) {
+            payload.activePage.content.stepAnimationBack("pageOverlay");
+        }
+        else {
+            payload.activePage.content.stepAnimationForward("pageOverlay");
+        }
+    }
+
     transitionPage(payload) {
 
         if (payload.inReverse) {
             payload.transitionToPage.content.resetAnimationFinal();
+            payload.transitionToPage.content.resetAnimationFinal("pageOverlay");
         }
         else {
             payload.transitionToPage.content.resetAnimationInitial();
+            payload.transitionToPage.content.resetAnimationInitial("pageOverlay");
         }
         
         AnimatorService.pageOutro(payload.transitionFromPage.content, payload.usingTransition, payload.withDuration);
@@ -85,7 +96,11 @@ class PresentationActionHandler {
     }
     
     transitionPageOverlay(payload) {
-        AnimatorService.transitionPageOverlay(payload.usingAction, payload.page.content, payload.withDuration);
+        if (payload.usingAction == 'animate') {
+            this.animateOverlay(payload)
+        } else {
+            AnimatorService.transitionPageOverlay(payload.usingAction, payload.page.content, payload.withDuration);
+        }
     }
 
     ZoomInToSection(section) {
