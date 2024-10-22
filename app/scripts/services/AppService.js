@@ -23,8 +23,7 @@ class AppService {
         AppService.DefineInPageAnimations();
         AppService.InitialiseInteractiveContent();
 
-        AppService.ActivateFirstPage();
-
+        AppService.ActivateFirstPage(); 
 
         Log.debug("AppService.Initialise - Complete", "APPSERVICE");
     }
@@ -41,6 +40,7 @@ class AppService {
         // Initialise event processing
         App.dispatcher = new Dispatcher();
         App.dispatcher.addDispatchHandler(new PresentationActionHandler(), "route");
+        App.dispatcher.addDispatchHandler(new DemoActionHandler(), "route");
     }
 
     static IndexKeyDOMElements() {
@@ -58,12 +58,15 @@ class AppService {
         App.pageNavigationCallback = App.dispatcher.newEventDispatchCallback("App_PageTransition");
         App.pageAnimationCallback = App.dispatcher.newEventDispatchCallback("App_PageAnimation");
         App.pageOverlayCallback = App.dispatcher.newEventDispatchCallback("App_OverlayAnimation");
-
+        
     }
 
     static LoadStore() {
 
         App.store.addObservablesDictionary("appModel");
+
+        App.store.addObservable("demo");
+        App.store.demo.observableData.demoClickCount = 0;
 
     }
 
@@ -280,6 +283,19 @@ class AppService {
         App.elements.loggingButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_LoggingButton_OnClick", true));
         App.elements.observablesButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_ObservablesButton_OnClick", true));
         App.elements.demoButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DemoButton_OnClick", true));
+        
+        // demo components
+        App.components.demoObservableElement = document.getElementById("DemoObservableElement");       
+        App.components.demoObservingElement1 = document.getElementById("DemoObservingElement1");       
+        App.components.demoObservingElement2 = document.getElementById("DemoObservingElement2");       
+        App.components.demoObservingElement3 = document.getElementById("DemoObservingElement3");       
+         
+        App.components.demoObservableElement.updateCallback = App.dispatcher.newEventDispatchCallback("DemoObservableElement_UpdateButton_Click");
+        App.components.demoObservableElement.resetCallback = App.dispatcher.newEventDispatchCallback("DemoObservableElement_ResetButton_Click");
+        
+        App.store.demo.addSubscriber(App.components.demoObservingElement1, Demo_DemoObservingElement_OnClickCountChanged);
+        App.store.demo.addSubscriber(App.components.demoObservingElement2, Demo_DemoObservingElement_OnClickCountChanged);
+        App.store.demo.addSubscriber(App.components.demoObservingElement3, Demo_DemoObservingElement_OnClickCountChanged);
 
     }
 

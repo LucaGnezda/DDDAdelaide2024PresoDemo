@@ -1,0 +1,10 @@
+.CCDemoObservingElement{
+    display: flex;
+    width: 10vmin;
+    height: 10vmin;
+    background-color: rgba(130, 123, 120, 0.8);
+}
+
+.CCDemoObservingElement.Active {
+    background-color: rgba(50, 230, 100, 0.8);   
+}

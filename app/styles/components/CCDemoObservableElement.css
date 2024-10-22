@@ -1,0 +1,9 @@
+.CCDemoObservableElement{
+    display: flex;
+    gap: 5vmin;
+}
+
+.CCDemoObservableElement li {
+    list-style: none;
+}
+
