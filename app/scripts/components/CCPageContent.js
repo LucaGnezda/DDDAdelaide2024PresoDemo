@@ -14,10 +14,18 @@ class CCPageContent extends CCBase {
     };
 
     #propertybag = {
-        animationEnabled: null,
-        animationSteps: null,
-        currentAnimationStep: null,
+        pagePrimary : {
+            animationEnabled: null,
+            animationSteps: null,
+            currentAnimationStep: null,
+        },
+        pageOverlay: {
+            animationEnabled: null,
+            animationSteps: null,
+            currentAnimationStep: null,
+        },
         hasOverlay: false,
+        overlayState: null,
     };
 
     static #htmlTemplate = `
@@ -51,16 +59,32 @@ class CCPageContent extends CCBase {
     /**
      * Getters & Setters
      */
-    get hasForwardAnimationsRemaining() {
-        return (this.#propertybag.animationEnabled && this.#propertybag.animationSteps != null && this.#propertybag.animationSteps.length - this.#propertybag.currentAnimationStep > 0);
+    hasForwardAnimationsRemaining(element = "pagePrimary") {
+        return (
+            this.#propertybag[element].animationEnabled 
+            && this.#propertybag[element].animationSteps != null 
+            && this.#propertybag[element].animationSteps.length - this.#propertybag[element].currentAnimationStep > 0
+        );
     }
 
-    get hasBackAnimationsRemaining() {
-        return (this.#propertybag.animationEnabled && this.#propertybag.animationSteps != null && this.#propertybag.currentAnimationStep > 0);
+    hasBackAnimationsRemaining(element = "pagePrimary") {
+        return (
+            this.#propertybag[element].animationEnabled 
+            && this.#propertybag[element].animationSteps != null 
+            && this.#propertybag[element].currentAnimationStep > 0
+        );
     }
-    
+
     get hasOverlay() {
         return this.#propertybag.hasOverlay;
+    }
+
+    set overlayState(val) {
+        this.#propertybag.overlayState = val;
+    }
+
+    get overlayState() {
+        return this.#propertybag.overlayState;
     }
     
     /**
@@ -93,8 +117,8 @@ class CCPageContent extends CCBase {
         this.#elements.pageTransformer.classList.remove("WithZoomInEntry", "WithZoomOutEntry", "WithZoomInExit", "WithZoomOutExit");
     }
 
-    #resetFadingClasses() {
-        this.#elements.pageRoot.classList.remove("withFadeIn", "WithFadeOut");
+    #resetFadingClasses(element = "pageRoot") {
+        this.#elements[element].classList.remove("withFadeIn", "WithFadeOut");
     }
 
     #isValidAminationStructure(definition) {
@@ -140,13 +164,13 @@ class CCPageContent extends CCBase {
         return true;
     }
 
-    #processAnimationStep(stepToAnimate, inReverse = false) {
+    #processAnimationStep(stepToAnimate, inReverse = false, elementToAnimate = 'pagePrimary') {
         let i, key, classArray, elements, e, element;
 
         for (i in stepToAnimate.add) {
             key = stepToAnimate.add[i].key;
             classArray = stepToAnimate.add[i].classes;
-            elements = [...this.#elements.pagePrimary.querySelectorAll(`[${key}]`)];
+            elements = [...this.#elements[elementToAnimate].querySelectorAll(`[${key}]`)];
             for (e in elements) {
                 element = elements[e];
                 if (inReverse) {
@@ -161,7 +185,7 @@ class CCPageContent extends CCBase {
         for (i in stepToAnimate.remove) {
             key = stepToAnimate.remove[i].key;
             classArray = stepToAnimate.remove[i].classes;
-            elements = [...this.#elements.pagePrimary.querySelectorAll(`[${key}]`)];
+            elements = [...this.#elements[elementToAnimate].querySelectorAll(`[${key}]`)];
             for (e in elements) {
                 element = elements[e];
                 if (inReverse) {
@@ -196,7 +220,7 @@ class CCPageContent extends CCBase {
         this.hide('pageOverlay');
     }
 
-    setAnimation(definition) {
+    setAnimation(definition, element = "pagePrimary") {
         
         this.#confirmUXIsInitialised();
         
@@ -205,79 +229,79 @@ class CCPageContent extends CCBase {
             return;
         }
 
-        this.#propertybag.animationEnabled = (definition != null);
-        this.#propertybag.animationSteps = definition;
-        this.#propertybag.currentAnimationStep = 0;
+        this.#propertybag[element].animationEnabled = (definition != null);
+        this.#propertybag[element].animationSteps = definition;
+        this.#propertybag[element].currentAnimationStep = 0;
 
     }
 
-    resetAnimationInitial() {
+    resetAnimationInitial(element = "pagePrimary") {
 
         this.#confirmUXIsInitialised();
 
-        if (this.#propertybag.animationSteps != null) {
+        if (this.#propertybag[element].animationSteps != null) {
 
             // note we're setting it to length NOT length - 1, because this signifies 'after the last animation'
-            this.#propertybag.currentAnimationStep = this.#propertybag.animationSteps.length;
+            this.#propertybag[element].currentAnimationStep = this.#propertybag[element].animationSteps.length;
 
-            for (let i = this.#propertybag.animationSteps.length - 1; i >= 0; i--) {
-                this.stepAnimationBack();
+            for (let i = this.#propertybag[element].animationSteps.length - 1; i >= 0; i--) {
+                this.stepAnimationBack(element);
             }
         }
     }
 
-    resetAnimationFinal() {
+    resetAnimationFinal(element = "pagePrimary") {
         
         this.#confirmUXIsInitialised();
 
-        if (this.#propertybag.animationSteps != null) {
+        if (this.#propertybag[element].animationSteps != null) {
 
             // note we're setting it to 0, because this signifies 'before the first animation'
-            this.#propertybag.currentAnimationStep = 0;
+            this.#propertybag[element].currentAnimationStep = 0;
             
-            for (let i = 0; i < this.#propertybag.animationSteps.length; i++) {
-                this.stepAnimationForward();
+            for (let i = 0; i < this.#propertybag[element].animationSteps.length; i++) {
+                this.stepAnimationForward(element);
             }
         }
     }
 
-    stepAnimationForward() {
+    stepAnimationForward(element = "pagePrimary") {
 
         this.#confirmUXIsInitialised();
         
-        if (this.#propertybag.animationSteps != null) {
-            if (this.#propertybag.currentAnimationStep >= this.#propertybag.animationSteps.length) {
+        if (this.#propertybag[element].animationSteps != null) {
+            if (this.#propertybag[element].currentAnimationStep >= this.#propertybag[element].animationSteps.length) {
                 // nothing left to animate
                 return;
             }
 
-            this.#processAnimationStep(this.#propertybag.animationSteps[this.#propertybag.currentAnimationStep]);
-            this.#propertybag.currentAnimationStep++;
+            this.#processAnimationStep(this.#propertybag[element].animationSteps[this.#propertybag[element].currentAnimationStep], false, element);
+            this.#propertybag[element].currentAnimationStep++;
         }
     }
 
-    stepAnimationBack() {
+    stepAnimationBack(element = "pagePrimary") {
         
         this.#confirmUXIsInitialised();
         
-        if (this.#propertybag.animationSteps != null) {
-            if (this.#propertybag.currentAnimationStep <= 0) {
+        if (this.#propertybag[element].animationSteps != null) {
+            if (this.#propertybag[element].currentAnimationStep <= 0) {
                 // nothing left to animate
                 return;
             }
 
-            this.#propertybag.currentAnimationStep--;
-            this.#processAnimationStep(this.#propertybag.animationSteps[this.#propertybag.currentAnimationStep], true);
+            this.#propertybag[element].currentAnimationStep--;
+            this.#processAnimationStep(this.#propertybag[element].animationSteps[this.#propertybag[element].currentAnimationStep], true, element);
         }
         
     }
 
-    disableAnimation() {
-        this.#propertybag.animationEnabled = false;
+    disableAnimation(element = "pagePrimary") {
+        this.#propertybag[element].animationEnabled = false;
     }
 
-    enableAnimation() {
-        this.#propertybag.animationEnabled = true;
+    enableAnimation(element = "pagePrimary") {
+        this.#propertybag[element].animationEnabled = true;
     }
 
     usingTransition(duration, timingFunction, delay) {
@@ -376,26 +400,26 @@ class CCPageContent extends CCBase {
         this.#resetTransformationalClasses()
     }
 
-    withFadeIn() {
+    withFadeIn(element = "pageRoot") {
         this.#confirmUXIsInitialised();
-        this.#resetFadingClasses()
-        this.#elements.pageRoot.classList.add("withFadeIn");
+        this.#resetFadingClasses(element)
+        this.#elements[element].classList.add("withFadeIn");
     }
 
-    withoutFadeIn() {
+    withoutFadeIn(element = "pageRoot") {
         this.#confirmUXIsInitialised();
-        this.#resetFadingClasses()
+        this.#resetFadingClasses(element)
     }
 
-    withFadeOut() {
+    withFadeOut(element = "pageRoot") {
         this.#confirmUXIsInitialised();
-        this.#resetFadingClasses()
-        this.#elements.pageRoot.classList.add("WithFadeOut");
+        this.#resetFadingClasses(element)
+        this.#elements[element].classList.add("WithFadeOut");
     }
 
-    withoutFadeOut() {
+    withoutFadeOut(element = "pageRoot") {
         this.#confirmUXIsInitialised();
-        this.#resetFadingClasses()
+        this.#resetFadingClasses(element)
     }
 
     enterLeft() {
@@ -453,14 +477,14 @@ class CCPageContent extends CCBase {
     
     fadeTo(element = "pageRoot", value) {
         this.#confirmUXIsInitialised();
+        
         if (typeof value === 'number') {
             this.#elements[element].style.opacity = value + "%";
         } else {
             this.#elements[element].style.opacity = value;
         }
-        this.#elements[element].classList.add("FadeTo");
     }
-
+    
      /**
      * Callbacks
      */

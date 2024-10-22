@@ -398,18 +398,22 @@ class AnimatorService {
         
         switch (action) {
             case 'open':
-                page.disableAnimation();
+                page.disableAnimation("pagePrimary");
                 page.usingOverlayTransition(halfDuration, "ease-in", 0, halfDuration, "ease-out", 0);
                 page.enterBottom('pageOverlay');
+                page.withFadeIn('pageOverlay');
                 page.show('pageOverlay');
                 page.fadeTo('pagePrimary', 50);
+                page.overlayState = action;
                 break;
             case 'close':
-                page.enableAnimation();
+                page.enableAnimation("pagePrimary");
                 page.usingOverlayTransition(halfDuration, "ease-out", 0 , halfDuration, "ease-in", 0);
                 page.exitBottom('pageOverlay');
+                page.withFadeOut('pageOverlay');
                 page.hide('pageOverlay');
                 page.fadeTo('pagePrimary', 100);
+                page.overlayState = action;
                 break;
         }
     }
