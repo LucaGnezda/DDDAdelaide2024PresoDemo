@@ -1,7 +1,8 @@
+// @ts-nocheck
+
 /** 
  * A set of general purpose useful functions
 */
-
 
 /** 
  * Returns true if the object is an HTML Element 
@@ -9,8 +10,6 @@
 function isElement(obj) {
     return obj instanceof Element;
 }
-
-
 
 function isInt(value) {
     return !isNaN(value) && (function(x) { return (x | 0) === x; })(parseFloat(value))

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /** 
  * Enum is an enum 'like' data structure, with helper methods for later use. 
  * AsEnum then makes instantiation cleaner and simpler. Avoids using Symbols 

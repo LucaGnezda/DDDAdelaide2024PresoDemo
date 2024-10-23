@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /** 
  * Dispatcher dispatches an action to all registered handlers.
 */

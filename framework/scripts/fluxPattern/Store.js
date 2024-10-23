@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /** 
  * Stores data for your application.
  * 

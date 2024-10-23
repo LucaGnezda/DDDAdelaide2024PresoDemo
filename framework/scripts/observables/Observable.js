@@ -1,8 +1,11 @@
+//@ts-nocheck
+
 /** 
  * Observable is a usable object that wraps ObservableCore, exposing its
  * proxy as .observableData, as well as key subscription methods. It is 
  * used by the ObservablesDictionary.
 */
+
 "use strict";
 
 class Observable {

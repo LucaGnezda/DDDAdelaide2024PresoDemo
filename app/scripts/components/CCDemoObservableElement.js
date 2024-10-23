@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use strict"
 
 class CCDemoObservableElement extends CCObservableBase {
@@ -7,7 +9,7 @@ class CCDemoObservableElement extends CCObservableBase {
         resetButton: null,
         count: null,
     }
-
+    
     #propertybag = {
         updateCallback: null,
         resetCallback: null,

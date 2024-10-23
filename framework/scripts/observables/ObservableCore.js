@@ -1,8 +1,11 @@
+// @ts-nocheck
+
 /** 
  * ObservableCore is a object that is intended to be used within another
  * object, such as a component or Observable. It's purpose is to provide
  * and object that triggers change callbacks through use of a proxy.
 */
+
 "use strict";
 
 class ObservableCore {

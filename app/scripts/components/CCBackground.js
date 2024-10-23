@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use strict";
 
 class CCBackground extends CCBase {

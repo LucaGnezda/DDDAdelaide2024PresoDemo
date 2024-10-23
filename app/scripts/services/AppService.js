@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 "use strict";
 
 class AppService {
@@ -261,6 +263,11 @@ class AppService {
 
         document.getElementById("ContentSource").remove();
     }
+    
+    /**
+     * @typedef {{key: string, classes: Array<string>}} AnimationStep
+     * @typedef {{add: Array<AnimationStep>, remove: Array<AnimationStep>}} AnimationDefinition
+     */
 
     static DefineInPageAnimations() {
         

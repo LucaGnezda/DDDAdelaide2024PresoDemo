@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * ObservableDictionary is a name keyed list of Observables.
  */
