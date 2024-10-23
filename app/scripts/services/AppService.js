@@ -3,9 +3,7 @@
 "use strict";
 
 class AppService {
-
     static Initialise() {
-        
         Log.setLoggingLevel(LogLevel.Trace);
         Log.debug("AppService.Initialise - Begin", "APPSERVICE");
 
@@ -31,14 +29,11 @@ class AppService {
     }
 
     static InitialiseAppStore() {
-
         // Create Store & Observables
         App.store = new Store();
-
     }
 
     static InitialiseAppEventProcessing() {
-
         // Initialise event processing
         App.dispatcher = new Dispatcher();
         App.dispatcher.addDispatchHandler(new PresentationActionHandler(), "route");
@@ -47,14 +42,11 @@ class AppService {
     }
 
     static IndexKeyDOMElements() {
-
         App.elements["backgroundsContainer"] = document.getElementById("BackgroundsContainer");
         App.elements["pagesContainer"] = document.getElementById("PagesContainer");
-
     }
 
     static InitialiseCoreEventBindings() {
-
         document.body.addEventListener("keydown", this.keydownCallback);
         document.body.addEventListener("click", this.clickCallback);
 
@@ -65,7 +57,6 @@ class AppService {
     }
 
     static LoadStore() {
-
         App.store.addObservablesDictionary("appModel");
         App.store.appModel.add("app");
         App.store.appModel.add("components");
@@ -101,11 +92,9 @@ class AppService {
 
         App.store.addObservable("demo");
         App.store.demo.observableData.demoClickCount = 0;
-
     }
 
     static DefinePresentation() {
-
         let factory = new PresentationFactory(App.pages, App.pageContent, App.backgrounds, App.elements.pagesContainer, App.elements.backgroundsContainer);
 
         // Define & configure Backgrounds
@@ -211,7 +200,6 @@ class AppService {
 
         App.pages.demo.setPageContentAndBackground(App.pageContent.demo, App.backgrounds.demoBackground);
 
-
         // Interrelate Pages with transitions
         App.pages.intro1.setNextPage(App.pages.intro2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
         App.pages.intro2.setNextPage(App.pages.intro3, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
@@ -247,7 +235,6 @@ class AppService {
     }
 
     static LoadPresentationContent() {
-
         for (let name in App.pages) {
             let source = document.querySelector(`data[value='${name}']`);
             if (source != null) {
@@ -266,11 +253,10 @@ class AppService {
     
     /**
      * @typedef {{key: string, classes: Array<string>}} AnimationStep
-     * @typedef {{add: Array<AnimationStep>, remove: Array<AnimationStep>}} AnimationDefinition
+     * @typedef {{add: Array<AnimationStep>?, remove: Array<AnimationStep>?}} AnimationDefinition
      */
 
     static DefineInPageAnimations() {
-        
         // Add animations to Pages
         App.pageContent.intro2.setAnimation(
             [
@@ -334,7 +320,6 @@ class AppService {
     }
 
     static InitialiseInteractiveContent() {
-
         // Hub page
         App.elements.AppModelAppStructure = document.createElement("cc-frameworkelement");
         App.elements.AppModelAppStructure.useMultiClouds(true);
@@ -454,11 +439,9 @@ class AppService {
         App.store.demo.addSubscriber(App.components.demoObservingElement1, Demo_DemoObservingElement_OnClickCountChanged);
         App.store.demo.addSubscriber(App.components.demoObservingElement2, Demo_DemoObservingElement_OnClickCountChanged);
         App.store.demo.addSubscriber(App.components.demoObservingElement3, Demo_DemoObservingElement_OnClickCountChanged);
-
     }
 
     static ActivateFirstPage() {
-
         // Activate and transition page 1
         App.activePage = App.pages.intro1;
         App.activePage.background.usingTransition(1, "ease-in", 0);
@@ -467,7 +450,6 @@ class AppService {
         App.activePage.content.usingTransition(1, "ease-in", 0);
         App.activePage.content.withFadeIn();
         App.activePage.content.show();
-
     }
 
     static SolveAppModel() {
@@ -492,7 +474,6 @@ class AppService {
     }
 
     static keydownCallback(keyEvent) {
-
         Log.debug(`${this.constructor.name} captured keydown event`, "APPSERVICE");
 
         if (keyEvent.key == "ArrowRight") {
@@ -539,7 +520,6 @@ class AppService {
             }
         }
         else if (keyEvent.key == "ArrowLeft") {
-
             if (App.activePage.content.overlayState == 'open') {
                 if (!App.activePage.content.hasBackAnimationsRemaining("pageOverlay")) {
                     return;
@@ -557,7 +537,6 @@ class AppService {
             }
 
             if (App.activePage.content.hasBackAnimationsRemaining() && App.pageAnimationCallback != null) {
-
                 let event = {};
                 event.originatingObject = this;
                 event.originatingEvent = keyEvent;
@@ -565,9 +544,7 @@ class AppService {
                 event.inReverse = true;
 
                 App.pageAnimationCallback(event);
-            }
-            else if (App.activePage.previousPage != null && App.pageNavigationCallback != null) {
-
+            } else if (App.activePage.previousPage != null && App.pageNavigationCallback != null) {
                 let event = {};
                 event.originatingObject = this;
                 event.originatingEvent = keyEvent;
@@ -578,11 +555,8 @@ class AppService {
                 event.inReverse = true;
 
                 App.pageNavigationCallback(event);
-
             }
-
-        }
-        else if (keyEvent.key == "ArrowUp") {
+        } else if (keyEvent.key == "ArrowUp") {
             if (App.activePage.content.hasOverlay && App.pageOverlayCallback != null) {
                 let event= {};
                 event.originatingObject = this;
@@ -593,8 +567,7 @@ class AppService {
                 
                 App.pageOverlayCallback(event)
             }
-        }
-        else if (keyEvent.key == "ArrowDown") {
+        } else if (keyEvent.key == "ArrowDown") {
             if (App.activePage.content.hasOverlay && App.pageOverlayCallback != null) {
                 let event= {};
                 event.originatingObject = this;
@@ -609,7 +582,6 @@ class AppService {
     }
 
     static clickCallback(clickEvent) {
-
         Log.debug(`${this.constructor.name} captured click event`, "APPSERVICE");
         
         if (App.activePage.content.overlayState == 'open') {
@@ -617,7 +589,6 @@ class AppService {
         }
 
         if (App.activePage.content.hasForwardAnimationsRemaining() && App.pageAnimationCallback != null) {
-
             let event = {};
             event.originatingObject = this;
             event.originatingEvent = clickEvent;
@@ -625,10 +596,7 @@ class AppService {
             event.inReverse = false;
 
             App.pageAnimationCallback(event);
-
-        }
-        else if (App.activePage.nextPage != null && App.pageNavigationCallback != null) {
-
+        } else if (App.activePage.nextPage != null && App.pageNavigationCallback != null) {
             let event = {};
             event.originatingObject = this;
             event.originatingEvent = clickEvent;
@@ -639,7 +607,6 @@ class AppService {
             event.inReverse = false;
 
             App.pageNavigationCallback(event);
-
         }
     }
 }

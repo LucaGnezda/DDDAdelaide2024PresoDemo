@@ -1,15 +1,38 @@
-// @ts-nocheck
-
-"use strict";
-
+/**
+ * @class
+ * @public
+ * @constructor
+ */
 class CCObservableBase extends HTMLElement {
+    /**
+     * @type {ObservableCore}
+     */
+    #state;
     
-    id = null;
-    #state = null;
-    observableData = null;
+    /**
+     * @type {Function?}
+     */
     #dataChangedCallbackExtention = null;
+
+    /**
+     * @type {Function?}
+     */
     #dataListnerCallbackExtention = null;
 
+    /**
+     * @type {string}
+     */
+    id = "";
+
+    /**
+     * @type {ObservableData}
+     */
+    observableData;
+    
+    /**
+     * @constructs CCObservableBase
+     * @param {ObservableCore} state 
+     */
     constructor(state) {
         super();
         this.#state = state;
@@ -21,12 +44,7 @@ class CCObservableBase extends HTMLElement {
     }
 
     set dataChangedCallbackExtention(val) {
-        if (typeof val == 'function') {
-            this.#dataChangedCallbackExtention = val;
-        }
-        else if (isEmptyOrNull(val)) {
-            this.#dataChangedCallbackExtention = null;
-        }
+        this.#dataChangedCallbackExtention = val;
     }
 
     get dataListnerCallbackExtention() {
@@ -34,12 +52,7 @@ class CCObservableBase extends HTMLElement {
     }
 
     set dataListnerCallbackExtention(val) {
-        if (typeof val == 'function') {
-            this.#dataListnerCallbackExtention = val;
-        }
-        else if (isEmptyOrNull(val)) {
-            this.#dataListnerCallbackExtention = null;
-        }
+        this.#dataListnerCallbackExtention = val;
     }
 
     get subscribers() {
@@ -58,18 +71,32 @@ class CCObservableBase extends HTMLElement {
         this.#state.notificationStatus = val;
     }
 
+    /**
+     * @param {*} obj 
+     * @param {Function} callbackToAdd 
+     */
     addSubscriber(obj, callbackToAdd) {
         this.#state.addSubscriber(obj, callbackToAdd);
     }
 
+    /**
+     * @param {*} obj 
+     * @param {Function} callbackToAdd 
+     */
     subscribeTo(obj, callbackToAdd) {
         this.#state.subscribeTo(obj, callbackToAdd);
     }
 
+    /**
+     * @param {*} obj 
+     */
     removeSubscriber(obj) {
         this.#state.removeSubscriber(obj);
     }
 
+    /**
+     * @param {*} obj 
+     */
     unsubscribeFrom(obj) {
         this.#state.unsubscribeFrom(obj);
     }

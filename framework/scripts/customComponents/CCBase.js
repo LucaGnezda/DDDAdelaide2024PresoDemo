@@ -1,7 +1,3 @@
-// @ts-nocheck
-
-"use strict";
-
 /**
  * Base class for custom components
  * @class
@@ -9,13 +5,11 @@
  * @public
  */
 class CCBase extends HTMLElement {
-
-
     /**
      * The id of the custom component
-     * @type {string?}
+     * @type {string}
      */
-    id = null;
+    id = "";
     
     constructor() {
         super();

@@ -14,9 +14,7 @@ class CCBackground extends CCBase {
         backgroundContent: null
     };
 
-    #propertybag = {
-        
-    }
+    #propertybag = { }
 
     static #htmlTemplate = `
         <div class="CCBackgroundRoot" data-background-root>
@@ -33,11 +31,10 @@ class CCBackground extends CCBase {
         super();
 
         // Allocate a guid
-        if (isEmptyOrNull(this.id)) {
+        if (this.id === "") {
             this.id = crypto.randomUUID();
         }
     }
-
 
     /**
      * Standard Component Methods

@@ -3,15 +3,12 @@
 "use strict";
 
 class AnimatorService {
-    
     static pageOutro(fromPage, usingTransition, duration) {
-
         let oneQtrDuration = duration / 4;
         let halfDuration = duration / 2;
         let threeQtrDuration = (3 * duration) / 4;
 
         switch (usingTransition) {
-
             case PageTransition.SlideLeft:
                 fromPage.usingTransition(halfDuration, "ease-in", 0);
                 fromPage.exitLeft();
@@ -107,19 +104,15 @@ class AnimatorService {
                 fromPage.withoutFadeOut();
                 fromPage.withoutZoom();
                 fromPage.hide();
-            
         }
-
     }
 
     static pageIntro(toPage, usingTransition, duration) {
-
         let oneQtrDuration = duration / 4;
         let halfDuration = duration / 2;
         let threeQtrDuration = (3 * duration) / 4;
 
         switch (usingTransition) {
-
             case PageTransition.SlideLeft:
                 toPage.usingTransition(halfDuration, "ease-out", halfDuration);
                 toPage.enterRight();
@@ -215,25 +208,17 @@ class AnimatorService {
                 toPage.withoutFadeIn();
                 toPage.withoutZoom();
                 toPage.show();
-
         }
-
     }
 
     static transitionBackground(currentBG, toBG, toX, toY, toTransformer, usingTransition, duration) {
-
         toBG.usingContentPosition(toX, toY);
         toBG.usingTransformationClass(toTransformer);
 
         if (currentBG == toBG) {
-
             toBG.usingTransition(duration, "ease-in-out", 0);
-
-        }
-        else {
-
+        } else {
             switch (usingTransition) {
-
                 case PageTransition.SlideLeft:
                     currentBG.usingTransition(duration, "ease-in-out", 0);
                     currentBG.exitLeft();
@@ -389,13 +374,11 @@ class AnimatorService {
                     toBG.withoutFadeIn();
                     toBG.withoutZoom();
                     toBG.show();
-
             }
         }
     }
         
     static transitionPageOverlay(action, page, duration) {
-
         let halfDuration = duration / 2;
         
         switch (action) {

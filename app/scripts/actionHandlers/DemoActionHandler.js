@@ -3,13 +3,11 @@
 "use strict";
 
 class DemoActionHandler {
-
     route(action) {
 
         Log.debug(`${this.constructor.name} processing event ${action.type}`, "HANDLER");
 
         switch (action.type) {
-
             case "DemoObservableElement_UpdateButton_Click":
                 App.store.demo.observableData.demoClickCount += 1;
                 App.store.demo.emitNotifications();

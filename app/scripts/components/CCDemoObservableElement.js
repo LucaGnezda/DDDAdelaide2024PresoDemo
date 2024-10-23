@@ -32,7 +32,7 @@ class CCDemoObservableElement extends CCObservableBase {
         state.addSubscriber(this, this.dataChangedCallback);
 
         // allocate a guid
-        if (isEmptyOrNull(this.id)) {
+        if (this.id === "") {
             this.id = crypto.randomUUID();
         }
 

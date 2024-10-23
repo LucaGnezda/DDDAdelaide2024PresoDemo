@@ -1,73 +1,148 @@
-// @ts-nocheck
-
-/** 
+/**
  * Stores data for your application.
  * 
  * There are two options for storing data, within a single Observable object 
  * accessed via ".appState", or within an ObservablesDictionary collection
  * accessed by ".observables[...]". 
-*/
-
-"use strict";
-
+ *
+ * @class 
+ * @public
+ * @constructor
+ */
 class Store {
+    /**
+     * @type {ObservableCore}
+     */
+    #appstate;
+
+    /**
+     * @type {ObservableData}
+     */
+    appState;
     
-    #appstate = null;
-    appState = null;
+    /**
+     * @type {Array<string>}
+     */
     #dictionaries = [];
-
+    
+    /**
+     * @param {NotificationMode} notificationMode 
+     * @param {NotificationStatus} notificationStatus 
+     * @this {Store}
+     */
     constructor(notificationMode, notificationStatus) {        
-
-        if (!NotificationMode.hasValue(notificationMode)) {
-            notificationMode = NotificationMode.ObjectNotifyOnEmit;
-        }
-
-        if (!NotificationStatus.hasValue(notificationStatus)) {
-            notificationStatus = NotificationStatus.Active;
-        }
+        notificationMode = NotificationMode.ObjectNotifyOnEmit;
+        notificationStatus = NotificationStatus.Active;
 
         this.#appstate = new ObservableCore(notificationMode, notificationStatus);
         this.#appstate.originatingObject = this;
         this.appState = this.#appstate.dataProxy;
     }
-
-    addObservablesDictionary(name) {
+    
+    /**
+     * Adds an {@link ObservablesDictionary} to the store
+     * @param {string} dictionary 
+     * @returns {ObservablesDictionary?}
+     */
+    addObservablesDictionary(dictionary) {
+        let name = dictionary.constructor.name;
+         
         if (name in this) {
             return null
         }
+        
+        if (!this.#appstate) {
+            return null;
+        }
     
-        this[name] = new ObservablesDictionary(this.#appstate.notificationMode);
+        let dict =  new ObservablesDictionary(this.#appstate.notificationMode);
+        
+        this.#addObservablesDictionary(name, dict)
         this.#dictionaries.push(name);
         
-        return this[name];
+        return dict;
+    }
+    
+    /**
+     * Adds a dictionary to the store in store[name] format
+     * @param {string} name 
+     * @param {ObservablesDictionary} dictionary 
+     */
+    #addObservablesDictionary(name, dictionary) {
+        // @ts-ignore
+        this[name] = dictionary;        
     }
 
+    /**
+     * Adds an {@link Observable} to the store
+     * @param {string} name 
+     * @returns {Observable?}
+     */
     addObservable(name) {
         if (name in this) {
             return null
         }
+        
+        if (!this.#appstate) {
+            return null;
+        }
     
-        this[name] = new Observable(name, this.#appstate.notificationMode);
+        let observable = new Observable(name, this.#appstate.notificationMode);
+        
+        this.#addObservable(name, observable)
         this.#dictionaries.push(name);
         
-        return this[name];
+        return observable;
+    }
+    
+    /**
+     * Adds an observable to the store in store[name] fromat
+     * @param {string} name 
+     * @param {Observable} observable 
+     */
+    #addObservable(name, observable) {
+        // @ts-ignore
+        this[name] = observable;
+    }
+    
+    /**
+     * Gets an observable or observables dictionary from the store by name
+     * @param {string} name 
+     * @returns {Observable|ObservablesDictionary}
+     */
+    #getFromStore(name) {
+        // @ts-ignore
+        return this[name]
     }
 
     /**
      * Emits notifications if any have been backlogged.
+     * @param {boolean} isforced 
      */
     emitNotifications(isforced) {
-        this.#appstate.emitNotifications(isforced);
-        this.#dictionaries.forEach(d => this[d].emitNotifications(isforced));
+        if (this.#appstate) {
+            this.#appstate.emitNotifications(isforced);
+        }
+        this.#dictionaries.forEach(dName => this.#getFromStore(dName).emitNotifications(isforced));
     }
 
     enableAllNotifications() {
-        this.#appstate.notificationStatus = NotificationStatus.Active;
-        this.#dictionaries.forEach(d => this[d].enableAllNotifications());
+        if (this.#appstate) {
+            this.#appstate.notificationStatus = NotificationStatus.Active;
+        }
+        this.#dictionaries.map((name)=>{
+            let d = this.#getFromStore(name);
+            if (d instanceof ObservablesDictionary) return d;
+        }).forEach(d => d && d.enableAllNotifications());
     }
 
     disableAllNotifications() {
-        this.#appstate.notificationStatus = NotificationStatus.Inactive;
-        this.#dictionaries.forEach(d => this[d].disableAllNotifications());
+        if (this.#appstate) {
+            this.#appstate.notificationStatus = NotificationStatus.Inactive;
+        }
+        this.#dictionaries.map((name)=>{
+            let d = this.#getFromStore(name);
+            if (d instanceof ObservablesDictionary) return d;
+        }).forEach(d => d && d.disableAllNotifications());
     }
 }

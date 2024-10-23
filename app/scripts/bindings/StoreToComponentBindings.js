@@ -1,5 +1,18 @@
-// @ts-nocheck
+/**
+ * @template T
+ * @typedef {(arg0: T) => void} Binding<T>
+ */
 
+/**
+ * @typedef {Object} AppModelBindingEvent
+ * @property {*} observableData
+ * @property {*} originatingObject
+ */
+
+/**
+ * @type {Binding<AppModelBindingEvent>}
+ * @this {*}
+ */
 let AppModel_OnDataChange = function(event) {
     Log.debug(`Component Data Listener Callback Extension`, "COMPONENT BINDING");
 
@@ -10,6 +23,16 @@ let AppModel_OnDataChange = function(event) {
     }
 }
 
+/**
+ * @typedef {Object} DemoBindingEvent
+ * @property {*} newValue
+ * @property {*} originatingObject
+ */
+
+/**
+ * @type {Binding<DemoBindingEvent>}
+ * @this {*}
+ */
 let Demo_DemoObservingElement_OnClickCountChanged = function(event) {
     Log.debug(`Component Data Listener Callback Extension`, "COMPONENT BINDING");
     event.newValue = event.originatingObject.observableData.demoClickCount;

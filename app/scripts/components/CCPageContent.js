@@ -10,6 +10,10 @@ class CCPageContent extends CCBase {
      */
     
     /**
+     * @typedef {('pagePrimary'|'pageOverlay'|'pageRoot'|'pageTransformer')} PageElement
+     */
+    
+    /**
      * The elements that make up this component
      * @typedef {{[key in PageElement]:HTMLElement?}} PageElements
      */
@@ -83,14 +87,14 @@ class CCPageContent extends CCBase {
      */
     constructor() {
         super();
-
+        
         // Allocate a guid
-        if (isEmptyOrNull(this.id)) {
+        if (this.id === "") {
             this.id = crypto.randomUUID();
         }
     }
 
-    /**
+    /*
      * Standard Component Methods
      */
     /**
@@ -101,12 +105,8 @@ class CCPageContent extends CCBase {
         return [];
     }
 
-    /**
+    /*
      * Getters & Setters
-     */
-    
-    /**
-     * @typedef {('pagePrimary'|'pageOverlay'|'pageRoot'|'pageTransformer')} PageElement
      */
 
     /**
@@ -163,7 +163,7 @@ class CCPageContent extends CCBase {
         return this.#propertybag.overlayState;
     }
     
-    /**
+    /*
      * Private Methods
      */
 
@@ -224,7 +224,7 @@ class CCPageContent extends CCBase {
      * @param {PageElement} [elementToAnimate=pagePrimary] 
      */
     #processAnimationStep(stepToAnimate, inReverse = false, elementToAnimate = 'pagePrimary') {
-        stepToAnimate.add.forEach((step) => {
+        stepToAnimate.add?.forEach((step) => {
             if (!this.#elements[elementToAnimate]) return;
 
             [...this.#elements[elementToAnimate].querySelectorAll(`[${step.key}]`)].forEach((element) => {
@@ -236,7 +236,7 @@ class CCPageContent extends CCBase {
             });
         });
         
-        stepToAnimate.remove.forEach((step) => {
+        stepToAnimate.remove?.forEach((step) => {
             if (!this.#elements[elementToAnimate]) return;
 
             [...this.#elements[elementToAnimate].querySelectorAll(`[${step.key}]`)].forEach((element) => {
@@ -250,7 +250,7 @@ class CCPageContent extends CCBase {
     }
 
 
-    /**
+    /*
      * Public Methods
      */
 
@@ -522,8 +522,9 @@ class CCPageContent extends CCBase {
     withZoomInExit() {
         this.#confirmUXIsInitialised();
         this.#resetTransformationalClasses()
-        if (this.#elements.pageTransformer)
+        if (this.#elements.pageTransformer) {
             this.#elements.pageTransformer.classList.add("WithZoomInExit");
+        }
     }
 
     /**
@@ -693,7 +694,7 @@ class CCPageContent extends CCBase {
         }               
     }
     
-     /**
+     /*
      * Callbacks
      */
 

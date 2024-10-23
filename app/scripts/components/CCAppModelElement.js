@@ -1,9 +1,9 @@
-// @ts-nocheck
-
-"use strict";
-
+/**
+ * @class
+ * @public
+ * @constructor
+ */
 class CCAppModelElement extends CCObservableBase {
-
     /**
      * Member attributes
      */
@@ -16,6 +16,10 @@ class CCAppModelElement extends CCObservableBase {
         knownIcon: null
     };
 
+    /**
+     * The html template for the component
+     * @property {string} #htmlTemplate  
+     */
     static #htmlTemplate = `
         <div class="CCAppModelElementRoot" data-element-root>
             <div class="CCAppModelElementTitle" data-element-title></div>
@@ -29,7 +33,7 @@ class CCAppModelElement extends CCObservableBase {
     `
 
     /**
-     * Constructor
+     * @constructs CCAppModelElement
      */
     constructor() {
 
@@ -41,7 +45,7 @@ class CCAppModelElement extends CCObservableBase {
         state.addSubscriber(this, this.dataChangedCallback);
 
         // Allocate a guid
-        if (isEmptyOrNull(this.id)) {
+        if (this.id === "") {
             this.id = crypto.randomUUID();
         }
 

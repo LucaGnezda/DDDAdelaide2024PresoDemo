@@ -3,7 +3,6 @@
 "use strict";
 
 class PageNode {
-
     /**
      * Member attributes
      */
@@ -29,7 +28,6 @@ class PageNode {
     constructor(nodeId) {
         this.#nodeId = nodeId;
     }
-
 
     /**
      * Getters & Setters
@@ -94,7 +92,6 @@ class PageNode {
      * Public Methods
      */
     setPageContent(pageContent) {
-
         if (pageContent.constructor.name != "CCPageContent") {
             Log.error('Page is not of type CCPage', "PAGENODE");
             return;
@@ -104,7 +101,6 @@ class PageNode {
     }
 
     setBackground(background, pageX = 0, pageY = 0, transformerClass) {
-
         if (background.constructor.name != "CCBackground") {
             Log.error('Page is not of type CCBackground', "PAGENODE");
             return;
@@ -122,7 +118,6 @@ class PageNode {
     }
 
     setNextPage(node, transitionForward, transitionBack, duration) {
-
         if (node.constructor.name != "PageNode") {
             Log.error('Page is not of type PageNode', "PAGENODE");
             return;
@@ -140,7 +135,6 @@ class PageNode {
     }
 
     setPreviousPage(node, transitionBack, duration) {
-
         if (node.constructor.name != "PageNode") {
             Log.error('Page is not of type PageNode', "PAGENODE");
             return;
@@ -150,5 +144,4 @@ class PageNode {
         this.#transitionBack = transitionBack;
         this.#transitionBackDuration = duration;
     }
-    
 }

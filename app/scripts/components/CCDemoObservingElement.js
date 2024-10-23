@@ -21,7 +21,7 @@ class CCDemoObservingElement extends CCBase {
         super();
 
         // allocate a guid
-        if (isEmptyOrNull(this.id)) {
+        if (this.id === "") {
             this.id = crypto.randomUUID();
         }
     }
@@ -30,13 +30,9 @@ class CCDemoObservingElement extends CCBase {
      * Private Methods
      */
     #confirmUXIsInitialised() {
-
         if (this.children.length == 0) {
-
             let fragment = getDOMFragmentFromString(CCDemoObservingElement.#htmlTemplate);
-
             this.#elements.root = fragment.querySelector('[data-element-root]');
-            
             this.appendChild(fragment);
         }
     }

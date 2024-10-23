@@ -5,9 +5,14 @@
 "use strict";
 
 class App {
-
     // Flux Pattern objects
+    /**
+     * @type {Store?}
+     */
     static store = null;
+    /**
+     * @type {Dispatcher?}
+     */
     static dispatcher = null;
 
     // Core dispatch callbacks

@@ -1,55 +1,103 @@
-// @ts-nocheck
-
 /**
  * ObservableDictionary is a name keyed list of Observables.
+ * @class
+ * @constructor
  */
-
-"use strict";
-
 class ObservablesDictionary {
-
-    #defaultNotificationMode = null;
-
+    /**
+     * @type {string}
+     */
+    #defaultNotificationMode;
+    
+    /**
+     * 
+     * @param {NotificationMode} defaultNotificationMode 
+     */
     constructor(defaultNotificationMode) {
-        this.defaultNotificationMode = defaultNotificationMode;
+        this.#defaultNotificationMode = defaultNotificationMode;
     }
 
+    /**
+     * @returns {string}
+     */
     get defaultNotificationMode() {
         return this.#defaultNotificationMode;
     }
 
+    /**
+     * @param {NotificationMode} val 
+     */
     set defaultNotificationMode(val) {
-        if (val != null && NotificationMode.hasValue(val)) {
+        if (val != null) {
             this.#defaultNotificationMode = val;
         }
         else {
             this.#defaultNotificationMode = NotificationMode.Default;
         }
     }
+    
+    /**
+     * Adds an observable to the dictionary in dictionary[name] format
+     * @param {string} name 
+     * @param {Observable} observable 
+     */
+    #addObservable(name, observable) {
+        // @ts-ignore
+        this[name] = observable;
+    }
+    
+    /**
+     * Gets an observable from the dictionary in dictionary[name] format
+     * @param {string} name 
+     * @returns {Observable}
+     */
+    #getObservable(name) {
+        // @ts-ignore
+        return this[name];
+    }
 
+    /**
+     * Adds an observable to the dictionary
+     * @param {string} key 
+     * @returns {Observable?}
+     */
     add(key) {
         if (key in this) {
             return null
         }
 
-        this[key] = new Observable(key, this.#defaultNotificationMode);
+        let observable =  new Observable(key, this.#defaultNotificationMode);
+        this.#addObservable(key, observable);
 
-        return this[key];
+        return observable;
     }
 
+    /**
+     * Removes an observable from the dictionary
+     * @param {string} key 
+     * @returns {boolean}
+     */
     remove(key) {
-        if (!key in this) {
+        if (!(key in this)) {
             return false
         }
 
-        this[key].removeAllSubscriptions();
+        this.#getObservable(key).removeAllSubscriptions();
+        
+        // @ts-ignore
         delete this[key];
+        
+        return true;
     }
 
-    emitNotifications(isforced) {
+    /**
+     * Emits notification for all observables, optionally forcing emission
+     * @param {boolean} isForced 
+     */
+    emitNotifications(isForced) {
         for (var property in this) {
-            if (typeof this[property].emitNotifications !== "undefined") {
-                this[property].emitNotifications(isforced);
+            if (typeof this.#getObservable(property).emitNotifications !== "undefined") {
+                this.#getObservable(property).emitNotifications(isForced);
             }
             else {
                 // Ignore
@@ -58,10 +106,13 @@ class ObservablesDictionary {
         }
     }
 
+    /**
+     * Enables all notifications
+     */
     enableAllNotifications() {
         for (var property in this) {
-            if (typeof this[property].emitNotifications !== "undefined") {
-                this[property].notificationStatus = NotificationStatus.Active;
+            if (typeof this.#getObservable(property).emitNotifications !== "undefined") {
+                this.#getObservable(property).notificationStatus = NotificationStatus.Active;
             }
             else {
                 // Ignore
@@ -70,10 +121,13 @@ class ObservablesDictionary {
         }
     }
 
+    /**
+     * Disables all notifications
+     */
     disableAllNotifications() {
         for (var property in this) {
-            if (typeof this[property].emitNotifications !== "undefined") {
-                this[property].notificationStatus = NotificationStatus.Inactive;
+            if (typeof this.#getObservable(property).emitNotifications !== "undefined") {
+                this.#getObservable(property).notificationStatus = NotificationStatus.Inactive;
             }
             else {
                 // Ignore
@@ -82,6 +136,10 @@ class ObservablesDictionary {
         }
     }
 
+    /**
+     * Gets all the observable data for all observables in the dictionary as an array
+     * @returns {Array<ProxyConstructor>}
+     */
     toArray() {
         return Object.values(this).map(e => e.observableData);
     }
