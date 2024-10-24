@@ -1,0 +1,178 @@
+cc-frameworkelement {
+    display: contents;
+}
+
+
+.CCFrameworkElement {
+    position: absolute;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    transition-behavior: allow-discrete;
+    @starting-style {
+        opacity: 0;
+        top: 0%;
+        left: 0%;
+    }
+}
+
+.CCFrameworkElement.Hide {
+    display: none;
+    opacity: 0;
+}
+
+.CCFrameworkElementUnknown {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 90%;
+}
+
+.CCFrameworkElementSolved {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-delay: 0.25s;
+    transition-timing-function: ease-in-out;
+    transition-behavior: allow-discrete;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCFrameworkElementSolved.Hide {
+    display: none;
+    opacity: 0;
+}
+
+.CCFrameworkElementSolvedImage {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+}
+
+.CCFrameworkElementUnknownMultiCloud {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    transition-behavior: allow-discrete;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCFrameworkElementUnknownMultiCloud.Pos1 {
+    top: 5%;
+    left: 20%;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-delay: 0s;
+    transition-timing-function: ease-in-out;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCFrameworkElementUnknownMultiCloud.Pos1.Hide {
+    display: none;
+    opacity: 0;
+}
+
+.CCFrameworkElementUnknownMultiCloud.Pos2 {
+    top: -10%;
+    left: 0%;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-delay: 0.25s;
+    transition-timing-function: ease-in-out;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCFrameworkElementUnknownMultiCloud.Pos2.Hide {
+    display: none;
+    opacity: 0;
+}
+
+.CCFrameworkElementUnknownMultiCloud.Pos3 {
+    top: 30%;
+    left: 0%;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-delay: 0.5s;
+    transition-timing-function: ease-in-out;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCFrameworkElementUnknownMultiCloud.Pos3.Hide {
+    display: none;
+    opacity: 0;
+}
+
+.CCFrameworkElementUnknownSimpleCloud {
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    transition-behavior: allow-discrete;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCFrameworkElementUnknownSimpleCloud.Hide {
+    display: none;
+    opacity: 0;
+}
+
+.CCFrameworkElementTitle {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: auto;
+    height: 10%;
+    color: #ffffff;
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 1.0s;
+    transition-delay: 0s;
+    transition-timing-function: ease-in-out;
+    transition-behavior: allow-discrete;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCFrameworkElementTitle.Hide {
+    display: none;
+    opacity: 0;
+}
+
+.CCFrameworkElementTitle.Glowing {
+    -webkit-animation: Glowing 1s ease-in-out infinite alternate;
+    -moz-animation: Glowing 1s ease-in-out infinite alternate;
+    animation: Glowing 1s ease-in-out infinite alternate;
+}
+
+@keyframes Glowing {
+    from {
+        text-shadow: 0 0 3px #f0f, 0 0 4px #0ff, 0 0 5px #e60073, 0 0 6px #e60073, 0 0 7px #e60073;
+    }
+    to {
+        text-shadow: 0 0 3px #ff4da6, 0 0 4px #ff4da6, 0 0 5px #ff4da6, 0 0 6px #ff4da6, 0 0 7px #ff4da6, 0 0 8px #ff4da6;
+    }
+}

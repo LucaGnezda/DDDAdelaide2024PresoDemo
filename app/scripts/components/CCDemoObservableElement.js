@@ -14,9 +14,9 @@ class CCDemoObservableElement extends CCObservableBase {
     }
     
     static #htmlTemplate = `
-        <div id="CCDemoObservableElementRoot" class="CCDemoObservableElement" data-element-root> 
-            <div data-element-button-update id="DemoUpdateButton" class="TestButton Filled Show">Update</div>
-            <div data-element-button-reset id="DemoResetButton" class="TestButton Filled Show">Reset</div>
+        <div class="CCDemoObservableElement" data-element-root> 
+            <div data-element-button-update id="DemoUpdateButton" class="PresentationButton Filled Show">Update</div>
+            <div data-element-button-reset id="DemoResetButton" class="PresentationButton Filled Show">Reset</div>
             <li data-element-count></li>
         </div>
     `

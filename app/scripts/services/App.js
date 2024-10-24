@@ -19,13 +19,16 @@ class App {
     static elements = {
         pagesContainer: null,
         backgroundsContainer: null,
-        componentsButton: null,
-        eventBindingButton: null,
-        dispatchActionHandlingButton: null,
-        storeButton: null,
-        dataBindingButton: null,
-        loggingButton: null,
-        observablesButton: null,
+        AppModelAppStructure: null,
+        appModelComponents: null,
+        appModelEventBindings: null,
+        appModelActionDispatch: null,
+        appModelHandlers: null,
+        appModelStore: null,
+        appModelDataBindings: null,
+        appModelObservables: null,
+        appModelLogging: null,
+        appModelHelpers: null,
         demoButton: null,
     };
 

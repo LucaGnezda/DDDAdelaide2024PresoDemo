@@ -12,7 +12,7 @@ class CCDemoObservingElement extends CCBase {
     }
     
     static #htmlTemplate = `
-        <div id="CCDemoObservingElementRoot" class="CCDemoObservingElement" data-element-root> </div>
+        <div class="CCDemoObservingElement" data-element-root> </div>
     `
 
     constructor() {

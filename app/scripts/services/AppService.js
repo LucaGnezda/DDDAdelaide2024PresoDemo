@@ -40,6 +40,7 @@ class AppService {
         // Initialise event processing
         App.dispatcher = new Dispatcher();
         App.dispatcher.addDispatchHandler(new PresentationActionHandler(), "route");
+        App.dispatcher.addDispatchHandler(new AppModelActionHandler(), "route");
         App.dispatcher.addDispatchHandler(new DemoActionHandler(), "route");
     }
 
@@ -64,6 +65,37 @@ class AppService {
     static LoadStore() {
 
         App.store.addObservablesDictionary("appModel");
+        App.store.appModel.add("app");
+        App.store.appModel.add("components");
+        App.store.appModel.add("eventBindings");
+        App.store.appModel.add("actionDispatchers");
+        App.store.appModel.add("handlers");
+        App.store.appModel.add("store");
+        App.store.appModel.add("dataBindings");
+        App.store.appModel.add("observables");
+        App.store.appModel.add("logging");
+        App.store.appModel.add("helpers");
+
+        App.store.appModel["app"].observableData.title = "App Core";
+        App.store.appModel["app"].observableData.state = FrameworkElementState.SolvableUnknown;
+        App.store.appModel["components"].observableData.title = "UI / Components";
+        App.store.appModel["components"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["eventBindings"].observableData.title = "Event Bindings";
+        App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["actionDispatchers"].observableData.title = "Action / Dispatchers";
+        App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["handlers"].observableData.title = "Handlers";
+        App.store.appModel["handlers"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["store"].observableData.title = "Store";
+        App.store.appModel["store"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["dataBindings"].observableData.title = "Data Bindings";
+        App.store.appModel["dataBindings"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["observables"].observableData.title = "Observables";
+        App.store.appModel["observables"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["logging"].observableData.title = "Logging";
+        App.store.appModel["logging"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["helpers"].observableData.title = "Helpers";
+        App.store.appModel["helpers"].observableData.state = FrameworkElementState.Unknown;
 
         App.store.addObservable("demo");
         App.store.demo.observableData.demoClickCount = 0;
@@ -297,22 +329,111 @@ class AppService {
     static InitialiseInteractiveContent() {
 
         // Hub page
-        App.elements.componentsButton = document.getElementById("ComponentsButton");
-        App.elements.eventBindingButton = document.getElementById("EventBindingButton");
-        App.elements.dispatchActionHandlingButton = document.getElementById("DispatchActionHandlingButton");
-        App.elements.storeButton = document.getElementById("StoreButton");
-        App.elements.dataBindingButton = document.getElementById("DataBindingButton");
-        App.elements.loggingButton = document.getElementById("LoggingButton");
-        App.elements.observablesButton = document.getElementById("ObservablesButton");
-        App.elements.demoButton = document.getElementById("DemoButton");
+        App.elements.AppModelAppStructure = document.createElement("cc-frameworkelement");
+        App.elements.AppModelAppStructure.useMultiClouds(true);
+        App.elements.AppModelAppStructure.setKnownImage("appStructure.svg");
+        App.elements.AppModelAppStructure.setPlacement("50%", "40%", "25vmin", "25vmin", "1.5vmin");
+        App.elements.AppModelAppStructure.titleStylingClassList.add("DiagramFont");
+        App.elements.AppModelAppStructure.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_AppStructure_OnClick"));
+        
+        App.store.appModel["app"].addSubscriber(App.elements.AppModelAppStructure, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.AppModelAppStructure);
 
-        App.elements.componentsButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_ComponentsButton_OnClick", true));
-        App.elements.eventBindingButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_EventBindingButton_OnClick", true));
-        App.elements.dispatchActionHandlingButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DispatchActionHandlingButton_OnClick", true));
-        App.elements.storeButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_StoreButton_OnClick", true));
-        App.elements.dataBindingButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DataBindingButton_OnClick", true));
-        App.elements.loggingButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_LoggingButton_OnClick", true));
-        App.elements.observablesButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_ObservablesButton_OnClick", true));
+        App.elements.appModelComponents = document.createElement("cc-frameworkelement");
+        App.elements.appModelComponents.useMultiClouds(true);
+        App.elements.appModelComponents.setKnownImage("components.svg");
+        App.elements.appModelComponents.setPlacement("50%", "20%", "10vmin", "10vmin", "1.5vmin");
+        App.elements.appModelComponents.titleStylingClassList.add("DiagramFont");
+        App.elements.appModelComponents.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Components_OnClick"));
+        
+        App.store.appModel["components"].addSubscriber(App.elements.appModelComponents, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.appModelComponents);
+
+        App.elements.appModelEventBindings = document.createElement("cc-frameworkelement");
+        App.elements.appModelEventBindings.useMultiClouds(false);
+        App.elements.appModelEventBindings.setKnownImage("bindings.svg");
+        App.elements.appModelEventBindings.setPlacement("63%", "26%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelEventBindings.titleStylingClassList.add("DiagramFont");
+        App.elements.appModelEventBindings.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_EventBindings_OnClick"));
+        
+        App.store.appModel["eventBindings"].addSubscriber(App.elements.appModelEventBindings, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.appModelEventBindings);
+
+        App.elements.appModelActionDispatch = document.createElement("cc-frameworkelement");
+        App.elements.appModelActionDispatch.useMultiClouds(true);
+        App.elements.appModelActionDispatch.setKnownImage("actionDispatchers.svg");
+        App.elements.appModelActionDispatch.setPlacement("70%", "42%", "10vmin", "10vmin", "1.5vmin");
+        App.elements.appModelActionDispatch.titleStylingClassList.add("DiagramFont");
+        App.elements.appModelActionDispatch.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_ActionDispatchers_OnClick"));
+        
+        App.store.appModel["actionDispatchers"].addSubscriber(App.elements.appModelActionDispatch, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.appModelActionDispatch);
+
+        App.elements.appModelHandlers = document.createElement("cc-frameworkelement");
+        App.elements.appModelHandlers.useMultiClouds(true);
+        App.elements.appModelHandlers.setKnownImage("handlers.svg");
+        App.elements.appModelHandlers.setPlacement("67%", "52%", "10vmin", "10vmin", "1.5vmin");
+        //App.elements.appModelHandlers.setPlacement("62%", "58%", "10vmin", "10vmin", "1.5vmin");
+        App.elements.appModelHandlers.titleStylingClassList.add("DiagramFont");
+        App.elements.appModelHandlers.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Handlers_OnClick"));
+        
+        App.store.appModel["handlers"].addSubscriber(App.elements.appModelHandlers, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.appModelHandlers);
+
+        App.elements.appModelStore = document.createElement("cc-frameworkelement");
+        App.elements.appModelStore.useMultiClouds(true);
+        App.elements.appModelStore.setKnownImage("store.svg");
+        App.elements.appModelStore.setPlacement("33%", "52%", "10vmin", "10vmin", "1.5vmin");
+        App.elements.appModelStore.titleStylingClassList.add("DiagramFont");
+        App.elements.appModelStore.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Store_OnClick"));
+        
+        App.store.appModel["store"].addSubscriber(App.elements.appModelStore, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.appModelStore);
+
+        App.elements.appModelDataBindings = document.createElement("cc-frameworkelement");
+        App.elements.appModelDataBindings.useMultiClouds(false);
+        App.elements.appModelDataBindings.setKnownImage("bindings.svg");
+        App.elements.appModelDataBindings.setPlacement("37%", "26%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelDataBindings.titleStylingClassList.add("DiagramFont");
+        App.elements.appModelDataBindings.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_DataBindings_OnClick"));
+        
+        App.store.appModel["dataBindings"].addSubscriber(App.elements.appModelDataBindings, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.appModelDataBindings);
+
+        App.elements.appModelObservables = document.createElement("cc-frameworkelement");
+        App.elements.appModelObservables.useMultiClouds(false);
+        App.elements.appModelObservables.setKnownImage("observables.svg");
+        App.elements.appModelObservables.setPlacement("35%", "75%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelObservables.titleStylingClassList.add("DiagramFont");
+        App.elements.appModelObservables.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Observables_OnClick"));
+        
+        App.store.appModel["observables"].addSubscriber(App.elements.appModelObservables, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.appModelObservables);
+
+        App.elements.appModelLogging = document.createElement("cc-frameworkelement");
+        App.elements.appModelLogging.useMultiClouds(false);
+        App.elements.appModelLogging.setKnownImage("logging.svg");
+        App.elements.appModelLogging.setPlacement("65%", "75%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelLogging.titleStylingClassList.add("DiagramFont");
+        App.elements.appModelLogging.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Logging_OnClick"));
+        
+        App.store.appModel["logging"].addSubscriber(App.elements.appModelLogging, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.appModelLogging);
+
+        App.elements.appModelHelpers = document.createElement("cc-frameworkelement");
+        App.elements.appModelHelpers.useMultiClouds(false);
+        App.elements.appModelHelpers.setKnownImage("helpers.svg");
+        App.elements.appModelHelpers.setPlacement("50%", "75%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelHelpers.titleStylingClassList.add("DiagramFont");
+        App.elements.appModelHelpers.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Helpers_OnClick"));
+        
+        App.store.appModel["helpers"].addSubscriber(App.elements.appModelHelpers, AppModel_OnDataChange);
+        document.getElementById("AppModel").appendChild(App.elements.appModelHelpers);
+
+        App.store.appModel.emitNotifications(true);
+
+        // Goto demo button
+        App.elements.demoButton = document.getElementById("DemoButton");
         App.elements.demoButton.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DemoButton_OnClick", true));
         
         // demo components
@@ -340,6 +461,26 @@ class AppService {
         App.activePage.content.usingTransition(1, "ease-in", 0);
         App.activePage.content.withFadeIn();
         App.activePage.content.show();
+
+    }
+
+    static SolveAppModel() {
+
+        App.store.appModel["app"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["components"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["handlers"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["store"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["dataBindings"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["observables"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["logging"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["helpers"].observableData.state = FrameworkElementState.Solved;
+        App.elements.appModelHandlers.setPlacement("60%", "58%", "10vmin", "10vmin", "1.5vmin");
+        App.store.appModel["handlers"].observableData.title = "Handlers";
+        App.elements.AppModelAppStructure.setPlacement(null, null, "15vmin", "15vmin", "1.5vmin");
+
+        App.store.appModel.emitNotifications();
 
     }
 
