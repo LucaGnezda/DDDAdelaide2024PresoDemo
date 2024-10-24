@@ -49,10 +49,10 @@ class AppService {
         document.body.addEventListener("keydown", this.keydownCallback);
         document.body.addEventListener("click", this.clickCallback);
 
+        // optional chaining results in 'undefined' not 'null'...
         App.pageNavigationCallback = App.dispatcher?.newEventDispatchCallback("App_PageTransition") ?? null;
         App.pageAnimationCallback = App.dispatcher?.newEventDispatchCallback("App_PageAnimation") ?? null;
         App.pageOverlayCallback = App.dispatcher?.newEventDispatchCallback("App_OverlayAnimation") ?? null;
-
     }
 
     static LoadStore() {
@@ -245,10 +245,26 @@ class AppService {
                 if (source.hasAttribute("data-hasoverlay")) {
                     let overlaySource = document.querySelector(`data[value='${name}_overlay']`);
                     if (overlaySource != null) {
-                        App.pageContent[name].setOverlay(overlaySource.childNodes);
+                        // @ts-ignore cant index by variable name
+                        if (App.pageContent[name]) {
+                            // @ts-ignore cant index by variable name
+                            App.pageContent[name].setOverlay(overlaySource.childNodes);
+                        } else {
+                            Log.error(`Failed to assign page ovelay ${name} to a CCContentPage}`, "PRESENTATION")
+                        }
+                    } else {
+                        Log.error(`Failed to load overlay content for ${name}, which has the [data-hasoverlay] attribute`, "PRESENTATION")
                     }
                 }
-                App.pageContent[name].setContents(source.childNodes);
+                // @ts-ignore cant index by variable name
+                if (App.pageContent[name]) {
+                    // @ts-ignore cant index by variable name
+                    App.pageContent[name].setContents(source.childNodes);
+                } else {
+                    Log.error(`Failed to assign page content ${name} to a CCContentPage}`, "PRESENTATION")
+                }
+            } else {
+                Log.error(`Failed to load content for PageNode: ${name}`, "PRESENTATION")
             }
         }
 
@@ -643,9 +659,8 @@ class AppService {
     }
 
     /**
-     *
      * @param {MouseEvent} clickEvent
-     * @returns
+     * @returns {void}
      */
     static clickCallback(clickEvent) {
         Log.debug(`${this.constructor.name} captured click event`, "APPSERVICE");

@@ -41,7 +41,7 @@ class PresentationFactory {
 
     /**
      * Creates a new {@link PageNode} element and appends it to the given library
-     * @param {string} name 
+     * @param {AppPages} name 
      * @returns {PageNode?}
      */
     newPageNode(name) {
@@ -61,7 +61,7 @@ class PresentationFactory {
     
     /**
      * Creates a new {@link CCPageContent} element and appends it to the given library
-     * @param {String} name 
+     * @param {AppPageContents} name 
      * @returns {HTMLElement?}
      */
     newPageContent(name) {
@@ -89,7 +89,7 @@ class PresentationFactory {
 
     /**
      * Creates a new {@link CCBackground} element and appends it to the given library
-     * @param {string} name 
+     * @param {AppBackgrounds} name 
      * @returns {HTMLElement?}
      */
     newBackground(name) {
