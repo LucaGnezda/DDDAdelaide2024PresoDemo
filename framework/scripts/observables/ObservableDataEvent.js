@@ -14,7 +14,7 @@ class ObservableDataEvent {
     
     /**
      * @memberof ObservableDataEvent
-     * @type {object}
+     * @type {*}
      */
     originatingObject;
 

@@ -45,3 +45,8 @@
  * @template Value
  * @typedef {{[k in Key]: Value}} LimitedDictionary<Key, Value>
  */
+
+/**
+ * A observable callback
+ * @typedef {(event: ObservableDataEvent) => void} ObservableCallback
+ */

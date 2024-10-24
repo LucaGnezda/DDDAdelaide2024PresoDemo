@@ -214,7 +214,7 @@ class ObservableCore {
     /**
      * Adds a subscriber to the observable
      * @param {*} obj 
-     * @param {Function} callbackToAdd TODO: Resolve this type!
+     * @param {ObservableCallback} callbackToAdd
      * @returns {void}
      */
     addSubscriber(obj, callbackToAdd) {
@@ -232,7 +232,7 @@ class ObservableCore {
     /**
      * Adds a subscription to the observable
      * @param {*} obj 
-     * @param {Function} callbackToAdd TODO: Resolve this type!
+     * @param {ObservableCallback} callbackToAdd 
      * @returns {void}
      */
     subscribeTo(obj, callbackToAdd) {

@@ -87,7 +87,7 @@ class Observable {
     /**
      * Adds a subscriber to the observable
      * @param {*} obj
-     * @param {Function} callbackToAdd
+     * @param {ObservableCallback} callbackToAdd
      * @returns {void}
      */
     addSubscriber(obj, callbackToAdd) {
@@ -98,7 +98,7 @@ class Observable {
     /**
      * Adds a subscription to the observable
      * @param {*} obj
-     * @param {Function} callbackToAdd
+     * @param {ObservableCallback} callbackToAdd
      * @returns {void}
      */
     subscribeTo(obj, callbackToAdd) {

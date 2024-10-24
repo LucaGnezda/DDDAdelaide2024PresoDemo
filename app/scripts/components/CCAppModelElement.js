@@ -193,7 +193,7 @@ class CCAppModelElement extends CCObservableBase {
 
     /**
      * Callback for observable data changed events
-     * @param {*} event TODO: resolve this type!
+     * @param {ObservableDataEvent} event 
      */
     dataChangedCallback(event) {
         this.render();

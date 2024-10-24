@@ -131,7 +131,7 @@ class CCDemoObservingElement extends CCBase {
 
     /**
      * Callback for observable data changed events
-     * @param {*} event TODO: resolve this type!
+     * @param {ObservableDataEvent} event 
      */
     dataChangedCallback(event) {
         this.#propertyBag.count = event.newValue;

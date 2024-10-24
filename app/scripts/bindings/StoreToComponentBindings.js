@@ -5,7 +5,7 @@
 
 /**
  * @typedef {Object} AppModelBindingEvent
- * @property {*} observableData
+ * @property {AnyDictionary} observableData
  * @property {*} originatingObject
  */
 
