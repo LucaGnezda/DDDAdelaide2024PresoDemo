@@ -10,12 +10,12 @@ class CCObservableBase extends HTMLElement {
     #state;
     
     /**
-     * @type {Function?}
+     * @type {Function?} TODO: Resolve this type!
      */
     #dataChangedCallbackExtention = null;
 
     /**
-     * @type {Function?}
+     * @type {Function?} TODO: Resolve this type!
      */
     #dataListnerCallbackExtention = null;
 
@@ -25,12 +25,11 @@ class CCObservableBase extends HTMLElement {
     id = "";
 
     /**
-     * @type {ObservableData}
+     * @type {AnyDictionary}
      */
     observableData;
     
     /**
-     * @constructs CCObservableBase
      * @param {ObservableCore} state 
      */
     constructor(state) {
@@ -72,35 +71,47 @@ class CCObservableBase extends HTMLElement {
     }
 
     /**
+     * Adds a subscriber to the observable
      * @param {*} obj 
-     * @param {Function} callbackToAdd 
+     * @param {Function} callbackToAdd TODO: Resolve this type!
+     * @returns {void}
      */
     addSubscriber(obj, callbackToAdd) {
         this.#state.addSubscriber(obj, callbackToAdd);
     }
 
     /**
+     * Adds a subscription to the observable
      * @param {*} obj 
-     * @param {Function} callbackToAdd 
+     * @param {Function} callbackToAdd TODO: Resolve this type!
+     * @returns {void}
      */
     subscribeTo(obj, callbackToAdd) {
         this.#state.subscribeTo(obj, callbackToAdd);
     }
 
     /**
+     * Removes a subscriber from the observable
      * @param {*} obj 
+     * @returns {void}
      */
     removeSubscriber(obj) {
         this.#state.removeSubscriber(obj);
     }
 
     /**
+     * Removes a subscription from the observable
      * @param {*} obj 
+     * @returns {void}
      */
     unsubscribeFrom(obj) {
         this.#state.unsubscribeFrom(obj);
     }
 
+    /**
+     * Removes all subscriptions from the observable
+     * @returns {void}
+     */
     removeAllSubscriptions() {
         this.#state.removeAllSubscriptions();
     }

@@ -37,7 +37,6 @@ class ObservableDataEvent {
     newValue;
     
     /**
-     * @constructs ObservableDataEvent
      * @param {NotificationMode} notificationMode 
      * @param {object} originatingObject 
      * @param {Array<*>?} path 

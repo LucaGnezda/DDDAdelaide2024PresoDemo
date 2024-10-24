@@ -1,8 +1,13 @@
-// @ts-nocheck
-
-"use strict";
-
+/**
+ * @class
+ * @public
+ * @constructor
+ */
 class PresentationActionHandler {
+    /**
+     * Handler metod for incoming actions
+     * @param {Action} action
+     */
     route(action) {
         Log.debug(`${this.constructor.name} processing event ${action.type}`, "HANDLER");
 
@@ -24,29 +29,88 @@ class PresentationActionHandler {
         }
     }
 
+    /**
+     * @typedef {Object} AnimateContentPageEvent
+     * @property {*} originatingObject
+     * @property {KeyboardEvent|MouseEvent} originatingEvent
+     * @property {PageNode} activePage
+     * @property {boolean} inReverse
+     */
+
+    /**
+     * @param {*} originatingObject
+     * @param {KeyboardEvent|MouseEvent} originatingEvent
+     * @param {PageNode} activePage
+     * @param {boolean} inReverse
+     * @returns {AnimateContentPageEvent}
+     */
+    static animateContentPageEvent(originatingObject, originatingEvent, activePage, inReverse) {
+        return {
+            originatingObject,
+            originatingEvent,
+            activePage,
+            inReverse
+        }
+    }
+
+    /**
+     * Animates a page
+     * @param {AnimateContentPageEvent} payload
+     * @returns {void}
+     */
     animatePage(payload) {
         if (payload.inReverse) {
-            payload.activePage.content.stepAnimationBack();
+            payload.activePage.content?.stepAnimationBack();
         } else {
-            payload.activePage.content.stepAnimationForward();
+            payload.activePage.content?.stepAnimationForward();
         }
     }
 
-    animateOverlay(payload) {
-        if (payload.inReverse) {
-            payload.activePage.content.stepAnimationBack("pageOverlay");
-        } else {
-            payload.activePage.content.stepAnimationForward("pageOverlay");
+    /**
+     * @typedef {Object} TransitionContentPageEvent
+     * @property {*} originatingObject
+     * @property {KeyboardEvent|MouseEvent} originatingEvent
+     * @property {PageNode} transitionFromPage
+     * @property {PageNode} transitionToPage
+     * @property {PageTransition} usingTransition
+     * @property {number} withDuration
+     * @property {boolean} inReverse
+     */
+
+    /**
+     * @param {*} originatingObject
+     * @param {KeyboardEvent|MouseEvent} originatingEvent
+     * @param {PageNode} transitionFromPage
+     * @param {PageNode} transitionToPage
+     * @param {PageTransition} usingTransition
+     * @param {number} withDuration
+     * @param {boolean} inReverse
+     * @returns {TransitionContentPageEvent}
+     */
+    static transitionContentPageEvent(originatingObject, originatingEvent, transitionFromPage, transitionToPage, usingTransition, withDuration, inReverse) {
+        return {
+            originatingObject,
+            originatingEvent,
+            transitionFromPage,
+            transitionToPage,
+            usingTransition,
+            withDuration,
+            inReverse,
         }
     }
 
+    /**
+     * Animates a page overlay
+     * @param {TransitionContentPageEvent} payload
+     * @returns {void}
+     */
     transitionPage(payload) {
         if (payload.inReverse) {
-            payload.transitionToPage.content.resetAnimationFinal();
-            payload.transitionToPage.content.resetAnimationFinal("pageOverlay");
+            payload.transitionToPage.content?.resetAnimationFinal();
+            payload.transitionToPage.content?.resetAnimationFinal("pageOverlay");
         } else {
-            payload.transitionToPage.content.resetAnimationInitial();
-            payload.transitionToPage.content.resetAnimationInitial("pageOverlay");
+            payload.transitionToPage.content?.resetAnimationInitial();
+            payload.transitionToPage.content?.resetAnimationInitial("pageOverlay");
         }
 
         AnimatorService.pageOutro(payload.transitionFromPage.content, payload.usingTransition, payload.withDuration);
@@ -56,11 +120,70 @@ class PresentationActionHandler {
         App.activePage = payload.transitionToPage;
     }
 
+    /**
+     * @typedef {Object} AnimateContentPageOverlayEvent
+     * @property {*} originatingObject
+     * @property {KeyboardEvent|MouseEvent} originatingEvent
+     * @property {PageNode} activePage
+     * @property {boolean} inReverse
+     * @property {OverlayAction} usingAction
+     * @property {number} withDuration
+     */
+
+    /**
+     * Action that can be applied to a page overlay
+     * @typedef {'open'|'close'|'animate'} OverlayAction
+     */
+
+    /**
+     * @param {*} originatingObject
+     * @param {KeyboardEvent|MouseEvent} originatingEvent
+     * @param {PageNode} activePage
+     * @param {boolean} inReverse
+     * @param {OverlayAction} usingAction
+     * @param {number} withDuration
+     * @returns {AnimateContentPageOverlayEvent}
+     */
+    static animateContentPageOverlayEvent(originatingObject, originatingEvent, activePage, inReverse, usingAction, withDuration) {
+        return {
+            originatingObject,
+            originatingEvent,
+            activePage,
+            inReverse,
+            usingAction,
+            withDuration
+        }
+    }
+
+    /**
+     * Animates a page overlay
+     * @param {AnimateContentPageOverlayEvent} payload
+     * @returns {void}
+     */
     transitionPageOverlay(payload) {
         if (payload.usingAction == 'animate') {
-            this.animateOverlay(payload)
+            if (payload.inReverse) {
+                payload.activePage.content?.stepAnimationBack("pageOverlay");
+            } else {
+                payload.activePage.content?.stepAnimationForward("pageOverlay");
+            }
         } else {
-            AnimatorService.transitionPageOverlay(payload.usingAction, payload.page.content, payload.withDuration);
+            AnimatorService.transitionPageOverlay(payload.usingAction, payload.activePage.content, payload.withDuration);
         }
+    }
+
+    /**
+     * Zooms into a given page
+     * @param {string} section
+     * @returns {void}
+     */
+    ZoomInToSection(section) {
+        App.pages.components1.content?.resetAnimationInitial();
+
+        AnimatorService.pageOutro(App.activePage?.content ?? null, PageTransition.ZoomIn, 1.75);
+        AnimatorService.transitionBackground(App.activePage?.background ?? null, App.pages[section].background, 0, 0, null, PageTransition.ZoomIn, 1.75);
+        AnimatorService.pageIntro(App.pages[section].content, PageTransition.ZoomIn, 1.75);
+
+        App.activePage = App.pages[section];
     }
 }

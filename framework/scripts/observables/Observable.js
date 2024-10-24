@@ -8,24 +8,23 @@
 */
 class Observable {
     /**
-     * @type {ObservableCore?}
+     * @type {ObservableCore}
      */
-    #state = null;
+    #state;
 
     /**
      * @memberof Observable
      * @type {string}
      */
-    id = "";
+    id;
 
     /**
      * @memberof Observable
-     * @type {ObservableData?}
+     * @type {AnyDictionary}
      */
-    observableData = null;
+    observableData;
 
     /**
-     * @constructs Observable
      * @param {string} id
      * @param {NotificationMode} notificationMode
      */
@@ -86,8 +85,10 @@ class Observable {
     }
 
     /**
+     * Adds a subscriber to the observable
      * @param {*} obj
      * @param {Function} callbackToAdd
+     * @returns {void}
      */
     addSubscriber(obj, callbackToAdd) {
         if (!this.#state) return;
@@ -95,8 +96,10 @@ class Observable {
     }
 
     /**
+     * Adds a subscription to the observable
      * @param {*} obj
      * @param {Function} callbackToAdd
+     * @returns {void}
      */
     subscribeTo(obj, callbackToAdd) {
         if (!this.#state) return;
@@ -104,7 +107,9 @@ class Observable {
     }
 
     /**
+     * Removes a subscriber from the observable
      * @param {*} obj
+     * @returns {void}
      */
     removeSubscriber(obj) {
         if (!this.#state) return;
@@ -112,20 +117,28 @@ class Observable {
     }
 
     /**
+     * Removes a subscription from the observable
      * @param {*} obj
+     * @returns {void}
      */
     unsubscribeFrom(obj) {
         if (!this.#state) return;
         this.#state.unsubscribeFrom(obj);
     }
 
+    /**
+     * Removes all subscriptions from the observable
+     * @returns {void}
+     */
     removeAllSubscriptions() {
         if (!this.#state) return;
         this.#state.removeAllSubscriptions();
     }
 
     /**
+     * Emits notifications for the observable
      * @param {boolean} force
+     * @returns {void}
      */
     emitNotifications(force) {
         if (!this.#state) return;

@@ -1,20 +1,44 @@
-// @ts-nocheck
-
-"use strict"
-
+/**
+ * @class
+ * @public
+ * @constructor
+ */
 class CCDemoObservableElement extends CCObservableBase {
+    /**
+     * Definitions for internal elements
+     * @typedef {('root'|'updateButton'|'resetButton'|'count')} DemoObservableElementElement
+     */
+
+    /**
+     * The properties of this component
+     * @typedef {Object} DemoObservableElementPropertybag
+     * @property {Function?} updateCallback
+     * @property {Function?} resetCallback
+     */
+         
+    /**
+     * The elements that make up this component
+     * @type {LimitedDictionary<DemoObservableElementElement, HTMLElement?>}
+     */
     #elements = {
         root: null,
         updateButton: null,
         resetButton: null,
         count: null,
     }
-    
+     
+    /**
+     * @type {DemoObservableElementPropertybag}
+     */
     #propertybag = {
         updateCallback: null,
         resetCallback: null,
     }
     
+    /**
+     * The html template for the component
+     * @property {string} #htmlTemplate  
+     */
     static #htmlTemplate = `
         <div class="CCDemoObservableElement" data-element-root> 
             <div data-element-button-update id="DemoUpdateButton" class="PresentationButton Filled Show">Update</div>
@@ -23,6 +47,9 @@ class CCDemoObservableElement extends CCObservableBase {
         </div>
     `
 
+    /**
+     * @constructs CCDemoObservableElement
+     */
     constructor() {
         // construct the object, need to call `super` before you can use `this` 
         let state = new ObservableCore();
@@ -40,21 +67,34 @@ class CCDemoObservableElement extends CCObservableBase {
         this.observableData.clickCount = 0;
     }
     
-    /**
+    /*
      * Getters and Setters
      */
+    
+    /**
+     * @param {Function} fn 
+     */
     set resetCallback(fn) {
-        this.#elements.resetButton.addEventListener("click", this.resetButtonClick.bind(this), true);
+        this.#elements.resetButton?.addEventListener("click", this.resetButtonClick.bind(this), true);
         this.#propertybag.resetCallback = fn;
     }
     
+    /**
+     * @param {Function} fn 
+     */
     set updateCallback(fn) {
-        this.#elements.updateButton.addEventListener("click", this.updateButtonClick.bind(this), true);
+        this.#elements.updateButton?.addEventListener("click", this.updateButtonClick.bind(this), true);
         this.#propertybag.updateCallback = fn;
     }
     
-    /**
+    /*
      * Private Methods
+     */
+
+    /**
+     * Checks whether the UI is initialised, if not
+     * the named elements are pulled from the htmlTemplate and
+     * inserted into the page elements.
      */
     #confirmUXIsInitialised() {
 
@@ -72,18 +112,32 @@ class CCDemoObservableElement extends CCObservableBase {
         }
     }
     
+    /**
+     * Initialises the attributes for the pgae
+     */
     #initialiseAttributes() { }
     
-    /**
+    /*
      * Public Methods
      */
+
+    /**
+     * Dynamically renders the component content
+     * @returns {void}
+     */
     render() {
-        this.#elements.count.innerText = this.observableData.clickCount;
+        if (this.#elements.count) {
+            this.#elements.count.innerText = this.observableData.clickCount;
+        }
     }
     
-    /**
+    /*
     * Callbacks
     */
+
+    /**
+     * Callback called when the component is connected to the DOM
+     */
     connectedCallback() {
         this.#confirmUXIsInitialised();
         this.#initialiseAttributes();
@@ -94,22 +148,39 @@ class CCDemoObservableElement extends CCObservableBase {
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
     }
     
+    /**
+     * Callback called when the component is disconnected from the DOM
+     */
     disconnectedCallback() {
         Log.debug(`${this.constructor.name} disconnected from DOM`, "COMPONENT");
     }
 
+    /**
+     * Callback for observable data changed events
+     * @param {*} event TODO: resolve this type!
+     */
     dataChangedCallback(event) {
         this.render();
         Log.debug(`Data change callback on component ${event.originatingObject.constructor.name} with id:${event.originatingObject.id} updated property ${event.path} from ${event.oldValue} to ${event.newValue}`, "COMPONENT");
     }
     
+    /**
+     * Callback for update button click event
+     */
     updateButtonClick() {
         this.observableData.clickCount += 1;
-        this.#propertybag.updateCallback();
+        if (this.#propertybag.updateCallback) {
+            this.#propertybag.updateCallback();
+        }
     }
     
+    /**
+     * Callback for reset button click event
+     */
     resetButtonClick() {
         this.observableData.clickCount = 0;
-        this.#propertybag.resetCallback();
+        if (this.#propertybag.resetCallback) {
+            this.#propertybag.resetCallback();           
+        } 
     }
 }

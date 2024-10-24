@@ -2,6 +2,10 @@
  * ObservableCore is a object that is intended to be used within another
  * object, such as a component or Observable. It's purpose is to provide
  * and object that triggers change callbacks through use of a proxy.
+ * 
+ * NOTE: the typings in this file are ... Proxies and getters and setters
+ * on what is essentially an any type (an observable) are prrety weak.
+ * 
  * @class
  * @public
  * @constructor
@@ -36,26 +40,25 @@ class ObservableCore {
      * @type {boolean}
      */
     #pendingNotification = false;
-
+    
     /**
-     * @type {ObservableData}
+     * @type {AnyDictionary}
      */
     data;
 
     /**
-     * @type {ObservableData}
+     * @type {AnyDictionary}
      */
     dataProxy;
 
     /**
-     * @constructs ObservableCore
      * @param {NotificationMode?} notificationMode 
      * @param {NotificationStatus?} notificationStatus 
      */
     constructor(notificationMode = null, notificationStatus = null) {
         let self = this;
         this.#originatingObject = this;
-        this.data = new ObservableData();
+        this.data = {};
 
         if (notificationMode) {
             this.#notificationMode = notificationMode;
@@ -211,7 +214,7 @@ class ObservableCore {
     /**
      * Adds a subscriber to the observable
      * @param {*} obj 
-     * @param {Function} callbackToAdd 
+     * @param {Function} callbackToAdd TODO: Resolve this type!
      * @returns {void}
      */
     addSubscriber(obj, callbackToAdd) {
@@ -229,7 +232,7 @@ class ObservableCore {
     /**
      * Adds a subscription to the observable
      * @param {*} obj 
-     * @param {Function} callbackToAdd 
+     * @param {Function} callbackToAdd TODO: Resolve this type!
      * @returns {void}
      */
     subscribeTo(obj, callbackToAdd) {
@@ -274,6 +277,7 @@ class ObservableCore {
 
     /**
      * Removes all subscriptions from the observable
+     * @returns {void}
      */
     removeAllSubscriptions() {
         this.#subscribers.map(obj => this.removeSubscriber(obj.subscriber));
@@ -288,6 +292,7 @@ class ObservableCore {
     }
 
     /**
+     * Emits notifications for the observable
      * @param {boolean} isforced 
      */
     emitNotifications(isforced) {
@@ -297,6 +302,7 @@ class ObservableCore {
 
             Log.debug(`Emitting notifications in ${this.constructor.name} for ${this.originatingObject.constructor.name}`, "STORE");
 
+            // TODO: work out if this is reasonable? Should there be nulls here?
             let event = new ObservableDataEvent(
                 NotificationMode.ObjectNotifyOnEmit,
                 this.originatingObject,

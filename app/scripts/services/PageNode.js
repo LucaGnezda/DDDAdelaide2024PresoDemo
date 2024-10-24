@@ -1,35 +1,91 @@
-// @ts-nocheck
-
-"use strict";
-
+/**
+ * @class
+ * @public
+ * @constructor
+ */
 class PageNode {
-    /**
+    /*
      * Member attributes
      */
-    #nodeId = null;
+    /**
+     * @type {string}
+     */
+    #nodeId;
+    
+    /**
+     * @type {CCBackground?}
+     */
     #background = null;
-    #backgroundX = null;
-    #backgroundY = null;
-    #backgroundTransformer = null;
-    #backgroundTransitionForward = null;
-    #backgroundTransitionBack = null;
-    #pageContent = null;
-    #nextNode = null;
-    #previousNode = null;
-    #transitionForward = null;
-    #transitionForwardDuration = null;
-    #transitionBack = null;
-    #transitionBackDuration = null;
-
+    
+    /**
+     * @type {number}
+     */
+    #backgroundX = 0;
 
     /**
-     * Constructor
+     * @type {number}
+     */
+    #backgroundY = 0;
+
+    /**
+     * @type {string?}
+     */
+    #backgroundTransformer = null;
+    
+    /**
+     * @type {PageTransition}
+     */
+    #backgroundTransitionForward = PageTransition.None;
+    
+    /**
+     * @type {PageTransition}
+     */
+    #backgroundTransitionBack = PageTransition.None;
+    
+    /**
+     * @type {CCPageContent?}
+     */
+    #pageContent = null;
+    
+    /**
+     * @type {PageNode?}
+     */
+    #nextNode = null;
+    
+    /**
+     * @type {PageNode?}
+     */
+    #previousNode = null;
+
+    /**
+     * @type {PageTransition}
+     */
+    #transitionForward = PageTransition.None;
+    
+    /**
+     * @type {number}
+     */
+    #transitionForwardDuration = 0;
+    
+    /**
+     * @type {PageTransition}
+     */
+    #transitionBack = PageTransition.None;
+    
+    /**
+     * @type {number}
+     */
+    #transitionBackDuration = 0;
+
+    /**
+     * @constructs PageNode
+     * @param {string} nodeId 
      */
     constructor(nodeId) {
         this.#nodeId = nodeId;
     }
 
-    /**
+    /*
      * Getters & Setters
      */
     get nodeId() {
@@ -88,60 +144,78 @@ class PageNode {
         return this.#backgroundTransformer;
     }
     
-    /**
+    /*
      * Public Methods
      */
+    
+    /**
+     * Sets the page content for the node
+     * @param {CCPageContent} pageContent 
+     * @returns {void}
+     */
     setPageContent(pageContent) {
-        if (pageContent.constructor.name != "CCPageContent") {
-            Log.error('Page is not of type CCPage', "PAGENODE");
-            return;
-        }
-        
         this.#pageContent = pageContent;
     }
 
+    /**
+     * Sets the background for the node
+     * @param {CCBackground} background 
+     * @param {number} pageX 
+     * @param {number} pageY 
+     * @param {string?} transformerClass 
+     * @returns {void}
+     */
     setBackground(background, pageX = 0, pageY = 0, transformerClass) {
-        if (background.constructor.name != "CCBackground") {
-            Log.error('Page is not of type CCBackground', "PAGENODE");
-            return;
-        }
-
         this.#background = background;
         this.#backgroundX = pageX;
         this.#backgroundY = pageY;
         this.#backgroundTransformer = transformerClass;
     }
 
+    /**
+     * Sets the page content and background for the node
+     * @param {CCPageContent} pageContent 
+     * @param {CCBackground} background 
+     * @param {number} pageX 
+     * @param {number} pageY 
+     * @param {string?} transformerClass 
+     * @returns {void}
+     */
     setPageContentAndBackground(pageContent, background, pageX, pageY, transformerClass) {
         this.setPageContent(pageContent);
         this.setBackground(background, pageX, pageY, transformerClass);
     }
 
+    /**
+     * Sets the next page for the node along with transtition classes/info
+     * @param {PageNode} node 
+     * @param {PageTransition?} transitionForward 
+     * @param {PageTransition?} transitionBack 
+     * @param {number} duration 
+     * @returns 
+     */
     setNextPage(node, transitionForward, transitionBack, duration) {
-        if (node.constructor.name != "PageNode") {
-            Log.error('Page is not of type PageNode', "PAGENODE");
-            return;
-        }
-
         if (transitionForward != null) {
             this.#nextNode = node;
             this.#transitionForward = transitionForward;
             this.#transitionForwardDuration = duration;
         }
 
-        if (transitionBack != null) {
-            node.setPreviousPage(this, transitionBack, duration)
-        }
+        node.setPreviousPage(this, transitionBack, duration)
     }
 
+    /**
+     * Sets the previous page for the node along with transtition classes/info
+     * @param {PageNode} node 
+     * @param {PageTransition?} transitionBack 
+     * @param {number} duration 
+     * @returns 
+     */
     setPreviousPage(node, transitionBack, duration) {
-        if (node.constructor.name != "PageNode") {
-            Log.error('Page is not of type PageNode', "PAGENODE");
-            return;
+        if (transitionBack != null) {
+            this.#previousNode = node;
+            this.#transitionBack = transitionBack;
+            this.#transitionBackDuration = duration;
         }
-
-        this.#previousNode = node;
-        this.#transitionBack = transitionBack;
-        this.#transitionBackDuration = duration;
     }
 }

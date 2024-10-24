@@ -1,7 +1,6 @@
 /**
  * @class
  * @public
- * @static
  */
 class Log {
    static #logLevel = LogLevel.Default;

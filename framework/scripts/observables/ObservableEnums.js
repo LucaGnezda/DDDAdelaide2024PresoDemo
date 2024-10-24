@@ -3,6 +3,7 @@
  */
 
 /**
+ * Options for an Observables notification mode
  * @enum {string}
  * @readonly
  * @property {string} Default
@@ -16,6 +17,7 @@ const NotificationMode = {
 };
 
 /**
+ * Options for an Observables notification status
  * @enum {string}
  * @readonly
  * @property {string} Default

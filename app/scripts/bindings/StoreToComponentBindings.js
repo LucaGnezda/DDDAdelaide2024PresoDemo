@@ -25,7 +25,7 @@ let AppModel_OnDataChange = function(event) {
 
 /**
  * @typedef {Object} DemoBindingEvent
- * @property {*} newValue
+ * @property {number} newValue
  * @property {*} originatingObject
  */
 

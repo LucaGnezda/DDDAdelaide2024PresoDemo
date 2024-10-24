@@ -13,14 +13,13 @@ class Action {
     
     /**
      * @memberof Action
-     * @type {object}
+     * @type {*}
      */
     payload;
 
     /**
-     * @constructs Action
      * @param {string} type 
-     * @param {object} payload 
+     * @param {*} payload 
      */
     constructor(type, payload) {
         this.type = type;

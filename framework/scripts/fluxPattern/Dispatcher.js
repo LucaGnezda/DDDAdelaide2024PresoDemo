@@ -1,14 +1,10 @@
-/** 
+/**
  * Dispatcher dispatches an action to all registered handlers.
  * @class
  * @public
  * @constructor
 */
 class Dispatcher {
-    /**
-     * @typedef {{handler: {[k:string]:Function}, routerName: string}} ActionHandler
-     */
-
     /**
      * @type {Array<ActionHandler>}
      */
@@ -23,7 +19,7 @@ class Dispatcher {
 
     /**
      * Dispatches an action to all registered handlers.
-     * @param {Action} action 
+     * @param {Action} action
      * @returns {void}
      */
     dispatch(action) {
@@ -31,7 +27,7 @@ class Dispatcher {
             Log.warn("Parameter provided is not an Action. Ignoring request.", "DISPATCHER");
             return;
         }
-        
+
         Log.debug(`Dispatching action ${action.type} with payload ${action.payload}`, "DISPATCHER");
         this.#registeredHandlers.map(e => e.handler[e.routerName](action));
     }
@@ -39,8 +35,8 @@ class Dispatcher {
     /**
      * Adds a handlers to the list of registered handlers.
      * Note: Only one of each type of handler can be added, as determined by its class name.
-     * @param {{[k:string]:Function}} actionHandler 
-     * @param {string} actionRouterName 
+     * @param {Object} actionHandler
+     * @param {string} actionRouterName
      * @returns {void}
      */
     addDispatchHandler(actionHandler, actionRouterName) {
@@ -54,33 +50,37 @@ class Dispatcher {
             return;
         }
 
-        if (actionHandler[actionRouterName] == null) {
+        // the way we use the action handler is a bit funky...
+        let actionHandlerDict = /** @type {FunctionDictionary} */ (actionHandler);
+
+        if (actionHandlerDict[actionRouterName] == null) {
             Log.error("Routing method does not exist. Unable to register", "DISPATCHER");
             return;
         }
 
-        if (typeof actionHandler[actionRouterName] != "function") {
+        if (typeof actionHandlerDict[actionRouterName] != "function") {
             Log.error("Routing target is not a method. Unable to register", "DISPATCHER");
             return;
         }
-        
+
         if (this.#registeredHandlers.findIndex(e => e.handler.constructor.name == actionHandler.constructor.name) == -1) {
-            this.#registeredHandlers.push({handler:actionHandler, routerName: actionRouterName});
+            this.#registeredHandlers.push({handler: actionHandlerDict, routerName: actionRouterName});
         }
     }
 
 
     /**
-     * @param {string} actionType 
-     * @param {Array<*>} bundleArgumentsAs 
+     * TODO: there is not enough usage context to add docs to this yet.
+     * @param {string} actionType
+     * @param {Array<*>} bundleArgumentsAs
      * @returns {Function} a dispatcher callback that passes a payload based on callback arguments.
      */
     newArgsDispatchCallback(actionType, bundleArgumentsAs) {
         let self = this; // Closures babyyy!
-        
+
         return function() {
             Log.debug(`Dispatch callback for Event ${actionType}`, "EVENT CALLBACK");
-    
+
             /**
              * This probably needs to be more specific but it's not being used anywhere
              * yet so it's hard to say.
@@ -92,23 +92,24 @@ class Dispatcher {
             for (let i = 0; i < bundleArgumentsAs.length; i++) {
                 payload[bundleArgumentsAs[i]] = arguments[i];
             }
-            
+
             self.dispatch(new Action(actionType, payload));
         }
     }
 
     /**
-     * @param {string} actionType 
-     * @param {boolean} stopPropagationIfDispatched a boolean that will stop propogfation if dispatched 
-     * @param {(event:string)=>boolean} dispatchIf a function that is expected to consume an event and returns true or false to determine if a dispatch should occur
-     * @returns {Function} a dispatcher callback that passes an event as its payload.
+     * Creates a new event callback that will dispatch a defined actionType
+     * @param {string} actionType
+     * @param {boolean} stopPropagationIfDispatched a boolean that will stop propogfation if dispatched
+     * @param {((event: string) => boolean)?} dispatchIf a function that is expected to consume an event and returns true or false to determine if a dispatch should occur
+     * @returns {EventListener} a dispatcher callback that passes an event as its payload.
      */
-    newEventDispatchCallback(actionType, stopPropagationIfDispatched, dispatchIf) {
+    newEventDispatchCallback(actionType, stopPropagationIfDispatched = false, dispatchIf = null) {
         let self = this; // Closures babyyy!
-        
+
         return function() {
             Log.debug(`Dispatch callback for Event ${actionType}`, "EVENT CALLBACK");
-        
+
             let event = arguments[0];
 
             // Check the dispatch condition if supplied
@@ -127,7 +128,7 @@ class Dispatcher {
     /**
      * Removes a handlers to the list of registered handlers.
      * Note: Removes by matching the class name of the supplied object or class defintiion
-     * @param {ActionHandler} obj 
+     * @param {ActionHandler} obj
      */
     removeDispatchHandler(obj) {
         if (this.#registeredHandlers.findIndex(e => (e.handler.constructor.name == obj.constructor.name || e.handler.constructor.name == obj.routerName)) > -1) {

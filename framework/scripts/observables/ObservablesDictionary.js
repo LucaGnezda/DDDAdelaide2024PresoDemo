@@ -10,7 +10,6 @@ class ObservablesDictionary {
     #defaultNotificationMode;
     
     /**
-     * 
      * @param {NotificationMode} defaultNotificationMode 
      */
     constructor(defaultNotificationMode) {
