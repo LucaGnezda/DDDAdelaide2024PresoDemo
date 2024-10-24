@@ -42,9 +42,6 @@ class CCDemoObservingElement extends CCBase {
         <div class="CCDemoObservingElement" data-element-root> </div>
     `
 
-    /**
-     * @constructs CCDemoObservingElement
-     */
     constructor() {
         super();
 

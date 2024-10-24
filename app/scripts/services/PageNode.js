@@ -78,7 +78,6 @@ class PageNode {
     #transitionBackDuration = 0;
 
     /**
-     * @constructs PageNode
      * @param {string} nodeId 
      */
     constructor(nodeId) {

@@ -47,9 +47,6 @@ class CCDemoObservableElement extends CCObservableBase {
         </div>
     `
 
-    /**
-     * @constructs CCDemoObservableElement
-     */
     constructor() {
         // construct the object, need to call `super` before you can use `this` 
         let state = new ObservableCore();

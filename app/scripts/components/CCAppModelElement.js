@@ -37,9 +37,6 @@ class CCAppModelElement extends CCObservableBase {
         </div>
     `
 
-    /**
-     * @constructs CCAppModelElement
-     */
     constructor() {
         // construct the core object. Note, order of operation matters here as you can't call 'this' before 'super'
         let state = new ObservableCore();

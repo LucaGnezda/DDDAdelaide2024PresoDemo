@@ -41,9 +41,6 @@ class CCBackground extends CCBase {
         </div>
     `
 
-    /**
-     * @constructs CCBackground
-     */
     constructor() {
         super();
 

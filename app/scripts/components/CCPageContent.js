@@ -74,9 +74,6 @@ class CCPageContent extends CCBase {
         </div>
     `
 
-    /**
-     * @constructs CCPageContent
-     */
     constructor() {
         super();
         
