@@ -7,31 +7,26 @@
 */
 class ObservableDataEvent {
     /**
-     * @memberof ObservableDataEvent
      * @type {NotificationMode}
      */
     notificationMode;
     
     /**
-     * @memberof ObservableDataEvent
      * @type {*}
      */
     originatingObject;
 
     /**
-     * @memberof ObservableDataEvent
      * @type {Array<*>?}
      */
     path;
 
     /**
-     * @memberof ObservableDataEvent
      * @type {*}
      */
     oldValue;
 
     /**
-     * @memberof ObservableDataEvent
      * @type {*}
      */
     newValue;
