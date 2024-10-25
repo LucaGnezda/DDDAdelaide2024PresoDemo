@@ -61,12 +61,12 @@
 .TestFlexLarge {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    height: 60%;
+    justify-content: end;
+    height: 80%;
 }
 
-.TestButton {
-    align-self: center;
+.PresentationButton {
+    align-self: self-end;
     display: flex;
     flex-direction: row;
     width: 30vmin;
@@ -85,25 +85,58 @@
     user-select: none; /* Standard syntax */
 }
 
-.TestButton.Filled {
+.PresentationButton.Filled {
     background: #42a768; 
     box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.5);
 }
 
-.TestButton.Filled:hover:not(.Disabled) {
+.PresentationButton.Filled:hover:not(.Disabled) {
     background: #368d57; 
 }
 
-.TestButton.Filled:active:not(.Disabled) {
+.PresentationButton.Filled:active:not(.Disabled) {
     background: #2c7749; 
     box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.5);
 }
 
-.TestButton.Show {
+.PresentationButton.Show {
     opacity: 1;
 }
 
-.TestButton.Disabled {
+.PresentationButton.Disabled {
     opacity: 0.5;
     box-shadow: none;
+}
+
+.DiagramContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.Diagram {
+    width: 80vmin;
+    height: 80vmin;
+    position: relative;
+}
+
+.DiagramFont {
+    font-family: "Alpha Echo";
+    white-space: nowrap;
+    text-align: center;
+}
+
+.DemoPage {
+    display: flex;
+    flex-direction: column;
+    gap: 10vmin;
+    justify-content: center;
+}
+
+.DemoPage .Section {
+    display: flex;
+    flex-direction: row;
+    gap: 10vmin;    
 }

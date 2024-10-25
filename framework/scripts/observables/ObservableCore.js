@@ -91,12 +91,12 @@ class ObservableCore {
                             event.oldValue = oldValue;
                             event.newValue = newValue;
 
-                            Log.debug(`  Propagating change event to subscribers`, "PROXY");
+                            Log.debug(`Propagating change event to subscribers`, "PROXY");
                             self.subscribers.map(obj => obj.callback(event));
                             break;
 
                         case NotificationMode.ObjectNotifyOnEmit:
-                            Log.debug(`  Backlog change event for later propagation.`, "PROXY");
+                            Log.debug(`Backlog change event for later propagation.`, "PROXY");
                             self.notificationRequired();
                             break;
 

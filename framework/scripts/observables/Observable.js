@@ -67,7 +67,7 @@ class Observable {
         this.#state.removeAllSubscriptions();
     }
 
-    emitNotifications() {
-        this.#state.emitNotifications();
+    emitNotifications(force) {
+        this.#state.emitNotifications(force);
     }
 }
