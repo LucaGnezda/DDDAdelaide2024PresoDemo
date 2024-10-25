@@ -6,6 +6,7 @@ class CCFrameworkElement extends CCObservableBase {
         unknownContainer: null,
         solvedContainer: null,
         solvedImage: null,
+        solvedImageStyling: null,
         title: null,
         titleStyling: null,
     }
@@ -24,7 +25,9 @@ class CCFrameworkElement extends CCObservableBase {
     static #htmlTemplate = `
         <div class="CCFrameworkElement" data-element-root>
             <div class="CCFrameworkElementSolved Hide" data-element-solved-container>
-                <img class="CCFrameworkElementSolvedImage" data-element-solved-image></img>
+                <div data-element-solved-imagestyle>
+                    <img class="CCFrameworkElementSolvedImage" data-element-solved-image></img>
+                </div>
             </div>
             <div class="CCFrameworkElementUnknown" data-element-unkonwn-container></div>
             <div class="CCFrameworkElementTitle" data-element-Title>
@@ -62,6 +65,10 @@ class CCFrameworkElement extends CCObservableBase {
         return this.#elements.titleStyling.classList;
     }
 
+    get solvedImageStylingClassList() {
+        return this.#elements.solvedImageStyling.classList;
+    }
+
     
     /**
      * Private Methods
@@ -76,6 +83,7 @@ class CCFrameworkElement extends CCObservableBase {
             this.#elements.unknownContainer = fragment.querySelector('[data-element-unkonwn-container]');
             this.#elements.solvedContainer = fragment.querySelector('[data-element-solved-container]');
             this.#elements.solvedImage = fragment.querySelector('[data-element-solved-image]');
+            this.#elements.solvedImageStyling = fragment.querySelector('[data-element-solved-imagestyle]');
             this.#elements.title = fragment.querySelector('[data-element-title]');
             this.#elements.titleStyling = fragment.querySelector('[data-element-titlestyling]');
 

@@ -332,7 +332,7 @@ class AppService {
         App.elements.AppModelAppStructure = document.createElement("cc-frameworkelement");
         App.elements.AppModelAppStructure.useMultiClouds(true);
         App.elements.AppModelAppStructure.setKnownImage("appStructure.svg");
-        App.elements.AppModelAppStructure.setPlacement("50%", "40%", "25vmin", "25vmin", "1.5vmin");
+        App.elements.AppModelAppStructure.setPlacement("50%", "45%", "40vmin", "40vmin", "1.5vmin");
         App.elements.AppModelAppStructure.titleStylingClassList.add("DiagramFont");
         App.elements.AppModelAppStructure.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_AppStructure_OnClick"));
         
@@ -342,7 +342,7 @@ class AppService {
         App.elements.appModelComponents = document.createElement("cc-frameworkelement");
         App.elements.appModelComponents.useMultiClouds(true);
         App.elements.appModelComponents.setKnownImage("components.svg");
-        App.elements.appModelComponents.setPlacement("50%", "20%", "10vmin", "10vmin", "1.5vmin");
+        App.elements.appModelComponents.setPlacement("50%", "8%", "10vmin", "10vmin", "1.5vmin");
         App.elements.appModelComponents.titleStylingClassList.add("DiagramFont");
         App.elements.appModelComponents.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Components_OnClick"));
         
@@ -352,7 +352,7 @@ class AppService {
         App.elements.appModelEventBindings = document.createElement("cc-frameworkelement");
         App.elements.appModelEventBindings.useMultiClouds(false);
         App.elements.appModelEventBindings.setKnownImage("bindings.svg");
-        App.elements.appModelEventBindings.setPlacement("63%", "26%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelEventBindings.setPlacement("80%", "25%", "6vmin", "6vmin", "1.5vmin");
         App.elements.appModelEventBindings.titleStylingClassList.add("DiagramFont");
         App.elements.appModelEventBindings.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_EventBindings_OnClick"));
         
@@ -362,7 +362,7 @@ class AppService {
         App.elements.appModelActionDispatch = document.createElement("cc-frameworkelement");
         App.elements.appModelActionDispatch.useMultiClouds(true);
         App.elements.appModelActionDispatch.setKnownImage("actionDispatchers.svg");
-        App.elements.appModelActionDispatch.setPlacement("70%", "42%", "10vmin", "10vmin", "1.5vmin");
+        App.elements.appModelActionDispatch.setPlacement("90%", "50%", "10vmin", "10vmin", "1.5vmin");
         App.elements.appModelActionDispatch.titleStylingClassList.add("DiagramFont");
         App.elements.appModelActionDispatch.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_ActionDispatchers_OnClick"));
         
@@ -372,7 +372,7 @@ class AppService {
         App.elements.appModelHandlers = document.createElement("cc-frameworkelement");
         App.elements.appModelHandlers.useMultiClouds(true);
         App.elements.appModelHandlers.setKnownImage("handlers.svg");
-        App.elements.appModelHandlers.setPlacement("67%", "52%", "10vmin", "10vmin", "1.5vmin");
+        App.elements.appModelHandlers.setPlacement("85%", "60%", "10vmin", "10vmin", "1.5vmin");
         //App.elements.appModelHandlers.setPlacement("62%", "58%", "10vmin", "10vmin", "1.5vmin");
         App.elements.appModelHandlers.titleStylingClassList.add("DiagramFont");
         App.elements.appModelHandlers.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Handlers_OnClick"));
@@ -383,7 +383,7 @@ class AppService {
         App.elements.appModelStore = document.createElement("cc-frameworkelement");
         App.elements.appModelStore.useMultiClouds(true);
         App.elements.appModelStore.setKnownImage("store.svg");
-        App.elements.appModelStore.setPlacement("33%", "52%", "10vmin", "10vmin", "1.5vmin");
+        App.elements.appModelStore.setPlacement("15%", "60%", "10vmin", "10vmin", "1.5vmin");
         App.elements.appModelStore.titleStylingClassList.add("DiagramFont");
         App.elements.appModelStore.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Store_OnClick"));
         
@@ -393,7 +393,7 @@ class AppService {
         App.elements.appModelDataBindings = document.createElement("cc-frameworkelement");
         App.elements.appModelDataBindings.useMultiClouds(false);
         App.elements.appModelDataBindings.setKnownImage("bindings.svg");
-        App.elements.appModelDataBindings.setPlacement("37%", "26%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelDataBindings.setPlacement("20%", "25%", "6vmin", "6vmin", "1.5vmin");
         App.elements.appModelDataBindings.titleStylingClassList.add("DiagramFont");
         App.elements.appModelDataBindings.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_DataBindings_OnClick"));
         
@@ -403,7 +403,7 @@ class AppService {
         App.elements.appModelObservables = document.createElement("cc-frameworkelement");
         App.elements.appModelObservables.useMultiClouds(false);
         App.elements.appModelObservables.setKnownImage("observables.svg");
-        App.elements.appModelObservables.setPlacement("35%", "75%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelObservables.setPlacement("35%", "90%", "6vmin", "6vmin", "1.5vmin");
         App.elements.appModelObservables.titleStylingClassList.add("DiagramFont");
         App.elements.appModelObservables.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Observables_OnClick"));
         
@@ -413,7 +413,7 @@ class AppService {
         App.elements.appModelLogging = document.createElement("cc-frameworkelement");
         App.elements.appModelLogging.useMultiClouds(false);
         App.elements.appModelLogging.setKnownImage("logging.svg");
-        App.elements.appModelLogging.setPlacement("65%", "75%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelLogging.setPlacement("65%", "90%", "6vmin", "6vmin", "1.5vmin");
         App.elements.appModelLogging.titleStylingClassList.add("DiagramFont");
         App.elements.appModelLogging.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Logging_OnClick"));
         
@@ -423,7 +423,7 @@ class AppService {
         App.elements.appModelHelpers = document.createElement("cc-frameworkelement");
         App.elements.appModelHelpers.useMultiClouds(false);
         App.elements.appModelHelpers.setKnownImage("helpers.svg");
-        App.elements.appModelHelpers.setPlacement("50%", "75%", "6vmin", "6vmin", "1.5vmin");
+        App.elements.appModelHelpers.setPlacement("50%", "90%", "6vmin", "6vmin", "1.5vmin");
         App.elements.appModelHelpers.titleStylingClassList.add("DiagramFont");
         App.elements.appModelHelpers.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Helpers_OnClick"));
         
@@ -476,9 +476,10 @@ class AppService {
         App.store.appModel["observables"].observableData.state = FrameworkElementState.Solved;
         App.store.appModel["logging"].observableData.state = FrameworkElementState.Solved;
         App.store.appModel["helpers"].observableData.state = FrameworkElementState.Solved;
-        App.elements.appModelHandlers.setPlacement("60%", "58%", "10vmin", "10vmin", "1.5vmin");
+        App.elements.appModelHandlers.setPlacement("80%", "68%", "10vmin", "10vmin", "1.5vmin");
         App.store.appModel["handlers"].observableData.title = "Handlers";
-        App.elements.AppModelAppStructure.setPlacement(null, null, "15vmin", "15vmin", "1.5vmin");
+        App.elements.AppModelAppStructure.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
+        App.elements.AppModelAppStructure.solvedImageStylingClassList.add("Rotating");
 
         App.store.appModel.emitNotifications();
 

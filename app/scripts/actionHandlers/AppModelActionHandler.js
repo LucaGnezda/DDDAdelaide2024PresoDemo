@@ -68,30 +68,30 @@ class AppModelActionHandler {
         if (App.store.appModel["helpers"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["helpers"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel["app"].observableData.state = FrameworkElementState.KnownUnknown;
-            App.elements.AppModelAppStructure.setPlacement(null, null, "24vmin", "24vmin", "1.5vmin");
+            App.elements.AppModelAppStructure.setPlacement(null, null, "38vmin", "38vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
         else if (App.store.appModel["components"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["components"].observableData.state = FrameworkElementState.KnownUnknown;
-            App.elements.AppModelAppStructure.setPlacement(null, null, "22vmin", "22vmin", "1.5vmin");
+            App.elements.AppModelAppStructure.setPlacement(null, null, "36vmin", "36vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
         else if (App.store.appModel["handlers"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["handlers"].observableData.state = FrameworkElementState.KnownUnknown;
-            //App.elements.appModelHandlers.setPlacement("67%", "52%", "10vmin", "10vmin", "1.5vmin");
             App.store.appModel["handlers"].observableData.title = "Logic";
-            App.elements.AppModelAppStructure.setPlacement(null, null, "20vmin", "20vmin", "1.5vmin");
+            App.elements.AppModelAppStructure.setPlacement(null, null, "34vmin", "34vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
         else if (App.store.appModel["store"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["app"].observableData.state = FrameworkElementState.KnownUnknown;
             App.store.appModel["store"].observableData.state = FrameworkElementState.SolvableUnknown;
-            App.elements.AppModelAppStructure.setPlacement(null, null, "19vmin", "19vmin", "1.5vmin");
+            App.elements.AppModelAppStructure.setPlacement(null, null, "32vmin", "32vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
         else if (App.store.appModel["app"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["app"].observableData.state = FrameworkElementState.Solved;
-            App.elements.AppModelAppStructure.setPlacement(null, null, "15vmin", "15vmin", "1.5vmin");
+            App.elements.AppModelAppStructure.solvedImageStylingClassList.add("Rotating");
+            App.elements.AppModelAppStructure.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
 
@@ -203,7 +203,7 @@ class AppModelActionHandler {
 
         if (App.store.appModel["actionDispatchers"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["handlers"].observableData.title = "Handlers";
-            App.elements.appModelHandlers.setPlacement("60%", "58%", "10vmin", "10vmin", "1.5vmin");
+            App.elements.appModelHandlers.setPlacement("80%", "68%", "10vmin", "10vmin", "1.5vmin");
             App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel.emitNotifications();
         }

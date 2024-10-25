@@ -10,7 +10,6 @@ const FrameworkElementState = AsEnum(
         Unknown:           0,
         KnownUnknown:      1,
         SolvableUnknown:   2,
-        SolvedUnknown:     3,
-        Solved:            4
+        Solved:            3
     }
 );

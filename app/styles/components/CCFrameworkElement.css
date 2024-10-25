@@ -168,11 +168,27 @@ cc-frameworkelement {
     animation: Glowing 1s ease-in-out infinite alternate;
 }
 
+
+.Rotating {
+    animation: Rotating 60s linear infinite;
+    width:100%;
+    height:100%;
+}
+
 @keyframes Glowing {
     from {
         text-shadow: 0 0 3px #f0f, 0 0 4px #0ff, 0 0 5px #e60073, 0 0 6px #e60073, 0 0 7px #e60073;
     }
     to {
         text-shadow: 0 0 3px #ff4da6, 0 0 4px #ff4da6, 0 0 5px #ff4da6, 0 0 6px #ff4da6, 0 0 7px #ff4da6, 0 0 8px #ff4da6;
+    }
+}
+
+@keyframes Rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
