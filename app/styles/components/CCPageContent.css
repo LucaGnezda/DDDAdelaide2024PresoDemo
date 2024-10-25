@@ -120,16 +120,3 @@ cc-page {
 .CCPageTransformer.WithZoomOutExit {
     transform: scale(0.1, 0.1);
 }
-
-.DemoPage {
-    display: flex;
-    flex-direction: column;
-    gap: 10vmin;
-    justify-content: center;
-}
-
-.DemoPage .Section {
-    display: flex;
-    flex-direction: row;
-    gap: 10vmin;    
-}

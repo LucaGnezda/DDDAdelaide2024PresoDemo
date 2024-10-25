@@ -1,6 +1,4 @@
-
-
-let AppModel_AppModelElement_OnStoreChanged = function(event) {
+let AppModel_OnDataChange = function(event) {
     Log.debug(`Component Data Listener Callback Extension`, "COMPONENT BINDING");
 
     for (let [key, value] of Object.entries(this.observableData)) {

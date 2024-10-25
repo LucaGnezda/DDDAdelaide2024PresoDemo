@@ -4,7 +4,7 @@ class PresentationActionHandler {
 
     route(action) {
 
-        Log.debug(`Handler processing event ${action.type}`, "HANDLER");
+        Log.debug(`${this.constructor.name} processing event ${action.type}`, "HANDLER");
 
         switch (action.type) {
 
@@ -18,38 +18,6 @@ class PresentationActionHandler {
                 
             case "App_OverlayAnimation":
                 this.transitionPageOverlay(action.payload);
-                break;
-
-            case "Hub_ComponentsButton_OnClick":
-                this.ZoomInToSection("components1");
-                break;
-            
-            case "Hub_EventBindingButton_OnClick":
-                this.ZoomInToSection("eventBinding1");
-                break;
-
-            case "Hub_DispatchActionHandlingButton_OnClick":
-                this.ZoomInToSection("dispatchActionHandling1");
-                break;
-
-            case "Hub_StoreButton_OnClick":
-                this.ZoomInToSection("store1");
-                break;
-
-            case "Hub_DataBindingButton_OnClick":
-                this.ZoomInToSection("dataBinding1");
-                break;
-
-            case "Hub_LoggingButton_OnClick":
-                this.ZoomInToSection("logging1");
-                break;
-
-            case "Hub_ObservablesButton_OnClick":
-                this.ZoomInToSection("observables1");
-                break;
-
-            case "Hub_DemoButton_OnClick":
-                this.ZoomInToSection("demo");
                 break;
             
             default:
@@ -101,17 +69,6 @@ class PresentationActionHandler {
         } else {
             AnimatorService.transitionPageOverlay(payload.usingAction, payload.page.content, payload.withDuration);
         }
-    }
-
-    ZoomInToSection(section) {
-        
-        App.pages.components1.content.resetAnimationInitial();
-        
-        AnimatorService.pageOutro(App.activePage.content, PageTransition.ZoomIn, 1.75);
-        AnimatorService.transitionBackground(App.activePage.background, App.pages[section].background, 0, 0, null, PageTransition.ZoomIn, 1.75);
-        AnimatorService.pageIntro(App.pages[section].content, PageTransition.ZoomIn, 1.75);
-
-        App.activePage = App.pages[section];
     }
 
 }

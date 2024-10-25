@@ -8,9 +8,10 @@
         <link rel="stylesheet" type="text/css" href="./app/styles/Base.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCAppModelElement.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCBackground.css">
-        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCPageContent.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCDemoObservableElement.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCDemoObservingElement.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCFrameworkElement.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCPageContent.css">
 
         <link rel="stylesheet" type="text/css" href="./app/styles/PresentationStyling.css">
 
@@ -37,9 +38,11 @@
         <script defer src="./framework/scripts/helpers/Helpers.js"></script>
 
         <!-- Enums -->
+        <script defer src="./app/scripts/enums/FrameworkElementState.js"></script>
         <script defer src="./app/scripts/enums/TransitionEffects.js"></script>
 
         <!-- ActionHandlers -->
+        <script defer src="./app/scripts/actionHandlers/AppModelActionHandler.js"></script>
         <script defer src="./app/scripts/actionHandlers/PresentationActionHandler.js"></script>
         <script defer src="./app/scripts/actionHandlers/DemoActionHandler.js"></script>
 
@@ -49,9 +52,10 @@
         <!-- Components -->
         <script defer src="./app/scripts/components/CCAppModelElement.js"></script>
         <script defer src="./app/scripts/components/CCBackground.js"></script>
-        <script defer src="./app/scripts/components/CCPageContent.js"></script>        
         <script defer src="./app/scripts/components/CCDemoObservableElement.js"></script>        
-        <script defer src="./app/scripts/components/CCDemoObservingElement.js"></script>        
+        <script defer src="./app/scripts/components/CCDemoObservingElement.js"></script>
+        <script defer src="./app/scripts/components/CCFrameworkElement.js"></script>          
+        <script defer src="./app/scripts/components/CCPageContent.js"></script>   
 
         <!-- Services -->
         <script defer src="./app/scripts/services/AnimatorService.js"></script> 
@@ -157,16 +161,12 @@
                 </div>
             </data>
             <data value="hub">
-                <div class="PageTitle">Hub</div>
-                <div id="AppModel" class="PageContents TestFlexLarge">
-                    <div id="ComponentsButton" class="TestButton Filled Show">Components</div>
-                    <div id="EventBindingButton" class="TestButton Filled Show">Event Binding</div>
-                    <div id="DispatchActionHandlingButton" class="TestButton Filled Show">Dispatch Action Handling</div>
-                    <div id="StoreButton" class="TestButton Filled Show">Store</div>
-                    <div id="DataBindingButton" class="TestButton Filled Show">Data Binding</div>
-                    <div id="LoggingButton" class="TestButton Filled Show">Logging</div>
-                    <div id="ObservablesButton" class="TestButton Filled Show">Observables</div>
-                    <div id="DemoButton" class="TestButton Filled Show">Demo</div>
+                <div class="PageTitle">Designing the WebApp</div>
+                <div class="PageContents DiagramContainer">
+                    <div id="AppModel" class="Diagram">
+
+                    </div>
+                    <div id="DemoButton" class="PresentationButton Filled Show">Demo</div>
                 </div>
             </data>
             <data value="demo">

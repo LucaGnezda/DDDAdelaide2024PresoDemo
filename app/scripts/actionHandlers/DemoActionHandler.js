@@ -4,7 +4,7 @@ class DemoActionHandler {
 
     route(action) {
 
-        Log.debug(`Handler processing event ${action.type}`, "HANDLER");
+        Log.debug(`${this.constructor.name} processing event ${action.type}`, "HANDLER");
 
         switch (action.type) {
 
