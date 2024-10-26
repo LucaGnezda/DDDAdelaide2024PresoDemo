@@ -1,3 +1,33 @@
+body {
+    background: #000000;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.ContentSource {
+    display: none;
+}
+
+.PresentationBackgroundsContainer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: -0%;
+    top: -0%;
+    overflow: hidden;
+    opacity: 1;
+}
+
+.PresentationPagesContainer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: -0%;
+    top: -0%;
+    overflow: hidden;
+    opacity: 1;
+}
+
 .PageBackground {
     background: url("../assets/images/DarkNetwork.png");
     background-size: cover;
@@ -27,11 +57,429 @@
 
 .PageContents {
     color: #ffffff;
-    font-size: 4.5vmin;
+    font-size: 4vmin;
     padding: 0vmin 8vmin 0vmin 8vmin;
     font-family: "Nunito";
+    line-height: normal;
+    margin: 1.6vmin 0vmin 1.6vmin 0vmin;
 }
 
+.PageContents.Dense {
+    line-height: 1.3;
+}
+
+.PageContents.Denser {
+    line-height: 1.25;
+}
+
+.PageContents.Densest {
+    line-height: 1.2;
+}
+
+
+
+/* Extra Large (full size) fonts */
+p,
+P.XL {
+    font-size: 4vmin;
+    margin: 1.6vmin 0vmin 1.6vmin 0vmin;
+}
+
+p.Indent0,
+P.XL.Indent0 {
+    font-size: 4vmin;
+    padding-left: 0vmin;
+}
+
+p.Indent1,
+P.XL.Indent1 {
+    font-size: 4vmin;
+    padding-left: 8vmin;
+}
+
+p.Indent2,
+P.XL.Indent2 {
+    font-size: 4vmin;
+    padding-left: 16vmin;
+}
+
+p.Indent3,
+P.XL.Indent3 {
+    font-size: 4vmin;
+    padding-left: 24vmin;
+}
+
+ol,
+ol.XL,
+ul,
+ul.XL {
+    font-size: 4vmin;
+    margin-block: 1.6vmin 1.6vmin;
+}
+
+ol,
+ol.Indent0,
+ol.XL.Indent0,
+ul,
+ul.Indent0,
+ul.XL.Indent0 {
+    padding-inline-start: 6.4vmin;
+}
+
+ol.Indent1,
+ol.XL.Indent1,
+ul.Indent1,
+ul.XL.Indent1 {
+    padding-inline-start: 14.4vmin;
+}
+
+ol.Indent2,
+ol.XL.Indent2,
+ul.Indent2,
+ul.XL.Indent2 {
+    padding-inline-start: 22.4vmin;
+}
+
+ol > li,
+ol.XL > li,
+ul > li,
+ul.XL > li {
+    padding-left: 1.6vmin;
+}
+
+/* Large fonts */
+P.L {
+    font-size: 3.5vmin;
+    margin: 1.4vmin 0vmin 1.4vmin 0vmin;
+}
+
+P.L.Indent0 {
+    font-size: 3.5vmin;
+    padding-left: 0vmin;
+}
+
+P.L.Indent1 {
+    font-size: 3.5vmin;
+    padding-left: 7vmin;
+}
+
+P.L.Indent2 {
+    font-size: 3.5vmin;
+    padding-left: 14vmin;
+}
+
+P.L.Indent3 {
+    font-size: 3.5vmin;
+    padding-left: 21vmin;
+}
+
+ol.L,
+ul.L {
+    font-size: 3.5vmin;
+    margin-block: 1.4vmin 1.4vmin;
+}
+
+ol.L,
+ol.L.Indent0,
+ul.L,
+ul.L.Indent0 {
+    padding-inline-start: 5.6vmin;
+}
+
+ol.L.Indent1,
+ul.L.Indent1 {
+    padding-inline-start: 12.6vmin;
+}
+
+ol.L.Indent2,
+ul.L.Indent2 {
+    padding-inline-start: 19.6vmin;
+}
+
+ol.L > li,
+ul.L > li {
+    padding-left: 1.4vmin;
+}
+
+/* Medium fonts */
+P.M {
+    font-size: 3vmin;
+    margin: 1.2vmin 0vmin 1.2vmin 0vmin;
+}
+
+P.M.Indent0 {
+    font-size: 3vmin;
+    padding-left: 0vmin;
+}
+
+P.M.Indent1 {
+    font-size: 3vmin;
+    padding-left: 6vmin;
+}
+
+P.M.Indent2 {
+    font-size: 3vmin;
+    padding-left: 12vmin;
+}
+
+P.M.Indent3 {
+    font-size: 3vmin;
+    padding-left: 18vmin;
+}
+
+ol.M,
+ul.M {
+    font-size: 3vmin;
+    margin-block: 1.2vmin 1.2vmin;
+}
+
+ol.M,
+ol.M.Indent0,
+ul.M,
+ul.M.Indent0 {
+    padding-inline-start: 4.8vmin;
+}
+
+ol.M.Indent1,
+ul.M.Indent1 {
+    padding-inline-start: 10.8vmin;
+}
+
+ol.M.Indent2,
+ul.M.Indent2 {
+    padding-inline-start: 16.8vmin;
+}
+
+ol.M > li,
+ul.M > li {
+    padding-left: 1.2vmin;
+}
+
+/* Small fonts */
+P.S {
+    font-size: 2.5vmin;
+    margin: 1vmin 0vmin 1vmin 0vmin;
+}
+
+P.S.Indent0 {
+    font-size: 2.5vmin;
+    padding-left: 0vmin;
+}
+
+P.S.Indent1 {
+    font-size: 2.5vmin;
+    padding-left: 5vmin;
+}
+
+P.S.Indent2 {
+    font-size: 2.5vmin;
+    padding-left: 10vmin;
+}
+
+P.S.Indent3 {
+    font-size: 2.5vmin;
+    padding-left: 15vmin;
+}
+
+ol.S,
+ul.S {
+    font-size: 2.5vmin;
+    margin-block: 1vmin 1vmin;
+}
+
+ol.S,
+ol.S.Indent0,
+ul.S,
+ul.S.Indent0 {
+    padding-inline-start: 4vmin;
+}
+
+ol.S.Indent1,
+ul.S.Indent1 {
+    padding-inline-start: 9vmin;
+}
+
+ol.S.Indent2,
+ul.S.Indent2 {
+    padding-inline-start: 14vmin;
+}
+
+ol.S > li,
+ul.S > li {
+    padding-left: 1vmin;
+}
+
+/* Extra Small fonts */
+P.XS {
+    font-size: 2vmin;
+    margin: 0.8vmin 0vmin 0.8vmin 0vmin;
+}
+
+P.XS.Indent0 {
+    font-size: 2vmin;
+    padding-left: 0vmin;
+}
+
+P.XS.Indent1 {
+    font-size: 2vmin;
+    padding-left: 4vmin;
+}
+
+P.XS.Indent2 {
+    font-size: 2vmin;
+    padding-left: 8vmin;
+}
+
+P.XS.Indent3 {
+    font-size: 2vmin;
+    padding-left: 12vmin;
+}
+
+ol.XS,
+ul.XS {
+    font-size: 2vmin;
+    margin-block: 0.8vmin 0.8vmin;
+}
+
+ol.XS,
+ol.XS.Indent0,
+ul.XS,
+ul.XS.Indent0 {
+    padding-inline-start: 3.2vmin;
+}
+
+ol.XS.Indent1,
+ul.XS.Indent1 {
+    padding-inline-start: 7.2vmin;
+}
+
+ol.XS.Indent2,
+ul.XS.Indent2 {
+    padding-inline-start: 11.2vmin;
+}
+
+ol.XS > li,
+ul.XS > li {
+    padding-left: 0.8vmin;
+}
+
+/* XXS (smallest) fonts */
+P.XXS {
+    font-size: 1.5vmin;
+    margin: 0.6vmin 0vmin 0.6vmin 0vmin;
+}
+
+P.XXS.Indent0 {
+    font-size: 1.5vmin;
+    padding-left: 0vmin;
+}
+
+P.XXS.Indent1 {
+    font-size: 1.5vmin;
+    padding-left: 3vmin;
+}
+
+P.XXS.Indent2 {
+    font-size: 1.5vmin;
+    padding-left: 6vmin;
+}
+
+P.XXS.Indent3 {
+    font-size: 1.5vmin;
+    padding-left: 9vmin;
+}
+
+ol.XXS,
+ul.XXS {
+    font-size: 1.5vmin;
+    margin-block: 0.6vmin 0.6vmin;
+}
+
+ol.XXS,
+ol.XXS.Indent0,
+ul.XXS,
+ul.XXS.Indent0 {
+    padding-inline-start: 2.4vmin;
+}
+
+ol.XXS.Indent1,
+ul.XXS.Indent1 {
+    padding-inline-start: 5.4vmin;
+}
+
+ol.XXS.Indent2,
+ul.XXS.Indent2 {
+    padding-inline-start: 8.4vmin;
+}
+
+ol.XXS > li,
+ul.XXS > li {
+    padding-left: 0.6vmin;
+}
+
+/* List Markers */
+li.Tick, 
+li.Cross {
+    list-style: none;
+    position: relative;
+}
+
+li.Tick::before,
+li.Cross::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-repeat: no-repeat;
+}
+
+li.Tick::before {
+    background-image: url("../assets/svg/tick.svg");
+    filter: brightness(0) saturate(100%) invert(58%) sepia(87%) saturate(315%) hue-rotate(120deg) brightness(92%) contrast(95%);
+}
+
+li.Cross::before {
+    background-image: url("../assets/svg/cross.svg");
+    filter: brightness(0) saturate(100%) invert(32%) sepia(91%) saturate(1216%) hue-rotate(325deg) brightness(97%) contrast(87%);
+}
+
+ul li.Tick::before,
+ul li.Cross::before,
+ul.XL li.Tick::before,
+ul.XL li.Cross::before {
+    left: -3.9vmin;
+    top: 1.35vmin;
+}
+
+ul.L li.Tick::before,
+ul.L li.Cross::before {
+    left: -3.45vmin;
+    top: 1.225vmin;
+}
+
+ul.M li.Tick::before,
+ul.M li.Cross::before {
+    left: -3vmin;
+    top: 1.1vmin;
+}
+
+ul.S li.Tick::before,
+ul.S li.Cross::before {
+    left: -2.6vmin;
+    top: 0.85vmin;
+}
+
+ul.XS li.Tick::before,
+ul.XS li.Cross::before {
+    left: -2.2vmin;
+    top: 0.7vmin;
+}
+
+ul.XXS li.Tick::before,
+ul.XXS li.Cross::before {
+    left: -1.75vmin;
+    top: 0.5vmin;
+}
 
 .Fadeable {
     transition: all 0.5s ease-in-out;
@@ -49,20 +497,6 @@
 .Fadeable.Hide {
     display: none;
     opacity: 0;
-}
-
-.TestFlex {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 25%;
-}
-
-.TestFlexLarge {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    height: 80%;
 }
 
 .PresentationButton {

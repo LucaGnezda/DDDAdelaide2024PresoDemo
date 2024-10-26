@@ -373,7 +373,6 @@ class AppService {
         App.elements.appModelHandlers.useMultiClouds(true);
         App.elements.appModelHandlers.setKnownImage("handlers.svg");
         App.elements.appModelHandlers.setPlacement("85%", "60%", "10vmin", "10vmin", "1.5vmin");
-        //App.elements.appModelHandlers.setPlacement("62%", "58%", "10vmin", "10vmin", "1.5vmin");
         App.elements.appModelHandlers.titleStylingClassList.add("DiagramFont");
         App.elements.appModelHandlers.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Handlers_OnClick"));
         
