@@ -200,7 +200,7 @@ class CCPageContent extends CCBase {
      */
     #resetFadingClasses(element = "pageRoot") {
         if (this.#elements[element])
-            this.#elements[element].classList.remove("withFadeIn", "WithFadeOut");
+            this.#elements[element].classList.remove("WithFadeIn", "WithFadeOut");
     }
 
     /**

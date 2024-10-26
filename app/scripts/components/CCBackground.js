@@ -8,12 +8,12 @@ class CCBackground extends CCBase {
      * Definitions for internal elements
      * @typedef {('backgroundRoot'|'backgroundTransformer'|'backgroundContent')} BackgroundElement
      */
-         
+
     /**
      * The properties of this component
      * @typedef {Object} BackgroundPropertybag
      */
-    
+
     /**
      * The elements that make up this component
      * @type {LimitedDictionary<BackgroundElement, HTMLElement?>}
@@ -27,11 +27,11 @@ class CCBackground extends CCBase {
     /**
      * @type {BackgroundPropertybag}
      */
-    #propertybag = { }
+    #propertybag = {}
 
     /**
      * The html template for the component
-     * @property {string} #htmlTemplate  
+     * @property {string} #htmlTemplate
      */
     static #htmlTemplate = `
         <div class="CCBackgroundRoot" data-background-root>
@@ -56,7 +56,7 @@ class CCBackground extends CCBase {
 
     /**
      * Gets all attributes observed by the property
-     * @return {Array<any>} A list of attributes 
+     * @return {Array<any>} A list of attributes
      */
     static get observedAttributes() {
         return [];
@@ -82,7 +82,7 @@ class CCBackground extends CCBase {
             this.#elements.backgroundRoot = fragment.querySelector('[data-background-root]');
             this.#elements.backgroundTransformer = fragment.querySelector('[data-background-transformer]');
             this.#elements.backgroundContent = fragment.querySelector('[data-background-content]');
-            
+
             this.appendChild(fragment);
         }
     }
@@ -111,7 +111,7 @@ class CCBackground extends CCBase {
      * Resets the fading classes for the element
      */
     #resetFadingClasses() {
-        this.#elements.backgroundRoot?.classList.remove("withFadeIn", "WithFadeOut");
+        this.#elements.backgroundRoot?.classList.remove("WithFadeIn", "WithFadeOut");
     }
 
     /*
@@ -128,7 +128,7 @@ class CCBackground extends CCBase {
 
     /**
      * Sets the classname on the backgroundContent
-     * @param {string} className 
+     * @param {string} className
      * @returns {void}
      */
     setContentClass(className) {
@@ -140,13 +140,13 @@ class CCBackground extends CCBase {
 
     /**
      * Sets the content position range for the background content element
-     * @param {number} xPages 
-     * @param {number} yPages 
+     * @param {number} xPages
+     * @param {number} yPages
      * @returns {void}
      */
     setContentPositionRange(xPages, yPages) {
         this.#confirmUXIsInitialised();
-        if (this.#elements.backgroundContent){
+        if (this.#elements.backgroundContent) {
             this.#elements.backgroundContent.style.width = (xPages * 100).toString() + '%';
             this.#elements.backgroundContent.style.height = (yPages * 100).toString() + '%';
             this.#elements.backgroundContent.style.left = '-0%';
@@ -155,14 +155,14 @@ class CCBackground extends CCBase {
     }
 
     /**
-     * 
-     * @param {number} pageX 
-     * @param {number} pageY 
+     *
+     * @param {number} pageX
+     * @param {number} pageY
      * @returns {void}
      */
     usingContentPosition(pageX, pageY) {
         this.#confirmUXIsInitialised();
-        if (this.#elements.backgroundContent){
+        if (this.#elements.backgroundContent) {
             this.#elements.backgroundContent.style.left = (-pageX * 100).toString() + '%';
             this.#elements.backgroundContent.style.top = (-pageY * 100).toString() + '%';
         }
@@ -170,8 +170,8 @@ class CCBackground extends CCBase {
 
     /**
      * Set the root element position
-     * @param {number} left 
-     * @param {number} top 
+     * @param {number} left
+     * @param {number} top
      * @returns {void}
      */
     usingRootPosition(left, top) {
@@ -179,12 +179,12 @@ class CCBackground extends CCBase {
         if (this.#elements.backgroundRoot) {
             this.#elements.backgroundRoot.style.left = left.toString();
             this.#elements.backgroundRoot.style.top = top.toString();
-        }        
+        }
     }
-    
+
     /**
      * Sets the transformation class for the background
-     * @param {string?} cssClass 
+     * @param {string?} cssClass
      * @returns {void}
      */
     usingTransformationClass(cssClass) {
@@ -199,9 +199,9 @@ class CCBackground extends CCBase {
 
     /**
      * Sets the styling inforamiotn for transitions/animations for the base page elements
-     * @param {number} duration 
-     * @param {TimingFunction} timingFunction 
-     * @param {number} delay 
+     * @param {number} duration
+     * @param {TimingFunction} timingFunction
+     * @param {number} delay
      * @returns {void}
      */
     usingTransition(duration, timingFunction, delay) {
@@ -304,7 +304,7 @@ class CCBackground extends CCBase {
     withFadeIn() {
         this.#confirmUXIsInitialised();
         this.#resetFadingClasses()
-        this.#elements.backgroundRoot?.classList.add("withFadeIn");
+        this.#elements.backgroundRoot?.classList.add("WithFadeIn");
     }
 
     /**
@@ -423,20 +423,20 @@ class CCBackground extends CCBase {
         this.#resetPositionalClasses();
     }
 
-     /*
-     * Callbacks
-     */
+    /*
+    * Callbacks
+    */
 
-     /**
-      * Callback called when the component is connected to the DOM
-      */
+    /**
+     * Callback called when the component is connected to the DOM
+     */
     connectedCallback() {
         this.#confirmUXIsInitialised();
         this.#initialiseAttributes();
         this.render();
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
     }
-    
+
     /**
      * Callback called when the component is disconnected from the DOM
      */
@@ -446,9 +446,9 @@ class CCBackground extends CCBase {
 
     /**
      * Callback called when component attributes change
-     * @param {string} name 
-     * @param {*} oldValue 
-     * @param {*} newValue 
+     * @param {string} name
+     * @param {*} oldValue
+     * @param {*} newValue
      */
     attributeChangedCallback(name, oldValue, newValue) {
         this.render();
