@@ -7,9 +7,9 @@ class AnimatorService {
     /**
      * Process a page outro transition
      * @static
-     * @param {CCPageContent?} fromPage 
-     * @param {PageTransition} usingTransition 
-     * @param {number} duration 
+     * @param {CCPageContent?} fromPage
+     * @param {PageTransition} usingTransition
+     * @param {number} duration
      * @returns {void}
      */
     static pageOutro(fromPage, usingTransition, duration) {
@@ -105,7 +105,7 @@ class AnimatorService {
                 fromPage?.withZoomOutExit();
                 fromPage?.hide();
                 break;
-            
+
             case PageTransition.None:
             default:
                 fromPage?.usingTransition(0, "linear", 0);
@@ -119,9 +119,9 @@ class AnimatorService {
     /**
      * Process a page intro transition
      * @static
-     * @param {CCPageContent?} toPage 
-     * @param {PageTransition} usingTransition 
-     * @param {number} duration 
+     * @param {CCPageContent?} toPage
+     * @param {PageTransition} usingTransition
+     * @param {number} duration
      */
     static pageIntro(toPage, usingTransition, duration) {
         let oneQtrDuration = duration / 4;
@@ -160,7 +160,7 @@ class AnimatorService {
                 toPage?.withoutZoom();
                 toPage?.show();
                 break;
-            
+
             case PageTransition.FadeSlideLeft:
                 toPage?.usingTransition(halfDuration, "ease-out", halfDuration);
                 toPage?.enterRight();
@@ -216,7 +216,7 @@ class AnimatorService {
                 toPage?.withZoomOutEntry();
                 toPage?.show();
                 break;
-            
+
             case PageTransition.None:
             default:
                 toPage?.usingTransition(0, "linear", 0);
@@ -230,13 +230,13 @@ class AnimatorService {
     /**
      * Process a transition from currentBg to toBg with provided pramaters
      * @static
-     * @param {CCBackground?} currentBG 
-     * @param {CCBackground?} toBG 
-     * @param {number} toX 
-     * @param {number} toY 
-     * @param {string?} toTransformer 
-     * @param {PageTransition} usingTransition 
-     * @param {number} duration 
+     * @param {CCBackground?} currentBG
+     * @param {CCBackground?} toBG
+     * @param {number} toX
+     * @param {number} toY
+     * @param {string?} toTransformer
+     * @param {PageTransition} usingTransition
+     * @param {number} duration
      */
     static transitionBackground(currentBG, toBG, toX, toY, toTransformer, usingTransition, duration) {
         toBG?.usingContentPosition(toX, toY);
@@ -258,7 +258,7 @@ class AnimatorService {
                     toBG?.withoutZoom();
                     toBG?.show();
                     break;
-    
+
                 case PageTransition.SlideRight:
                     currentBG?.usingTransition(duration, "ease-in-out", 0);
                     currentBG?.exitRight();
@@ -310,7 +310,7 @@ class AnimatorService {
                     toBG?.withoutZoom();
                     toBG?.show();
                     break;
-    
+
                 case PageTransition.FadeSlideRight:
                     currentBG?.usingTransition(duration, "ease-in-out", 0);
                     currentBG?.exitRight();
@@ -388,7 +388,7 @@ class AnimatorService {
                     toBG?.withZoomOutEntry();
                     toBG?.show();
                     break;
-                
+
                 case PageTransition.None:
                 default:
                     currentBG?.usingTransition(0, "linear", 0);
@@ -404,17 +404,17 @@ class AnimatorService {
             }
         }
     }
-        
+
     /**
      * Process a transition event for a {@link CCContentPage} overlay
      * @static
-     * @param {OverlayAction} action 
-     * @param {CCPageContent?} page 
-     * @param {number} duration 
+     * @param {OverlayAction} action
+     * @param {CCPageContent?} page
+     * @param {number} duration
      */
     static transitionPageOverlay(action, page, duration) {
         let halfDuration = duration / 2;
-        
+
         switch (action) {
             case 'open':
                 page?.disableAnimation("pagePrimary");
@@ -422,12 +422,12 @@ class AnimatorService {
                 page?.enterBottom('pageOverlay');
                 page?.withFadeIn('pageOverlay');
                 page?.show('pageOverlay');
-                page?.fadeTo(50 ,'pagePrimary');
+                page?.fadeTo(50, 'pagePrimary');
                 if (page) page.overlayState = 'open';
                 break;
             case 'close':
                 page?.enableAnimation("pagePrimary");
-                page?.usingOverlayTransition(halfDuration, "ease-out", 0 , halfDuration, "ease-in", 0);
+                page?.usingOverlayTransition(halfDuration, "ease-out", 0, halfDuration, "ease-in", 0);
                 page?.exitBottom('pageOverlay');
                 page?.withFadeOut('pageOverlay');
                 page?.hide('pageOverlay');
