@@ -8,7 +8,7 @@ class CCPageContent extends CCBase {
      * Definitions for internal elements
      * @typedef {('pagePrimary'|'pageOverlay'|'pageRoot'|'pageTransformer')} PageContentElement
      */
-    
+
     /**
      * State options for a CCContentPage Overlay
      * @typedef {('open'|'closed')} OverlayState
@@ -21,7 +21,7 @@ class CCPageContent extends CCBase {
      * @property {boolean} hasOverlay
      * @property {OverlayState} overlayState
      */
-    
+
     /**
      * An animation property for a page
      * @typedef {Object} AnimationProperty
@@ -29,7 +29,7 @@ class CCPageContent extends CCBase {
      * @property {Array<AnimationDefinition>} animationSteps
      * @property {number} currentAnimationStep
      */
-         
+
     /**
      * The elements that make up this component
      * @type {LimitedDictionary<PageContentElement, HTMLElement?>}
@@ -40,7 +40,7 @@ class CCPageContent extends CCBase {
         pagePrimary: null,
         pageOverlay: null,
     };
-    
+
     /**
      * @type {PageContentPropertybag}
      */
@@ -63,7 +63,7 @@ class CCPageContent extends CCBase {
 
     /**
      * The html template for the component
-     * @property {string} #htmlTemplate  
+     * @property {string} #htmlTemplate
      */
     static #htmlTemplate = `
         <div class="CCPageRoot" data-page-root>
@@ -76,7 +76,7 @@ class CCPageContent extends CCBase {
 
     constructor() {
         super();
-        
+
         // Allocate a guid
         if (this.id === "") {
             this.id = crypto.randomUUID();
@@ -89,7 +89,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Gets all attributes observed by the property
-     * @return {Array<any>} A list of attributes 
+     * @return {Array<any>} A list of attributes
      */
     static get observedAttributes() {
         return [];
@@ -101,26 +101,26 @@ class CCPageContent extends CCBase {
 
     /**
      * Checks whether the element has forward animations remaining
-     * @param {PageContentElement} [element=pagePrimary] 
-     * @returns {boolean} 
+     * @param {PageContentElement} [element=pagePrimary]
+     * @returns {boolean}
      */
     hasForwardAnimationsRemaining(element = "pagePrimary") {
         return (
-            this.#propertybag.animations[element].animationEnabled 
-            && this.#propertybag.animations[element].animationSteps != null 
+            this.#propertybag.animations[element].animationEnabled
+            && this.#propertybag.animations[element].animationSteps != null
             && this.#propertybag.animations[element].animationSteps.length - this.#propertybag.animations[element].currentAnimationStep > 0
         );
     }
 
     /**
      * Checks whether the element has backward animations remaining
-     * @param {PageContentElement} [element=pagePrimary] 
+     * @param {PageContentElement} [element=pagePrimary]
      * @returns {boolean}
      */
     hasBackAnimationsRemaining(element = "pagePrimary") {
         return (
-            this.#propertybag.animations[element].animationEnabled 
-            && this.#propertybag.animations[element].animationSteps != null 
+            this.#propertybag.animations[element].animationEnabled
+            && this.#propertybag.animations[element].animationSteps != null
             && this.#propertybag.animations[element].currentAnimationStep > 0
         );
     }
@@ -135,7 +135,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the overlayState for this page
-     * @param {OverlayState} val 
+     * @param {OverlayState} val
      */
     set overlayState(val) {
         this.#propertybag.overlayState = val;
@@ -148,7 +148,7 @@ class CCPageContent extends CCBase {
     get overlayState() {
         return this.#propertybag.overlayState;
     }
-    
+
     /*
      * Private Methods
      */
@@ -179,7 +179,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Resets the positional classes for the element
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      */
     #resetPositionalClasses(element = 'pageRoot') {
         this.#elements[element]?.classList.remove("EnterFromLeft", "EnterFromRight", "EnterFromTop", "EnterFromBottom");
@@ -193,10 +193,10 @@ class CCPageContent extends CCBase {
         if (this.#elements.pageTransformer)
             this.#elements.pageTransformer.classList.remove("WithZoomInEntry", "WithZoomOutEntry", "WithZoomInExit", "WithZoomOutExit");
     }
-    
+
     /**
      * Resets the fading classes for the element
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      */
     #resetFadingClasses(element = "pageRoot") {
         if (this.#elements[element])
@@ -205,9 +205,9 @@ class CCPageContent extends CCBase {
 
     /**
      * Processes the given animation step for the given element in the given direction
-     * @param {AnimationDefinition} stepToAnimate 
-     * @param {boolean} [inReverse=false] 
-     * @param {PageContentElement} [elementToAnimate=pagePrimary] 
+     * @param {AnimationDefinition} stepToAnimate
+     * @param {boolean} [inReverse=false]
+     * @param {PageContentElement} [elementToAnimate=pagePrimary]
      */
     #processAnimationStep(stepToAnimate, inReverse = false, elementToAnimate = 'pagePrimary') {
         stepToAnimate.add?.forEach((step) => {
@@ -221,7 +221,7 @@ class CCPageContent extends CCBase {
                 }
             });
         });
-        
+
         stepToAnimate.remove?.forEach((step) => {
             if (!this.#elements[elementToAnimate]) return;
 
@@ -250,7 +250,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the content source for the pages primary element
-     * @param {NodeListOf<ChildNode>} source 
+     * @param {NodeListOf<ChildNode>} source
      * @returns {void}
      */
     setContents(source) {
@@ -258,10 +258,10 @@ class CCPageContent extends CCBase {
         this.#elements.pagePrimary?.append(...source);
         this.hide('pageOverlay');
     }
-    
+
     /**
      * Sets the content source for the pages overlay element
-     * @param {NodeListOf<ChildNode>} source 
+     * @param {NodeListOf<ChildNode>} source
      * @returns {void}
      */
     setOverlay(source) {
@@ -273,7 +273,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the animation definition for the element
-     * @param {Array<AnimationDefinition>} definition 
+     * @param {Array<AnimationDefinition>} definition
      * @param {PageContentElement} [element=pagePrimary]
      * @returns {void}
      */
@@ -287,7 +287,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Resets the element's animation to its initial state
-     * @param {PageContentElement} [element=pagePrimary] 
+     * @param {PageContentElement} [element=pagePrimary]
      * @returns {void}
      */
     resetAnimationInitial(element = "pagePrimary") {
@@ -304,8 +304,8 @@ class CCPageContent extends CCBase {
     }
 
     /**
-     * Resets the element's animation to its final state 
-     * @param {PageContentElement} [element=pagePrimary] 
+     * Resets the element's animation to its final state
+     * @param {PageContentElement} [element=pagePrimary]
      * @returns {void}
      */
     resetAnimationFinal(element = "pagePrimary") {
@@ -315,7 +315,7 @@ class CCPageContent extends CCBase {
 
             // note we're setting it to 0, because this signifies 'before the first animation'
             this.#propertybag.animations[element].currentAnimationStep = 0;
-            
+
             for (let i = 0; i < this.#propertybag.animations[element].animationSteps.length; i++) {
                 this.stepAnimationForward(element);
             }
@@ -324,12 +324,12 @@ class CCPageContent extends CCBase {
 
     /**
      * Steps the element's animation forward
-     * @param {PageContentElement} [element=pagePrimary] 
+     * @param {PageContentElement} [element=pagePrimary]
      * @returns {void}
      */
     stepAnimationForward(element = "pagePrimary") {
         this.#confirmUXIsInitialised();
-        
+
         if (this.#propertybag.animations[element].animationSteps != null) {
             if (this.#propertybag.animations[element].currentAnimationStep >= this.#propertybag.animations[element].animationSteps.length) {
                 // nothing left to animate
@@ -343,12 +343,12 @@ class CCPageContent extends CCBase {
 
     /**
      * Steps the element's animation backward
-     * @param {PageContentElement} [element=pagePrimary] 
+     * @param {PageContentElement} [element=pagePrimary]
      * @returns {void}
      */
     stepAnimationBack(element = "pagePrimary") {
         this.#confirmUXIsInitialised();
-        
+
         if (this.#propertybag.animations[element].animationSteps != null) {
             if (this.#propertybag.animations[element].currentAnimationStep <= 0) {
                 // nothing left to animate
@@ -358,12 +358,12 @@ class CCPageContent extends CCBase {
             this.#propertybag.animations[element].currentAnimationStep--;
             this.#processAnimationStep(this.#propertybag.animations[element].animationSteps[this.#propertybag.animations[element].currentAnimationStep], true, element);
         }
-        
+
     }
 
     /**
      * Disable animation for the element
-     * @param {PageContentElement} [element=pagePrimary] 
+     * @param {PageContentElement} [element=pagePrimary]
      * @returns {void}
      */
     disableAnimation(element = "pagePrimary") {
@@ -372,7 +372,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Enables animation for the element
-     * @param {PageContentElement} [element=pagePrimary] 
+     * @param {PageContentElement} [element=pagePrimary]
      * @returns {void}
      */
     enableAnimation(element = "pagePrimary") {
@@ -381,14 +381,14 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the styling inforamiotn for transitions/animations for the base page elements
-     * @param {number} duration 
-     * @param {TimingFunction} timingFunction 
-     * @param {number} delay 
+     * @param {number} duration
+     * @param {TimingFunction} timingFunction
+     * @param {number} delay
      * @returns {void}
      */
     usingTransition(duration, timingFunction, delay) {
         this.#confirmUXIsInitialised();
-        
+
         let sDuration = "", sDelay = ""
 
         if (typeof duration == "number") {
@@ -398,9 +398,9 @@ class CCPageContent extends CCBase {
         if (typeof delay == "number") {
             sDelay = delay + "s";
         }
-        
+
         if (!this.#elements.pageTransformer || !this.#elements.pageRoot || !this.#elements.pagePrimary || !this.#elements.pageOverlay) return;
-        
+
         this.#elements.pageTransformer.style.transitionDuration = sDuration;
         this.#elements.pageTransformer.style.transitionTimingFunction = timingFunction;
         this.#elements.pageTransformer.style.transitionDelay = sDelay;
@@ -416,17 +416,17 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the styling information for transitions/animations for the page content elements
-     * @param {number} primaryDuration 
-     * @param {TimingFunction} primaryTimingFunction 
-     * @param {number} primaryDelay 
-     * @param {number} overlayDuration 
-     * @param {TimingFunction} overlayTimingFunction 
-     * @param {number} overlayDelay 
+     * @param {number} primaryDuration
+     * @param {TimingFunction} primaryTimingFunction
+     * @param {number} primaryDelay
+     * @param {number} overlayDuration
+     * @param {TimingFunction} overlayTimingFunction
+     * @param {number} overlayDelay
      * @returns {void}
      */
     usingOverlayTransition(primaryDuration, primaryTimingFunction, primaryDelay, overlayDuration, overlayTimingFunction, overlayDelay) {
         this.#confirmUXIsInitialised();
-        
+
         let pdur = "", pdel = "", odur = "", odel = "";
 
         if (typeof primaryDuration == "number") {
@@ -439,20 +439,20 @@ class CCPageContent extends CCBase {
 
         if (overlayDuration == null) {
             odur = pdur;
-        } 
+        }
         else if (typeof overlayDuration == "number") {
             odur = overlayDuration + "s";
         }
 
         if (overlayDelay == null) {
             odel = pdel;
-        } 
+        }
         else if (typeof overlayDelay == "number") {
             odel = overlayDelay + "s";
         }
-        
+
         if (!this.#elements.pageOverlay || !this.#elements.pagePrimary) return;
-        
+
         this.#elements.pagePrimary.style.transitionDuration = pdur;
         this.#elements.pagePrimary.style.transitionTimingFunction = primaryTimingFunction;
         this.#elements.pagePrimary.style.transitionDelay = pdel;
@@ -532,18 +532,18 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the fade in animation for the element through CSS manipulation
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      * @returns {void}
      */
     withFadeIn(element = "pageRoot") {
         this.#confirmUXIsInitialised();
         this.#resetFadingClasses(element)
-        this.#elements[element]?.classList.add("withFadeIn");
+        this.#elements[element]?.classList.add("WithFadeIn");
     }
 
     /**
      * Sets no fade in animation for the element through CSS manipulation
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      * @returns {void}
      */
     withoutFadeIn(element = "pageRoot") {
@@ -553,7 +553,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the fade out animation for the element through CSS manipulation
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      * @returns {void}
      */
     withFadeOut(element = "pageRoot") {
@@ -564,7 +564,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets no fade out animation for the element through CSS manipulation
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      * @returns {void}
      */
     withoutFadeOut(element = "pageRoot") {
@@ -594,7 +594,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the enter top animation for the element through CSS manipulation
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      * @returns {void}
      */
     enterTop(element = 'pageRoot') {
@@ -605,7 +605,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the enter bottom animation for the element through CSS manipulation
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      * @returns {void}
      */
     enterBottom(element = 'pageRoot') {
@@ -636,7 +636,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the exit top animation for the element through CSS manipulation
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      * @returns {void}
      */
     exitTop(element = 'pageRoot') {
@@ -647,7 +647,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the exit bottom animation for the element through CSS manipulation
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      * @returns {void}
      */
     exitBottom(element = 'pageRoot') {
@@ -664,40 +664,40 @@ class CCPageContent extends CCBase {
         this.#confirmUXIsInitialised();
         this.#resetPositionalClasses();
     }
-    
+
     /**
      * Sets the fade in animation for the element through CSS manipulation
      * @param {number|string} value the % opacity to fade the element to
-     * @param {PageContentElement} [element=pageRoot] 
+     * @param {PageContentElement} [element=pageRoot]
      * @returns {void}
      */
     fadeTo(value, element = "pageRoot") {
         this.#confirmUXIsInitialised();
 
-        if (this.#elements[element]){
+        if (this.#elements[element]) {
             if (typeof value === 'number') {
                 this.#elements[element].style.opacity = value + "%";
             } else {
                 this.#elements[element].style.opacity = value;
             }
-        }               
+        }
     }
-    
-     /*
-     * Callbacks
-     */
 
-     /**
-      * Callback called when the component is connected to the DOM
-     * @returns {void}
-      */
-     connectedCallback() {
+    /*
+    * Callbacks
+    */
+
+    /**
+     * Callback called when the component is connected to the DOM
+    * @returns {void}
+     */
+    connectedCallback() {
         this.#confirmUXIsInitialised();
         this.#initialiseAttributes();
         this.render();
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
     }
-    
+
     /**
      * Callback called when the component is disconnected from the DOM
      * @returns {void}
@@ -708,9 +708,9 @@ class CCPageContent extends CCBase {
 
     /**
      * Callback called when component attributes change
-     * @param {string} name 
-     * @param {*} oldValue 
-     * @param {*} newValue 
+     * @param {string} name
+     * @param {*} oldValue
+     * @param {*} newValue
      * @returns {void}
      */
     attributeChangedCallback(name, oldValue, newValue) {

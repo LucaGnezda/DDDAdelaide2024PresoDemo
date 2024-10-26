@@ -605,13 +605,11 @@ class AppService {
             }
 
             if (App.activePage?.content?.hasBackAnimationsRemaining() && App.pageAnimationCallback) {
-                let event = PresentationActionHandler.animateContentPageOverlayEvent(
+                let event = PresentationActionHandler.animateContentPageEvent(
                     this,
                     keyEvent,
                     App.activePage,
                     true,
-                    'animate',
-                    1
                 );
 
                 App.pageAnimationCallback(event);
@@ -622,7 +620,7 @@ class AppService {
                     keyEvent,
                     App.activePage,
                     App.activePage.previousPage,
-                    App.activePage.transitionForward,
+                    App.activePage.transitionBack,
                     App.activePage.transitionBackDuration,
                     true
                 );
