@@ -476,11 +476,14 @@ class AppService {
         App.elements.demoButton = document.getElementById("DemoButton");
         App.elements.demoButton?.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DemoButton_OnClick", true));
 
-        // demo components, note, these are html elements and need to be cast which is a little uglg but it works
-        App.components.demoObservableElement = /** @type {CCDemoObservableElement} */ (document.getElementById("DemoObservableElement"));
-        App.components.demoObservingElement1 = /** @type {CCDemoObservingElement} */ (document.getElementById("DemoObservingElement1"));
-        App.components.demoObservingElement2 = /** @type {CCDemoObservingElement} */ (document.getElementById("DemoObservingElement2"));
-        App.components.demoObservingElement3 = /** @type {CCDemoObservingElement} */ (document.getElementById("DemoObservingElement3"));
+        // @ts-ignore getElementById gets a HTMLElement, which is technically our CC but the type is wrong.
+        App.components.demoObservableElement = document.getElementById("DemoObservableElement");
+        // @ts-ignore
+        App.components.demoObservingElement1 = document.getElementById("DemoObservingElement1");
+        // @ts-ignore
+        App.components.demoObservingElement2 = document.getElementById("DemoObservingElement2");
+        // @ts-ignore
+        App.components.demoObservingElement3 = document.getElementById("DemoObservingElement3");
 
         if (App.components.demoObservableElement instanceof CCDemoObservableElement) {
             let updateCallback = App.dispatcher?.newEventDispatchCallback("DemoObservableElement_UpdateButton_Click");
