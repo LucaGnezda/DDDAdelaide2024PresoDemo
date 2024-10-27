@@ -547,14 +547,15 @@ class AppService {
                     return;
                 }
 
-                let event = PresentationActionHandler.animateContentPageOverlayEvent(
-                    this,
-                    keyEvent,
-                    App.activePage,
-                    false,
-                    'animate',
-                    1
-                );
+                /** @type AnimateContentPageOverlayEvent */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: keyEvent,
+                    activePage: App.activePage,
+                    inReverse: false,
+                    usingAction: 'animate',
+                    withDuration: 1
+                };
 
                 App.pageOverlayCallback(event)
                 return;
@@ -562,27 +563,29 @@ class AppService {
 
             if (App.activePage?.content?.hasForwardAnimationsRemaining() && App.pageAnimationCallback) {
 
-                let event = PresentationActionHandler.animateContentPageEvent(
-                    this,
-                    keyEvent,
-                    App.activePage,
-                    false,
-                );
+
+                /** @type {AnimateContentPageEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: keyEvent,
+                    activePage: App.activePage,
+                    inReverse: false
+                }
 
                 App.pageAnimationCallback(event);
 
             }
             else if (App.activePage?.nextPage != null && App.pageNavigationCallback != null) {
-
-                let event = PresentationActionHandler.transitionContentPageEvent(
-                    this,
-                    keyEvent,
-                    App.activePage,
-                    App.activePage.nextPage,
-                    App.activePage.transitionForward,
-                    App.activePage.transitionForwardDuration,
-                    false
-                );
+                /** @type {TransitionContentPageEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: keyEvent,
+                    transitionFromPage: App.activePage,
+                    transitionToPage: App.activePage.nextPage,
+                    usingTransition: App.activePage.transitionForward,
+                    withDuration: App.activePage.transitionForwardDuration,
+                    inReverse: false
+                }
 
                 App.pageNavigationCallback(event);
 
@@ -594,65 +597,70 @@ class AppService {
                     return;
                 }
 
-                let event = PresentationActionHandler.animateContentPageOverlayEvent(
-                    this,
-                    keyEvent,
-                    App.activePage,
-                    true,
-                    'animate',
-                    1
-                );
+                /** @type {AnimateContentPageOverlayEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: keyEvent,
+                    activePage: App.activePage,
+                    inReverse: true,
+                    usingAction: 'animate',
+                    withDuration: 1
+                };
 
                 App.pageOverlayCallback(event)
                 return;
             }
 
             if (App.activePage?.content?.hasBackAnimationsRemaining() && App.pageAnimationCallback) {
-                let event = PresentationActionHandler.animateContentPageEvent(
-                    this,
-                    keyEvent,
-                    App.activePage,
-                    true,
-                );
+                /** @type {AnimateContentPageEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: keyEvent,
+                    activePage: App.activePage,
+                    inReverse: true
+                }
 
                 App.pageAnimationCallback(event);
 
             } else if (App.activePage?.previousPage != null && App.pageNavigationCallback != null) {
-                let event = PresentationActionHandler.transitionContentPageEvent(
-                    this,
-                    keyEvent,
-                    App.activePage,
-                    App.activePage.previousPage,
-                    App.activePage.transitionBack,
-                    App.activePage.transitionBackDuration,
-                    true
-                );
+                /** @type {TransitionContentPageEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: keyEvent,
+                    transitionFromPage: App.activePage,
+                    transitionToPage: App.activePage.previousPage,
+                    usingTransition: App.activePage.transitionBack,
+                    withDuration: App.activePage.transitionBackDuration,
+                    inReverse: true
+                }
 
                 App.pageNavigationCallback(event);
             }
         } else if (keyEvent.key == "ArrowUp") {
             if (App.activePage?.content?.hasOverlay && App.pageOverlayCallback) {
-                let event = PresentationActionHandler.animateContentPageOverlayEvent(
-                    this,
-                    keyEvent,
-                    App.activePage,
-                    false,
-                    'open',
-                    1
-                );
+                /** @type {AnimateContentPageOverlayEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: keyEvent,
+                    activePage: App.activePage,
+                    inReverse: false,
+                    usingAction: 'open',
+                    withDuration: 1
+                };
 
                 App.pageOverlayCallback(event)
             }
         } else if (keyEvent.key == "ArrowDown") {
             if (App.activePage?.content?.hasOverlay && App.pageOverlayCallback) {
-                let event = PresentationActionHandler.animateContentPageOverlayEvent(
-                    this,
-                    keyEvent,
-                    App.activePage,
-                    false,
-                    'close',
-                    1
-                );
+                /** @type {AnimateContentPageOverlayEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: keyEvent,
+                    activePage: App.activePage,
+                    inReverse: false,
+                    usingAction: 'close',
+                    withDuration: 1
+                };
 
                 App.pageOverlayCallback(event)
             }
@@ -671,27 +679,29 @@ class AppService {
         }
 
         if (App.activePage?.content?.hasForwardAnimationsRemaining() && App.pageAnimationCallback) {
-            let event = PresentationActionHandler.animateContentPageOverlayEvent(
-                this,
-                clickEvent,
-                App.activePage,
-                false,
-                'animate',
-                1
-            );
+            /** @type {AnimateContentPageOverlayEvent} */
+            let event = {
+                originatingObject: this,
+                originatingEvent: clickEvent,
+                activePage: App.activePage,
+                inReverse: false,
+                usingAction: 'animate',
+                withDuration: 1
+            };
 
             App.pageAnimationCallback(event);
 
         } else if (App.activePage?.nextPage != null && App.pageNavigationCallback) {
-            let event = PresentationActionHandler.transitionContentPageEvent(
-                this,
-                clickEvent,
-                App.activePage,
-                App.activePage.nextPage,
-                App.activePage.transitionForward,
-                App.activePage.transitionForwardDuration,
-                false
-            );
+            /** @type {TransitionContentPageEvent} */
+            let event = {
+                originatingObject: this,
+                originatingEvent: clickEvent,
+                transitionFromPage: App.activePage,
+                transitionToPage: App.activePage.nextPage,
+                usingTransition: App.activePage.transitionForward,
+                withDuration: App.activePage.transitionForwardDuration,
+                inReverse: true
+            }
 
             App.pageNavigationCallback(event);
         }

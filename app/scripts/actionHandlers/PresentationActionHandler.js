@@ -38,22 +38,6 @@ class PresentationActionHandler {
      */
 
     /**
-     * @param {*} originatingObject
-     * @param {KeyboardEvent|MouseEvent} originatingEvent
-     * @param {PageNode} activePage
-     * @param {boolean} inReverse
-     * @returns {AnimateContentPageEvent}
-     */
-    static animateContentPageEvent(originatingObject, originatingEvent, activePage, inReverse) {
-        return {
-            originatingObject,
-            originatingEvent,
-            activePage,
-            inReverse
-        }
-    }
-
-    /**
      * Animates a page
      * @param {AnimateContentPageEvent} payload
      * @returns {void}
@@ -73,31 +57,9 @@ class PresentationActionHandler {
      * @property {PageNode} transitionFromPage
      * @property {PageNode} transitionToPage
      * @property {PageTransition} usingTransition
-     * @property {number} withDuration
      * @property {boolean} inReverse
+     * @property {number} withDuration
      */
-
-    /**
-     * @param {*} originatingObject
-     * @param {KeyboardEvent|MouseEvent} originatingEvent
-     * @param {PageNode} transitionFromPage
-     * @param {PageNode} transitionToPage
-     * @param {PageTransition} usingTransition
-     * @param {number} withDuration
-     * @param {boolean} inReverse
-     * @returns {TransitionContentPageEvent}
-     */
-    static transitionContentPageEvent(originatingObject, originatingEvent, transitionFromPage, transitionToPage, usingTransition, withDuration, inReverse) {
-        return {
-            originatingObject,
-            originatingEvent,
-            transitionFromPage,
-            transitionToPage,
-            usingTransition,
-            withDuration,
-            inReverse,
-        }
-    }
 
     /**
      * Animates a page overlay
@@ -134,26 +96,6 @@ class PresentationActionHandler {
      * Action that can be applied to a page overlay
      * @typedef {'open'|'close'|'animate'} OverlayAction
      */
-
-    /**
-     * @param {*} originatingObject
-     * @param {KeyboardEvent|MouseEvent} originatingEvent
-     * @param {PageNode} activePage
-     * @param {boolean} inReverse
-     * @param {OverlayAction} usingAction
-     * @param {number} withDuration
-     * @returns {AnimateContentPageOverlayEvent}
-     */
-    static animateContentPageOverlayEvent(originatingObject, originatingEvent, activePage, inReverse, usingAction, withDuration) {
-        return {
-            originatingObject,
-            originatingEvent,
-            activePage,
-            inReverse,
-            usingAction,
-            withDuration
-        }
-    }
 
     /**
      * Animates a page overlay

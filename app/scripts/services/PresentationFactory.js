@@ -11,11 +11,11 @@ class PresentationFactory {
     #addBackgroundToDOMElement;
 
     /**
-     * @param {Dictionary<PageNode>} intoPageNodeLibrary 
-     * @param {Dictionary<CCPageContent>} intoPageContentLibrary 
-     * @param {Dictionary<CCBackground>} intoBackgroundLibrary 
-     * @param {HTMLElement?} addPageContentToDOMElement 
-     * @param {HTMLElement?} addBackgroundToDOMElement 
+     * @param {Dictionary<PageNode>} intoPageNodeLibrary
+     * @param {Dictionary<CCPageContent>} intoPageContentLibrary
+     * @param {Dictionary<CCBackground>} intoBackgroundLibrary
+     * @param {HTMLElement?} addPageContentToDOMElement
+     * @param {HTMLElement?} addBackgroundToDOMElement
      */
     constructor(intoPageNodeLibrary, intoPageContentLibrary, intoBackgroundLibrary, addPageContentToDOMElement, addBackgroundToDOMElement) {
         if (intoPageNodeLibrary != null) {
@@ -41,7 +41,7 @@ class PresentationFactory {
 
     /**
      * Creates a new {@link PageNode} element and appends it to the given library
-     * @param {AppPages} name 
+     * @param {AppPages} name
      * @returns {PageNode?}
      */
     newPageNode(name) {
@@ -58,10 +58,10 @@ class PresentationFactory {
 
         return pageNode;
     }
-    
+
     /**
      * Creates a new {@link CCPageContent} element and appends it to the given library
-     * @param {AppPageContents} name 
+     * @param {AppPageContents} name
      * @returns {HTMLElement?}
      */
     newPageContent(name) {
@@ -83,13 +83,13 @@ class PresentationFactory {
         if (this.#addPageContentToDOMElement != null) {
             this.#addPageContentToDOMElement.appendChild(component);
         }
-        
+
         return component;
     }
 
     /**
      * Creates a new {@link CCBackground} element and appends it to the given library
-     * @param {AppBackgrounds} name 
+     * @param {AppBackgrounds} name
      * @returns {HTMLElement?}
      */
     newBackground(name) {
@@ -102,7 +102,7 @@ class PresentationFactory {
         component.id = name;
         // @ts-ignore due to create element returning a HTMLElement type (which is actually a CCBackground)
         component.hide();
-        
+
         if (this.#intoBackgroundLibrary != null) {
             // @ts-ignore due to create element returning a HTMLElement type (which is actually a CCBackground)
             this.#intoBackgroundLibrary[name] = component;
