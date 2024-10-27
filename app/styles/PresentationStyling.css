@@ -449,37 +449,81 @@ ul.XL li.Tick::before,
 ul.XL li.Cross::before {
     left: -3.9vmin;
     top: 1.35vmin;
+    height: 2.8vmin;
 }
 
 ul.L li.Tick::before,
 ul.L li.Cross::before {
     left: -3.45vmin;
     top: 1.225vmin;
+    height: 2.45vmin;
 }
 
 ul.M li.Tick::before,
 ul.M li.Cross::before {
     left: -3vmin;
     top: 1.1vmin;
+    height: 2.1vmin;
 }
 
 ul.S li.Tick::before,
 ul.S li.Cross::before {
     left: -2.6vmin;
     top: 0.85vmin;
+    height: 1.75vmin;
 }
 
 ul.XS li.Tick::before,
 ul.XS li.Cross::before {
     left: -2.2vmin;
     top: 0.7vmin;
+    height: 1.4vmin;
 }
 
 ul.XXS li.Tick::before,
 ul.XXS li.Cross::before {
     left: -1.75vmin;
     top: 0.5vmin;
+    height: 1.05vmin;
 }
+
+/* Content Colours & Fonts */
+p.Green,
+ul.Green,
+li.Green,
+span.Green {
+    color: #32bea6;
+}
+
+p.Blue,
+ul.Blue,
+li.Blue,
+span.Blue {
+    color: #238ddd;
+}
+
+p.Red,
+ul.Red,
+li.Red,
+span.Red {
+    color: #e74856;
+}
+
+p.Ice,
+ul.Ice,
+li.Ice,
+span.Ice {
+    color: #9cdcfe;
+}
+
+p.Code,
+ul.Code,
+li.Code,
+span.Code {
+    font-family: Consolas;
+}
+
+
 
 .Fadeable {
     transition: all 0.5s ease-in-out;
