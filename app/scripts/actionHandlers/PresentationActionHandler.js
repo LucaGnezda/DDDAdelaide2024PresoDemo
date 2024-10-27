@@ -116,7 +116,7 @@ class PresentationActionHandler {
 
     /**
      * Zooms into a given page
-     * @param {string} section
+     * @param {AppPages} section
      * @returns {void}
      */
     ZoomInToSection(section) {

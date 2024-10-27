@@ -700,7 +700,7 @@ class AppService {
                 transitionToPage: App.activePage.nextPage,
                 usingTransition: App.activePage.transitionForward,
                 withDuration: App.activePage.transitionForwardDuration,
-                inReverse: true
+                inReverse: false
             }
 
             App.pageNavigationCallback(event);

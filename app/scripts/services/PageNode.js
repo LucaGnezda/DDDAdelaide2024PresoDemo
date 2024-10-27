@@ -11,12 +11,12 @@ class PageNode {
      * @type {string}
      */
     #nodeId;
-    
+
     /**
      * @type {CCBackground?}
      */
     #background = null;
-    
+
     /**
      * @type {number}
      */
@@ -31,27 +31,27 @@ class PageNode {
      * @type {string?}
      */
     #backgroundTransformer = null;
-    
+
     /**
      * @type {PageTransition}
      */
     #backgroundTransitionForward = PageTransition.None;
-    
+
     /**
      * @type {PageTransition}
      */
     #backgroundTransitionBack = PageTransition.None;
-    
+
     /**
      * @type {CCPageContent?}
      */
     #pageContent = null;
-    
+
     /**
      * @type {PageNode?}
      */
     #nextNode = null;
-    
+
     /**
      * @type {PageNode?}
      */
@@ -61,24 +61,24 @@ class PageNode {
      * @type {PageTransition}
      */
     #transitionForward = PageTransition.None;
-    
+
     /**
      * @type {number}
      */
     #transitionForwardDuration = 0;
-    
+
     /**
      * @type {PageTransition}
      */
     #transitionBack = PageTransition.None;
-    
+
     /**
      * @type {number}
      */
     #transitionBackDuration = 0;
 
     /**
-     * @param {string} nodeId 
+     * @param {string} nodeId
      */
     constructor(nodeId) {
         this.#nodeId = nodeId;
@@ -94,7 +94,7 @@ class PageNode {
     get content() {
         return this.#pageContent;
     }
-    
+
     get nextPage() {
         return this.#nextNode;
     }
@@ -125,7 +125,7 @@ class PageNode {
 
     get transitionBackDuration() {
         return this.#transitionBackDuration;
-    } 
+    }
 
     get background() {
         return this.#background;
@@ -138,18 +138,18 @@ class PageNode {
     get backgroundY() {
         return this.#backgroundY
     }
-    
+
     get backgroundTransformer() {
         return this.#backgroundTransformer;
     }
-    
+
     /*
      * Public Methods
      */
-    
+
     /**
      * Sets the page content for the node
-     * @param {CCPageContent} pageContent 
+     * @param {CCPageContent} pageContent
      * @returns {void}
      */
     setPageContent(pageContent) {
@@ -158,10 +158,10 @@ class PageNode {
 
     /**
      * Sets the background for the node
-     * @param {CCBackground} background 
-     * @param {number} pageX 
-     * @param {number} pageY 
-     * @param {string?} transformerClass 
+     * @param {CCBackground} background
+     * @param {number} pageX
+     * @param {number} pageY
+     * @param {string?} transformerClass
      * @returns {void}
      */
     setBackground(background, pageX = 0, pageY = 0, transformerClass) {
@@ -173,11 +173,11 @@ class PageNode {
 
     /**
      * Sets the page content and background for the node
-     * @param {CCPageContent} pageContent 
-     * @param {CCBackground} background 
-     * @param {number} pageX 
-     * @param {number} pageY 
-     * @param {string?} transformerClass 
+     * @param {CCPageContent} pageContent
+     * @param {CCBackground} background
+     * @param {number} pageX
+     * @param {number} pageY
+     * @param {string?} transformerClass
      * @returns {void}
      */
     setPageContentAndBackground(pageContent, background, pageX, pageY, transformerClass) {
@@ -187,11 +187,11 @@ class PageNode {
 
     /**
      * Sets the next page for the node along with transtition classes/info
-     * @param {PageNode} node 
-     * @param {PageTransition?} transitionForward 
-     * @param {PageTransition?} transitionBack 
-     * @param {number} duration 
-     * @returns 
+     * @param {PageNode} node
+     * @param {PageTransition?} transitionForward
+     * @param {PageTransition?} transitionBack
+     * @param {number} duration
+     * @returns
      */
     setNextPage(node, transitionForward, transitionBack, duration) {
         if (transitionForward != null) {
@@ -205,10 +205,10 @@ class PageNode {
 
     /**
      * Sets the previous page for the node along with transtition classes/info
-     * @param {PageNode} node 
-     * @param {PageTransition?} transitionBack 
-     * @param {number} duration 
-     * @returns 
+     * @param {PageNode} node
+     * @param {PageTransition?} transitionBack
+     * @param {number} duration
+     * @returns
      */
     setPreviousPage(node, transitionBack, duration) {
         if (transitionBack != null) {
