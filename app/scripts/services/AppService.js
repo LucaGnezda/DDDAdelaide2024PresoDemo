@@ -575,7 +575,7 @@ class AppService {
                 App.pageAnimationCallback(event);
 
             }
-            else if (App.activePage?.nextPage != null && App.pageNavigationCallback != null) {
+            else if (App.activePage?.nextPage != null && App.activePage.transitionForward && App.activePage.transitionForwardDuration && App.pageNavigationCallback != null) {
                 /** @type {TransitionContentPageEvent} */
                 let event = {
                     originatingObject: this,
@@ -622,7 +622,7 @@ class AppService {
 
                 App.pageAnimationCallback(event);
 
-            } else if (App.activePage?.previousPage != null && App.pageNavigationCallback != null) {
+            } else if (App.activePage?.previousPage != null && App.activePage.transitionBack && App.activePage.transitionBackDuration && App.pageNavigationCallback != null) {
                 /** @type {TransitionContentPageEvent} */
                 let event = {
                     originatingObject: this,
@@ -691,7 +691,7 @@ class AppService {
 
             App.pageAnimationCallback(event);
 
-        } else if (App.activePage?.nextPage != null && App.pageNavigationCallback) {
+        } else if (App.activePage?.nextPage != null && App.activePage.transitionForward && App.activePage.transitionForwardDuration && App.pageNavigationCallback != null) {
             /** @type {TransitionContentPageEvent} */
             let event = {
                 originatingObject: this,

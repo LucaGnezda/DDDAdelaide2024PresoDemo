@@ -58,24 +58,24 @@ class PageNode {
     #previousNode = null;
 
     /**
-     * @type {PageTransition}
+     * @type {PageTransition?}
      */
-    #transitionForward = PageTransition.None;
+    #transitionForward = null;
 
     /**
-     * @type {number}
+     * @type {number?}
      */
-    #transitionForwardDuration = 0;
+    #transitionForwardDuration = null;
 
     /**
-     * @type {PageTransition}
+     * @type {PageTransition?}
      */
-    #transitionBack = PageTransition.None;
+    #transitionBack = null;
 
     /**
-     * @type {number}
+     * @type {number?}
      */
-    #transitionBackDuration = 0;
+    #transitionBackDuration = null;
 
     /**
      * @param {string} nodeId
