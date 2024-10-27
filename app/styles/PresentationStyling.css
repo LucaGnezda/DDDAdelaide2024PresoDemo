@@ -2,6 +2,7 @@ body {
     background: #000000;
     margin: 0px;
     overflow: hidden;
+    user-select: none;
 }
 
 .ContentSource {
