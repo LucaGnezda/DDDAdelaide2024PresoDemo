@@ -106,7 +106,7 @@
                     <p class="L Green">We need to be able to figure out what's going on in the code; tracing, debugging and reporting errors, with well formatted and categorised console output.</p>
                     <p class="L"><b>Key points:</b></p>
                     <ul class="M">
-                        <li class="Tick">Not hard, do it now, while debugging observables.
+                        <li class="Tick">Not hard, do it now, while debugging observables.</li>
                         <li class="Tick">Adding it everywhere later on will be a real drag.</li>
                     </ul>
                     <p class="L"><b>Simply put:</b></p>
@@ -132,7 +132,7 @@
                 <div class="PageTitle">Observables</div>
                 <div class="PageContents">
                     <p class="L"><b>Goal:</b></p>
-                    <p class="L Green">We want to be able to identify some data structures as observable. They should be able to take any form, and when we change them, they should fire events in response, describing the change.</p>
+                    <p class="L Green">We want to be able to identify some data structures as observable. The data should be able to take any form, and when changed, should fire events in response, describing that change.</p>
                     <p class="L"><b>Key points:</b></p>
                     <ul class="M">
                         <li class="Cross">There isn't a simple JavaScript answer for this.</li>
@@ -170,13 +170,54 @@
                 </div>
             </data>
             <data value="store1">
-                <div class="PageTitle">Store 1</div>
+                <div class="PageTitle">Store</div>
                 <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We now want to use observables manage data in our app. We should be able to organise our data across any number of structures, both singular and as individualised named collections.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li>Not too hard, now we have our fancy observables building blocks.</li>
+                        <li>But we still need to set it up in a clean, easy to use form.</li>
+                    </ul>
+                    <p class="L">It needs to:</p>
+                    <ul class="M">
+                        <li class="Tick">Expose the subscription functionality.</li>
+                        <li class="Tick">Expose the Notification Mode (Batch, Immediate, Forced) functionality.</li>
+                        <li class="Tick">Expose the Notification Status (Active, Inactive) functionality.</li>
+                        <li class="Tick">Have a dictionary form, for things like list collections.</li>
+                        <li class="Tick">Have a single object form. that can hold properties, arrays, and the like.</li>
+                    </ul>
+                    <p class="L">Easy .. we'll be done by lunchtime.</p>
                 </div>
             </data>
             <data value="store2">
-                <div class="PageTitle">Store 2</div>
+                <div class="PageTitle">Store</div>
                 <div class="PageContents">
+                    <p class="L">Well after some debugging... a mere weekend later, we can:</p>
+                    <ul class="M">
+                        <li>Define a store.
+                            <p class="XS Ice Code Indent1">App.store = new Store();</p>
+                        </li>
+                        <li>Instantiate named observables within the store
+                            <p class="XS Ice Code Indent1">App.store.addObservables("Settings");</p>
+                            <p class="XS Ice Code Indent1">App.store.Settings.observableData = {...};</p>
+                        </li>
+                        <li>Instantiate named dictionaries, as a collection of named observables within the store.
+                            <p class="XS Ice Code Indent1">App.store.addObservablesDictionary("ForniteTeam");</p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam.add("EllaSmella");</p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam.add("DrV");</p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam.add("Aga007");</p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam["Aga007"].observableData = {...};</p>
+                        </li>
+                        <li>Subscribe
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam["DrV"].addSubscriber(MyComponent, OnDataChange_Callback);</p>
+                        </li>
+                        <li>Emit
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam.emitNotifications(); <span class="XS Green Code Indent1"> // if set to manual</span></p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam["Aga007"].observableData = {...}; <span class="XS Green Code Indent1">// when immediate</span></p>
+                        </li>
+                    </ul>
+                    <p class="M Indent1 Green">Let's take a look at the result.</p>
                 </div>
             </data>
             <data value="eventBinding1">
