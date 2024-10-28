@@ -1,18 +1,22 @@
 /**
- * Enums used for the Logging solution
+ * Enum used for the Logging solution
+ * @enum {number}
+ * @readonly
+ * @property {number} Default
+ * @property {number} Off
+ * @property {number} Error
+ * @property {number} Warning
+ * @property {number} Information
+ * @property {number} Debug
+ * @property {number} Trace
  */
-
-"use strict";
-
-const LogLevel = AsEnum(
-    {
-        Default:     0, 
-        Off:         0,
-        // Fatal     1 - not relevant in javascript
-        Error:       2,
-        Warning:     3,
-        Infomation:  4,
-        Debug:       5,
-        Trace:       6
-    }
-);
+const LogLevel = {
+    Default:     0, 
+    Off:         0,
+    // Fatal     1 - not relevant in javascript
+    Error:       2,
+    Warning:     3,
+    Infomation:  4,
+    Debug:       5,
+    Trace:       6
+};

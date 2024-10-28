@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES6"
+        "target": "ES2023",
+        "checkJs": true,
+        "allowJs": true,
+        "strict": true
     },
 }

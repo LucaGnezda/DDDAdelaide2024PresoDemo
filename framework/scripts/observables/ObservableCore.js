@@ -2,37 +2,84 @@
  * ObservableCore is a object that is intended to be used within another
  * object, such as a component or Observable. It's purpose is to provide
  * and object that triggers change callbacks through use of a proxy.
+ * 
+ * NOTE: the typings in this file are ... Proxies and getters and setters
+ * on what is essentially an any type (an observable) are prrety weak.
+ * 
+ * @class
+ * @public
+ * @constructor
 */
-"use strict";
-
 class ObservableCore {
+    /**
+     * @type {*}
+     */
+    #originatingObject;
     
-    #originatingObject = null;
-    data = null;
-    dataProxy = null;
+    /**
+     * @type {Array<*>}
+     */
     #subscribers = [];
+    
+    /**
+     * @type {Array<*>}
+     */
     #subscriptionsTo = [];
+    
+    /**
+     * @type {NotificationMode}
+     */
     #notificationMode = NotificationMode.Default;
+    
+    /**
+     * @type {NotificationStatus}
+     */
     #notificationStatus = NotificationStatus.NotStarted;
+    
+    /**
+     * @type {boolean}
+     */
     #pendingNotification = false;
+    
+    /**
+     * @type {AnyDictionary}
+     */
+    data;
 
-    constructor(notificationMode, notificationStatus) {
+    /**
+     * @type {AnyDictionary}
+     */
+    dataProxy;
 
+    /**
+     * @param {NotificationMode?} notificationMode 
+     * @param {NotificationStatus?} notificationStatus 
+     */
+    constructor(notificationMode = null, notificationStatus = null) {
         let self = this;
         this.#originatingObject = this;
-        this.data = new ObservableData();
+        this.data = {};
 
-        if (!isEmptyOrNull(notificationMode) && NotificationMode.hasValue(notificationMode)) {
+        if (notificationMode) {
             this.#notificationMode = notificationMode;
         }
 
-        if (!isEmptyOrNull(notificationStatus)  && NotificationStatus.hasValue(notificationStatus)) {
+        if (notificationStatus) {
             this.#notificationStatus = notificationStatus;
         }
 
+        /**
+         * @param {Array<*>} path 
+         * @returns {*}
+         */
         let handler = (path = []) => ({
+            /**
+             * @param {*} target 
+             * @param {*} property 
+             * @param {*} reciever 
+             * @returns {*}
+             */
             get(target, property, reciever) {
-
                 if (typeof property === 'symbol'){
                     Log.trace(`Proxied Get. Getting ${target.constructor.name}.UnknownSymbol`, "PROXY");
                 }
@@ -54,8 +101,14 @@ class ObservableCore {
                 return Reflect.get(target, property, reciever);
             },
 
+            /**
+             * @param {*} target 
+             * @param {*} property 
+             * @param {*} newValue 
+             * @param {*} reciever 
+             * @returns {*}
+             */
             set(target, property, newValue, reciever) {
-                
                 Log.debug(`(${self.#originatingObject.constructor.name}.ObservableData): Proxied Set. Update observed for ${target.constructor.name}.${property} from ${target[property]} to ${newValue}`, "PROXY");
 
                 let oldValue = target[property];
@@ -84,12 +137,13 @@ class ObservableCore {
                     switch(self.notificationMode){
                         case NotificationMode.PropertyNotifyOnChange:
                             
-                            let event = new ObservableDataEvent();
-                            event.notificationMode = NotificationMode.PropertyNotifyOnChange;
-                            event.originatingObject = self.#originatingObject;
-                            event.path = path.concat(property);
-                            event.oldValue = oldValue;
-                            event.newValue = newValue;
+                            let event = new ObservableDataEvent(
+                                NotificationMode.PropertyNotifyOnChange,
+                                self.#originatingObject,
+                                path.concat(property),
+                                oldValue,
+                                newValue,
+                            );
 
                             Log.debug(`Propagating change event to subscribers`, "PROXY");
                             self.subscribers.map(obj => obj.callback(event));
@@ -103,7 +157,6 @@ class ObservableCore {
                         default:
                             // Shouldn't be here!!!!
                             Log.debug("Error: Invalid NotificationMode", "PROXY")
-
                     }
                 }
                 
@@ -112,8 +165,7 @@ class ObservableCore {
         });
 
         Log.debug(`Object proxy created for ${this.data.constructor.name} in parent object ${self.#originatingObject.constructor.name}`, "PROXY");
-        self.dataProxy = new Proxy(this.data, handler());
-
+        this.dataProxy = new Proxy(this.data, handler());
     }
 
     get originatingObject() {
@@ -121,7 +173,7 @@ class ObservableCore {
     }
 
     set originatingObject(val) {
-        Log.debug(`${this.dataProxy.constructor.name} in ${this.constructor.name} assigned to parent ${val.constructor.name}`, "PROXY")
+        Log.debug(`${this.dataProxy?.constructor.name} in ${this.constructor.name} assigned to parent ${val.constructor.name}`, "PROXY")
         this.#originatingObject = val;
     }
 
@@ -138,7 +190,7 @@ class ObservableCore {
     }
 
     set notificationMode(val) {
-        if (val != null && NotificationMode.hasValue(val)) {
+        if (val != null) {
             this.#notificationMode = val;
         }
         else {
@@ -151,7 +203,7 @@ class ObservableCore {
     }
 
     set notificationStatus(val) {
-        if (val != null && NotificationStatus.hasValue(val)) {
+        if (val != null) {
             this.#notificationStatus = val;
         }
         else {
@@ -159,8 +211,13 @@ class ObservableCore {
         }
     }
 
+    /**
+     * Adds a subscriber to the observable
+     * @param {*} obj 
+     * @param {ObservableCallback} callbackToAdd
+     * @returns {void}
+     */
     addSubscriber(obj, callbackToAdd) {
-        
         if (this.#subscribers.find(e => e.subscriber == obj)) {
             return;
         }
@@ -172,19 +229,27 @@ class ObservableCore {
         }
     }
 
+    /**
+     * Adds a subscription to the observable
+     * @param {*} obj 
+     * @param {ObservableCallback} callbackToAdd 
+     * @returns {void}
+     */
     subscribeTo(obj, callbackToAdd) {
-
         if (typeof obj.addSubscriber != 'function' || this.#subscriptionsTo.includes(obj)) {
             return;
         }
 
         this.#subscriptionsTo.push(obj);
         obj.addSubscriber(this.originatingObject, callbackToAdd);
-    
     }
 
+    /**
+     * Removes a subscriber from the observable
+     * @param {*} obj 
+     * @returns {void}
+     */
     removeSubscriber(obj) {
-
         if (!this.#subscribers.find(e => e.subscriber == obj)) {
             return;
         }
@@ -196,26 +261,40 @@ class ObservableCore {
         }
     }
 
+    /**
+     * Removes a subscription from the observable
+     * @param {*} obj 
+     * @returns {void}
+     */
     unsubscribeFrom(obj) {
-
         if (typeof obj.removeSubscriber != 'function' || !this.#subscriptionsTo.includes(obj)) {
             return;
         }
 
         this.#subscriptionsTo = this.#subscriptionsTo.filter(e => e != obj);
         obj.removeSubscriber(this.originatingObject);
-
     }
 
+    /**
+     * Removes all subscriptions from the observable
+     * @returns {void}
+     */
     removeAllSubscriptions() {
         this.#subscribers.map(obj => this.removeSubscriber(obj.subscriber));
         this.#subscriptionsTo.map(obj => this.unsubscribeFrom(obj));
     }
 
+    /**
+     * Mark the observable as notification pending
+     */
     notificationRequired() {
         this.#pendingNotification = true;
     }
 
+    /**
+     * Emits notifications for the observable
+     * @param {boolean} isforced 
+     */
     emitNotifications(isforced) {
         if (this.#pendingNotification || isforced) {
 
@@ -223,12 +302,14 @@ class ObservableCore {
 
             Log.debug(`Emitting notifications in ${this.constructor.name} for ${this.originatingObject.constructor.name}`, "STORE");
 
-            let event = new ObservableDataEvent();
-            event.notificationMode = NotificationMode.ObjectNotifyOnEmit;
-            event.originatingObject = this.originatingObject;
-            event.path = null;
-            event.oldValue = null;
-            event.newValue = null;
+            // TODO: work out if this is reasonable? Should there be nulls here?
+            let event = new ObservableDataEvent(
+                NotificationMode.ObjectNotifyOnEmit,
+                this.originatingObject,
+                null,
+                null,
+                null,
+            );
 
             if (typeof isforced == "string") {  
                 // If a string was provided, use it as a key to target the recipient by id
@@ -243,6 +324,5 @@ class ObservableCore {
                 this.#subscribers.map(obj => obj.callback(event));
             }
         }
-        
     }
 }
