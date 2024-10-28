@@ -2,8 +2,8 @@ cc-page {
     display: contents;
 }
 
-.CCPageRoot, 
-.CCPageOverlay, 
+.CCPageRoot,
+.CCPageOverlay,
 .CCPagePrimary {
     width: 100%;
     height: 100%;
@@ -27,7 +27,7 @@ cc-page {
     list-style: none;
 }
 
-.CCPageRoot.Hide, 
+.CCPageRoot.Hide,
 .CCPageOverlay.Hide,
 .CCPagePrimary.Hide {
     display: none;
@@ -67,8 +67,8 @@ cc-page {
     }
 }
 
-.CCPageRoot.EnterFromBottom, 
-.CCPageOverlay.EnterFromBottom, 
+.CCPageRoot.EnterFromBottom,
+.CCPageOverlay.EnterFromBottom,
 .CCPagePrimary.EnterFromBottom {
     @starting-style {
         top: 100%;
@@ -89,8 +89,8 @@ cc-page {
     top: -100%;
 }
 
-.CCPageRoot.ExitToBottom, 
-.CCPageOverlay.ExitToBottom, 
+.CCPageRoot.ExitToBottom,
+.CCPageOverlay.ExitToBottom,
 .CCPagePrimary.ExitToBottom {
     top: 100%;
 }

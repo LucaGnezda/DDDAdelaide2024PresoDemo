@@ -1,7 +1,14 @@
-"use strict";
-
+/**
+ * @class
+ * @public
+ * @constructor
+ */
 class ComponentRegistry {
-
+    /**
+     * Adds all of the apps custom components as custom elements
+     * @static
+     * @returns {void}
+     */
     static registerComponents() {
         customElements.define("cc-appmodelelement", CCAppModelElement);
         customElements.define("cc-background", CCBackground);      
@@ -10,5 +17,4 @@ class ComponentRegistry {
         customElements.define("cc-frameworkelement", CCFrameworkElement);  
         customElements.define("cc-pagecontent", CCPageContent);  
     }
-
 }

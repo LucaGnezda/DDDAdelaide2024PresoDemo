@@ -1,11 +1,18 @@
-"use strict";
-
+/**
+ * @class
+ * @public
+ * @constructor
+ */
 class CCAppModelElement extends CCObservableBase {
-
     /**
-     * Member attributes
+     * Definitions for internal elements
+     * @typedef {('root'|'title'|'unknown'|'known'|'knownIcon')} AppModelElementElement
      */
-
+         
+    /**
+     * The elements that make up this component
+     * @type {LimitedDictionary<AppModelElementElement, HTMLElement?>}
+     */
     #elements = {
         root: null,
         title: null,
@@ -14,6 +21,10 @@ class CCAppModelElement extends CCObservableBase {
         knownIcon: null
     };
 
+    /**
+     * The html template for the component
+     * @property {string} #htmlTemplate  
+     */
     static #htmlTemplate = `
         <div class="CCAppModelElementRoot" data-element-root>
             <div class="CCAppModelElementTitle" data-element-title></div>
@@ -26,11 +37,7 @@ class CCAppModelElement extends CCObservableBase {
         </div>
     `
 
-    /**
-     * Constructor
-     */
     constructor() {
-
         // construct the core object. Note, order of operation matters here as you can't call 'this' before 'super'
         let state = new ObservableCore();
         super(state);
@@ -39,7 +46,7 @@ class CCAppModelElement extends CCObservableBase {
         state.addSubscriber(this, this.dataChangedCallback);
 
         // Allocate a guid
-        if (isEmptyOrNull(this.id)) {
+        if (this.id === "") {
             this.id = crypto.randomUUID();
         }
 
@@ -50,16 +57,14 @@ class CCAppModelElement extends CCObservableBase {
 
     }
 
-
-    /**
+    /*
      * Standard Component Methods
      */
     static get observedAttributes() {
         return [];
     }
 
-
-    /**
+    /*
      * Getters & Setters
      */
     get title() {
@@ -78,14 +83,17 @@ class CCAppModelElement extends CCObservableBase {
         this.observableData.knownIconSrc = s;
     }
 
-
-    /**
+    /*
      * Private Methods
      */
+
+    /**
+     * Checks whether the UI is initialised, if not
+     * the named elements are pulled from the htmlTemplate and
+     * inserted into the page elements.
+     */
     #confirmUXIsInitialised() {
-
         if (this.children.length == 0) {
-
             let fragment = getDOMFragmentFromString(CCAppModelElement.#htmlTemplate);
 
             this.#elements.root = fragment.querySelector('[data-element-root]');
@@ -95,55 +103,64 @@ class CCAppModelElement extends CCObservableBase {
             this.#elements.knownIcon = fragment.querySelector('[data-element-knownicon]');
             
             this.appendChild(fragment);
-
         }
-
     }
-
-    #initialiseAttributes() {
-
-    }
-
 
     /**
+     * Initialises the attributes for the pgae
+     */
+    #initialiseAttributes() { }
+
+    /*
      * Public Methods
      */
+
+    /**
+     * Dynamically renders the component content
+     * @returns {void}
+     */
     render() {
-        
         // Title
-        if (this.observableData.title != null) {
-            this.#elements.title.innerText = this.observableData.title;
+        if (this.#elements.title) {
+            if (this.observableData.title != null) {
+                this.#elements.title.innerText = this.observableData.title;
+            }
+            else {
+                this.#elements.title.innerText = "Unnamed";
+            } 
         }
-        else {
-            this.#elements.title.innerText = "Unnamed";
-        } 
 
         // KnownIconSrc
-        if (this.observableData.knownIconSrc != null) {
-            this.#elements.knownIcon.src = this.observableData.knownIconSrc;
-        }
-        else {
-            this.#elements.knownIcon.src = "./app/assets/clouds.svg";
+        if (this.#elements.knownIcon && this.#elements.knownIcon instanceof HTMLImageElement) {
+            if (this.observableData.knownIconSrc != null) {
+                this.#elements.knownIcon.src = this.observableData.knownIconSrc;
+            }
+            else {
+                this.#elements.knownIcon.src = "./app/assets/clouds.svg";
+            }
         }
         
         // Is Unlocked
-        if (this.observableData.isUnlocked) {
-            this.#elements.known.classList.remove("Hide");
-            this.#elements.unknown.classList.add("Hide");
+        if (this.#elements.known && this.#elements.unknown) {
+            if (this.observableData.isUnlocked) {
+                this.#elements.known.classList.remove("Hide");
+                this.#elements.unknown.classList.add("Hide");
+            }
+            else {
+                this.#elements.known.classList.add("Hide");
+                this.#elements.unknown.classList.remove("Hide");
+            }
         }
-        else {
-            this.#elements.known.classList.add("Hide");
-            this.#elements.unknown.classList.remove("Hide");
-        }
-
     }
 
-
-     /**
+     /*
      * Callbacks
      */
-     connectedCallback() {
 
+     /**
+      * Callback called when the component is connected to the DOM
+      */
+     connectedCallback() {
         this.#confirmUXIsInitialised();
         this.#initialiseAttributes();
 
@@ -151,18 +168,30 @@ class CCAppModelElement extends CCObservableBase {
 
         this.render();
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
-
     }
     
+    /**
+     * Callback called when the component is disconnected from the DOM
+     */
     disconnectedCallback() {
         Log.debug(`${this.constructor.name} disconnected from DOM`, "COMPONENT");
     }
 
+    /**
+     * Callback for attribute changed events
+     * @param {string} name 
+     * @param {*} oldValue 
+     * @param {*} newValue 
+     */
     attributeChangedCallback(name, oldValue, newValue) {
         this.render();
         Log.debug(`${this.constructor.name}, value ${name} changed from ${oldValue} to ${newValue}`, "COMPONENT");
     }
 
+    /**
+     * Callback for observable data changed events
+     * @param {ObservableDataEvent} event 
+     */
     dataChangedCallback(event) {
         this.render();
         Log.debug(`Data change callback on component ${event.originatingObject.constructor.name} with id:${event.originatingObject.id} updated property ${event.path} from ${event.oldValue} to ${event.newValue}`, "COMPONENT");
