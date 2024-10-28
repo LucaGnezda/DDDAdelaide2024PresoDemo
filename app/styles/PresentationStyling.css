@@ -40,6 +40,13 @@ body {
     transition: all 1.0s ease-in-out;
 }
 
+.DDDPageBackground {
+    background-color: #f3ebe0;
+    opacity: 1;
+    position: absolute;
+    transition: all 1.0s ease-in-out;
+}
+
 .TestTransformer1 {
     transform: scale(0.5);
 }

@@ -16,7 +16,7 @@
     font-style: normal;
   }
 
-  @font-face {
+@font-face {
     font-family: 'Nunito';
     src: url('../fonts/Nunito-VariableItalic.woff2') format('woff2'),
          url('../fonts/Nunito-VariableItalic.woff') format('woff'),
@@ -24,5 +24,21 @@
     font-weight: 200 1000;
     font-display: swap;
     font-style: italic;
-  }
+}
+
+@font-face {
+     font-family: 'Segoe UI';
+     src: url('../fonts/SegUIVar.ttf') format('truetype');
+     font-weight: 200 1000;
+     font-display: swap;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'Segoe UI';
+     src: url('../fonts/SegUIVar.ttf') format('truetype');
+     font-weight: 200 1000;
+     font-display: swap;
+     font-style: italic;
+}
 
