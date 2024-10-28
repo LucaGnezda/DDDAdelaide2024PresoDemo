@@ -1,6 +1,7 @@
-
-"use strict";
-
+/**
+ * @class
+ * @public
+ */
 class AppService {
     static Initialise() {
         Log.setLoggingLevel(LogLevel.Trace);
@@ -522,13 +523,17 @@ class AppService {
             App.store.appModel["observables"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["logging"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["helpers"].observableData.state = FrameworkElementState.Solved;
-            /** @type {CCFrameworkElement} cast from HTMLElement */ (App.elements.appModelHandlers).setPlacement("80%", "68%", "10vmin", "10vmin", "1.5vmin");
+
+            if (App.elements.appModelHandlers instanceof CCFrameworkElement) {
+                (App.elements.appModelHandlers).setPlacement("80%", "68%", "10vmin", "10vmin", "1.5vmin");
+            }
+
             App.store.appModel["handlers"].observableData.title = "Handlers";
-            /** @type {CCFrameworkElement} cast from HTMLElement */ (App.elements.AppModelAppStructure).setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
-            /** @type {CCFrameworkElement} cast from HTMLElement */ (App.elements.AppModelAppStructure).solvedImageStylingClassList.add("Rotating");
-            /** @type {CCFrameworkElement} cast from HTMLElement */ (App.elements?.appModelHandlers).setPlacement("60%", "58%", "10vmin", "10vmin", "1.5vmin");
-            App.store.appModel["handlers"].observableData.title = "Handlers";
-            /** @type {CCFrameworkElement} cast from HTMLElement */ (App.elements?.AppModelAppStructure).setPlacement(null, null, "15vmin", "15vmin", "1.5vmin");
+            
+            if (App.elements.AppModelAppStructure instanceof CCFrameworkElement) {
+                App.elements.AppModelAppStructure.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
+                App.elements.AppModelAppStructure.solvedImageStylingClassList.add("Rotating");
+            }
         }
 
         App.store?.appModel.emitNotifications();
