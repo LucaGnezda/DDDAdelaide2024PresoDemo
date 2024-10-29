@@ -34,6 +34,19 @@ class Log {
     static removeLoggingCategoryRestrictions() {
         this.#logCategories = [];
     }
+    
+    /**
+     * Logs a fatal error to the console and throws and error
+     * @param {string} msg 
+     * @param {string} category 
+     * @param {*} context
+     * @throws
+     */
+    static fatal(msg, category, context) {
+        Log.#log("Fatal Error", "color:#ffffff; background: #ee2225", msg, LogLevel.Fatal, category);
+        let contextString = context ? `in ${context.constructor.name}` : "";
+        throw `Fatal Error ${contextString} with message: ${msg}`;
+    }
 
     /**
      * Logs an error to the console

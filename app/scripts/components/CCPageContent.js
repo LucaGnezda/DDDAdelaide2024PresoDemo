@@ -399,7 +399,11 @@ class CCPageContent extends CCBase {
             sDelay = delay + "s";
         }
 
-        if (!this.#elements.pageTransformer || !this.#elements.pageRoot || !this.#elements.pagePrimary || !this.#elements.pageOverlay) return;
+        if (!this.#elements.pageTransformer || !this.#elements.pageRoot || !this.#elements.pagePrimary || !this.#elements.pageOverlay) {
+            Log.fatal("Page elements not correctly loaded","",this);
+            return;
+        }
+
 
         this.#elements.pageTransformer.style.transitionDuration = sDuration;
         this.#elements.pageTransformer.style.transitionTimingFunction = timingFunction;
@@ -451,7 +455,10 @@ class CCPageContent extends CCBase {
             odel = overlayDelay + "s";
         }
 
-        if (!this.#elements.pageOverlay || !this.#elements.pagePrimary) return;
+        if (!this.#elements.pageOverlay || !this.#elements.pagePrimary) {
+            Log.fatal("Page elements not correctly loaded","",this);
+            return;
+        }
 
         this.#elements.pagePrimary.style.transitionDuration = pdur;
         this.#elements.pagePrimary.style.transitionTimingFunction = primaryTimingFunction;

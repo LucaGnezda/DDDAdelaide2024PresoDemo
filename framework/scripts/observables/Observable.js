@@ -39,7 +39,6 @@ class Observable {
      * @returns {NotificationMode?}
      */
     get notificationMode() {
-        if (!this.#state) return null;
         return this.#state.notificationMode;
     }
 
@@ -47,16 +46,13 @@ class Observable {
      * @param {NotificationMode} val
      */
     set notificationMode(val) {
-        if (this.#state) {
-            this.#state.notificationMode = val;
-        }
+        this.#state.notificationMode = val;
     }
 
     /**
      * @returns {NotificationStatus?}
      */
     get notificationStatus() {
-        if (!this.#state) return null;
         return this.#state.notificationStatus;
     }
 
@@ -64,23 +60,19 @@ class Observable {
      * @param {NotificationStatus} val
      */
     set notificationStatus(val) {
-        if (this.#state) {
-            if (val != null) {
-                this.#state.notificationStatus = val;
-            }
-            else {
-                this.#state.notificationStatus = NotificationStatus.Default;
-            }
+        if (val != null) {
+            this.#state.notificationStatus = val;
+        }
+        else {
+            this.#state.notificationStatus = NotificationStatus.Default;
         }
     }
 
     get subscribers() {
-        if (!this.#state) return null;
         return this.#state.subscribers;
     }
 
     get subscriptionsTo() {
-        if (!this.#state) return null;
         return this.#state.subscriptionsTo;
     }
 
@@ -91,7 +83,6 @@ class Observable {
      * @returns {void}
      */
     addSubscriber(obj, callbackToAdd) {
-        if (!this.#state) return;
         this.#state.addSubscriber(obj, callbackToAdd);
     }
 
@@ -102,7 +93,6 @@ class Observable {
      * @returns {void}
      */
     subscribeTo(obj, callbackToAdd) {
-        if (!this.#state) return;
         this.#state.subscribeTo(obj, callbackToAdd);
     }
 
@@ -112,7 +102,6 @@ class Observable {
      * @returns {void}
      */
     removeSubscriber(obj) {
-        if (!this.#state) return;
         this.#state.removeSubscriber(obj);
     }
 
@@ -122,7 +111,6 @@ class Observable {
      * @returns {void}
      */
     unsubscribeFrom(obj) {
-        if (!this.#state) return;
         this.#state.unsubscribeFrom(obj);
     }
 
@@ -131,7 +119,6 @@ class Observable {
      * @returns {void}
      */
     removeAllSubscriptions() {
-        if (!this.#state) return;
         this.#state.removeAllSubscriptions();
     }
 
@@ -141,7 +128,6 @@ class Observable {
      * @returns {void}
      */
     emitNotifications(force) {
-        if (!this.#state) return;
         this.#state.emitNotifications(force);
     }
 }

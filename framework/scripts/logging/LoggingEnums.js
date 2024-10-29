@@ -4,6 +4,7 @@
  * @readonly
  * @property {number} Default
  * @property {number} Off
+ * @property {number} Fatal
  * @property {number} Error
  * @property {number} Warning
  * @property {number} Information
@@ -13,7 +14,7 @@
 const LogLevel = {
     Default:     0, 
     Off:         0,
-    // Fatal     1 - not relevant in javascript
+    Fatal:       1,
     Error:       2,
     Warning:     3,
     Infomation:  4,

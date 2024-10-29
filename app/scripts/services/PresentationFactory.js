@@ -46,7 +46,7 @@ class PresentationFactory {
      */
     newPageNode(name) {
         if (this.#intoPageNodeLibrary != null && this.#intoPageNodeLibrary.hasOwnProperty(name)) {
-            Log.error("A pageNode with this name already exists in the specified library, unable to add", "FACTORY");
+            Log.fatal("A pageNode with this name already exists in the specified library, unable to add", "FACTORY", this);
             return null;
         }
 
@@ -66,7 +66,7 @@ class PresentationFactory {
      */
     newPageContent(name) {
         if (this.#intoPageContentLibrary != null && this.#intoPageContentLibrary.hasOwnProperty(name)) {
-            Log.error("A CCPage component with this name already exists in the specified library, unable to add", "FACTORY");
+            Log.fatal("A CCPage component with this name already exists in the specified library, unable to add", "FACTORY", this);
             return null;
         }
 
@@ -94,7 +94,7 @@ class PresentationFactory {
      */
     newBackground(name) {
         if (this.#intoBackgroundLibrary != null && this.#intoBackgroundLibrary.hasOwnProperty(name)) {
-            Log.error("A background with this name already exists in the specified library, unable to add", "FACTORY");
+            Log.fatal("A background with this name already exists in the specified library, unable to add", "FACTORY", this);
             return null;
         }
 
