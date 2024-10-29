@@ -99,12 +99,16 @@ class AppService {
         let factory = new PresentationFactory(App.pages, App.pageContent, App.backgrounds, App.elements.pagesContainer, App.elements.backgroundsContainer);
 
         // Define & configure Backgrounds
+        factory.newBackground("dddBackground");
         factory.newBackground("introBackground");
         factory.newBackground("hubBackground");
         factory.newBackground("sectionBackground1");
         factory.newBackground("demoBackground");
 
         // Define Pages Content
+        factory.newPageContent("ddd");
+        factory.newPageContent("dddSponsors");
+        
         factory.newPageContent("intro1");
         factory.newPageContent("intro2");
         factory.newPageContent("intro3");
@@ -133,6 +137,9 @@ class AppService {
         factory.newPageContent("demo");
 
         // Define Pages
+        factory.newPageNode("ddd");
+        factory.newPageNode("dddSponsors");
+
         factory.newPageNode("intro1");
         factory.newPageNode("intro2");
         factory.newPageNode("intro3");
@@ -161,6 +168,9 @@ class AppService {
         factory.newPageNode("demo");
 
         // Configure Backgrounds
+        App.backgrounds.dddBackground.setContentClass("DDDPageBackground");
+        App.backgrounds.dddBackground.setContentPositionRange(1, 1);
+
         App.backgrounds.introBackground.setContentClass("PageBackground");
         App.backgrounds.introBackground.setContentPositionRange(1.6, 1);
 
@@ -174,6 +184,9 @@ class AppService {
         App.backgrounds.demoBackground.setContentPositionRange(1, 1);
 
         // Configure Pages
+        App.pages.ddd.setPageContentAndBackground(App.pageContent.ddd, App.backgrounds.dddBackground, 0.0, 0, null);
+        App.pages.dddSponsors.setPageContentAndBackground(App.pageContent.dddSponsors, App.backgrounds.dddBackground, 0.0, 0, null);
+
         App.pages.intro1.setPageContentAndBackground(App.pageContent.intro1, App.backgrounds.introBackground, 0.0, 0, null);
         App.pages.intro2.setPageContentAndBackground(App.pageContent.intro2, App.backgrounds.introBackground, 0.3, 0, null);
         App.pages.intro3.setPageContentAndBackground(App.pageContent.intro3, App.backgrounds.introBackground, 0.6, 0, null);
@@ -202,6 +215,9 @@ class AppService {
         App.pages.demo.setPageContentAndBackground(App.pageContent.demo, App.backgrounds.demoBackground, 0.0, 0, null);
 
         // Interrelate Pages with transitions
+        App.pages.ddd.setNextPage(App.pages.dddSponsors, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+        App.pages.dddSponsors.setNextPage(App.pages.intro1, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+
         App.pages.intro1.setNextPage(App.pages.intro2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
         App.pages.intro2.setNextPage(App.pages.intro3, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
         App.pages.intro3.setNextPage(App.pages.hub, PageTransition.Fade, PageTransition.Fade, 2);
@@ -502,7 +518,7 @@ class AppService {
 
     static ActivateFirstPage() {
         // Activate and transition page 1
-        App.activePage = App.pages.intro1;
+        App.activePage = App.pages.ddd;
         App.activePage.background?.usingTransition(1, "ease-in", 0);
         App.activePage.background?.withFadeIn();
         App.activePage.background?.show();
