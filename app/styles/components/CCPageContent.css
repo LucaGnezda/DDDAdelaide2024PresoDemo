@@ -13,6 +13,10 @@ cc-page {
     overflow: hidden;
     opacity: 1;
     transition-behavior: allow-discrete;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .CCPageOverlay {

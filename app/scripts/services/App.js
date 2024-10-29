@@ -5,11 +5,11 @@
  */
 class App {
     /**
-     * @typedef {'intro1'|'intro2'|'intro3'|'hub'|'logging1'|'components1'|'components2'|'observables1'|'observables2'|'store1'|'store2'|'eventBinding1'|'dispatchActionHandling1'|'dispatchActionHandling2'|'dispatchActionHandling3'|'dataBinding1'|'demo'} AppPages
+     * @typedef {'ddd'|'dddSponsors'|'intro1'|'intro2'|'intro3'|'hub'|'logging1'|'components1'|'components2'|'observables1'|'observables2'|'store1'|'store2'|'eventBinding1'|'dispatchActionHandling1'|'dispatchActionHandling2'|'dispatchActionHandling3'|'dataBinding1'|'demo'} AppPages
      */
 
     /**
-     * @typedef {'introBackground'|'hubBackground'|'sectionBackground1'|'demoBackground'} AppBackgrounds
+     * @typedef {'dddBackground'|'introBackground'|'hubBackground'|'sectionBackground1'|'demoBackground'} AppBackgrounds
      */
 
     /**

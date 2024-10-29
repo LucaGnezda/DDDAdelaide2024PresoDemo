@@ -8,7 +8,6 @@
 
         <link rel="stylesheet" type="text/css" href="./app/styles/PresentationStyling.css">
 
-        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCAppModelElement.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCBackground.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCDemoObservableElement.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCDemoObservingElement.css">
@@ -47,7 +46,6 @@
         <script defer src="./app/scripts/bindings/StoreToComponentBindings.js"></script>
 
         <!-- Components -->
-        <script defer src="./app/scripts/components/CCAppModelElement.js"></script>
         <script defer src="./app/scripts/components/CCBackground.js"></script>
         <script defer src="./app/scripts/components/CCDemoObservableElement.js"></script>
         <script defer src="./app/scripts/components/CCDemoObservingElement.js"></script>
@@ -66,6 +64,12 @@
     </head>
     <body onload="AppService.Initialise()">
         <div id="ContentSource" class="ContentSource">
+            <data value="ddd">
+                <div class="PageContents VerticalCentreFlex">
+                    <div class="DDDLogo"></div>
+                    <p class="DDDSocialsText">#DDDAdelaide / @DDDAdelaide</p>
+                </div>
+            </data>
             <data value="intro1">
                 <div class="PageTitle">Intro 1</div>
                 <div class="PageContents">
