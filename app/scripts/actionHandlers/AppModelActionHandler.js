@@ -1,7 +1,13 @@
-"use strict";
-
+/**
+ * @class
+ * @public
+ * @constructor
+ */
 class AppModelActionHandler {
-
+    /**
+     * Handler metod for incoming actions
+     * @param {Action} action 
+     */
     route(action) {
 
         Log.debug(`${this.constructor.name} processing event ${action.type}`, "HANDLER");
@@ -58,54 +64,64 @@ class AppModelActionHandler {
         }
     }
 
+    /**
+     * Solve the app element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveApp(payload) {
 
-        if (App.store.appModel["app"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["app"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["app"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["app"].observableData.state == FrameworkElementState.KnownUnknown || 
+            !(App.elements.AppModelAppStructure instanceof CCFrameworkElement)) {
                 return;
         }
 
-        if (App.store.appModel["helpers"].observableData.state == FrameworkElementState.Unknown) {
+        if (App.store?.appModel["helpers"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["helpers"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel["app"].observableData.state = FrameworkElementState.KnownUnknown;
-            App.elements.AppModelAppStructure.setPlacement(null, null, "38vmin", "38vmin", "1.5vmin");
+            App.elements?.AppModelAppStructure?.setPlacement(null, null, "38vmin", "38vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
-        else if (App.store.appModel["components"].observableData.state == FrameworkElementState.Unknown) {
+        else if (App.store?.appModel["components"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["components"].observableData.state = FrameworkElementState.KnownUnknown;
-            App.elements.AppModelAppStructure.setPlacement(null, null, "36vmin", "36vmin", "1.5vmin");
+            App.elements?.AppModelAppStructure?.setPlacement(null, null, "36vmin", "36vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
-        else if (App.store.appModel["handlers"].observableData.state == FrameworkElementState.Unknown) {
+        else if (App.store?.appModel["handlers"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["handlers"].observableData.state = FrameworkElementState.KnownUnknown;
             App.store.appModel["handlers"].observableData.title = "Logic";
-            App.elements.AppModelAppStructure.setPlacement(null, null, "34vmin", "34vmin", "1.5vmin");
+            App.elements?.AppModelAppStructure?.setPlacement(null, null, "34vmin", "34vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
-        else if (App.store.appModel["store"].observableData.state == FrameworkElementState.Unknown) {
+        else if (App.store?.appModel["store"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["app"].observableData.state = FrameworkElementState.KnownUnknown;
             App.store.appModel["store"].observableData.state = FrameworkElementState.SolvableUnknown;
-            App.elements.AppModelAppStructure.setPlacement(null, null, "32vmin", "32vmin", "1.5vmin");
+            App.elements?.AppModelAppStructure?.setPlacement(null, null, "32vmin", "32vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
-        else if (App.store.appModel["app"].observableData.state == FrameworkElementState.SolvableUnknown) {
+        else if (App.store?.appModel["app"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["app"].observableData.state = FrameworkElementState.Solved;
-            App.elements.AppModelAppStructure.solvedImageStylingClassList.add("Rotating");
-            App.elements.AppModelAppStructure.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
+            App.elements?.AppModelAppStructure?.solvedImageStylingClassList?.add("Rotating");
+            App.elements?.AppModelAppStructure?.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
             App.store.appModel.emitNotifications();
         }
-
 
     }
 
+    /**
+     * Solve the helpers element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveHelpers(payload) {
 
-        if (App.store.appModel["helpers"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["helpers"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["helpers"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["helpers"].observableData.state == FrameworkElementState.KnownUnknown) {
                 return;
         }
 
-        if (App.store.appModel["helpers"].observableData.state == FrameworkElementState.SolvableUnknown) {
+        if (App.store?.appModel["helpers"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["helpers"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["app"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel.emitNotifications();
@@ -113,14 +129,19 @@ class AppModelActionHandler {
 
     }
 
+    /**
+     * Solve the observables element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveObservables(payload) {
 
-        if (App.store.appModel["observables"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["observables"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["observables"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["observables"].observableData.state == FrameworkElementState.KnownUnknown) {
                 return;
         }
 
-        if (App.store.appModel["observables"].observableData.state == FrameworkElementState.SolvableUnknown) {
+        if (App.store?.appModel["observables"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["observables"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["logging"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel.emitNotifications();
@@ -132,14 +153,19 @@ class AppModelActionHandler {
 
     }
 
+    /**
+     * Solve the logging element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveLogging(payload) {
 
-        if (App.store.appModel["logging"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["logging"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["logging"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["logging"].observableData.state == FrameworkElementState.KnownUnknown) {
                 return;
         }
 
-        if (App.store.appModel["logging"].observableData.state == FrameworkElementState.SolvableUnknown) {
+        if (App.store?.appModel["logging"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["logging"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["store"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel.emitNotifications();
@@ -151,20 +177,25 @@ class AppModelActionHandler {
 
     }
 
+    /**
+     * Solve the store element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveStore(payload) {
 
-        if (App.store.appModel["store"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["store"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["store"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["store"].observableData.state == FrameworkElementState.KnownUnknown) {
                 return;
         }
 
-        if (App.store.appModel["observables"].observableData.state == FrameworkElementState.Unknown) {
+        if (App.store?.appModel["observables"].observableData.state == FrameworkElementState.Unknown) {
             App.store.appModel["observables"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel["store"].observableData.state = FrameworkElementState.KnownUnknown;
 
             App.store.appModel.emitNotifications();
         }
-        else if (App.store.appModel["store"].observableData.state == FrameworkElementState.SolvableUnknown) {
+        else if (App.store?.appModel["store"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["store"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["components"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel.emitNotifications();
@@ -175,14 +206,19 @@ class AppModelActionHandler {
         }
     }
 
+    /**
+     * Solve the components element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveComponents(payload) {
     
-        if (App.store.appModel["components"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["components"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["components"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["components"].observableData.state == FrameworkElementState.KnownUnknown) {
                 return;
         }
 
-        if (App.store.appModel["components"].observableData.state == FrameworkElementState.SolvableUnknown) {
+        if (App.store?.appModel["components"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["components"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["handlers"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel.emitNotifications();
@@ -194,20 +230,26 @@ class AppModelActionHandler {
 
     }
 
+    /**
+     * Solve handlers element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveHandlers(payload) {
     
-        if (App.store.appModel["handlers"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["handlers"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["handlers"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["handlers"].observableData.state == FrameworkElementState.KnownUnknown) {
                 return;
         }
 
-        if (App.store.appModel["actionDispatchers"].observableData.state == FrameworkElementState.Unknown) {
+        if (App.store?.appModel["actionDispatchers"].observableData.state == FrameworkElementState.Unknown && 
+            App.elements.appModelHandlers instanceof CCFrameworkElement) {
             App.store.appModel["handlers"].observableData.title = "Handlers";
-            App.elements.appModelHandlers.setPlacement("80%", "68%", "10vmin", "10vmin", "1.5vmin");
+            App.elements.appModelHandlers?.setPlacement("80%", "68%", "10vmin", "10vmin", "1.5vmin");
             App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel.emitNotifications();
         }
-        else if (App.store.appModel["handlers"].observableData.state = FrameworkElementState.SolvableUnknown) {
+        else if (App.store?.appModel["handlers"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["handlers"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.SolvableUnknown;
@@ -221,19 +263,24 @@ class AppModelActionHandler {
 
     }
 
+    /**
+     * Solve action dispatchers element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveActionDispatchers(payload) {
     
-        if (App.store.appModel["actionDispatchers"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["actionDispatchers"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["actionDispatchers"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["actionDispatchers"].observableData.state == FrameworkElementState.KnownUnknown) {
                 return;
         }
 
-        if (App.store.appModel["handlers"].observableData.state = FrameworkElementState.SolvableUnknown) {
+        if (App.store?.appModel["handlers"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["handlers"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.Solved;
             App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.SolvableUnknown;
             App.store.appModel["dataBindings"].observableData.state = FrameworkElementState.SolvableUnknown;
-            App.store.appModel.emitNotifications();
+            App.store?.appModel.emitNotifications();
             this.ZoomInToSection("dispatchActionHandling1");
         }
         else {
@@ -242,17 +289,22 @@ class AppModelActionHandler {
 
     }
 
+    /**
+     * Solve data bindings element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveDataBindings(payload) {
     
-        if (App.store.appModel["dataBindings"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["dataBindings"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["dataBindings"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["dataBindings"].observableData.state == FrameworkElementState.KnownUnknown) {
                 return;
         }
 
-        if (App.store.appModel["dataBindings"].observableData.state = FrameworkElementState.SolvableUnknown) {
+        if (App.store?.appModel["dataBindings"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["dataBindings"].observableData.state = FrameworkElementState.Solved;
 
-            if (App.store.appModel["eventBindings"].observableData.state == FrameworkElementState.Solved) {
+            if (App.store?.appModel["eventBindings"].observableData.state == FrameworkElementState.Solved) {
                 App.store.appModel["app"].observableData.state = FrameworkElementState.SolvableUnknown;
             }
 
@@ -265,14 +317,19 @@ class AppModelActionHandler {
 
     }
 
+    /**
+     * Solve the event bindings element
+     * @param {*} payload 
+     * @returns {void}
+     */
     SolveEventBindings(payload) {
     
-        if (App.store.appModel["eventBindings"].observableData.state == FrameworkElementState.Unknown || 
-            App.store.appModel["eventBindings"].observableData.state == FrameworkElementState.KnownUnknown) {
+        if (App.store?.appModel["eventBindings"].observableData.state == FrameworkElementState.Unknown || 
+            App.store?.appModel["eventBindings"].observableData.state == FrameworkElementState.KnownUnknown) {
                 return;
         }
 
-        if (App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.SolvableUnknown) {
+        if (App.store?.appModel["eventBindings"].observableData.state == FrameworkElementState.SolvableUnknown) {
             App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.Solved;
 
             if (App.store.appModel["dataBindings"].observableData.state == FrameworkElementState.Solved) {
@@ -288,9 +345,16 @@ class AppModelActionHandler {
 
     }
 
+    /**
+     * Handles zooming into a section
+     * @param {AppPages} section 
+     * @returns {void}
+     */
     ZoomInToSection(section) {
         
-        App.pages.components1.content.resetAnimationInitial();
+        if (!App.activePage || !App.pages || !App.pages[section]) return;
+        
+        App.pages?.components1?.content?.resetAnimationInitial();
         
         AnimatorService.pageOutro(App.activePage.content, PageTransition.ZoomIn, 1.75);
         AnimatorService.transitionBackground(App.activePage.background, App.pages[section].background, 0, 0, null, PageTransition.ZoomIn, 1.75);
