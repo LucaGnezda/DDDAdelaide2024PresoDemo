@@ -12,13 +12,13 @@ class CCFrameworkElement extends CCObservableBase {
     /**
      * The properties of this component
      * @typedef {Object} FrameworkElementPropertybag
-     * @property {*} top
-     * @property {*} left
-     * @property {*} width
-     * @property {*} height
-     * @property {*} fontSize
-     * @property {*} multiCLouds
-     * @property {*} solvedImage
+     * @property {string?} top
+     * @property {string?} left
+     * @property {string?} width
+     * @property {string?} height
+     * @property {string?} fontSize
+     * @property {boolean?} multiCLouds
+     * @property {string?} solvedImage
      * @property {Function?} clickCallback
      */
 
