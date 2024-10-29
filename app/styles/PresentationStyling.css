@@ -659,3 +659,255 @@ span.Code {
     font-size: 4vmin;
     margin: 2vmin 0vmin 13vmin 0vmin;
 }
+
+.DDDGoldSponsorsSection {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+}
+
+.DDDTeir2SponsorsSection {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    gap: 5vmin;
+    margin-top: 3vmin;
+}
+
+.DDDSASponsorsSection {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.DDDSilverSponsorsSection {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.DDDSupportingSponsorsSection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vmin;
+}
+
+.DDDGoldSponsorsTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+}
+
+.DDDGoldSponsorsTitleLine {
+    border-top:1px solid #1BA5A6;
+    width: 15vmin;
+    height: 1px;
+    flex: 1 1 auto;
+}
+
+.DDDGoldSponsorsTitle {
+    color:#1BA5A6;
+    font-family: "Segoe UI";
+    font-weight: 700;
+    font-size: 5.3333vmin;
+    flex: 0 0 auto;
+}
+
+.DDDGoldSponsors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 9vmin;
+    height: 15vmin;
+}
+
+.DDDGoldSponsorLogo {
+    height: 100%;
+    width: 30vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.DDDSASponsorsTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+}
+
+.DDDSASponsorsTitleLine {
+    border-top:1px solid #1BA5A6;
+    width: 15vmin;
+    height: 1px;
+    flex: 1 1 auto;
+}
+
+.DDDSASponsorsTitle {
+    color:#1BA5A6;
+    font-family: "Segoe UI";
+    font-weight: 700;
+    font-size: 3.6vmin;
+    flex: 0 0 auto;
+}
+
+.DDDSASponsors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4vmin;
+    height: 12vmin;
+    justify-content: center;
+}
+
+.DDDSASponsorLogo {
+    height: 100%;
+    width: 15vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.DDDSilverSponsorsTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+}
+
+.DDDSilverSponsorsTitleLine {
+    border-top:1px solid #1BA5A6;
+    width: 15vmin;
+    height: 1px;
+    flex: 1 1 auto;
+}
+
+.DDDSilverSponsorsTitle {
+    color:#1BA5A6;
+    font-family: "Segoe UI";
+    font-weight: 700;
+    font-size: 3.6vmin;
+    flex: 0 0 auto;
+}
+
+.DDDSilverSponsors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8vmin;
+    height: 12vmin;
+    justify-content: center;
+}
+
+.DDDSilverSponsorLogo {
+    height: 100%;
+    width: 23vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.DDDSupportingSponsorsTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+}
+
+.DDDSupportingSponsorsTitleLine {
+    border-top:1px solid #1BA5A6;
+    width: 15vmin;
+    height: 1px;
+    flex: 1 1 auto;
+}
+
+.DDDSupportingSponsorsTitle {
+    color:#1BA5A6;
+    font-family: "Segoe UI";
+    font-weight: 700;
+    font-size: 3.6vmin;
+    flex: 0 0 auto;
+}
+
+.DDDSupportingSponsors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12vmin;
+    height: 12vmin;
+    justify-content: center;
+}
+
+.DDDSupportingSponsorLogo {
+    height: 100%;
+    width: 16vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.UoALogo {
+    background-image: url("../assets/svg/UoA.svg");
+}
+
+.RAALogo {
+    background-image: url("../assets/svg/RAA.svg");
+    max-height: 75%;
+}
+
+.OctopusDeployLogo {
+    background-image: url("../assets/svg/OctopusDeploy.svg");
+}
+
+.MaxmineLogo {
+    background-image: url("../assets/svg/Maxmine.svg");
+}
+
+.OzRunwaysLogo {
+    background-image: url("../assets/svg/OzRunways.svg");
+}
+
+.TiimelyLogo {
+    background-image: url("../assets/images/Tiimely.jpg");
+    max-height: 75%;
+    width: 12vmin;
+}
+
+.QuoteRiteLogo {
+    background-image: url("../assets/svg/QuoteRite.svg");
+}
+
+.AligentLogo {
+    background-image: url("../assets/images/Aligent.png");
+}
+
+.RDSLogo {
+    background-image: url("../assets/svg/RDS.svg");
+}
+
+.TaptuLogo {
+    background-image: url("../assets/svg/Taptu.svg");
+}
+
+.SixPivotLogo {
+    background-image: url("../assets/svg/SixPivot.svg");
+}
+
+.IntopiaLogo {
+    background-image: url("../assets/svg/Intopia.svg");
+}
+
+.EncodeTalentLogo {
+    background-image: url("../assets/svg/EncodeTalent.svg");
+    width: 14vmin;
+}
+
+.MantelGroupLogo {
+    background-image: url("../assets/svg/MantelGroup.svg");
+}
