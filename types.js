@@ -50,3 +50,16 @@
  * A observable callback
  * @typedef {(event: ObservableDataEvent) => void} ObservableCallback
  */
+
+/**
+ * An input event callback
+ * @template T
+ * @typedef {(arg0: T) => void} Callback
+ */
+
+/**
+ * @typedef {Object} EventBase
+ * @property {Event} originatingEvent
+ * @property {*} originatingObject
+ */
+            

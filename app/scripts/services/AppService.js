@@ -93,10 +93,6 @@ class AppService {
         }
 
         App.store?.addObservable("demo");
-
-        if (App.store) {
-            App.store.demo.observableData.demoClickCount = 0;
-        }
     }
 
     static DefinePresentation() {
@@ -348,7 +344,7 @@ class AppService {
             App.elements.AppModelAppStructure.useMultiClouds(true);
             App.elements.AppModelAppStructure.setKnownImage("appStructure.svg");
             App.elements.AppModelAppStructure.setPlacement("50%", "45%", "40vmin", "40vmin", "1.5vmin");
-            App.elements.AppModelAppStructure.titleStylingClassList.add("DiagramFont");
+            App.elements.AppModelAppStructure.titleStylingClassList?.add("DiagramFont");
             App.elements.AppModelAppStructure.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_AppStructure_OnClick"));
         }
 
@@ -361,7 +357,7 @@ class AppService {
             App.elements.appModelComponents.useMultiClouds(true);
             App.elements.appModelComponents.setKnownImage("components.svg");
             App.elements.appModelComponents.setPlacement("50%", "8%", "10vmin", "10vmin", "1.5vmin");
-            App.elements.appModelComponents.titleStylingClassList.add("DiagramFont");
+            App.elements.appModelComponents.titleStylingClassList?.add("DiagramFont");
             App.elements.appModelComponents.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Components_OnClick"));
         }
 
@@ -373,7 +369,7 @@ class AppService {
             App.elements.appModelEventBindings.useMultiClouds(false);
             App.elements.appModelEventBindings.setKnownImage("bindings.svg");
             App.elements.appModelEventBindings.setPlacement("80%", "25%", "6vmin", "6vmin", "1.5vmin");
-            App.elements.appModelEventBindings.titleStylingClassList.add("DiagramFont");
+            App.elements.appModelEventBindings.titleStylingClassList?.add("DiagramFont");
             App.elements.appModelEventBindings.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_EventBindings_OnClick"));
         }
 
@@ -386,7 +382,7 @@ class AppService {
             App.elements.appModelActionDispatch.useMultiClouds(true);
             App.elements.appModelActionDispatch.setKnownImage("actionDispatchers.svg");
             App.elements.appModelActionDispatch.setPlacement("90%", "50%", "10vmin", "10vmin", "1.5vmin");
-            App.elements.appModelActionDispatch.titleStylingClassList.add("DiagramFont");
+            App.elements.appModelActionDispatch.titleStylingClassList?.add("DiagramFont");
             App.elements.appModelActionDispatch.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_ActionDispatchers_OnClick"));
         }
 
@@ -399,7 +395,7 @@ class AppService {
             App.elements.appModelHandlers.useMultiClouds(true);
             App.elements.appModelHandlers.setKnownImage("handlers.svg");
             App.elements.appModelHandlers.setPlacement("85%", "60%", "10vmin", "10vmin", "1.5vmin");
-            App.elements.appModelHandlers.titleStylingClassList.add("DiagramFont");
+            App.elements.appModelHandlers.titleStylingClassList?.add("DiagramFont");
             App.elements.appModelHandlers.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Handlers_OnClick"));
         }
 
@@ -412,7 +408,7 @@ class AppService {
             App.elements.appModelStore.useMultiClouds(true);
             App.elements.appModelStore.setKnownImage("store.svg");
             App.elements.appModelStore.setPlacement("15%", "60%", "10vmin", "10vmin", "1.5vmin");
-            App.elements.appModelStore.titleStylingClassList.add("DiagramFont");
+            App.elements.appModelStore.titleStylingClassList?.add("DiagramFont");
             App.elements.appModelStore.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Store_OnClick"));
         }
 
@@ -425,7 +421,7 @@ class AppService {
             App.elements.appModelDataBindings.useMultiClouds(false);
             App.elements.appModelDataBindings.setKnownImage("bindings.svg");
             App.elements.appModelDataBindings.setPlacement("20%", "25%", "6vmin", "6vmin", "1.5vmin");
-            App.elements.appModelDataBindings.titleStylingClassList.add("DiagramFont");
+            App.elements.appModelDataBindings.titleStylingClassList?.add("DiagramFont");
             App.elements.appModelDataBindings.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_DataBindings_OnClick"));
         }
 
@@ -438,7 +434,7 @@ class AppService {
             App.elements.appModelObservables.useMultiClouds(false);
             App.elements.appModelObservables.setKnownImage("observables.svg");
             App.elements.appModelObservables.setPlacement("35%", "90%", "6vmin", "6vmin", "1.5vmin");
-            App.elements.appModelObservables.titleStylingClassList.add("DiagramFont");
+            App.elements.appModelObservables.titleStylingClassList?.add("DiagramFont");
             App.elements.appModelObservables.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Observables_OnClick"));
         }
 
@@ -451,7 +447,7 @@ class AppService {
             App.elements.appModelLogging.useMultiClouds(false);
             App.elements.appModelLogging.setKnownImage("logging.svg");
             App.elements.appModelLogging.setPlacement("65%", "90%", "6vmin", "6vmin", "1.5vmin");
-            App.elements.appModelLogging.titleStylingClassList.add("DiagramFont");
+            App.elements.appModelLogging.titleStylingClassList?.add("DiagramFont");
             App.elements.appModelLogging.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Logging_OnClick"));
         }
 
@@ -464,7 +460,7 @@ class AppService {
             App.elements.appModelHelpers.useMultiClouds(false);
             App.elements.appModelHelpers.setKnownImage("helpers.svg");
             App.elements.appModelHelpers.setPlacement("50%", "90%", "6vmin", "6vmin", "1.5vmin");
-            App.elements.appModelHelpers.titleStylingClassList.add("DiagramFont");
+            App.elements.appModelHelpers.titleStylingClassList?.add("DiagramFont");
             App.elements.appModelHelpers.attachClickCallback(App.dispatcher.newEventDispatchCallback("Hub_AppModel_Helpers_OnClick"));
         }
 
@@ -493,6 +489,10 @@ class AppService {
                 App.components.demoObservableElement.updateCallback = updateCallback;
                 App.components.demoObservableElement.resetCallback = resetCallback;
             }
+        }
+
+        if (App.store) {
+            App.store.demo.observableData.demoClickCount = 0;
         }
 
         App.store?.demo.addSubscriber(App.components.demoObservingElement1, Demo_DemoObservingElement_OnClickCountChanged);
@@ -532,7 +532,7 @@ class AppService {
             
             if (App.elements.AppModelAppStructure instanceof CCFrameworkElement) {
                 App.elements.AppModelAppStructure.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
-                App.elements.AppModelAppStructure.solvedImageStylingClassList.add("Rotating");
+                App.elements.AppModelAppStructure.solvedImageStylingClassList?.add("Rotating");
             }
         }
 

@@ -1,6 +1,31 @@
-"use strict"
-
+/**
+ * @class
+ * @public
+ * @constructor
+ */
 class CCFrameworkElement extends CCObservableBase {
+    /**
+     * Definitions for internal elements
+     * @typedef {('root'|'unknownContainer'|'solvedContainer'|'solvedImage'|'solvedImageStyling'|'title'|'titleStyling')} FrameworkElementElement
+     */
+    
+    /**
+     * The properties of this component
+     * @typedef {Object} FrameworkElementPropertybag
+     * @property {string?} top
+     * @property {string?} left
+     * @property {string?} width
+     * @property {string?} height
+     * @property {string?} fontSize
+     * @property {boolean?} multiCLouds
+     * @property {string?} solvedImage
+     * @property {Function?} clickCallback
+     */
+
+    /**
+     * The elements that make up this component
+     * @type {LimitedDictionary<FrameworkElementElement, HTMLElement?>}
+     */
     #elements = {
         root: null,
         unknownContainer: null,
@@ -11,6 +36,9 @@ class CCFrameworkElement extends CCObservableBase {
         titleStyling: null,
     }
 
+    /**
+     * @type {FrameworkElementPropertybag}
+     */
     #propertybag = {
         top: null,
         left: null,
@@ -22,6 +50,10 @@ class CCFrameworkElement extends CCObservableBase {
         clickCallback: null,
     }
     
+    /**
+     * The html template for the component
+     * @property {string} #htmlTemplate  
+     */
     static #htmlTemplate = `
         <div class="CCFrameworkElement" data-element-root>
             <div class="CCFrameworkElementSolved Hide" data-element-solved-container>
@@ -36,6 +68,10 @@ class CCFrameworkElement extends CCObservableBase {
         </div>
     `
 
+    /**
+     * The dynamic CSS template for the component
+     * @property {string} #dynamicCSSTemplate  
+     */
     static #dynamicCSSTemplate = `
         .
     `
@@ -58,20 +94,27 @@ class CCFrameworkElement extends CCObservableBase {
         this.observableData.state = null;
     }
     
-    /**
+    /*
      * Getters and Setters
      */
+
     get titleStylingClassList() {
-        return this.#elements.titleStyling.classList;
+        return this.#elements.titleStyling?.classList;
     }
 
     get solvedImageStylingClassList() {
-        return this.#elements.solvedImageStyling.classList;
+        return this.#elements.solvedImageStyling?.classList;
     }
 
     
-    /**
+    /*
      * Private Methods
+     */
+
+    /**
+     * Checks whether the UI is initialised, if not
+     * the named elements are pulled from the htmlTemplate and
+     * inserted into the page elements.
      */
     #confirmUXIsInitialised() {
 
@@ -87,127 +130,144 @@ class CCFrameworkElement extends CCObservableBase {
             this.#elements.title = fragment.querySelector('[data-element-title]');
             this.#elements.titleStyling = fragment.querySelector('[data-element-titlestyling]');
 
-            fragment.firstChild.addEventListener("click", this.clickCallback.bind(this));
+            fragment.firstChild?.addEventListener("click", /** @type {Function} */(this.clickCallback).bind(this));
             
             this.appendChild(fragment);
             
         }
     }
     
+    /**
+     * Initialises the attributes for the pgae
+     */
     #initialiseAttributes() { }
     
-    /**
+    /*
      * Public Methods
+     */
+    
+    /**
+     * Dynamically renders the component content
+     * @returns {void}
      */
     render() {
 
         let element;
+        
+        if (this.#elements.root) {
+            if (this.#propertybag.top != null) {
+                this.#elements.root.style.top = this.#propertybag.top;
+            }
 
-        if (this.#propertybag.top != null) {
-            this.#elements.root.style.top = this.#propertybag.top;
+            if (this.#propertybag.left != null) {
+                this.#elements.root.style.left = this.#propertybag.left;
+            }
+                
+            if (this.#propertybag.width != null) {
+                this.#elements.root.style.width = this.#propertybag.width;
+            }
+            
+            if (this.#propertybag.height != null) {
+                this.#elements.root.style.height = this.#propertybag.height;
+            }
         }
-        if (this.#propertybag.left != null) {
-            this.#elements.root.style.left = this.#propertybag.left;
-        }
-        if (this.#propertybag.width != null) {
-            this.#elements.root.style.width = this.#propertybag.width;
-        }
-        if (this.#propertybag.height != null) {
-            this.#elements.root.style.height = this.#propertybag.height;
-        }
-        if (this.#propertybag.fontSize != null) {
-            this.#elements.title.style.fontSize = this.#propertybag.fontSize;
+        
+        if (this.#elements.title) {
+            if (this.#propertybag.fontSize != null) {
+                this.#elements.title.style.fontSize = this.#propertybag.fontSize;
+            }
         }
 
-        if (this.#propertybag.multiCLouds && this.#elements.unknownContainer.childNodes.length != 3) {
+        if (this.#propertybag.multiCLouds && this.#elements.unknownContainer?.childNodes.length != 3) {
 
-            this.#elements.unknownContainer.innerHTML = "";
+            if (this.#elements.unknownContainer) {
+                this.#elements.unknownContainer.innerHTML = "";
+            }
 
             element = document.createElement("img");
             element.src = "./app/assets/svg/clouds.svg";
             element.classList.add("CCFrameworkElementUnknownMultiCloud", "Pos1");
-            this.#elements.unknownContainer.appendChild(element);
+            this.#elements.unknownContainer?.appendChild(element);
 
             element = document.createElement("img");
             element.src = "./app/assets/svg/clouds.svg";
             element.classList.add("CCFrameworkElementUnknownMultiCloud", "Pos2");
-            this.#elements.unknownContainer.appendChild(element);
+            this.#elements.unknownContainer?.appendChild(element);
 
             element = document.createElement("img");
             element.src = "./app/assets/svg/clouds.svg";
             element.classList.add("CCFrameworkElementUnknownMultiCloud", "Pos3");
-            this.#elements.unknownContainer.appendChild(element);
+            this.#elements.unknownContainer?.appendChild(element);
         }
-        else if (!this.#propertybag.multiCLouds && this.#elements.unknownContainer.childNodes.length != 1) {
-            this.#elements.unknownContainer.innerHTML = "";
+        else if (!this.#propertybag.multiCLouds && this.#elements.unknownContainer?.childNodes.length != 1) {
+            if (this.#elements.unknownContainer) {
+                this.#elements.unknownContainer.innerHTML = "";
+            }
 
             element = document.createElement("img");
             element.src = "./app/assets/svg/clouds.svg";
             element.classList.add("CCFrameworkElementUnknownSimpleCloud");
-            this.#elements.unknownContainer.appendChild(element);
+            this.#elements.unknownContainer?.appendChild(element);
         }
 
-        if (this.#propertybag.solvedImage != null) {
+        if (this.#propertybag.solvedImage != null && this.#elements.solvedImage instanceof HTMLImageElement) {
             this.#elements.solvedImage.src = `./app/assets/svg/${this.#propertybag.solvedImage}`;
         }
 
-        this.#elements.titleStyling.innerText = this.observableData.title;
+        if (this.#elements.titleStyling) {
+            this.#elements.titleStyling.innerText = this.observableData.title;
+        }
 
         switch (this.observableData.state) {
             case FrameworkElementState.Unknown:
-                this.#elements.unknownContainer.childNodes.forEach(e => e.classList.add("Hide"));
-                this.#elements.solvedContainer.classList.add("Hide");
-                this.#elements.title.classList.add("Hide");
-                this.#elements.title.classList.remove("Glowing");
+                this.#elements.unknownContainer?.childNodes.forEach(e => /** @type {HTMLElement} */(e).classList.add("Hide"));
+                this.#elements.solvedContainer?.classList.add("Hide");
+                this.#elements.title?.classList.add("Hide");
+                this.#elements.title?.classList.remove("Glowing");
                 break;
 
             case FrameworkElementState.KnownUnknown:
-                this.#elements.unknownContainer.childNodes.forEach(e => e.classList.remove("Hide"));
-                this.#elements.solvedContainer.classList.add("Hide");
-                this.#elements.title.classList.remove("Hide");
-                this.#elements.title.classList.remove("Glowing");
+                this.#elements.unknownContainer?.childNodes.forEach(e => /** @type {HTMLElement} */(e).classList.remove("Hide"));
+                this.#elements.solvedContainer?.classList.add("Hide");
+                this.#elements.title?.classList.remove("Hide");
+                this.#elements.title?.classList.remove("Glowing");
                 break;
 
             case FrameworkElementState.SolvableUnknown:
-                this.#elements.unknownContainer.childNodes.forEach(e => e.classList.remove("Hide"));
-                this.#elements.solvedContainer.classList.add("Hide");
-                this.#elements.title.classList.remove("Hide");
-                this.#elements.title.classList.add("Glowing");
-                break;
-
-            case FrameworkElementState.SolvedUnknown:
-                this.#elements.unknownContainer.childNodes.forEach(e => e.classList.remove("Hide"));
-                this.#elements.solvedContainer.classList.add("Hide");
-                this.#elements.title.classList.remove("Hide");
-                this.#elements.title.classList.add("Glowing");
+                this.#elements.unknownContainer?.childNodes.forEach(e => /** @type {HTMLElement} */(e).classList.remove("Hide"));
+                this.#elements.solvedContainer?.classList.add("Hide");
+                this.#elements.title?.classList.remove("Hide");
+                this.#elements.title?.classList.add("Glowing");
                 break;
 
             case FrameworkElementState.Solved:
-                this.#elements.unknownContainer.childNodes.forEach(e => e.classList.add("Hide"));
-                this.#elements.solvedContainer.classList.remove("Hide");
-                this.#elements.title.classList.remove("Hide");
-                this.#elements.title.classList.remove("Glowing");
+                this.#elements.unknownContainer?.childNodes.forEach(e => /** @type {HTMLElement} */(e).classList.add("Hide"));
+                this.#elements.solvedContainer?.classList.remove("Hide");
+                this.#elements.title?.classList.remove("Hide");
+                this.#elements.title?.classList.remove("Glowing");
                 break;
 
             default:
-                this.#elements.unknownContainer.childNodes.forEach(e => e.classList.add("Hide"));
-                this.#elements.solvedContainer.classList.add("Hide");
-                this.#elements.title.classList.add("Hide");
-                this.#elements.title.classList.remove("Glowing");
+                this.#elements.unknownContainer?.childNodes.forEach(e => /** @type {HTMLElement} */(e).classList.add("Hide"));
+                this.#elements.solvedContainer?.classList.add("Hide");
+                this.#elements.title?.classList.add("Hide");
+                this.#elements.title?.classList.remove("Glowing");
         }
 
     }
 
+    /**
+     * Attaches a callback to the click callback event
+     * @param {EventListener} callback 
+     */
     attachClickCallback(callback) {
-
-        if (callback != null && typeof callback === "function") {
-            this.#propertybag.clickCallback = callback;
-        }
-        else {
-            this.#propertybag.clickCallback = null;
-        }
+        this.#propertybag.clickCallback = callback;
     }
 
+    /**
+     * Sets the known image for the element
+     * @param {string} filename 
+     */
     setKnownImage(filename) {
 
         this.#confirmUXIsInitialised();
@@ -218,48 +278,51 @@ class CCFrameworkElement extends CCObservableBase {
     
     }
 
+    /**
+     * Sets the placement for the element
+     * @param {string?} x 
+     * @param {string?} y 
+     * @param {string} width 
+     * @param {string} height 
+     * @param {string} fontSize 
+     */
     setPlacement(x, y, width, height, fontSize) {
 
         this.#confirmUXIsInitialised();
+        
+        if (!this.#elements.root || !this.#elements.title) return;
 
-        if (x != null) {
-            this.#propertybag.left = x;
-        }
-        if (y != null) {
-            this.#propertybag.top = y;
-        }
-        if (width != null) {
-            this.#propertybag.width = width;
-        }
-        if (height != null) {
-            this.#elements.root.style.height = height;
-        }
-        if (fontSize != null) {
-            this.#elements.title.style.fontSize = fontSize;
-        }
+        this.#propertybag.left = x;
+        this.#propertybag.top = y;
+        this.#propertybag.width = width;
+        this.#elements.root.style.height = height;
+        this.#elements.title.style.fontSize = fontSize;
 
         this.render();
 
     }
 
+    /**
+     * Sets whether multi clouds should be used
+     * @param {boolean?} val 
+     */
     useMultiClouds(val) {
 
         this.#confirmUXIsInitialised();
-
-        if (val != null) {
-            this.#propertybag.multiCLouds = (val == true);
-        }
-        else {
-            this.#propertybag.multiCLouds = true;
-        }
+        
+        this.#propertybag.multiCLouds = val ? val : true;
 
         this.render();
 
     }
     
-    /**
+    /*
     * Callbacks
     */
+    
+    /**
+     * Callback called when the component is connected to the DOM
+     */
     connectedCallback() {
         this.#confirmUXIsInitialised();
         this.#initialiseAttributes();
@@ -270,21 +333,35 @@ class CCFrameworkElement extends CCObservableBase {
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
     }
     
+    /**
+     * Callback called when the component is disconnected from the DOM
+     */
     disconnectedCallback() {
         Log.debug(`${this.constructor.name} disconnected from DOM`, "COMPONENT");
     }
 
+    /**
+     * Callback for observable data changed events
+     * @param {ObservableDataEvent} event
+     */
     dataChangedCallback(event) {
         this.render();
         Log.debug(`Data change callback on component ${event.originatingObject.constructor.name} with id:${event.originatingObject.id} updated property ${event.path} from ${event.oldValue} to ${event.newValue}`, "COMPONENT");
     }
 
+    /**
+     * Callback for click event
+     * @param {MouseEvent} clickEvent 
+     */
     clickCallback(clickEvent) {
 
         clickEvent.stopPropagation();
 
         if (this.#propertybag.clickCallback) {
 
+            /**
+             * @type {EventBase}
+             */
             let event = {};
             event.originatingEvent = clickEvent;
             event.originatingObject = this;
