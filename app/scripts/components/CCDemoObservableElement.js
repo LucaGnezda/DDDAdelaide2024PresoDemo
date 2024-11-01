@@ -168,6 +168,8 @@ class CCDemoObservableElement extends CCObservableBase {
         this.observableData.clickCount += 1;
         if (this.#propertybag.updateCallback) {
             this.#propertybag.updateCallback();
+        } else {
+            Log.fatal("No update callback has been registered", "", this)
         }
     }
     
@@ -178,6 +180,8 @@ class CCDemoObservableElement extends CCObservableBase {
         this.observableData.clickCount = 0;
         if (this.#propertybag.resetCallback) {
             this.#propertybag.resetCallback();           
-        } 
+        } else {
+            Log.fatal("No update callback has been registered", "", this)
+        }
     }
 }

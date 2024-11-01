@@ -352,7 +352,10 @@ class AppModelActionHandler {
      */
     ZoomInToSection(section) {
         
-        if (!App.activePage || !App.pages || !App.pages[section]) return;
+        if (!App.activePage || !App.pages || !App.pages[section]) {
+            Log.fatal("App has not been correctly initialised", "", this);
+            return;
+        }
         
         App.pages?.components1?.content?.resetAnimationInitial();
         

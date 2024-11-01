@@ -47,52 +47,59 @@ class AppService {
     }
 
     static InitialiseCoreEventBindings() {
+        if (!App.dispatcher) {
+            Log.fatal("App Dispatcher must be initialised before Core Event Bindings", "", this);
+            return;
+        }
+
         document.body.addEventListener("keydown", this.keydownCallback);
         document.body.addEventListener("click", this.clickCallback);
 
-        // optional chaining results in 'undefined' not 'null'...
-        App.pageNavigationCallback = App.dispatcher?.newEventDispatchCallback("App_PageTransition") ?? null;
-        App.pageAnimationCallback = App.dispatcher?.newEventDispatchCallback("App_PageAnimation") ?? null;
-        App.pageOverlayCallback = App.dispatcher?.newEventDispatchCallback("App_OverlayAnimation") ?? null;
+        App.pageNavigationCallback = App.dispatcher.newEventDispatchCallback("App_PageTransition");
+        App.pageAnimationCallback = App.dispatcher.newEventDispatchCallback("App_PageAnimation");
+        App.pageOverlayCallback = App.dispatcher.newEventDispatchCallback("App_OverlayAnimation");
     }
 
     static LoadStore() {
-        App.store?.addObservablesDictionary("appModel");
-        App.store?.appModel.add("app");
-        App.store?.appModel.add("components");
-        App.store?.appModel.add("eventBindings");
-        App.store?.appModel.add("actionDispatchers");
-        App.store?.appModel.add("handlers");
-        App.store?.appModel.add("dataBindings");
-        App.store?.appModel.add("observables");
-        App.store?.appModel.add("store");
-        App.store?.appModel.add("logging");
-        App.store?.appModel.add("helpers");
-
-        if (App.store) {
-            App.store.appModel["app"].observableData.title = "App Core";
-            App.store.appModel["app"].observableData.state = FrameworkElementState.SolvableUnknown;
-            App.store.appModel["components"].observableData.title = "UI / Components";
-            App.store.appModel["components"].observableData.state = FrameworkElementState.Unknown;
-            App.store.appModel["eventBindings"].observableData.title = "Event Bindings";
-            App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.Unknown;
-            App.store.appModel["actionDispatchers"].observableData.title = "Action / Dispatchers";
-            App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.Unknown;
-            App.store.appModel["handlers"].observableData.title = "Handlers";
-            App.store.appModel["handlers"].observableData.state = FrameworkElementState.Unknown;
-            App.store.appModel["store"].observableData.title = "Store";
-            App.store.appModel["store"].observableData.state = FrameworkElementState.Unknown;
-            App.store.appModel["dataBindings"].observableData.title = "Data Bindings";
-            App.store.appModel["dataBindings"].observableData.state = FrameworkElementState.Unknown;
-            App.store.appModel["observables"].observableData.title = "Observables";
-            App.store.appModel["observables"].observableData.state = FrameworkElementState.Unknown;
-            App.store.appModel["logging"].observableData.title = "Logging";
-            App.store.appModel["logging"].observableData.state = FrameworkElementState.Unknown;
-            App.store.appModel["helpers"].observableData.title = "Helpers";
-            App.store.appModel["helpers"].observableData.state = FrameworkElementState.Unknown;
+        if (!App.store) {
+            Log.fatal("App Store must be initialised before Store content can be loaded", "", this);
+            return;
         }
+        
+        App.store.addObservablesDictionary("appModel");
+        App.store.appModel.add("app");
+        App.store.appModel.add("components");
+        App.store.appModel.add("eventBindings");
+        App.store.appModel.add("actionDispatchers");
+        App.store.appModel.add("handlers");
+        App.store.appModel.add("dataBindings");
+        App.store.appModel.add("observables");
+        App.store.appModel.add("store");
+        App.store.appModel.add("logging");
+        App.store.appModel.add("helpers");
 
-        App.store?.addObservable("demo");
+        App.store.appModel["app"].observableData.title = "App Core";
+        App.store.appModel["app"].observableData.state = FrameworkElementState.SolvableUnknown;
+        App.store.appModel["components"].observableData.title = "UI / Components";
+        App.store.appModel["components"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["eventBindings"].observableData.title = "Event Bindings";
+        App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["actionDispatchers"].observableData.title = "Action / Dispatchers";
+        App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["handlers"].observableData.title = "Handlers";
+        App.store.appModel["handlers"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["store"].observableData.title = "Store";
+        App.store.appModel["store"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["dataBindings"].observableData.title = "Data Bindings";
+        App.store.appModel["dataBindings"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["observables"].observableData.title = "Observables";
+        App.store.appModel["observables"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["logging"].observableData.title = "Logging";
+        App.store.appModel["logging"].observableData.state = FrameworkElementState.Unknown;
+        App.store.appModel["helpers"].observableData.title = "Helpers";
+        App.store.appModel["helpers"].observableData.state = FrameworkElementState.Unknown;
+
+        App.store.addObservable("demo");
     }
 
     static DefinePresentation() {
@@ -263,10 +270,10 @@ class AppService {
                             // @ts-ignore cant index by variable name
                             App.pageContent[name].setOverlay(overlaySource.childNodes);
                         } else {
-                            Log.error(`Failed to assign page ovelay ${name} to a CCContentPage}`, "PRESENTATION")
+                            Log.fatal(`Failed to assign page ovelay ${name} to a CCContentPage}`, "PRESENTATION", this)
                         }
                     } else {
-                        Log.error(`Failed to load overlay content for ${name}, which has the [data-hasoverlay] attribute`, "PRESENTATION")
+                        Log.fatal(`Failed to load overlay content for ${name}, which has the [data-hasoverlay] attribute`, "PRESENTATION", this)
                     }
                 }
                 // @ts-ignore cant index by variable name
@@ -274,10 +281,10 @@ class AppService {
                     // @ts-ignore cant index by variable name
                     App.pageContent[name].setContents(source.childNodes);
                 } else {
-                    Log.error(`Failed to assign page content ${name} to a CCContentPage}`, "PRESENTATION")
+                    Log.fatal(`Failed to assign page content ${name} to a CCContentPage}`, "PRESENTATION", this)
                 }
             } else {
-                Log.error(`Failed to load content for PageNode: ${name}`, "PRESENTATION")
+                Log.fatal(`Failed to load content for PageNode: ${name}`, "PRESENTATION", this)
             }
         }
 
@@ -350,6 +357,7 @@ class AppService {
 
     static InitialiseInteractiveContent() {
         if (!App.dispatcher || !App.store) {
+            Log.fatal("Both the Store and Dispatcher must be initialised before interactive content", "", this)
             return;
         }
 
@@ -511,9 +519,9 @@ class AppService {
             App.store.demo.observableData.demoClickCount = 0;
         }
 
-        App.store?.demo.addSubscriber(App.components.demoObservingElement1, Demo_DemoObservingElement_OnClickCountChanged);
-        App.store?.demo.addSubscriber(App.components.demoObservingElement2, Demo_DemoObservingElement_OnClickCountChanged);
-        App.store?.demo.addSubscriber(App.components.demoObservingElement3, Demo_DemoObservingElement_OnClickCountChanged);
+        App.store.demo.addSubscriber(App.components.demoObservingElement1, Demo_DemoObservingElement_OnClickCountChanged);
+        App.store.demo.addSubscriber(App.components.demoObservingElement2, Demo_DemoObservingElement_OnClickCountChanged);
+        App.store.demo.addSubscriber(App.components.demoObservingElement3, Demo_DemoObservingElement_OnClickCountChanged);
     }
 
     static ActivateFirstPage() {
@@ -528,28 +536,31 @@ class AppService {
     }
 
     static SolveAppModel() {
-        if (App.store) {
-            App.store.appModel["app"].observableData.state = FrameworkElementState.Solved;
-            App.store.appModel["components"].observableData.state = FrameworkElementState.Solved;
-            App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.Solved;
-            App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.Solved;
-            App.store.appModel["handlers"].observableData.state = FrameworkElementState.Solved;
-            App.store.appModel["store"].observableData.state = FrameworkElementState.Solved;
-            App.store.appModel["dataBindings"].observableData.state = FrameworkElementState.Solved;
-            App.store.appModel["observables"].observableData.state = FrameworkElementState.Solved;
-            App.store.appModel["logging"].observableData.state = FrameworkElementState.Solved;
-            App.store.appModel["helpers"].observableData.state = FrameworkElementState.Solved;
+        if (!App.store) {
+            Log.fatal("The store must be initialised", "", this)
+            return;
+        }
 
-            if (App.elements.appModelHandlers instanceof CCFrameworkElement) {
-                (App.elements.appModelHandlers).setPlacement("80%", "68%", "10vmin", "10vmin", "1.5vmin");
-            }
+        App.store.appModel["app"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["components"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["actionDispatchers"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["handlers"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["store"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["dataBindings"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["observables"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["logging"].observableData.state = FrameworkElementState.Solved;
+        App.store.appModel["helpers"].observableData.state = FrameworkElementState.Solved;
 
-            App.store.appModel["handlers"].observableData.title = "Handlers";
-            
-            if (App.elements.AppModelAppStructure instanceof CCFrameworkElement) {
-                App.elements.AppModelAppStructure.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
-                App.elements.AppModelAppStructure.solvedImageStylingClassList?.add("Rotating");
-            }
+        if (App.elements.appModelHandlers instanceof CCFrameworkElement) {
+            (App.elements.appModelHandlers).setPlacement("80%", "68%", "10vmin", "10vmin", "1.5vmin");
+        }
+
+        App.store.appModel["handlers"].observableData.title = "Handlers";
+        
+        if (App.elements.AppModelAppStructure instanceof CCFrameworkElement) {
+            App.elements.AppModelAppStructure.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
+            App.elements.AppModelAppStructure.solvedImageStylingClassList?.add("Rotating");
         }
 
         App.store?.appModel.emitNotifications();

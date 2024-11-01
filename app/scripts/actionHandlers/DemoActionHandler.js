@@ -17,6 +17,9 @@ class DemoActionHandler {
                 if (App.store?.demo) {
                     App.store.demo.observableData.demoClickCount += 1;
                     App.store.demo.emitNotifications();
+                } else {        
+                    Log.fatal("App has not been correctly initialised", "", this);
+                    return;
                 }
                 break;
 
@@ -24,6 +27,9 @@ class DemoActionHandler {
                 if (App.store?.demo) {
                     App.store.demo.observableData.demoClickCount = 0;
                     App.store.demo.emitNotifications();
+                } else {        
+                    Log.fatal("App has not been correctly initialised", "", this);
+                    return;
                 }
                 break;
         }
