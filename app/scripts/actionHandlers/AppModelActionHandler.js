@@ -53,10 +53,6 @@ class AppModelActionHandler {
             case "Hub_AppModel_Logging_OnClick":
                 this.SolveLogging(action.payload);
                 break;
-
-            case "Hub_DemoButton_OnClick":
-                this.ZoomInToSection("demo");
-                break;
             
             default:
                 // do nothing
@@ -101,6 +97,10 @@ class AppModelActionHandler {
             App.store.appModel.emitNotifications();
         }
         else if (App.store?.appModel["app"].observableData.state == FrameworkElementState.SolvableUnknown) {
+            
+            // attach demo page
+            App.pages.hub.setNextPage(App.pages.demo, PageTransition.ZoomIn, null, 1.75);
+            
             App.store.appModel["app"].observableData.state = FrameworkElementState.Solved;
             App.elements?.AppModelAppStructure?.solvedImageStylingClassList?.add("Rotating");
             App.elements?.AppModelAppStructure?.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
