@@ -184,13 +184,63 @@
                 </div>
             </data>
             <data value="components1">
-                <div class="PageTitle">Components 1</div>
+                <div class="PageTitle">Components</div>
                 <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We want to handle patterned elements of user interface in a consistent way.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <div class="FlexCols">
+                        <div class="Flex">
+                            <ul class="M">
+                                <li>There are two component types that can functionally overlap.</li>
+                                <ul class="S">
+                                    <li>Those that consume and present data.</li>
+                                    <li>Those that respond to the user and propogate events.</li>
+                                </ul>
+                                <li>They need to encapulate and abstract away presentation logic.</li>
+                                <li>But shouldn't be application logic or application data aware.</li>
+                                <li class="Tick">Yes, there is a piece of magic we can use ... Eustom Elements.</li>
+                            </ul>
+                        </div>
+                        <div class="Fixed PositionContents FlexCols">
+                            <div class="ComponentVennA"></div>
+                            <div class="ComponentVennB"></div>
+                            <p class="XXS VennALabel">Consume &<br/>Present</p>
+                            <p class="XXS VennABLabel">Both</p>
+                            <p class="XXS VennBLabel">Respond &<br/>Propogate</p>
+                        </div>
+                    </div>
+                    <p class="L"><b>Simply put:</b></p>
+                    <ul class="M">
+                        <li>We can define our own html tags, attaching logic via a paired class that inherits from HTMLElement.</li>
+                        <li>All we need to do is register the tag and class pair with the window object.</li>
+                    </ul>
+                    <p class="L">Easy .. we'll be done by lunchtime.</p>
                 </div>
             </data>
             <data value="components2">
-                <div class="PageTitle">Components 2</div>
+                <div class="PageTitle">Components</div>
                 <div class="PageContents">
+                    <p class="L">Hmmm ...</p>
+                    <ul class="M">
+                        <li class="Cross">Yes, custom elements have observable tag attributes, but that's no good for absorbing complex data.
+                            <p class="XS Ice Code Indent1">&lt;cc-myelement myattribute="foo"&gt;</p>
+                        </li>
+                        <li class="Tick">Oh wait ... we've solved this already... Observables to the rescue again.
+                            <p class="XS Ice Code Indent1">myelement.observableData = {...}</p>
+                        </li>
+                        <li class="Cross">But that's a lot of observable boilerplate, the kids won't follow that.</li>
+                        <li class="Tick">Oh wait ... Baseclasses to the rescue.</li>
+                        <li class="Cross">What you can't initialise the element's inner html in the constructor?</li>
+                        <li class="Tick">Oh I see ... we're supposed to use a render pattern against callback events.
+                            <p class="XS Ice Code Indent1">connectedCallback() {</p>
+                            <p class="XS Ice Code Indent2">render();</p>
+                            <p class="XS Ice Code Indent1">}</p>
+                        </li>
+                        <li class="Tick">Which is actually awesome, because the observable data change callback can follow the same pattern.</li>
+                    </ul>
+                    <p class="L">A mere weekend later ... </p>
+                    <p class="M Indent1 Green">Let's take a look at the result.</p>
                 </div>
             </data>
             <data value="observables1">
