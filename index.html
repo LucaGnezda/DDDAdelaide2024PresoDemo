@@ -336,28 +336,107 @@
                 </div>
             </data>
             <data value="eventBinding1">
-                <div class="PageTitle">Event Binding 1</div>
+                <div class="PageTitle">Event Bindings</div>
                 <div class="PageContents">
+                    <p class="L">Ok ... but where do we get the actions from?</p>
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We need a way of separating concerns between components and the dispatcher (neither should need to know about the other), while still being able to trigger actions.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li>Callbacks ... to the rescue!</li>
+                        <li>As long as we build our components to accept custom callbacks, and we pass relevant information to these callbacks, then these can act as adapters between the two.</li>
+                        <li>Even better, the dispatcher can autogenerate generic callbacks for us, that can bind to anything. for example
+                            <p class="XS Ice Code Indent1">MyComponent.changeWeaponCallback = App.dispatcher.newEventDispatchCallback("ChangeWeapon");<span class="XS Green Code Indent1"> // for simple events</span></p>
+                            <p class="XS Ice Code Indent1">MyComponent.changeWeaponCallback = App.dispatcher.newArgsDispatchCallback("ChangeWeapon");<span class="XS Green Code Indent1"> // for more custom data</span></p>
+                        </li>
                 </div>
             </data>
             <data value="dispatchActionHandling1">
-                <div class="PageTitle">Dispatch Action Handling 1</div>
+                <div class="PageTitle">logic & flow control</div>
                 <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We want logic to sit between UI events and the store. Let's go retro and recreate a Facebook Flux inspired pattern. I've never had a chance to use the OG, let alone build one.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li>Circa 2013 facebook was struggling with multiple UI elements needing to accessing singleton data.</li>
+                        <li>So they invented Flux, essentially a cyclic event/action based flow control.</li>
+                        <li>I'm going to add a little twist and formalise the boundary between the store and logic.</li>
+                        <li>Actually when you break it down ... it starts to feel like old school late 90s C++ windows event loops.</li>
+                    </ul>
+                    <p class="L"><b>Simply put:</b></p>
+                    <ul class="M">
+                        <li>When an event fires, we convert this into an <span class=Green>Action</span> (more about this in a moment).</li>
+                        <li>We <span class=Green>Dispatch</span> this action to all active Handlers (logic modules in front of parts of the store).</li>
+                        <li>Each <span class=Green>Handler</span> decides what it wants to do with the action, updating store items as required.</li>
+                    </ul>
+                    <p class="L">Easy .. we'll be done by lunchtime.</p>
                 </div>
             </data>
             <data value="dispatchActionHandling2">
-                <div class="PageTitle">Dispatch Action Handling 2</div>
+                <div class="PageTitle">Dispatching Actions</div>
                 <div class="PageContents">
+                    <p class="L">Ok, I'm having fun with this ...</p>
+                    <ul class="M">
+                        <li>Create a dispatcher class that we can instantiate
+                            <p class="XS Ice Code Indent1">App.dispatcher = new Dispatcher();</p>
+                        </li>
+                        <li>Allow store handlers to register as listners, with the function name to be called
+                            <p class="XS Ice Code Indent1">App.dispatcher.addDispatchHandler(new MyActionHandler(), "route");</p>
+                        </li>
+                        <li>Define an action, which has a type and a payload from the event (or other info we want to pass in).
+                            <p class="XS Ice Code Indent1">let action = new Action(actionType, payload);</p>
+                        </li>
+                        <li>Define a dispatch method that will pass actions to all the registered handlers
+                            <p class="XS Ice Code Indent1">App.dispatcher.dispatch(action);</p>
+                        </li>
+                    </ul>
                 </div>
             </data>
             <data value="dispatchActionHandling3">
-                <div class="PageTitle">Dispatch Action Handling 3</div>
+                <div class="PageTitle">Handling Actions</div>
                 <div class="PageContents">
+                    <p class="L">Which makes each handler just an implementation specific for each application ...</p>
+                    <ul class="M">
+                        <li>Define a handler class
+                            <p class="XS Ice Code Indent1">class MyActionHandler { ... }</p>
+                        </li>
+                        <li>add a routing method into the handler class
+                            <p class="XS Ice Code Indent1">route(action) {</p>
+                            <p class="XS Ice Code Indent2">switch (action.type) {
+                            <p class="XS Ice Code Indent3">case "ChangeWeapon": this.changeWeapon(action.payload); break;
+                            <p class="XS Ice Code Indent3">...</p>
+                            <p class="XS Ice Code Indent2">}</p>
+                            <p class="XS Ice Code Indent1">}</p>
+                        </li>
+                        <li>Then add logic methods that do things
+                            <p class="XS Ice Code Indent1">changeWeapon(payload) {</p>
+                            <p class="XS Ice Code Indent2">App.store.fortniteTeam["EllaSmella"].observableData.weapon = payload.weapon;
+                            <p class="XS Ice Code Indent2">App.store.emitNotifications();
+                            <p class="XS Ice Code Indent1">}</p>
+                        </li>
+                    </ul>
                 </div>
             </data>
             <data value="dataBinding1">
-                <div class="PageTitle">Data Binding 1</div>
+                <div class="PageTitle">Data Binding</div>
                 <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We also need a way of separating concerns between components and the store (neither should need to know about the other), while still being able to respond to store updates.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li>Callbacks ... to the rescue!</li>
+                        <li>As long as we build our components to accept custom callbacks, and these are what we register with the store, then these can act as adapters between the two.</li>
+                        <li>For example
+                            <p class="XS Ice Code Indent1">App.store.fortniteTeam["Aga007"].addSubscriber(MyComponent, TeamMember_OnDataChange);<span class="XS Green Code Indent1"> // for simple events</span></p>
+                        </li>
+                        <li>and
+                            <p class="XS Ice Code Indent1">TeamMember_OnDataChange() {</p>
+                            <p class="XS Green Code Indent2">// copy each store property across to the component</p>
+                            <p class="XS Ice Code Indent2">for (let [key, value] of Object.entries(this.observableData)) {</p>
+                            <p class="XS Ice Code Indent3">this.observableData[key] = event.originatingObject.observableData[key];</p>
+                            <p class="XS Ice Code Indent2">}</p>
+                            <p class="XS Ice Code Indent1">}</p>
+                        </li>
                 </div>
             </data>
             <data value="hub">
