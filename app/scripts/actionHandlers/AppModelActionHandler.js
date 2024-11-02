@@ -53,6 +53,11 @@ class AppModelActionHandler {
             case "Hub_AppModel_Logging_OnClick":
                 this.SolveLogging(action.payload);
                 break;
+
+            case "Hub_SolveIcon_OnClick":
+                AppService.SolveAppModel();
+                this.HideSolveIcon(action.payload);
+                break;
             
             default:
                 // do nothing
@@ -343,6 +348,15 @@ class AppModelActionHandler {
             this.ZoomInToSection("eventBinding1");
         }
 
+    }
+
+    /**
+     * Solve the event bindings element
+     * @param {*} payload 
+     * @returns {void}
+     */
+    HideSolveIcon(payload) {
+        App.elements.solveIcon?.classList.add("Hide");
     }
 
     /**

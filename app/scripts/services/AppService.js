@@ -494,8 +494,8 @@ class AppService {
         App.store.appModel.emitNotifications(true);
 
         // Goto demo button
-        App.elements.demoButton = document.getElementById("DemoButton");
-        App.elements.demoButton?.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DemoButton_OnClick", true));
+        App.elements.solveIcon = document.getElementById("SolveIcon");
+        App.elements.solveIcon?.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_SolveIcon_OnClick", true));
 
         // @ts-ignore getElementById gets a HTMLElement, which is technically our CC but the type is wrong.
         App.components.demoObservableElement = document.getElementById("DemoObservableElement");
