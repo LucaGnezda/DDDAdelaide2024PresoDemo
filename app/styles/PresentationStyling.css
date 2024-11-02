@@ -1,3 +1,14 @@
+:root {
+    --colourBlue: #238ddd;                 /* var(--colourBlue) */
+    --colourGreen: #32bea6;                /* var(--colourGreen) */
+    --colourIce: #9cdcfe;                  /* var(--colourIce) */
+    --colourRed: #e74856;                  /* var(--colourRed) */
+    --colourCharcoal: #323436;             /* var(--colourCharcoal) */
+    --colourDDDDarkSteelBlue: #3E5668;     /* var(--colourDDDDarkSteelBlue) */
+    --colourDDDTeal: #1BA5A6;              /* var(--colourDDDTeal) */
+    --colourDDDTan: #f3ebe0;               /* var(--colourDDDTan) */
+}
+
 body {
     background: #000000;
     margin: 0px;
@@ -34,15 +45,8 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: #323436;
+    background-color: var(--colourCharcoal);
     opacity: 0.5;
-    position: absolute;
-    transition: all 1.0s ease-in-out;
-}
-
-.DDDPageBackground {
-    background-color: #f3ebe0;
-    opacity: 1;
     position: absolute;
     transition: all 1.0s ease-in-out;
 }
@@ -511,28 +515,28 @@ p.Green,
 ul.Green,
 li.Green,
 span.Green {
-    color: #32bea6;
+    color: var(--colourGreen)
 }
 
 p.Blue,
 ul.Blue,
 li.Blue,
 span.Blue {
-    color: #238ddd;
+    color: var(--colourBlue);
 }
 
 p.Red,
 ul.Red,
 li.Red,
 span.Red {
-    color: #e74856;
+    color: var(--colourRed);
 }
 
 p.Ice,
 ul.Ice,
 li.Ice,
 span.Ice {
-    color: #9cdcfe;
+    color: var(--colourIce);
 }
 
 p.Code,
@@ -542,11 +546,38 @@ span.Code {
     font-family: Consolas;
 }
 
+p.Left60,
+ul.Left60,
+li.Left60 {
+    width: 60%;
+}
 
+p.LeftHalf,
+ul.LeftHalf,
+li.LeftHalf {
+    width: 50%;
+}
 
 .Fadeable {
     transition: all 0.5s ease-in-out;
     transition-behavior: allow-discrete;
+}
+
+.FlexCols {
+    display: flex;
+    flex-direction: row;
+}
+
+.Flex {
+    flex: 1 1 auto;
+}
+
+.Fixed {
+    flex: 0 0 auto;
+}
+
+.PositionContents {
+    position: relative;
 }
 
 .Fadeable.Show {
@@ -677,6 +708,62 @@ span.Code {
     gap: 10vmin;    
 }
 
+.ComponentVennA {
+    position: relative;
+    left: 5vmin;
+    width: 20vmin;
+    height: 20vmin;
+    background-color: var(--colourGreen);
+    border-radius: 50%;
+    mix-blend-mode: lighten;
+    opacity: 0.5;
+}
+
+.ComponentVennB {
+    position: relative;
+    left: -5vmin;
+    width: 20vmin;
+    height: 20vmin;
+    background-color: var(--colourBlue);
+    border-radius: 50%;
+    mix-blend-mode: lighten;
+    opacity: 0.5;
+}
+
+.VennALabel {
+    position: absolute;
+    text-align: center;
+    left: 25%;
+    top: 10vmin;
+    transform: translate(-50%, -50%);
+    margin: 0vmin;
+}
+
+.VennBLabel {
+    position: absolute;
+    text-align: center;
+    left: 75%;
+    top: 10vmin;
+    transform: translate(-50%, -50%);
+    margin: 0vmin;
+}
+
+.VennABLabel {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    top: 10vmin;
+    transform: translate(-50%, -50%);
+    margin: 0vmin;
+}
+
+.DDDPageBackground {
+    background-color: var(--colourDDDTan);
+    opacity: 1;
+    position: absolute;
+    transition: all 1.0s ease-in-out;
+}
+
 .DDDLogo {
     flex: 1 1 auto;
     margin: 15vmin 0vmin 0vmin 3vmin;
@@ -691,7 +778,7 @@ span.Code {
 .DDDSocialsText {
     font-family: "Segoe UI";
     font-weight: 600;
-    color: #3E5668;
+    color: var(--colourDDDDarkSteelBlue);
     font-size: 4vmin;
     margin: 2vmin 0vmin 13vmin 0vmin;
 }
@@ -738,14 +825,14 @@ span.Code {
 }
 
 .DDDGoldSponsorsTitleLine {
-    border-top:1px solid #1BA5A6;
+    border-top:1px solid var(--colourDDDTeal);
     width: 15vmin;
     height: 1px;
     flex: 1 1 auto;
 }
 
 .DDDGoldSponsorsTitle {
-    color:#1BA5A6;
+    color:var(--colourDDDTeal);
     font-family: "Segoe UI";
     font-weight: 700;
     font-size: 5.3333vmin;
@@ -777,14 +864,14 @@ span.Code {
 }
 
 .DDDSASponsorsTitleLine {
-    border-top:1px solid #1BA5A6;
+    border-top:1px solid var(--colourDDDTeal);
     width: 15vmin;
     height: 1px;
     flex: 1 1 auto;
 }
 
 .DDDSASponsorsTitle {
-    color:#1BA5A6;
+    color:var(--colourDDDTeal);
     font-family: "Segoe UI";
     font-weight: 700;
     font-size: 3.6vmin;
@@ -817,14 +904,14 @@ span.Code {
 }
 
 .DDDSilverSponsorsTitleLine {
-    border-top:1px solid #1BA5A6;
+    border-top:1px solid var(--colourDDDTeal);
     width: 15vmin;
     height: 1px;
     flex: 1 1 auto;
 }
 
 .DDDSilverSponsorsTitle {
-    color:#1BA5A6;
+    color:var(--colourDDDTeal);
     font-family: "Segoe UI";
     font-weight: 700;
     font-size: 3.6vmin;
@@ -857,14 +944,14 @@ span.Code {
 }
 
 .DDDSupportingSponsorsTitleLine {
-    border-top:1px solid #1BA5A6;
+    border-top:1px solid var(--colourDDDTeal);
     width: 15vmin;
     height: 1px;
     flex: 1 1 auto;
 }
 
 .DDDSupportingSponsorsTitle {
-    color:#1BA5A6;
+    color:var(--colourDDDTeal);
     font-family: "Segoe UI";
     font-weight: 700;
     font-size: 3.6vmin;
