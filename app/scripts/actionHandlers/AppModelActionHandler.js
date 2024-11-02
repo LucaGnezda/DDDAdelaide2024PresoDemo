@@ -103,6 +103,8 @@ class AppModelActionHandler {
         }
         else if (App.store?.appModel["app"].observableData.state == FrameworkElementState.SolvableUnknown) {
             
+            this.HideSolveIcon(payload);
+
             // attach demo page
             App.pages.hub.setNextPage(App.pages.demo, PageTransition.ZoomIn, null, 1.75);
             
