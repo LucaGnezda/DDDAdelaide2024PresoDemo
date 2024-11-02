@@ -54,8 +54,9 @@ class AppModelActionHandler {
                 this.SolveLogging(action.payload);
                 break;
 
-            case "Hub_DemoButton_OnClick":
-                this.ZoomInToSection("demo");
+            case "Hub_SolveIcon_OnClick":
+                AppService.SolveAppModel();
+                this.HideSolveIcon(action.payload);
                 break;
             
             default:
@@ -101,6 +102,10 @@ class AppModelActionHandler {
             App.store.appModel.emitNotifications();
         }
         else if (App.store?.appModel["app"].observableData.state == FrameworkElementState.SolvableUnknown) {
+            
+            // attach demo page
+            App.pages.hub.setNextPage(App.pages.demo, PageTransition.ZoomIn, null, 1.75);
+            
             App.store.appModel["app"].observableData.state = FrameworkElementState.Solved;
             App.elements?.AppModelAppStructure?.solvedImageStylingClassList?.add("Rotating");
             App.elements?.AppModelAppStructure?.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
@@ -343,6 +348,15 @@ class AppModelActionHandler {
             this.ZoomInToSection("eventBinding1");
         }
 
+    }
+
+    /**
+     * Solve the event bindings element
+     * @param {*} payload 
+     * @returns {void}
+     */
+    HideSolveIcon(payload) {
+        App.elements.solveIcon?.classList.add("Hide");
     }
 
     /**

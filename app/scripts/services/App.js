@@ -21,7 +21,7 @@ class App {
      */
 
     /**
-     * @typedef {'pagesContainer'|'backgroundsContainer'|'AppModelAppStructure'|'appModelComponents'|'appModelEventBindings'|'appModelActionDispatch'|'appModelHandlers'|'appModelStore'|'appModelDataBindings'|'appModelObservables'|'appModelLogging'|'appModelHelpers'|'demoButton'} AppElements
+     * @typedef {'pagesContainer'|'backgroundsContainer'|'AppModelAppStructure'|'appModelComponents'|'appModelEventBindings'|'appModelActionDispatch'|'appModelHandlers'|'appModelStore'|'appModelDataBindings'|'appModelObservables'|'appModelLogging'|'appModelHelpers'|'solveIcon'} AppElements
      */
 
     // Flux Pattern objects
@@ -73,7 +73,7 @@ class App {
         appModelObservables: null,
         appModelLogging: null,
         appModelHelpers: null,
-        demoButton: null,
+        solveIcon: null,
     };
 
     // Referecned components

@@ -4,7 +4,7 @@
  */
 class AppService {
     static Initialise() {
-        Log.setLoggingLevel(LogLevel.Trace);
+        Log.setLoggingLevel(LogLevel.Error);
         Log.debug("AppService.Initialise - Begin", "APPSERVICE");
 
         // Bootstrap
@@ -494,8 +494,8 @@ class AppService {
         App.store.appModel.emitNotifications(true);
 
         // Goto demo button
-        App.elements.demoButton = document.getElementById("DemoButton");
-        App.elements.demoButton?.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_DemoButton_OnClick", true));
+        App.elements.solveIcon = document.getElementById("SolveIcon");
+        App.elements.solveIcon?.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_SolveIcon_OnClick", true));
 
         // @ts-ignore getElementById gets a HTMLElement, which is technically our CC but the type is wrong.
         App.components.demoObservableElement = document.getElementById("DemoObservableElement");
@@ -536,11 +536,16 @@ class AppService {
     }
 
     static SolveAppModel() {
+
         if (!App.store) {
             Log.fatal("The store must be initialised", "", this)
             return;
         }
 
+        // attach demo page
+        App.pages.hub.setNextPage(App.pages.demo, PageTransition.ZoomIn, null, 1.75);
+
+        // set solve states
         App.store.appModel["app"].observableData.state = FrameworkElementState.Solved;
         App.store.appModel["components"].observableData.state = FrameworkElementState.Solved;
         App.store.appModel["eventBindings"].observableData.state = FrameworkElementState.Solved;
