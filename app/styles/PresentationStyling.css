@@ -654,8 +654,8 @@ span.Code {
     position: absolute;
     bottom: 2vmin;
     right: 2vmin;
-    width: 4vmin;
-    height: 4vmin;
+    width: 3vmin;
+    height: 3vmin;
     background-image: url("../assets/svg/about.svg");
     background-repeat: no-repeat;
     background-size: contain;
