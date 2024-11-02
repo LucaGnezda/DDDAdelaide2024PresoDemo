@@ -23,14 +23,6 @@ cc-page {
     backdrop-filter: blur(40px);
 }
 
-.CCPageRoot .OverlayIndicator {
-    color: white;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    list-style: none;
-}
-
 .CCPageRoot.Hide,
 .CCPageOverlay.Hide,
 .CCPagePrimary.Hide {
