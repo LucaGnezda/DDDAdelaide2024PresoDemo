@@ -63,6 +63,7 @@
         <script defer src="./app/scripts/services/PageNode.js"></script>
         <script defer src="./app/scripts/services/PresentationFactory.js"></script>
 
+        <script defer src="./app/scripts/helpers/Helpers.js"></script>
 
     </head>
     <body onload="AppService.Initialise()" data-body>
@@ -177,13 +178,19 @@
                 <div class="OverlayIndicator"></div>
             </data>
             <data value="intro2_overlay">
-                <div class="PageTitle">Intro 2 - Overlay</div>
+                <div class="PageTitle">An Aside</div>
                 <div class="PageContents">
-                    <ol>
-                        <li class="Fadeable Hide" data-line1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
-                        <li class="Fadeable Hide" data-line2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
-                        <li class="Fadeable Hide" data-line3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
-                    </ol>
+                    <p class="L">Allow me to interject here.</p>
+                    <div class="Fadeable Hide" data-line1>
+                        <p class="M Indent1">I'm here to contrast Luca's experience, this was his brain child which he graciously invited me to explore.</p>
+                        <p class="M Indent1">However, although he built this, I did help extend it, and I learnt a bunch along the way.</p>
+                    </div>
+                    <p class="L Fadeable Hide" data-line2="">How?</p>
+                    <div class="Fadeable Hide" data-line3>
+                        <p class="M Indent1">I'll pipe up every now and then and insert some interesting idea, note or learning from this experience.</p>
+                        <p class="M Indent1">Hopefully you'll all get a chuckle or two out of it.</p>
+                    </div>
+                    <p class="Fadeable Hide L Green" data-line4>Let's Go!</p>
                 </div>
             </data>
             <data value="intro3">
@@ -191,12 +198,29 @@
                 <div class="PageContents">
                 </div>
             </data>
-            <data value="intro4">
+            <data value="intro4" data-hasoverlay>
                 <div class="PageTitle">The rules...</div>
                 <div class="PageContents">
+                    ...
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="intro4_overlay">
+                <div class="PageTitle">Off to a good start!</div>
+                <div class="PageContents">
+                    <p class="L">I'm an Angular developer, I usually use VS Code, I'm used to Typescript, Types, an LSP.</p>
+                    <p class="L Yellow Fadeable Hide" data-line1>Hold Up! Your telling me...</p>
+                    <div class="ImageTextContainer">
+                        <p class="M Indent1 Fadeable Hide" data-line2>No building? What even is that? How does one... No Build?</p>
+                        <div class="Fadeable Hide DHH InsertImage" data-line3></div>
+                    </div>
+                    <p class="M Indent1 Fadeable Hide" data-line4>Just plain old javascript? Isn't that like some ancient runic alphabet?</p>
+                    <p class="M Indent1 Fadeable Hide" data-line5>And that means, no type checking?!?</p>
+                    <p class="M Indent1 Fadeable Hide" data-line6>So what do I do?</p>
+                    <p class="L Green Fadeable Hide" data-line7>JSDoc!</p>
                 </div>
             </data>
-            <data value="logging1">
+            <data value="logging1" data-hasoverlay>
                 <div class="PageTitle">Logging</div>
                 <div class="PageContents">
                     <p class="L"><b>Goal:</b></p>
@@ -213,6 +237,13 @@
                     </ul>
                     <p class="L">Easy .. we'll be done by lunchtime.</p>
                     <p class="M Indent1 Green">Let's take a look at the result.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="logging1_overlay">
+                <div class="PageTitle">Types and Errors</div>
+                <div class="PageContents">
+                    ... something about log fatal.
                 </div>
             </data>
             <data value="components1">
@@ -250,7 +281,7 @@
                     <p class="L">Easy .. we'll be done by lunchtime.</p>
                 </div>
             </data>
-            <data value="components2">
+            <data value="components2" data-hasoverlay>
                 <div class="PageTitle">Components</div>
                 <div class="PageContents">
                     <p class="L">Hmmm ...</p>
@@ -274,6 +305,13 @@
                     <p class="L">A mere weekend later ... </p>
                     <p class="M Indent1 Green">Let's take a look at the result.</p>
                 </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="components2_overlay">
+                <div class="PageTitle">This is base Javascript?!?</div>
+                <div class="PageContents">
+                    ... component registry is cool
+                </div>
             </data>
             <data value="observables1">
                 <div class="PageTitle">Observables</div>
@@ -294,7 +332,7 @@
                     <p class="L">Easy .. we'll be done by lunchtime.</p>
                 </div>
             </data>
-            <data value="observables2">
+            <data value="observables2" data-hasoverlay>
                 <div class="PageTitle">Observables</div>
                 <div class="PageContents">
                     <p class="L">Ha, not even close...</p>
@@ -314,6 +352,30 @@
                     </ul>
                     <p class="L">A mere two weekends later ... </p>
                     <p class="M Indent1 Green">Let's take a look at the result.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="observables2_overlay">
+                <div class="PageTitle">Deep Compare in Javascript</div>
+                <div class="PageContents">
+                    <p class="L">That's doing some pretty heavy lifting, isn't it?</p>
+                    <ul class="L">
+                        <li class="Tick"><span class="Blue">"Only fire events when real changes occur."</span></li>
+                    </ul>
+                    <p class="L">Yes, yes it is.</p>                
+                    <p class="L">The issues:</p>                
+                    <ul class="M">
+                        <li>We need to be able to track whether an object has changed. We don't want to propegate changes on every set, only on actual value updates.</li>
+                        <li>But do we actually need a proper deep compare implementation?</li>
+                        <li class="Fadeable Hide" data-line1>No we don't.</li>
+                    </ul>
+                    <p class="Fadeable Hide L" data-line2>Observe (hehe) the following:</p>
+                    <div class="Fadeable Hide" data-line3> 
+                        <p class="S Indent1"><span class="Ice Code ">const allKeys = new Set();</span> <span class="Fadeable Hide" data-line4>← Removes duplicates and gives us something to make into an arary.</span></p>
+                        <p class="S Indent1"><span class="Ice Code ">JSON.stringify(obj, (key, _) => (allKeys.add(key), key));</span> <span class="Fadeable Hide" data-line5>← Populates the set (some trickery here with the replacer).</span></p>
+                        <p class="S Indent1"><span class="Ice Code ">return JSON.stringify(obj, Array.from(allKeys).sort());</span> <span class="Fadeable Hide" data-line6>← Returns a JSON string of all props (and sub props) in lexicographical order.</span></p>
+                    </div>
+                    <p class="Fadeable Hide L Green Indent3" data-line7>MAGIC!</p>
                 </div>
             </data>
             <data value="store1">
@@ -383,7 +445,7 @@
                         </li>
                 </div>
             </data>
-            <data value="dispatchActionHandling1">
+            <data value="dispatchActionHandling1" data-hasoverlay>
                 <div class="PageTitle">logic & flow control</div>
                 <div class="PageContents">
                     <p class="L"><b>Goal:</b></p>
@@ -402,6 +464,13 @@
                         <li>Each <span class=Green>Handler</span> decides what it wants to do with the action, updating store items as required.</li>
                     </ul>
                     <p class="L">Easy .. we'll be done by lunchtime.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="dispatchActionHandling1_overlay">
+                <div class="PageTitle">Not the nightlight</div>
+                <div class="PageContents">
+                    ... flux yada yada
                 </div>
             </data>
             <data value="dispatchActionHandling2">
@@ -469,6 +538,7 @@
                             <p class="XS Ice Code Indent2">}</p>
                             <p class="XS Ice Code Indent1">}</p>
                         </li>
+                    </ul>
                 </div>
             </data>
             <data value="hub">
@@ -476,9 +546,10 @@
                 <div class="PageContents DiagramContainer">
                     <div id="AppModel" class="Diagram"></div>
                     <div id="SolveIcon" class="SolveIcon"></div>
+                    <div id="DemoButton" class="PresentationButton Filled Show">Demo</div>
                 </div>
             </data>
-            <data value="demo">
+            <data value="demo" data-hasoverlay>
                 <div class="PageTitle">Demo</div>
                 <div class="PageContents DemoPage">
                     <div class="DemoPage Section">
@@ -489,6 +560,13 @@
                         <cc-demoObservingElement id="DemoObservingElement2" [data-input-threshold]="5" [data-input-color]="blue"></cc-demoObservingElement>
                         <cc-demoObservingElement id="DemoObservingElement3" [data-input-threshold]="7" [data-input-color]="green"></cc-demoObservingElement>
                     </div>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="demo_overlay">
+                <div class="PageTitle">Types and Errors</div>
+                <div class="PageContents">
+                    ... something about log fatal.
                 </div>
             </data>
         </div>
