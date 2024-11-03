@@ -1,7 +1,23 @@
+@keyframes Shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+
 :root {
     --colourBlue: #238ddd;                 /* var(--colourBlue) */
     --colourGreen: #32bea6;                /* var(--colourGreen) */
     --colourIce: #9cdcfe;                  /* var(--colourIce) */
+    --colourYellow: #fffdab;               /* var(--colourYellow) */
     --colourRed: #e74856;                  /* var(--colourRed) */
     --colourCharcoal: #323436;             /* var(--colourCharcoal) */
     --colourDDDDarkSteelBlue: #3E5668;     /* var(--colourDDDDarkSteelBlue) */
@@ -14,6 +30,8 @@ body {
     margin: 0px;
     overflow: hidden;
     user-select: none;
+    height: 100vh;
+    width: 100vw;
 }
 
 .ContentSource {
@@ -568,12 +586,48 @@ li.LeftHalf {
     flex-direction: row;
 }
 
+.FlexRows {
+    display: flex;
+    flex-direction: column;
+}
+
 .Flex {
     flex: 1 1 auto;
 }
 
 .Fixed {
     flex: 0 0 auto;
+}
+
+.Expand {
+    width: 100%;
+    height: 100%;
+}
+
+.Contain {
+    width: auto;
+    height: auto;
+}
+
+.VContain {
+    width: 100%;
+    height: auto;
+}
+
+.HContain {
+    width: auto;
+    height: 100%;
+}
+
+.SpacedEvenly {
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+.JustifyEnd {
+    justify-content: end;
+    align-items: center;
 }
 
 .PositionContents {
@@ -755,6 +809,114 @@ li.LeftHalf {
     top: 10vmin;
     transform: translate(-50%, -50%);
     margin: 0vmin;
+}
+
+.PresentationTitle {
+    color: #ffffff;
+    padding: 0vmin 10vmin 0vmin 10vmin;
+    font-size: 8vmin;
+    text-align: center;
+    font-family: "Alpha Echo";
+    position: relative;
+}
+
+.PresentationTitleWTF {
+    color: var(--colourYellow);
+    padding: 0vmin 0vmin 0vmin 0vmin;
+    font-size: 20vmin;
+    text-align: center;
+    font-family: "Italian Revolution";
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    transform: translateY(-62%) translateX(0%) rotateZ(7deg);
+    text-shadow: 2px 5px 8px #000000;
+    transition: all 0.5s ease-in;
+}
+
+.PresentationTitleWTF.OffScreen {
+    transform: scale(10) translate(-25%, -100%);
+}
+
+.PresentationSubtitle {
+    color: var(--colourGreen);
+    padding: 0vmin 0vmin 0vmin 0vmin;
+    font-size: 4vmin;
+    text-align: center;
+    transition: all 0.5s ease-in-out 1.0s;
+    opacity: 1;
+}
+
+.PresentationSubtitle.Hide {
+    opacity: 0;
+    transition: all 0.5s ease-in-out 0s;
+}
+
+.Shake {
+    animation: Shake 0.2s 0.5s;
+}
+
+.Luca {
+    height: 42vmin;
+    width: 30vmin;
+    background-image: url("../assets/images/Luca.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.LucaQR {
+    height: 15vmin;
+    width: 15vmin;
+    background-image: url("../assets/images/LucaQR.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.Solomon {
+    height: 42vmin;
+    width: 30vmin;
+    background-image: url("../assets/images/Solomon.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.SolomonQR {
+    height: 15vmin;
+    width: 15vmin;
+    background-image: url("../assets/images/SolomonQR.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.Taptu {
+    height: 10vmin;
+    width: 30vmin;
+    background-image: url("../assets/svg/TaptuOnDark.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.TaptuQR {
+    height: 15vmin;
+    width: 15vmin;
+    background-image: url("../assets/images/TaptuQR.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.HFoH {
+    height: 10vmin;
+    width: 30vmin;
+    background-image: url("../assets/svg/HFoH.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .DDDPageBackground {

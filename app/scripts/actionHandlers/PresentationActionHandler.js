@@ -45,8 +45,10 @@ class PresentationActionHandler {
     animatePage(payload) {
         if (payload.inReverse) {
             payload.activePage.content?.stepAnimationBack();
+            payload.activePage.background?.stepAnimationBack();
         } else {
             payload.activePage.content?.stepAnimationForward();
+            payload.activePage.background?.stepAnimationForward();
         }
     }
 
