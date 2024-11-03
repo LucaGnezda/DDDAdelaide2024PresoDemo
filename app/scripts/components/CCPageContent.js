@@ -23,14 +23,6 @@ class CCPageContent extends CCBase {
      */
 
     /**
-     * An animation property for a page
-     * @typedef {Object} AnimationProperty
-     * @property {boolean} animationEnabled
-     * @property {Array<AnimationDefinition>} animationSteps
-     * @property {number} currentAnimationStep
-     */
-
-    /**
      * The elements that make up this component
      * @type {LimitedDictionary<PageContentElement, HTMLElement?>}
      */
@@ -205,7 +197,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Processes the given animation step for the given element in the given direction
-     * @param {AnimationDefinition} stepToAnimate
+     * @param {PageAnimationDefinition} stepToAnimate
      * @param {boolean} [inReverse=false]
      * @param {PageContentElement} [elementToAnimate=pagePrimary]
      */
@@ -273,7 +265,7 @@ class CCPageContent extends CCBase {
 
     /**
      * Sets the animation definition for the element
-     * @param {Array<AnimationDefinition>} definition
+     * @param {Array<PageAnimationDefinition>} definition
      * @param {PageContentElement} [element=pagePrimary]
      * @returns {void}
      */

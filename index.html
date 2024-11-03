@@ -65,12 +65,18 @@
 
 
     </head>
-    <body onload="AppService.Initialise()">
+    <body onload="AppService.Initialise()" data-body>
         <div id="ContentSource" class="ContentSource">
             <data value="ddd">
                 <div class="PageContents VerticalCentreFlex">
                     <div class="DDDLogo"></div>
                     <p class="DDDSocialsText">#DDDAdelaide / @DDDAdelaide</p>
+                </div>
+            </data>
+            <data value="title">
+                <div class="PageContents VerticalCentreFlex" data-contents>
+                    <div class="PresentationTitle">Webapps without a server<div class="PresentationTitleWTF OffScreen" data-flyin>???</div></div>
+                    <div class="PresentationSubtitle Hide" data-subtitle>A personal JavaScript Odyssey</div>
                 </div>
             </data>
             <data value="dddSponsors">
@@ -134,12 +140,33 @@
                 </div>
             </data>
             <data value="intro1">
-                <div class="PageTitle">Intro 1</div>
-                <div class="PageContents">
+                <div class="PageTitle">Hi, it's great to meet you</div>
+                <div class="PageContents VerticalCentreFlex">
+                    <div class="FlexCols SpacedEvenly VContain">
+                        <div class="FlexRows Flex SpacedEvenly Expand"><div class="Luca"></div></div>
+                        <div class="FlexRows Flex SpacedEvenly Expand"><div class="Solomon"></div></div>
+                        <div class="FlexRows Flex FlexRows SpacedEvenly Expand">
+                            <div class="FlexCols Flex SpacedEvenly Expand"><div class="Taptu"></div></div>
+                            <div class="FlexCols Flex SpacedEvenly Expand"><div class="HFoH"></div></div>
+                        </div>
+                    </div>
+                    <div class="FlexCols SpacedEvenly VContain">
+                        <div class="FlexRows Flex SpacedEvenly Expand">
+                            <p class="XS Green">Luca Gnezda</p>
+                            <div class="LucaQR"></div>
+                        </div>
+                        <div class="FlexRows Flex SpacedEvenly Expand">
+                            <p class="XS Green">Solomon Laing</p>
+                            <div class="SolomonQR"></div>
+                        </div>
+                        <div class="FlexRows Flex JustifyEnd Expand">
+                            <div class="TaptuQR"></div>
+                        </div>
+                    </div>
                 </div>
             </data>
             <data value="intro2" data-hasoverlay>
-                <div class="PageTitle">Intro 2</div>
+                <div class="PageTitle">And so it begins...</div>
                 <div class="PageContents">
                     <ol>
                         <li class="Fadeable Hide" data-line1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
@@ -160,7 +187,12 @@
                 </div>
             </data>
             <data value="intro3">
-                <div class="PageTitle">Intro 3</div>
+                <div class="PageTitle">I know what we can do...</div>
+                <div class="PageContents">
+                </div>
+            </data>
+            <data value="intro4">
+                <div class="PageTitle">The rules...</div>
                 <div class="PageContents">
                 </div>
             </data>

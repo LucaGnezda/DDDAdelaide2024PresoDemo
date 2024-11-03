@@ -12,6 +12,7 @@ class CCBackground extends CCBase {
     /**
      * The properties of this component
      * @typedef {Object} BackgroundPropertybag
+     * @property {BackgroundAnimationProperty} animation
      */
 
     /**
@@ -27,7 +28,13 @@ class CCBackground extends CCBase {
     /**
      * @type {BackgroundPropertybag}
      */
-    #propertybag = {}
+    #propertybag = {
+        animation: {
+            animationEnabled: false,
+            animationSteps: [],
+            currentAnimationStep: 0,
+        }
+    }
 
     /**
      * The html template for the component
@@ -114,6 +121,33 @@ class CCBackground extends CCBase {
         this.#elements.backgroundRoot?.classList.remove("WithFadeIn", "WithFadeOut");
     }
 
+    /**
+     * Processes the given animation step for the given element in the given direction
+     * @param {BackgroundAnimationDefinition} stepToAnimate
+     * @param {boolean} [inReverse=false]
+     */
+    #processAnimationStep(stepToAnimate, inReverse = false) {
+        stepToAnimate.add?.forEach((step) => {
+            if (!this.#elements) return;
+
+            if (inReverse) {
+                this.#elements.backgroundTransformer?.classList.remove(...step.classes);
+            } else {
+                this.#elements.backgroundTransformer?.classList.add(...step.classes);
+            }
+        });
+
+        stepToAnimate.remove?.forEach((step) => {
+            if (!this.#elements) return;
+
+            if (inReverse) {
+                this.#elements.backgroundTransformer?.classList.add(...step.classes);
+            } else {
+                this.#elements.backgroundTransformer?.classList.remove(...step.classes);
+            }
+        });
+    }
+
     /*
      * Public Methods
      */
@@ -152,6 +186,100 @@ class CCBackground extends CCBase {
             this.#elements.backgroundContent.style.left = '-0%';
             this.#elements.backgroundContent.style.top = '-0%';
         }
+    }
+
+    /**
+     * Sets the animation definition for the element
+     * @param {Array<BackgroundAnimationDefinition>} definition
+     * @returns {void}
+     */
+    setAnimation(definition) {
+        this.#confirmUXIsInitialised();
+
+        this.#propertybag.animation.animationEnabled = (definition != null);
+        this.#propertybag.animation.animationSteps = definition;
+        this.#propertybag.animation.currentAnimationStep = 0;
+    }
+
+    /**
+     * Resets the element's animation to its initial state
+     * @param {PageContentElement} [element=pagePrimary]
+     * @returns {void}
+     */
+    resetAnimationInitial(element = "pagePrimary") {
+        this.#confirmUXIsInitialised();
+
+        if (this.#propertybag.animation.animationSteps != null) {
+            // note we're setting it to length NOT length - 1, because this signifies 'after the last animation'
+            this.#propertybag.animation.currentAnimationStep = this.#propertybag.animation.animationSteps.length;
+
+            for (let i = this.#propertybag.animation.animationSteps.length - 1; i >= 0; i--) {
+                this.stepAnimationBack();
+            }
+        }
+    }
+
+    /**
+     * Resets the element's animation to its final state
+     * @returns {void}
+     */
+    resetAnimationFinal() {
+        this.#confirmUXIsInitialised();
+
+        if (this.#propertybag.animation.animationSteps != null) {
+
+            // note we're setting it to 0, because this signifies 'before the first animation'
+            this.#propertybag.animation.currentAnimationStep = 0;
+
+            for (let i = 0; i < this.#propertybag.animation.animationSteps.length; i++) {
+                this.stepAnimationForward();
+            }
+        }
+    }
+
+    /**
+     * Steps the element's animation forward
+     * @returns {void}
+     */
+    stepAnimationForward() {
+        this.#confirmUXIsInitialised();
+
+        if (this.#propertybag.animation.animationSteps != null) {
+            if (this.#propertybag.animation.currentAnimationStep >= this.#propertybag.animation.animationSteps.length) {
+                // nothing left to animate
+                return;
+            }
+
+            this.#processAnimationStep(this.#propertybag.animation.animationSteps[this.#propertybag.animation.currentAnimationStep], false);
+            this.#propertybag.animation.currentAnimationStep++;
+        }
+    }
+
+    /**
+     * Steps the element's animation backward
+     * @returns {void}
+     */
+    stepAnimationBack() {
+        this.#confirmUXIsInitialised();
+
+        if (this.#propertybag.animation.animationSteps != null) {
+            if (this.#propertybag.animation.currentAnimationStep <= 0) {
+                // nothing left to animate
+                return;
+            }
+
+            this.#propertybag.animation.currentAnimationStep--;
+            this.#processAnimationStep(this.#propertybag.animation.animationSteps[this.#propertybag.animation.currentAnimationStep], true);
+        }
+
+    }
+
+    /**
+     * Disable animation for the element
+     * @returns {void}
+     */
+    disableAnimation() {
+        this.#propertybag.animation.animationEnabled = false;
     }
 
     /**

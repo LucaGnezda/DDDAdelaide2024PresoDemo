@@ -15,17 +15,43 @@
 
 /**
  * A object to standardise animation steps for in page content
- * @typedef {{key: string, classes: Array<string>}} AnimationStep
+ * @typedef {{key: string, classes: Array<string>}} PageAnimationStep
  */
 
 /**
  * An object to standardise animation step collections for in page content
- * @typedef {{add: Array<AnimationStep>?, remove: Array<AnimationStep>?}} AnimationDefinition
+ * @typedef {{add: Array<PageAnimationStep>?, remove: Array<PageAnimationStep>?}} PageAnimationDefinition
  */
 
 /**
  * An object to standardise in page animations
- * @typedef {{[k: string]: AnimationProperty}} InPageAnimations
+ * @typedef {{[k: string]: PageAnimationProperty}} InPageAnimations
+ */
+
+/**
+ * An animation property for a page
+ * @typedef {Object} PageAnimationProperty
+ * @property {boolean} animationEnabled
+ * @property {Array<PageAnimationDefinition>} animationSteps
+ * @property {number} currentAnimationStep
+ */
+
+/**
+ * An animation property for a page
+ * @typedef {Object} BackgroundAnimationProperty
+ * @property {boolean} animationEnabled
+ * @property {Array<BackgroundAnimationDefinition>} animationSteps
+ * @property {number} currentAnimationStep
+ */
+
+/**
+ * An object to standardise animation step collections for in page content
+ * @typedef {{add: Array<BackgroundAnimationStep>?, remove: Array<BackgroundAnimationStep>?}} BackgroundAnimationDefinition
+ */
+
+/**
+ * A object to standardise animation steps for in page content
+ * @typedef {{classes: Array<string>}} BackgroundAnimationStep
  */
 
 /**

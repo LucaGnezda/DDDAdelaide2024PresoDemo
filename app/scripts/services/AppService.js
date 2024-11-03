@@ -107,6 +107,7 @@ class AppService {
 
         // Define & configure Backgrounds
         factory.newBackground("dddBackground");
+        factory.newBackground("titleBackground");
         factory.newBackground("introBackground");
         factory.newBackground("hubBackground");
         factory.newBackground("sectionBackground1");
@@ -114,11 +115,13 @@ class AppService {
 
         // Define Pages Content
         factory.newPageContent("ddd");
+        factory.newPageContent("title");
         factory.newPageContent("dddSponsors");
         
         factory.newPageContent("intro1");
         factory.newPageContent("intro2");
         factory.newPageContent("intro3");
+        factory.newPageContent("intro4");
 
         factory.newPageContent("hub");
 
@@ -145,11 +148,13 @@ class AppService {
 
         // Define Pages
         factory.newPageNode("ddd");
+        factory.newPageNode("title");
         factory.newPageNode("dddSponsors");
 
         factory.newPageNode("intro1");
         factory.newPageNode("intro2");
         factory.newPageNode("intro3");
+        factory.newPageNode("intro4");
 
         factory.newPageNode("hub");
 
@@ -178,6 +183,9 @@ class AppService {
         App.backgrounds.dddBackground.setContentClass("DDDPageBackground");
         App.backgrounds.dddBackground.setContentPositionRange(1, 1);
 
+        App.backgrounds.titleBackground.setContentClass("PageBackground");
+        App.backgrounds.titleBackground.setContentPositionRange(1, 1);
+
         App.backgrounds.introBackground.setContentClass("PageBackground");
         App.backgrounds.introBackground.setContentPositionRange(1.6, 1);
 
@@ -192,11 +200,13 @@ class AppService {
 
         // Configure Pages
         App.pages.ddd.setPageContentAndBackground(App.pageContent.ddd, App.backgrounds.dddBackground, 0.0, 0, null);
+        App.pages.title.setPageContentAndBackground(App.pageContent.title, App.backgrounds.titleBackground, 0.0, 0, null);
         App.pages.dddSponsors.setPageContentAndBackground(App.pageContent.dddSponsors, App.backgrounds.dddBackground, 0.0, 0, null);
 
         App.pages.intro1.setPageContentAndBackground(App.pageContent.intro1, App.backgrounds.introBackground, 0.0, 0, null);
-        App.pages.intro2.setPageContentAndBackground(App.pageContent.intro2, App.backgrounds.introBackground, 0.3, 0, null);
-        App.pages.intro3.setPageContentAndBackground(App.pageContent.intro3, App.backgrounds.introBackground, 0.6, 0, null);
+        App.pages.intro2.setPageContentAndBackground(App.pageContent.intro2, App.backgrounds.introBackground, 0.2, 0, null);
+        App.pages.intro3.setPageContentAndBackground(App.pageContent.intro3, App.backgrounds.introBackground, 0.4, 0, null);
+        App.pages.intro4.setPageContentAndBackground(App.pageContent.intro4, App.backgrounds.introBackground, 0.6, 0, null);
 
         App.pages.hub.setPageContentAndBackground(App.pageContent.hub, App.backgrounds.hubBackground, 0.0, 0, null);
 
@@ -222,12 +232,14 @@ class AppService {
         App.pages.demo.setPageContentAndBackground(App.pageContent.demo, App.backgrounds.demoBackground, 0.0, 0, null);
 
         // Interrelate Pages with transitions
-        App.pages.ddd.setNextPage(App.pages.dddSponsors, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
-        App.pages.dddSponsors.setNextPage(App.pages.intro1, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+        App.pages.ddd.setNextPage(App.pages.title, PageTransition.Fade, PageTransition.Fade, 1.25);
+        App.pages.title.setNextPage(App.pages.dddSponsors, PageTransition.Fade, PageTransition.Fade, 1.25);
+        App.pages.dddSponsors.setNextPage(App.pages.intro1, PageTransition.Fade, PageTransition.Fade, 1.25);
 
         App.pages.intro1.setNextPage(App.pages.intro2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
         App.pages.intro2.setNextPage(App.pages.intro3, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
-        App.pages.intro3.setNextPage(App.pages.hub, PageTransition.Fade, PageTransition.Fade, 2);
+        App.pages.intro3.setNextPage(App.pages.intro4, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+        App.pages.intro4.setNextPage(App.pages.hub, PageTransition.Fade, PageTransition.Fade, 2);
 
         App.pages.logging1.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
         App.pages.logging1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1.75);
@@ -294,6 +306,31 @@ class AppService {
 
     static DefineInPageAnimations() {
         // Add animations to Pages
+        App.pageContent.title.setAnimation(
+            [
+                {
+                    add: [
+                        { key: "data-contents", classes: ["Shake"] }
+                    ],
+                    remove: [
+                        { key: "data-subtitle", classes: ["Hide"] },
+                        { key: "data-flyin", classes: ["OffScreen"]},
+                    ]
+                },
+            ]
+        )
+
+        App.backgrounds.titleBackground.setAnimation(
+            [
+                {
+                    add: [
+                        { classes: ["Shake"] }
+                    ],
+                    remove: []
+                },
+            ]
+        )
+
         App.pageContent.intro2.setAnimation(
             [
                 {
