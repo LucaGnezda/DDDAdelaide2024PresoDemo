@@ -471,7 +471,7 @@ ul.XXS > li {
 }
 
 /* List Markers */
-li.Tick, 
+li.Tick,
 li.Cross {
     list-style: none;
     position: relative;
@@ -687,16 +687,16 @@ li.LeftHalf {
 }
 
 .PresentationButton.Filled {
-    background: #42a768; 
+    background: #42a768;
     box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.5);
 }
 
 .PresentationButton.Filled:hover:not(.Disabled) {
-    background: #368d57; 
+    background: #368d57;
 }
 
 .PresentationButton.Filled:active:not(.Disabled) {
-    background: #2c7749; 
+    background: #2c7749;
     box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.5);
 }
 
@@ -778,7 +778,7 @@ li.LeftHalf {
 .DemoPage .Section {
     display: flex;
     flex-direction: row;
-    gap: 10vmin;    
+    gap: 10vmin;
 }
 
 .ComponentVennA {
@@ -1221,7 +1221,7 @@ li.LeftHalf {
     border-radius: 4vmin;
     background-clip: border-box;
     width: 50% !important;
-    height: 50% !important;  
+    height: 50% !important;
     left: 0;
     right: 0;
     top: 0;
@@ -1231,6 +1231,13 @@ li.LeftHalf {
 
 .DHH {
     background-image: url("../assets/images/DHH.jpg");
+    border-radius: 4vmin;
+    background-clip: border-box;
+    left: 115vmin;
+}
+
+.FluxApp {
+    background-image: url("../assets/images/flux.png");
     border-radius: 4vmin;
     background-clip: border-box;
     left: 115vmin;

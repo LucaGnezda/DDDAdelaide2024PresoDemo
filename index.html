@@ -385,15 +385,15 @@
                     <ul class="L">
                         <li class="Tick"><span class="Blue">"Only fire events when real changes occur."</span></li>
                     </ul>
-                    <p class="L">Yes, yes it is.</p>                
-                    <p class="L">The issues:</p>                
+                    <p class="L">Yes, yes it is.</p>
+                    <p class="L">The issues:</p>
                     <ul class="M">
                         <li>We need to be able to track whether an object has changed. We don't want to propegate changes on every set, only on actual value updates.</li>
                         <li>But do we actually need a proper deep compare implementation?</li>
                         <li class="Fadeable Hide" data-line1>No we don't.</li>
                     </ul>
                     <p class="Fadeable Hide L" data-line2>Observe (hehe) the following:</p>
-                    <div class="Fadeable Hide" data-line3> 
+                    <div class="Fadeable Hide" data-line3>
                         <p class="S Indent1"><span class="Ice Code ">const allKeys = new Set();</span> <span class="Fadeable Hide" data-line4>← Removes duplicates and gives us something to make into an arary.</span></p>
                         <p class="S Indent1"><span class="Ice Code ">JSON.stringify(obj, (key, _) => (allKeys.add(key), key));</span> <span class="Fadeable Hide" data-line5>← Populates the set (some trickery here with the replacer).</span></p>
                         <p class="S Indent1"><span class="Ice Code ">return JSON.stringify(obj, Array.from(allKeys).sort());</span> <span class="Fadeable Hide" data-line6>← Returns a JSON string of all props (and sub props) in lexicographical order.</span></p>
@@ -475,7 +475,7 @@
                     <p class="L Green">We want logic to sit between UI events and the store. Let's go retro and recreate a Facebook Flux inspired pattern. I've never had a chance to use the OG, let alone build one.</p>
                     <p class="L"><b>Key points:</b></p>
                     <ul class="M">
-                        <li>Circa 2013 facebook was struggling with multiple UI elements needing to accessing singleton data.</li>
+                        <li>Circa 2013 facebook was struggling with multiple UI elements needing access to singleton data.</li>
                         <li>So they invented Flux, essentially a cyclic event/action based flow control.</li>
                         <li>I'm going to add a little twist and formalise the boundary between the store and logic.</li>
                         <li>Actually when you break it down ... it starts to feel like old school late 90s C++ windows event loops.</li>
@@ -491,9 +491,14 @@
                 <div class="OverlayIndicator"></div>
             </data>
             <data value="dispatchActionHandling1_overlay">
-                <div class="PageTitle">Not the nightlight</div>
+                <div class="PageTitle">Not the nightlight...</div>
                 <div class="PageContents">
-                    ... flux yada yada
+                    <p class="L">Again, let me show of how little I know and tell you a story.</p>
+                    <div class="ImageTextContainer">
+                        <p class="L">My only interaction with a software concept called flux was my use of a nightlight/redshift.</p>
+                        <div class="FluxApp InsertImage"></div>
+                    </div>
+                    <p class="L">Again, I've very much enjoyed learning more about the history of my profession and some of its foundations.</p>
                 </div>
             </data>
             <data value="dispatchActionHandling2">
