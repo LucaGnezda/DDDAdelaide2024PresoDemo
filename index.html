@@ -243,7 +243,13 @@
             <data value="logging1_overlay">
                 <div class="PageTitle">Types and Errors</div>
                 <div class="PageContents">
-                    ... something about log fatal.
+                    <p class="L">Javascript, now with <span class="Code">Log.fatal()</span>!</p>
+                    <ul class="M">
+                        <li>JSDoc forced the catching of a bunch of potential null errors.</li>
+                        <li>We caught them all, then realised that we were introducing some undefined behaviours.</li>
+                        <li>In some cases, you actually want things to fail (bootstrapping, etc).</li>
+                        <li>So why not extend the Logging to include a fatal option which throws.</li>
+                    </ul>
                 </div>
             </data>
             <data value="components1">
@@ -310,7 +316,10 @@
             <data value="components2_overlay">
                 <div class="PageTitle">This is base Javascript?!?</div>
                 <div class="PageContents">
-                    ... component registry is cool
+                    <p class="L Fadeable" data-line1>I might be outing myself as a bit of a framework andy here but I had no idea.</p>
+                    <p class="L Fadeable" data-line1>Custom components are natively supported in browsers/Javascirpt?</p>
+                    <p class="L Fadeable" data-line1>I know I'm saying this a lot, but, <span class="Blue">Magic!</span></p>
+                    <div class="MindExplosion InsertImage Hide Fadeable" data-line2></div>
                 </div>
             </data>
             <data value="observables1" data-hasoverlay>
