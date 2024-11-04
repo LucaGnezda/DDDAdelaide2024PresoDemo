@@ -331,11 +331,11 @@ class AppService {
             ]
         )
 
-        App.pageContent.intro1.setAnimation(defineBasicAnimationSeries(3));
+        App.pageContent.intro2.setAnimation(defineBasicAnimationSeries(3));
 
         // overlay definition
-        App.pageContent.intro1.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
-        App.pageContent.intro3.setAnimation(defineBasicAnimationSeries(7), "pageOverlay");
+        App.pageContent.intro2.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
+        App.pageContent.intro4.setAnimation(defineBasicAnimationSeries(7), "pageOverlay");
         App.pageContent.observables2.setAnimation(defineBasicAnimationSeries(7), "pageOverlay");
     }
 
@@ -510,7 +510,7 @@ class AppService {
 
     static ActivateFirstPage() {
         // Activate and transition page 1
-        App.activePage = App.pages.intro1;
+        App.activePage = App.pages.ddd;
         App.activePage.background?.usingTransition(1, "ease-in", 0);
         App.activePage.background?.withFadeIn();
         App.activePage.background?.show();

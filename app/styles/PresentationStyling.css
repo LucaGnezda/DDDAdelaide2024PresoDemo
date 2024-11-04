@@ -1220,7 +1220,7 @@ li.LeftHalf {
     background-image: url("../assets/images/DHH.jpg");
     border-radius: 4vmin;
     background-clip: border-box;
-    right: 40vmin;
+    left: 115vmin;
 }
 
 .InsertImage {
