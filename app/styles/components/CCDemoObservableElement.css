@@ -1,9 +1,19 @@
 .CCDemoObservableElement{
     display: flex;
     gap: 5vmin;
+    flex-flow: column;
+    align-items: center;
+    border-radius: 4vmin;
+    border: rgba(130, 123, 120, 1) 3px solid;
+    padding: 6vmin;
 }
 
 .CCDemoObservableElement li {
     list-style: none;
+}
+
+.CCDemoObservableElement .ObservableElementButtons {
+    display: flex;
+    gap: 5vmin;
 }
 

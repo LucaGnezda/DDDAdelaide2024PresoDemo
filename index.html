@@ -316,9 +316,10 @@
             <data value="components2_overlay">
                 <div class="PageTitle">This is base Javascript?!?</div>
                 <div class="PageContents">
-                    <p class="L Fadeable" data-line1>I might be outing myself as a bit of a framework andy here but I had no idea.</p>
-                    <p class="L Fadeable" data-line1>Custom components are natively supported in browsers/Javascirpt?</p>
+                    <p class="L Fadeable" data-line1>I might be outing myself as a bit of a framework andy here but...</p>
+                    <p class="L Fadeable" data-line1>I had no idea custom components are natively supported in browsers/Javascript?</p>
                     <p class="L Fadeable" data-line1>I know I'm saying this a lot, but, <span class="Blue">Magic!</span></p>
+                    <p class="L Fadeable" data-line1>I really think this speaks to the importance of exploration and experimentation.</p>
                     <div class="MindExplosion InsertImage Hide Fadeable" data-line2></div>
                 </div>
             </data>
@@ -388,13 +389,14 @@
                     <p class="L">Yes, yes it is.</p>
                     <p class="L">The issues:</p>
                     <ul class="M">
-                        <li>We need to be able to track whether an object has changed. We don't want to propegate changes on every set, only on actual value updates.</li>
-                        <li>But do we actually need a proper deep compare implementation?</li>
+                        <li>We need to be able to track whether an object has changed.</li>
+                        <li>We don't want to propegate changes on every set, only on actual value updates.</li>
+                        <li>Do we actually need a proper deep compare implementation?</li>
                         <li class="Fadeable Hide" data-line1>No we don't.</li>
                     </ul>
                     <p class="Fadeable Hide L" data-line2>Observe (hehe) the following:</p>
                     <div class="Fadeable Hide" data-line3>
-                        <p class="S Indent1"><span class="Ice Code ">const allKeys = new Set();</span> <span class="Fadeable Hide" data-line4>← Removes duplicates and gives us something to make into an arary.</span></p>
+                        <p class="S Indent1"><span class="Ice Code ">const allKeys = new Set();</span> <span class="Fadeable Hide" data-line4>← Removes duplicates and gives us something to make into an array.</span></p>
                         <p class="S Indent1"><span class="Ice Code ">JSON.stringify(obj, (key, _) => (allKeys.add(key), key));</span> <span class="Fadeable Hide" data-line5>← Populates the set (some trickery here with the replacer).</span></p>
                         <p class="S Indent1"><span class="Ice Code ">return JSON.stringify(obj, Array.from(allKeys).sort());</span> <span class="Fadeable Hide" data-line6>← Returns a JSON string of all props (and sub props) in lexicographical order.</span></p>
                     </div>

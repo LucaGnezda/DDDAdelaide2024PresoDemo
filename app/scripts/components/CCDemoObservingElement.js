@@ -6,7 +6,7 @@
 class CCDemoObservingElement extends CCBase {
     /**
      * Definitions for internal elements
-     * @typedef {('root')} DemoObservingElementElement
+     * @typedef {('root'|'id')} DemoObservingElementElement
      */
     
     /**
@@ -23,6 +23,7 @@ class CCDemoObservingElement extends CCBase {
      */
     #elements = {
         root: null,
+        id: null,
     }
     
     /**
@@ -39,7 +40,7 @@ class CCDemoObservingElement extends CCBase {
      * @property {string} #htmlTemplate  
      */
     static #htmlTemplate = `
-        <div class="CCDemoObservingElement" data-element-root> </div>
+        <div class="CCDemoObservingElement" data-element-root> <p class="ObservingElementId" data-element-id></p> </div>
     `
 
     constructor() {
@@ -64,6 +65,7 @@ class CCDemoObservingElement extends CCBase {
         if (this.children.length == 0) {
             let fragment = getDOMFragmentFromString(CCDemoObservingElement.#htmlTemplate);
             this.#elements.root = fragment.querySelector('[data-element-root]');
+            this.#elements.id = fragment.querySelector('[data-element-id]');
             this.appendChild(fragment);
         }
     }
@@ -96,6 +98,12 @@ class CCDemoObservingElement extends CCBase {
         if (!this.#elements.root) {
             return;
         }
+        
+        if (!this.#elements.id) {
+            return;
+        }
+        
+        this.#elements.id.innerText = `ID: ${this.#propertyBag.threshold.toString()}`;
 
         if (this.#propertyBag.count % this.#propertyBag.threshold == 0 && this.#propertyBag.count != 0 && CSS.supports('color', this.#propertyBag.color)) {
             this.#elements.root.style.backgroundColor = this.#propertyBag.color;

@@ -1217,6 +1217,7 @@ li.LeftHalf {
 }
 
 .MindExplosion {
+    position: absolute;
     background-image: url("../assets/images/MindExplosion.jpg");
     border-radius: 4vmin;
     background-clip: border-box;
