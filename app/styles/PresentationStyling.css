@@ -1240,11 +1240,9 @@ li.LeftHalf {
     background-image: url("../assets/images/flux.png");
     border-radius: 4vmin;
     background-clip: border-box;
-    left: 115vmin;
 }
 
 .InsertImage {
-    position: absolute;
     height: 16vmin;
     width: 16vmin;
     background-position: center;
@@ -1255,4 +1253,5 @@ li.LeftHalf {
 .ImageTextContainer {
     display: flex;
     align-items: center;
+    gap: 32vmin;
 }

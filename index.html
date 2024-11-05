@@ -210,14 +210,14 @@
                 <div class="PageContents">
                     <p class="L">I'm an Angular developer, I usually use VS Code, I'm used to Typescript, Types, an LSP.</p>
                     <p class="L Yellow Fadeable Hide" data-line1>Hold Up! Your telling me...</p>
-                    <div class="ImageTextContainer">
-                        <p class="M Indent1 Fadeable Hide" data-line2>No building? What even is that? How does one... No Build?</p>
-                        <div class="Fadeable Hide DHH InsertImage" data-line3></div>
+                    <div class="ImageTextContainer Fadeable Hide" data-line2>
+                        <p class="M Indent1">No building? What even is that? How does one... No Build?</p>
+                        <div class="DHH InsertImage"></div>
                     </div>
-                    <p class="M Indent1 Fadeable Hide" data-line4>Just plain old javascript? Isn't that like some ancient runic alphabet?</p>
-                    <p class="M Indent1 Fadeable Hide" data-line5>And that means, no type checking?!?</p>
-                    <p class="M Indent1 Fadeable Hide" data-line6>So what do I do?</p>
-                    <p class="L Green Fadeable Hide" data-line7>JSDoc!</p>
+                    <p class="M Indent1 Fadeable Hide" data-line3>Just plain old javascript? Isn't that like some ancient runic alphabet?</p>
+                    <p class="M Indent1 Fadeable Hide" data-line4>And that means, no type checking?!?</p>
+                    <p class="M Indent1 Fadeable Hide" data-line5>So what do I do?</p>
+                    <p class="L Green Fadeable Hide" data-line6>JSDoc!</p>
                 </div>
             </data>
             <data value="logging1" data-hasoverlay>
@@ -593,7 +593,13 @@
             <data value="demo_overlay">
                 <div class="PageTitle">This Demo</div>
                 <div class="PageContents">
-                    ... something about this demo.
+                    <p class="L">The goal here is to exemplify the systems working:</p>
+                    <ul class="M">
+                        <li>This example shows two components, 1 instance of the observable component, 3 instances of the observing component.</li>
+                        <li>The observable component connects to the store and updates it.</li>
+                        <li>The observable component also handles its own internal observable state.</li>
+                        <li>The observing components each take two inputs, one for a trigger value, another for colour.</li>
+                    </ul>
                 </div>
             </data>
         </div>

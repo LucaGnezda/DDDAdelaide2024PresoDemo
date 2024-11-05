@@ -335,7 +335,7 @@ class AppService {
 
         // overlay definition
         App.pageContent.intro2.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
-        App.pageContent.intro4.setAnimation(defineBasicAnimationSeries(7), "pageOverlay");
+        App.pageContent.intro4.setAnimation(defineBasicAnimationSeries(6), "pageOverlay");
         App.pageContent.components2.setAnimation(
             [
                 {
