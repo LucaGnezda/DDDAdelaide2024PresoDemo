@@ -129,8 +129,8 @@ p {
 p,
 P.XL {
     font-size: 4vmin;
-    /* margin: 1.6vmin 0vmin 1.6vmin 0vmin; */
-    padding: 1.6vmin 0vmin 1.6vmin 0vmin;
+    margin: 1.6vmin 0vmin 1.6vmin 0vmin;
+    /* padding: 1.6vmin 0vmin 1.6vmin 0vmin; */
 }
 
 p.Indent0,
@@ -198,8 +198,8 @@ ul.XL > li {
 /* Large fonts */
 P.L {
     font-size: 3.5vmin;
-    /* margin: 1.4vmin 0vmin 1.4vmin 0vmin; */
-    padding: 1.4vmin 0vmin 1.4vmin 0vmin;
+    margin: 1.4vmin 0vmin 1.4vmin 0vmin; 
+    /* padding: 1.4vmin 0vmin 1.4vmin 0vmin; */
 }
 
 P.L.Indent0 {
@@ -253,8 +253,8 @@ ul.L > li {
 /* Medium fonts */
 P.M {
     font-size: 3vmin;
-    /* margin: 1.2vmin 0vmin 1.2vmin 0vmin; */
-    padding: 1.2vmin 0vmin 1.2vmin 0vmin;
+    margin: 1.2vmin 0vmin 1.2vmin 0vmin;
+    /* padding: 1.2vmin 0vmin 1.2vmin 0vmin; */
 }
 
 P.M.Indent0 {
@@ -308,8 +308,8 @@ ul.M > li {
 /* Small fonts */
 P.S {
     font-size: 2.5vmin;
-    /* margin: 1vmin 0vmin 1vmin 0vmin; */
-    padding: 1vmin 0vmin 1vmin 0vmin;
+    margin: 1vmin 0vmin 1vmin 0vmin;
+    /* padding: 1vmin 0vmin 1vmin 0vmin; */
 }
 
 P.S.Indent0 {
@@ -363,8 +363,8 @@ ul.S > li {
 /* Extra Small fonts */
 P.XS {
     font-size: 2vmin;
-    /* margin: 0.8vmin 0vmin 0.8vmin 0vmin; */
-    padding: 0.8vmin 0vmin 0.8vmin 0vmin;
+    margin: 0.8vmin 0vmin 0.8vmin 0vmin;
+    /* padding: 0.8vmin 0vmin 0.8vmin 0vmin; */
 }
 
 P.XS.Indent0 {
@@ -418,8 +418,8 @@ ul.XS > li {
 /* XXS (smallest) fonts */
 P.XXS {
     font-size: 1.5vmin;
-    /* margin: 0.6vmin 0vmin 0.6vmin 0vmin; */
-    padding: 0.6vmin 0vmin 0.6vmin 0vmin;
+    margin: 0.6vmin 0vmin 0.6vmin 0vmin; 
+    /* padding: 0.6vmin 0vmin 0.6vmin 0vmin; */
 }
 
 P.XXS.Indent0 {
@@ -651,6 +651,7 @@ li.LeftHalf {
 
 .PositionContents {
     position: relative;
+    margin: auto;
 }
 
 .Fadeable.Show {
@@ -936,6 +937,188 @@ li.LeftHalf {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.IntroPhotoContainer {
+    position: absolute;
+    display: block;
+}
+
+.IntroPhotoContainer.Container1 {
+    width: 60vmin;
+    height: 60vmin;
+    transform: translateX(-20vmin) translateY(-10vmin) rotate(-5deg);
+}
+
+.IntroPhotoContainer.Container2 {
+    width: 60vmin;
+    height: 60vmin;
+    transform: translateX(20vmin) translateY(-5vmin) rotate(4deg);
+}
+
+.IntroPhotoContainer.Container3 {
+    width: 60vmin;
+    height: 60vmin;
+    transform: translateX(0vmin) translateY(0vmin) rotate(0deg);
+}
+
+.IntroPhotoContainer.Container4 {
+    width: 60vmin;
+    height: 60vmin;
+    transform: translateX(-20vmin) translateY(5vmin) rotate(-5deg);
+}
+
+.IntroPhotoContainer.Container5 {
+    width: 50vmin;
+    height: 50vmin;
+    transform: translateX(20vmin) translateY(10vmin) rotate(4deg);
+}
+
+.IntroPhotoContainer.Container6 {
+    width: 100vmin;
+    height: 100vmin;
+    transform: translateX(0vmin) translateY(0vmin) rotate(0deg);
+}
+
+.IntroPhoto {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(3px 3px 4px #00000080);
+    opacity: 1;
+}
+
+.IntroPhoto.OffScreen {
+    opacity: 0;
+    transform: scale(2) translate(-25%, -25%);
+}
+
+.IntroPhoto.FarOffScreen {
+    opacity: 0;
+    transform: scale(4) translate(-50%, -50%);
+}
+
+.IntroPhoto.Gentle {
+    transition: all 1.0s ease-out;
+}
+
+.IntroPhoto.Crash {
+    transition: all 0.5s ease-in;
+}
+
+.IntroPhoto.Photo1 {
+    background-image: url("../assets/images/IntroPhoto1.jpg");
+}
+
+.IntroPhoto.Photo2 {
+    background-image: url("../assets/images/IntroPhoto2.jpg");
+}
+
+.IntroPhoto.Photo3 {
+    background-image: url("../assets/images/IntroPhoto3.jpg");
+}
+
+.IntroPhoto.Photo4 {
+    background-image: url("../assets/images/IntroPhoto4.jpg");
+}
+
+.IntroPhoto.Photo5 {
+    background-image: url("../assets/images/IntroPhoto5.jpg");
+}
+
+.IntroPhoto.Photo6 {
+    background-image: url("../assets/images/IntroPhoto6.jpg");
+}
+
+.SpeechBubble {
+    position: absolute;
+    width: 15vmin;
+    height: 15vmin;
+    transition: transform 3.0s ease-in-out;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0;
+    line-height: 13vmin;
+    text-align: center;
+}
+
+.SpeechBubble.Bubble1 {
+    background-image: url("../assets/svg/speech-bubble-filled.svg");
+    transform: translateX(7vmin) translateY(-10vmin);
+}
+
+.SpeechBubble.Motion1 {
+    opacity: 1;
+    transform: translateX(14vmin) translateY(-12vmin);
+}
+
+.SpeechBubble.Bubble2 {
+    background-image: url("../assets/svg/speech-bubble-filled.svg");
+    transform: translateX(7vmin) translateY(7vmin);
+}
+
+.SpeechBubble.Motion2 {
+    opacity: 1;
+    transform: translateX(-7vmin) translateY(5vmin);
+}
+
+.SpeechBubble.Bubble3 {
+    background-image: url("../assets/svg/speech-bubble-filled.svg");
+    transform: translateX(-17vmin) translateY(-14vmin);
+}
+
+.SpeechBubble.Motion3 {
+    opacity: 1;
+    transform: translateX(-7vmin) translateY(-16vmin);
+}
+
+.SpeechBubbleText {
+    display: inline-block;
+    line-height: 1.5vmin;
+    color: #000000;
+    font-size: 1.5vmin;
+    text-align: center;
+    font-family: "Alpha Echo";
+}
+
+.IntroIcon {
+    position: absolute;
+    display: block;
+    width: 30vmin;
+    height: 30vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+}
+
+.IntroIcon.Icon1 {
+    transform: translateX(-25vmin) translateY(-25vmin);
+    background-image: url("../assets/svg/idea.svg");   
+}
+
+.IntroIcon.Icon2 {
+    transform: translateX(25vmin) translateY(-15vmin);
+    background-image: url("../assets/svg/business-presentation.svg");
+}
+
+.IntroIcon.Icon3 {
+    transform: translateX(-25vmin) translateY(10vmin);
+    background-image: url("../assets/svg/game.svg");
+}
+
+.IntroIcon.Icon4 {
+    transform: translateX(25vmin) translateY(20vmin);
+    background-image: url("../assets/svg/celebration.svg");
+}
+
+.IntroIcon.Hide {
+    opacity: 0;
 }
 
 .DDDPageBackground {

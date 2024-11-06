@@ -140,7 +140,7 @@
                     </div>
                 </div>
             </data>
-            <data value="intro1">
+            <data value="intro1" data-hasoverlay>
                 <div class="PageTitle">Hi, it's great to meet you</div>
                 <div class="PageContents VerticalCentreFlex">
                     <div class="FlexCols SpacedEvenly VContain">
@@ -165,19 +165,9 @@
                         </div>
                     </div>
                 </div>
-            </data>
-            <data value="intro2" data-hasoverlay>
-                <div class="PageTitle">And so it begins...</div>
-                <div class="PageContents">
-                    <ol>
-                        <li class="Fadeable Hide" data-line1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
-                        <li class="Fadeable Hide" data-line2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
-                        <li class="Fadeable Hide" data-line3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
-                    </ol>
-                </div>
                 <div class="OverlayIndicator"></div>
             </data>
-            <data value="intro2_overlay">
+            <data value="intro1_overlay">
                 <div class="PageTitle">An Aside</div>
                 <div class="PageContents">
                     <p class="L">Allow me to interject here.</p>
@@ -193,15 +183,51 @@
                     <p class="Fadeable Hide L Green" data-line4>Let's Go!</p>
                 </div>
             </data>
+            <data value="intro2">
+                <div class="PageTitle" data-shake>And so it begins...</div>
+                <div class="PageContents VerticalCentreFlex PositionContents" data-contents data-shake>
+                    <div class="IntroPhotoContainer Container1 OffScreen"><div class="IntroPhoto Photo1 Gentle" data-photo1></div></div>
+                    <div class="IntroPhotoContainer Container2 OffScreen"><div class="IntroPhoto Photo2 Gentle" data-photo2></div></div>
+                    <div class="IntroPhotoContainer Container3 OffScreen"><div class="IntroPhoto Photo3 Gentle" data-photo3></div></div>
+                    <div class="IntroPhotoContainer Container4 OffScreen"><div class="IntroPhoto Photo4 Gentle" data-photo4></div></div>
+                    <div class="IntroPhotoContainer Container5 OffScreen"><div class="IntroPhoto Photo5 Gentle" data-photo5></div></div>
+                    <div class="IntroPhotoContainer Container6 FarOffScreen"><div class="IntroPhoto Photo6 Crash" data-photo6></div></div>
+                    <div class="SpeechBubble Bubble1" data-motion1><span class="SpeechBubbleText">Go away,<br/>I'm busy</span></div>
+                    <div class="SpeechBubble Bubble2" data-motion2><span class="SpeechBubbleText">I don't<br/>want to go</span></div>
+                    <div class="SpeechBubble Bubble3" data-motion3><span class="SpeechBubbleText">*GRUNT*</span></div>
+                </div>
+            </data>
             <data value="intro3">
-                <div class="PageTitle">I know what we can do...</div>
-                <div class="PageContents">
+                <div class="PageTitle">I know what we'll do...</div>
+                <div class="PageContents VerticalCentreFlex PositionContents">
+                    <div class="IntroIcon Icon1 Hide" data-icon1></div>
+                    <div class="IntroIcon Icon2 Hide" data-icon2></div>
+                    <div class="IntroIcon Icon3 Hide" data-icon3></div>
+                    <div class="IntroIcon Icon4 Hide" data-icon4></div>
                 </div>
             </data>
             <data value="intro4" data-hasoverlay>
                 <div class="PageTitle">The rules...</div>
                 <div class="PageContents">
-                    ...
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">A coding environment that's highly interactive, rewards quickly, is commonplace, easy to learn, and without any of the developer complexities that get in the way of a good time.</p>
+                    <p class="L">Let's use...</p>
+                    <ul class="M">
+                        <li class="Tick">Basic HTML, CSS & Javascript</li>
+                    </ul>
+                    <p class="L">So, we'll go back to basics. This means:</p>
+                    <ul class="M">
+                        <li class="Cross">No servers, should just work from the local filesystem.</li>
+                        <li class="Cross">No building, should just run.</li>
+                        <li class="Cross">No external libraries, everything must be self contained so they can gradually learn the whole.</li>
+                    </ul>
+                    <p class="L">But this  means:</p>
+                    <ul class="M">
+                        <li class="Cross">No package imports.</li>
+                        <li class="Cross">No TypeScript.</li>
+                        <li class="Cross">No GitHub repo shortcuts</li>
+                    </ul>
+                    <p class="L Blue">Oh gosh ... where to begin?</p>
                 </div>
                 <div class="OverlayIndicator"></div>
             </data>
