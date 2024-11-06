@@ -331,65 +331,27 @@ class AppService {
             ]
         )
 
-        App.pageContent.intro2.setAnimation(
-            [
-                {
-                    add: [
-                        { key: "data-line1", classes: ["Show"] },
-                    ],
-                    remove: [
-                        { key: "data-line1", classes: ["Hide"] },
-                    ]
-                },
-                {
-                    add: [
-                        { key: "data-line2", classes: ["Show"] },
-                    ],
-                    remove: [
-                        { key: "data-line2", classes: ["Hide"] },
-                    ]
-                },
-                {
-                    add: [
-                        { key: "data-line3", classes: ["Show"] },
-                    ],
-                    remove: [
-                        { key: "data-line3", classes: ["Hide"] },
-                    ]
-                },
-            ]
-        )
+        App.pageContent.intro2.setAnimation(defineBasicAnimationSeries(3));
 
         // overlay definition
-        App.pageContent.intro2.setAnimation(
+        App.pageContent.intro2.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
+        App.pageContent.intro4.setAnimation(defineBasicAnimationSeries(6), "pageOverlay");
+        App.pageContent.components2.setAnimation(
             [
                 {
                     add: [
-                        { key: "data-line1", classes: ["Show"] },
-                    ],
-                    remove: [
                         { key: "data-line1", classes: ["Hide"] },
-                    ]
-                },
-                {
-                    add: [
-                        { key: "data-line2", classes: ["Show"] },
+                        { key: "data-line2", classes: ["Show"] }
                     ],
                     remove: [
-                        { key: "data-line2", classes: ["Hide"] },
+                        { key: "data-line1", classes: ["Show"] },
+                        { key: "data-line2", classes: ["Hide"] }
                     ]
-                },
-                {
-                    add: [
-                        { key: "data-line3", classes: ["Show"] },
-                    ],
-                    remove: [
-                        { key: "data-line3", classes: ["Hide"] },
-                    ]
-                },
+                }
             ],
             "pageOverlay"
         )
+        App.pageContent.observables2.setAnimation(defineBasicAnimationSeries(7), "pageOverlay");
     }
 
     static InitialiseInteractiveContent() {

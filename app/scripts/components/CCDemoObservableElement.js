@@ -41,8 +41,10 @@ class CCDemoObservableElement extends CCObservableBase {
      */
     static #htmlTemplate = `
         <div class="CCDemoObservableElement" data-element-root> 
-            <div data-element-button-update id="DemoUpdateButton" class="PresentationButton Filled Show">Update</div>
-            <div data-element-button-reset id="DemoResetButton" class="PresentationButton Filled Show">Reset</div>
+            <div class="ObservableElementButtons">
+                <div data-element-button-update id="DemoUpdateButton" class="PresentationButton Filled Show">Update</div>
+                <div data-element-button-reset id="DemoResetButton" class="PresentationButton Filled Show">Reset</div>
+            </div>
             <li data-element-count></li>
         </div>
     `
@@ -124,7 +126,7 @@ class CCDemoObservableElement extends CCObservableBase {
      */
     render() {
         if (this.#elements.count) {
-            this.#elements.count.innerText = this.observableData.clickCount;
+            this.#elements.count.innerText = `Count: ${this.observableData.clickCount}`;
         }
     }
     

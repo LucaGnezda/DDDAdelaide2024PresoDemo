@@ -34,6 +34,11 @@ body {
     width: 100vw;
 }
 
+p {
+    margin: 0;
+    padding: 0;
+}
+
 .ContentSource {
     display: none;
 }
@@ -92,6 +97,7 @@ body {
     font-family: "Nunito";
     line-height: normal;
     margin: 1.6vmin 0vmin 1.6vmin 0vmin;
+    /* padding: 1.6vmin 8vmin; */
     height: 100vh;
     width: 90vw;
 }
@@ -123,7 +129,8 @@ body {
 p,
 P.XL {
     font-size: 4vmin;
-    margin: 1.6vmin 0vmin 1.6vmin 0vmin;
+    /* margin: 1.6vmin 0vmin 1.6vmin 0vmin; */
+    padding: 1.6vmin 0vmin 1.6vmin 0vmin;
 }
 
 p.Indent0,
@@ -191,7 +198,8 @@ ul.XL > li {
 /* Large fonts */
 P.L {
     font-size: 3.5vmin;
-    margin: 1.4vmin 0vmin 1.4vmin 0vmin;
+    /* margin: 1.4vmin 0vmin 1.4vmin 0vmin; */
+    padding: 1.4vmin 0vmin 1.4vmin 0vmin;
 }
 
 P.L.Indent0 {
@@ -245,7 +253,8 @@ ul.L > li {
 /* Medium fonts */
 P.M {
     font-size: 3vmin;
-    margin: 1.2vmin 0vmin 1.2vmin 0vmin;
+    /* margin: 1.2vmin 0vmin 1.2vmin 0vmin; */
+    padding: 1.2vmin 0vmin 1.2vmin 0vmin;
 }
 
 P.M.Indent0 {
@@ -299,7 +308,8 @@ ul.M > li {
 /* Small fonts */
 P.S {
     font-size: 2.5vmin;
-    margin: 1vmin 0vmin 1vmin 0vmin;
+    /* margin: 1vmin 0vmin 1vmin 0vmin; */
+    padding: 1vmin 0vmin 1vmin 0vmin;
 }
 
 P.S.Indent0 {
@@ -353,7 +363,8 @@ ul.S > li {
 /* Extra Small fonts */
 P.XS {
     font-size: 2vmin;
-    margin: 0.8vmin 0vmin 0.8vmin 0vmin;
+    /* margin: 0.8vmin 0vmin 0.8vmin 0vmin; */
+    padding: 0.8vmin 0vmin 0.8vmin 0vmin;
 }
 
 P.XS.Indent0 {
@@ -407,7 +418,8 @@ ul.XS > li {
 /* XXS (smallest) fonts */
 P.XXS {
     font-size: 1.5vmin;
-    margin: 0.6vmin 0vmin 0.6vmin 0vmin;
+    /* margin: 0.6vmin 0vmin 0.6vmin 0vmin; */
+    padding: 0.6vmin 0vmin 0.6vmin 0vmin;
 }
 
 P.XXS.Indent0 {
@@ -459,7 +471,7 @@ ul.XXS > li {
 }
 
 /* List Markers */
-li.Tick, 
+li.Tick,
 li.Cross {
     list-style: none;
     position: relative;
@@ -555,6 +567,13 @@ ul.Ice,
 li.Ice,
 span.Ice {
     color: var(--colourIce);
+}
+
+p.Yellow,
+ul.Yellow,
+li.Yellow,
+span.Yellow {
+    color: #dfd549;
 }
 
 p.Code,
@@ -668,16 +687,16 @@ li.LeftHalf {
 }
 
 .PresentationButton.Filled {
-    background: #42a768; 
+    background: #42a768;
     box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.5);
 }
 
 .PresentationButton.Filled:hover:not(.Disabled) {
-    background: #368d57; 
+    background: #368d57;
 }
 
 .PresentationButton.Filled:active:not(.Disabled) {
-    background: #2c7749; 
+    background: #2c7749;
     box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.5);
 }
 
@@ -759,7 +778,7 @@ li.LeftHalf {
 .DemoPage .Section {
     display: flex;
     flex-direction: row;
-    gap: 10vmin;    
+    gap: 10vmin;
 }
 
 .ComponentVennA {
@@ -1195,4 +1214,46 @@ li.LeftHalf {
 
 .MantelGroupLogo {
     background-image: url("../assets/svg/MantelGroup.svg");
+}
+
+.MindExplosion {
+    position: absolute;
+    background-image: url("../assets/images/MindExplosion.jpg");
+    border-radius: 4vmin;
+    background-clip: border-box;
+    width: 50% !important;
+    height: 50% !important;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.DHH {
+    position: absolute;
+    background-image: url("../assets/images/DHH.jpg");
+    border-radius: 4vmin;
+    background-clip: border-box;
+    left: 115vmin;
+}
+
+.FluxApp {
+    background-image: url("../assets/images/flux.png");
+    border-radius: 4vmin;
+    background-clip: border-box;
+}
+
+.InsertImage {
+    height: 16vmin;
+    width: 16vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.ImageTextContainer {
+    display: flex;
+    align-items: center;
+    gap: 32vmin;
 }

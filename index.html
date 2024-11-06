@@ -63,6 +63,7 @@
         <script defer src="./app/scripts/services/PageNode.js"></script>
         <script defer src="./app/scripts/services/PresentationFactory.js"></script>
 
+        <script defer src="./app/scripts/helpers/Helpers.js"></script>
 
     </head>
     <body onload="AppService.Initialise()" data-body>
@@ -177,13 +178,19 @@
                 <div class="OverlayIndicator"></div>
             </data>
             <data value="intro2_overlay">
-                <div class="PageTitle">Intro 2 - Overlay</div>
+                <div class="PageTitle">An Aside</div>
                 <div class="PageContents">
-                    <ol>
-                        <li class="Fadeable Hide" data-line1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
-                        <li class="Fadeable Hide" data-line2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
-                        <li class="Fadeable Hide" data-line3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</li>
-                    </ol>
+                    <p class="L">Allow me to interject here.</p>
+                    <div class="Fadeable Hide" data-line1>
+                        <p class="M Indent1">I'm here to contrast Luca's experience, this was his brain child which he graciously invited me to explore.</p>
+                        <p class="M Indent1">Although he built this, I did help extend it, and I learnt a bunch along the way.</p>
+                    </div>
+                    <p class="L Fadeable Hide" data-line2="">How?</p>
+                    <div class="Fadeable Hide" data-line3>
+                        <p class="M Indent1">I'll pipe up every now and then and insert some interesting idea, note or learning from this experience.</p>
+                        <p class="M Indent1">Hopefully you'll all get a chuckle or two out of it.</p>
+                    </div>
+                    <p class="Fadeable Hide L Green" data-line4>Let's Go!</p>
                 </div>
             </data>
             <data value="intro3">
@@ -191,12 +198,29 @@
                 <div class="PageContents">
                 </div>
             </data>
-            <data value="intro4">
+            <data value="intro4" data-hasoverlay>
                 <div class="PageTitle">The rules...</div>
                 <div class="PageContents">
+                    ...
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="intro4_overlay">
+                <div class="PageTitle">Off to a good start!</div>
+                <div class="PageContents">
+                    <p class="L">I'm an Angular developer, I usually use VS Code, I'm used to Typescript, Types, an LSP.</p>
+                    <p class="L Yellow Fadeable Hide" data-line1>Hold Up! Your telling me...</p>
+                    <div class="ImageTextContainer Fadeable Hide" data-line2>
+                        <p class="M Indent1">No building? What even is that? How does one... No Build?</p>
+                        <div class="DHH InsertImage"></div>
+                    </div>
+                    <p class="M Indent1 Fadeable Hide" data-line3>Just plain old javascript? Isn't that like some ancient runic alphabet?</p>
+                    <p class="M Indent1 Fadeable Hide" data-line4>And that means, no type checking?!?</p>
+                    <p class="M Indent1 Fadeable Hide" data-line5>So what do I do?</p>
+                    <p class="L Green Fadeable Hide" data-line6>JSDoc!</p>
                 </div>
             </data>
-            <data value="logging1">
+            <data value="logging1" data-hasoverlay>
                 <div class="PageTitle">Logging</div>
                 <div class="PageContents">
                     <p class="L"><b>Goal:</b></p>
@@ -213,6 +237,30 @@
                     </ul>
                     <p class="L">Easy .. we'll be done by lunchtime.</p>
                     <p class="M Indent1 Green">Let's take a look at the result.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="logging1_overlay">
+                <div class="PageTitle">Types and Errors</div>
+                <div class="PageContents">
+                    <p class="L">Null Checking?</p>
+                    <ul class="M">
+                        <li>JSDoc forced the catching of a bunch of potential null errors.</li>
+                        <li>We caught them all, then realised that we were introducing some undefined behaviours.
+                            <p class="S Ice Code Indent1">App.bootstrap();</p>
+                            <p class="S Ice Code Indent1">if (!App.store) {</p>
+                            <p class="S Ice Code Indent2">// what should happen here?</p>
+                            <p class="S Ice Code Indent1">}</p>
+                            <p class="S Ice Code Indent1">// continue program (with the assumption the store is initialised)</p>
+                        </li>
+                    </ul>
+                    <p class="L">Javascript, now with <span class="Code">Log.fatal()</span>!</p>
+                    <ul>
+                        <li>In some cases, you actually want things to fail (bootstrapping, etc).</li>
+                        <li>So why not extend the Logging to include a fatal option which throws.
+                            <p class="S Ice Code Indent1">Log.fatal("An error has occured", "the category of the error", &lt;some object&gt;); // we decided this should</p>
+                        </li>
+                    </ul>
                 </div>
             </data>
             <data value="components1">
@@ -250,7 +298,7 @@
                     <p class="L">Easy .. we'll be done by lunchtime.</p>
                 </div>
             </data>
-            <data value="components2">
+            <data value="components2" data-hasoverlay>
                 <div class="PageTitle">Components</div>
                 <div class="PageContents">
                     <p class="L">Hmmm ...</p>
@@ -274,8 +322,19 @@
                     <p class="L">A mere weekend later ... </p>
                     <p class="M Indent1 Green">Let's take a look at the result.</p>
                 </div>
+                <div class="OverlayIndicator"></div>
             </data>
-            <data value="observables1">
+            <data value="components2_overlay">
+                <div class="PageTitle">This is base Javascript?!?</div>
+                <div class="PageContents">
+                    <p class="L Fadeable" data-line1>I might be outing myself as a bit of a framework andy here but...</p>
+                    <p class="L Fadeable" data-line1>I had no idea custom components are natively supported in browsers/Javascript?</p>
+                    <p class="L Fadeable" data-line1>I know I'm saying this a lot, but, <span class="Blue">Magic!</span></p>
+                    <p class="L Fadeable" data-line1>I really think this speaks to the importance of exploration and experimentation.</p>
+                    <div class="MindExplosion InsertImage Hide Fadeable" data-line2></div>
+                </div>
+            </data>
+            <data value="observables1" data-hasoverlay>
                 <div class="PageTitle">Observables</div>
                 <div class="PageContents">
                     <p class="L"><b>Goal:</b></p>
@@ -293,8 +352,22 @@
                     </ul>
                     <p class="L">Easy .. we'll be done by lunchtime.</p>
                 </div>
+                <div class="OverlayIndicator"></div>
             </data>
-            <data value="observables2">
+            <data value="observables1_overlay">
+                <div class="PageTitle">???</div>
+                <div class="PageContents">
+                    <p class="L">So, Proxies.</p>
+                    <p class="M Indent1">
+                        For what it's worth, when Luca first started talking to me about this project, I had no idea what he was on about.
+                    </p>
+                    <p class="M Indent1">
+                        Isn't a proxy a networking concept? I know what a reverse proxy is... I guess I'll look this up later.
+                    </p>
+                    <p class="L Green">Proxies are Magic!</p>
+                </div>
+            </data>
+            <data value="observables2" data-hasoverlay>
                 <div class="PageTitle">Observables</div>
                 <div class="PageContents">
                     <p class="L">Ha, not even close...</p>
@@ -314,6 +387,31 @@
                     </ul>
                     <p class="L">A mere two weekends later ... </p>
                     <p class="M Indent1 Green">Let's take a look at the result.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="observables2_overlay">
+                <div class="PageTitle">Deep Compare in Javascript</div>
+                <div class="PageContents">
+                    <p class="L">That's doing some pretty heavy lifting, isn't it?</p>
+                    <ul class="L">
+                        <li class="Tick"><span class="Blue">"Only fire events when real changes occur."</span></li>
+                    </ul>
+                    <p class="L">Yes, yes it is.</p>
+                    <p class="L">The issues:</p>
+                    <ul class="M">
+                        <li>We need to be able to track whether an object has changed.</li>
+                        <li>We don't want to propegate changes on every set, only on actual value updates.</li>
+                        <li>Do we actually need a proper deep compare implementation?</li>
+                        <li class="Fadeable Hide" data-line1>No we don't.</li>
+                    </ul>
+                    <p class="Fadeable Hide L" data-line2>Observe (hehe) the following:</p>
+                    <div class="Fadeable Hide" data-line3>
+                        <p class="S Indent1"><span class="Ice Code ">const allKeys = new Set();</span> <span class="Fadeable Hide" data-line4>← Removes duplicates and gives us something to make into an array.</span></p>
+                        <p class="S Indent1"><span class="Ice Code ">JSON.stringify(obj, (key, _) => (allKeys.add(key), key));</span> <span class="Fadeable Hide" data-line5>← Populates the set (some trickery here with the replacer).</span></p>
+                        <p class="S Indent1"><span class="Ice Code ">return JSON.stringify(obj, Array.from(allKeys).sort());</span> <span class="Fadeable Hide" data-line6>← Returns a JSON string of all props (and sub props) in lexicographical order.</span></p>
+                    </div>
+                    <p class="Fadeable Hide L Green Indent3" data-line7>MAGIC!</p>
                 </div>
             </data>
             <data value="store1">
@@ -383,14 +481,14 @@
                         </li>
                 </div>
             </data>
-            <data value="dispatchActionHandling1">
+            <data value="dispatchActionHandling1" data-hasoverlay>
                 <div class="PageTitle">logic & flow control</div>
                 <div class="PageContents">
                     <p class="L"><b>Goal:</b></p>
                     <p class="L Green">We want logic to sit between UI events and the store. Let's go retro and recreate a Facebook Flux inspired pattern. I've never had a chance to use the OG, let alone build one.</p>
                     <p class="L"><b>Key points:</b></p>
                     <ul class="M">
-                        <li>Circa 2013 facebook was struggling with multiple UI elements needing to accessing singleton data.</li>
+                        <li>Circa 2013 facebook was struggling with multiple UI elements needing access to singleton data.</li>
                         <li>So they invented Flux, essentially a cyclic event/action based flow control.</li>
                         <li>I'm going to add a little twist and formalise the boundary between the store and logic.</li>
                         <li>Actually when you break it down ... it starts to feel like old school late 90s C++ windows event loops.</li>
@@ -402,6 +500,18 @@
                         <li>Each <span class=Green>Handler</span> decides what it wants to do with the action, updating store items as required.</li>
                     </ul>
                     <p class="L">Easy .. we'll be done by lunchtime.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="dispatchActionHandling1_overlay">
+                <div class="PageTitle">Not the nightlight...</div>
+                <div class="PageContents">
+                    <p class="L">Again, let me show of how little I know and tell you a story.</p>
+                    <div class="ImageTextContainer">
+                        <p class="L">My only interaction with a software concept called flux was my use of a nightlight/redshift.</p>
+                        <div class="FluxApp InsertImage"></div>
+                    </div>
+                    <p class="L">Again, I've very much enjoyed learning more about the history of my profession and some of its foundations.</p>
                 </div>
             </data>
             <data value="dispatchActionHandling2">
@@ -469,6 +579,7 @@
                             <p class="XS Ice Code Indent2">}</p>
                             <p class="XS Ice Code Indent1">}</p>
                         </li>
+                    </ul>
                 </div>
             </data>
             <data value="hub">
@@ -478,7 +589,7 @@
                     <div id="SolveIcon" class="SolveIcon"></div>
                 </div>
             </data>
-            <data value="demo">
+            <data value="demo" data-hasoverlay>
                 <div class="PageTitle">Demo</div>
                 <div class="PageContents DemoPage">
                     <div class="DemoPage Section">
@@ -489,6 +600,19 @@
                         <cc-demoObservingElement id="DemoObservingElement2" [data-input-threshold]="5" [data-input-color]="blue"></cc-demoObservingElement>
                         <cc-demoObservingElement id="DemoObservingElement3" [data-input-threshold]="7" [data-input-color]="green"></cc-demoObservingElement>
                     </div>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="demo_overlay">
+                <div class="PageTitle">This Demo</div>
+                <div class="PageContents">
+                    <p class="L">The goal here is to exemplify the systems working:</p>
+                    <ul class="M">
+                        <li>This example shows two components, 1 instance of the observable component, 3 instances of the observing component.</li>
+                        <li>The observable component connects to the store and updates it.</li>
+                        <li>The observable component also handles its own internal observable state.</li>
+                        <li>The observing components each take two inputs, one for a trigger value, another for colour.</li>
+                    </ul>
                 </div>
             </data>
         </div>
