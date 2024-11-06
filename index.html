@@ -243,12 +243,23 @@
             <data value="logging1_overlay">
                 <div class="PageTitle">Types and Errors</div>
                 <div class="PageContents">
-                    <p class="L">Javascript, now with <span class="Code">Log.fatal()</span>!</p>
+                    <p class="L">Null Checking?</p>
                     <ul class="M">
                         <li>JSDoc forced the catching of a bunch of potential null errors.</li>
-                        <li>We caught them all, then realised that we were introducing some undefined behaviours.</li>
+                        <li>We caught them all, then realised that we were introducing some undefined behaviours.
+                            <p class="S Ice Code Indent1">App.bootstrap();</p>
+                            <p class="S Ice Code Indent1">if (!App.store) {</p>
+                            <p class="S Ice Code Indent2">// what should happen here?</p>
+                            <p class="S Ice Code Indent1">}</p>
+                            <p class="S Ice Code Indent1">// continue program (with the assumption the store is initialised)</p>
+                        </li>
+                    </ul>
+                    <p class="L">Javascript, now with <span class="Code">Log.fatal()</span>!</p>
+                    <ul>
                         <li>In some cases, you actually want things to fail (bootstrapping, etc).</li>
-                        <li>So why not extend the Logging to include a fatal option which throws.</li>
+                        <li>So why not extend the Logging to include a fatal option which throws.
+                            <p class="S Ice Code Indent1">Log.fatal("An error has occured", "the category of the error", &lt;some object&gt;); // we decided this should</p>
+                        </li>
                     </ul>
                 </div>
             </data>

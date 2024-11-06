@@ -525,7 +525,7 @@ class AppService {
 
     static ActivateFirstPage() {
         // Activate and transition page 1
-        App.activePage = App.pages.demo;
+        App.activePage = App.pages.ddd;
         App.activePage.background?.usingTransition(1, "ease-in", 0);
         App.activePage.background?.withFadeIn();
         App.activePage.background?.show();

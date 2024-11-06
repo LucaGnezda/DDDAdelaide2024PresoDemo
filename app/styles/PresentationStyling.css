@@ -1231,6 +1231,7 @@ li.LeftHalf {
 }
 
 .DHH {
+    position: absolute;
     background-image: url("../assets/images/DHH.jpg");
     border-radius: 4vmin;
     background-clip: border-box;
