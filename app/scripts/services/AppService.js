@@ -331,10 +331,133 @@ class AppService {
             ]
         )
 
-        App.pageContent.intro2.setAnimation(defineBasicAnimationSeries(3));
+        App.pageContent.intro2.setAnimation(
+            [
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-photo1", classes: ["OffScreen"] },
+                    ]
+                },
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-photo2", classes: ["OffScreen"] },
+                    ]
+                },
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-photo3", classes: ["OffScreen"] },
+                    ]
+                },
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-photo4", classes: ["OffScreen"] },
+                    ]
+                },
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-photo5", classes: ["OffScreen"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-shake", classes: ["Shake"] },
+                    ],
+                    remove: [
+                        { key: "data-photo6", classes: ["FarOffScreen"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-motion1", classes: ["Motion1"] },
+                    ],
+                    remove: []
+                },
+                {
+                    add: [
+                        { key: "data-motion2", classes: ["Motion2"] },
+                    ],
+                    remove: [
+                        { key: "data-motion1", classes: ["Motion1"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-motion3", classes: ["Motion3"] },
+                    ],
+                    remove: [
+                        { key: "data-motion2", classes: ["Motion2"] },
+                    ]
+                },
+            ]
+        )
+
+        App.backgrounds.introBackground.setAnimation(
+            [
+                {
+                    add: [],
+                    remove: []
+                },
+                {
+                    add: [],
+                    remove: []
+                },
+                {
+                    add: [],
+                    remove: []
+                },
+                {
+                    add: [],
+                    remove: []
+                },
+                {
+                    add: [],
+                    remove: []
+                },
+                {
+                    add: [
+                        { classes: ["Shake"] }
+                    ],
+                    remove: []
+                },
+            ]
+        )
+
+        App.pageContent.intro3.setAnimation(
+            [
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-icon1", classes: ["Hide"] },
+                    ]
+                },
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-icon2", classes: ["Hide"] },
+                    ]
+                },
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-icon3", classes: ["Hide"] },
+                    ]
+                },
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-icon4", classes: ["Hide"] },
+                    ]
+                },
+            ]
+        )
 
         // overlay definition
-        App.pageContent.intro2.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
+        App.pageContent.intro1.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
         App.pageContent.intro4.setAnimation(defineBasicAnimationSeries(6), "pageOverlay");
         App.pageContent.components2.setAnimation(
             [
