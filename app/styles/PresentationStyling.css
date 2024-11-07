@@ -198,7 +198,7 @@ ul.XL > li {
 /* Large fonts */
 P.L {
     font-size: 3.5vmin;
-    margin: 1.4vmin 0vmin 1.4vmin 0vmin; 
+    margin: 1.4vmin 0vmin 1.4vmin 0vmin;
     /* padding: 1.4vmin 0vmin 1.4vmin 0vmin; */
 }
 
@@ -418,7 +418,7 @@ ul.XS > li {
 /* XXS (smallest) fonts */
 P.XXS {
     font-size: 1.5vmin;
-    margin: 0.6vmin 0vmin 0.6vmin 0vmin; 
+    margin: 0.6vmin 0vmin 0.6vmin 0vmin;
     /* padding: 0.6vmin 0vmin 0.6vmin 0vmin; */
 }
 
@@ -1099,7 +1099,7 @@ li.LeftHalf {
 
 .IntroIcon.Icon1 {
     transform: translateX(-25vmin) translateY(-25vmin);
-    background-image: url("../assets/svg/idea.svg");   
+    background-image: url("../assets/svg/idea.svg");
 }
 
 .IntroIcon.Icon2 {
@@ -1442,7 +1442,7 @@ li.LeftHalf {
 .Peek {
     max-height: 16vmin;
     margin-top: 0px;
-    
+
     @starting-style {
         max-height:0px;
         margin-top: 16vmin;
@@ -1451,6 +1451,15 @@ li.LeftHalf {
 
 .FluxApp {
     background-image: url("../assets/images/flux.png");
-    border-radius: 4vmin;
+    background-clip: border-box;
+}
+
+.TheWrongFlux {
+    background-image: url("../assets/images/TheWrongFlux.png");
+    background-clip: border-box;
+}
+
+.AmIDunning {
+    background-image: url("../assets/images/TheWrongFlux.png");
     background-clip: border-box;
 }
