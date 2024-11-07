@@ -1413,20 +1413,6 @@ li.LeftHalf {
     margin: auto;
 }
 
-.DHH {
-    position: absolute;
-    background-image: url("../assets/images/DHH.jpg");
-    border-radius: 4vmin;
-    background-clip: border-box;
-    left: 115vmin;
-}
-
-.FluxApp {
-    background-image: url("../assets/images/flux.png");
-    border-radius: 4vmin;
-    background-clip: border-box;
-}
-
 .InsertImage {
     height: 16vmin;
     width: 16vmin;
@@ -1435,8 +1421,36 @@ li.LeftHalf {
     background-size: contain;
 }
 
-.ImageTextContainer {
-    display: flex;
-    align-items: center;
-    gap: 32vmin;
+.DHH {
+    background-image: url("../assets/images/DHH.jpg");
+    border-top-left-radius: 2vmin;
+    border-top-right-radius: 2vmin;
+    background-clip: border-box;
+}
+
+.Peekable{
+    transition: all 0.5s ease-in-out;
+    transition-behavior: allow-discrete;
+    background-size: cover;
+}
+
+.UnPeek {
+    max-height: 0px;
+    margin-top: 16vmin;
+}
+
+.Peek {
+    max-height: 16vmin;
+    margin-top: 0px;
+    
+    @starting-style {
+        max-height:0px;
+        margin-top: 16vmin;
+    }
+}
+
+.FluxApp {
+    background-image: url("../assets/images/flux.png");
+    border-radius: 4vmin;
+    background-clip: border-box;
 }

@@ -458,7 +458,42 @@ class AppService {
 
         // overlay definition
         App.pageContent.intro1.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
-        App.pageContent.intro4.setAnimation(defineBasicAnimationSeries(6), "pageOverlay");
+        App.pageContent.intro4.setAnimation(
+            [
+                {
+                    add: [
+                        { key: "data-line1", classes: ["Show"] },
+                    ],
+                    remove: [
+                        { key: "data-line1", classes: ["Hide"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-line2", classes: ["Show"] },
+                    ],
+                    remove: [
+                        { key: "data-line2", classes: ["Hide"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-peek1", classes: ["Peek"] },
+                    ],
+                    remove: [
+                        { key: "data-peek1", classes: ["UnPeek"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-line3", classes: ["Show"] },
+                    ],
+                    remove: [
+                        { key: "data-line3", classes: ["Hide"] },
+                    ]
+                },
+            ]
+            , "pageOverlay");
         App.pageContent.components2.setAnimation(
             [
                 {
@@ -648,7 +683,7 @@ class AppService {
 
     static ActivateFirstPage() {
         // Activate and transition page 1
-        App.activePage = App.pages.ddd;
+        App.activePage = App.pages.components2;
         App.activePage.background?.usingTransition(1, "ease-in", 0);
         App.activePage.background?.withFadeIn();
         App.activePage.background?.show();

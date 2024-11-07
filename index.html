@@ -234,16 +234,20 @@
             <data value="intro4_overlay">
                 <div class="PageTitle">Off to a good start!</div>
                 <div class="PageContents">
-                    <p class="L">I'm an Angular developer, I usually use VS Code, I'm used to Typescript, Types, an LSP.</p>
+                    <p class="L">I'm an Angular developer, I usually use VS Code and Neovim btw, I'm used to Typescript, Types, an LSP.</p>
                     <p class="L Yellow Fadeable Hide" data-line1>Hold Up! Your telling me...</p>
-                    <div class="ImageTextContainer Fadeable Hide" data-line2>
-                        <p class="M Indent1">No building? What even is that? How does one... No Build?</p>
-                        <div class="DHH InsertImage"></div>
+                    <div class="FlexCols">
+                        <div class="Flex">
+                            <p class="M Indent1 Fadeable Hide" data-line2>No building? What even is that? How does one... No Build?</p>
+                            <p class="M Indent1 Fadeable Hide" data-line2>Just plain old javascript? Isn't that like some ancient runic alphabet?</p>
+                            <p class="M Indent1 Fadeable Hide" data-line2>And that means, no type checking?!?</p>
+                            <p class="M Indent1 Fadeable Hide" data-line2>So what do I do?</p>
+                        </div>
+                        <div class="Flex">
+                            <div class="DHH InsertImage Peekable UnPeek" data-peek1></div>
+                        </div>
                     </div>
-                    <p class="M Indent1 Fadeable Hide" data-line3>Just plain old javascript? Isn't that like some ancient runic alphabet?</p>
-                    <p class="M Indent1 Fadeable Hide" data-line4>And that means, no type checking?!?</p>
-                    <p class="M Indent1 Fadeable Hide" data-line5>So what do I do?</p>
-                    <p class="L Green Fadeable Hide" data-line6>JSDoc!</p>
+                    <p class="L Green Fadeable Hide" data-line3>JSDoc!</p>
                 </div>
             </data>
             <data value="logging1" data-hasoverlay>
@@ -351,12 +355,16 @@
                 <div class="OverlayIndicator"></div>
             </data>
             <data value="components2_overlay">
-                <div class="PageTitle">This is base Javascript?!?</div>
+                <div class="PageTitle">The Importance of Foundations</div>
                 <div class="PageContents">
-                    <p class="L Fadeable" data-line1>I might be outing myself as a bit of a framework andy here but...</p>
-                    <p class="L Fadeable" data-line1>I had no idea custom components are natively supported in browsers/Javascript?</p>
-                    <p class="L Fadeable" data-line1>I know I'm saying this a lot, but, <span class="Blue">Magic!</span></p>
-                    <p class="L Fadeable" data-line1>I really think this speaks to the importance of exploration and experimentation.</p>
+                    <p class="L Fadeable" data-line1>Skill Issue?</p>
+                    <p class="M Indent1 Fadeable" data-line1>I'm a framework Andy.</p>
+                    <p class="M Indent1 Fadeable" data-line1>I had no idea custom components existed.</p>
+                    <p class="M Indent1 Fadeable" data-line1>They are a tool I would never have reached for.</p>
+                    <p class="L Fadeable" data-line1>Where I find Joy.</p>
+                    <p class="M Indent1 Fadeable" data-line1>Exploration and experimentation.</p>
+                    <p class="M Indent1 Fadeable" data-line1>Maybe make a framework? Or not.</p>
+                    <p class="M Indent1 Fadeable" data-line1>Plain old Javascript to do some pretty amazing stuff. Who knew?</p>
                     <div class="MindExplosion InsertImage Hide Fadeable" data-line2></div>
                 </div>
             </data>
@@ -381,16 +389,15 @@
                 <div class="OverlayIndicator"></div>
             </data>
             <data value="observables1_overlay">
-                <div class="PageTitle">???</div>
+                <div class="PageTitle">The Man in The Middle</div>
                 <div class="PageContents">
                     <p class="L">So, Proxies.</p>
-                    <p class="M Indent1">
-                        For what it's worth, when Luca first started talking to me about this project, I had no idea what he was on about.
-                    </p>
-                    <p class="M Indent1">
-                        Isn't a proxy a networking concept? I know what a reverse proxy is... I guess I'll look this up later.
-                    </p>
+                    <p class="M Indent1">Yeah, I have no idea either.</p>
+                    <p class="M Indent1">Isn't a proxy a networking concept?</p>
+                    <p class="M Indent1">I know what a reverse proxy is... </p>
+                    <p class="M Indent1">I guess I'll look this up later.</p>
                     <p class="L Green">Proxies are Magic!</p>
+                    <p>... some points about very powerful, hard to debug, pretty much the inbuild javascript man in teh middle.</p>
                 </div>
             </data>
             <data value="observables2" data-hasoverlay>
@@ -632,9 +639,15 @@
             <data value="demo_overlay">
                 <div class="PageTitle">This Demo</div>
                 <div class="PageContents">
-                    <p class="L">The goal here is to exemplify the systems working:</p>
-                    <ul class="M">
-                        <li>This example shows two components, 1 instance of the observable component, 3 instances of the observing component.</li>
+                    <p class="L">The goal here is to exemplify the systems working.</p>
+                    <p class="M">The setup.</p>
+                    <ul class="S">
+                        <li>This example shows two components.</li>
+                        <li>1 instance of an <span class="Blue">observable</span> input component.</li>
+                        <li>3 instances of <span class="Blue">observing</span> output component.</li>
+                    </ul>
+                    <p class="M">Running it.</p>
+                    <ul class="S">
                         <li>The observable component connects to the store and updates it.</li>
                         <li>The observable component also handles its own internal observable state.</li>
                         <li>The observing components each take two inputs, one for a trigger value, another for colour.</li>
