@@ -2,12 +2,12 @@
  * Defines a basic for 'count' many elements with simple 'Show'/'Hide' classes.
  * Assumes that the data attribute targets are 'data-line-<number>' 
  * @param {number} count 
- * @returns {Array<AnimationDefinition>}
+ * @returns {Array<PageAnimationDefinition>}
  */
 function defineBasicAnimationSeries(count) {
     let animations = [];
     for (let i = 0; i < count; i++) {
-        /** @type {AnimationDefinition} */
+        /** @type {PageAnimationDefinition} */
         let animation = {
             add:[
                 { key: `data-line${i+1}`, classes: ["Show"] },

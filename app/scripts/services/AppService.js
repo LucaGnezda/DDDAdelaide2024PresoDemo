@@ -65,7 +65,7 @@ class AppService {
             Log.fatal("App Store must be initialised before Store content can be loaded", "", this);
             return;
         }
-        
+
         App.store.addObservablesDictionary("appModel");
         App.store.appModel.add("app");
         App.store.appModel.add("components");
@@ -117,7 +117,7 @@ class AppService {
         factory.newPageContent("ddd");
         factory.newPageContent("title");
         factory.newPageContent("dddSponsors");
-        
+
         factory.newPageContent("intro1");
         factory.newPageContent("intro2");
         factory.newPageContent("intro3");
@@ -314,7 +314,7 @@ class AppService {
                     ],
                     remove: [
                         { key: "data-subtitle", classes: ["Hide"] },
-                        { key: "data-flyin", classes: ["OffScreen"]},
+                        { key: "data-flyin", classes: ["OffScreen"] },
                     ]
                 },
             ]
@@ -458,7 +458,42 @@ class AppService {
 
         // overlay definition
         App.pageContent.intro1.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
-        App.pageContent.intro4.setAnimation(defineBasicAnimationSeries(6), "pageOverlay");
+        App.pageContent.intro4.setAnimation(
+            [
+                {
+                    add: [
+                        { key: "data-line1", classes: ["Show"] },
+                    ],
+                    remove: [
+                        { key: "data-line1", classes: ["Hide"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-line2", classes: ["Show"] },
+                    ],
+                    remove: [
+                        { key: "data-line2", classes: ["Hide"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-peek1", classes: ["Peek"] },
+                    ],
+                    remove: [
+                        { key: "data-peek1", classes: ["UnPeek"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-line3", classes: ["Show"] },
+                    ],
+                    remove: [
+                        { key: "data-line3", classes: ["Hide"] },
+                    ]
+                },
+            ]
+            , "pageOverlay");
         App.pageContent.components2.setAnimation(
             [
                 {
@@ -474,7 +509,53 @@ class AppService {
             ],
             "pageOverlay"
         )
+        App.pageContent.observables1.setAnimation(defineBasicAnimationSeries(3), "pageOverlay");
         App.pageContent.observables2.setAnimation(defineBasicAnimationSeries(7), "pageOverlay");
+        App.pageContent.dispatchActionHandling1.setAnimation(
+            [
+                {
+                    add: [
+                        { key: "data-peek1", classes: ["Peek"] },
+                    ],
+                    remove: [
+                        { key: "data-peek1", classes: ["UnPeek"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-peek2", classes: ["Peek"] },
+                    ],
+                    remove: [
+                        { key: "data-peek2", classes: ["UnPeek"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-line1", classes: ["Show"] },
+                    ],
+                    remove: [
+                        { key: "data-line1", classes: ["Hide"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-line2", classes: ["Show"] }
+                    ],
+                    remove: [
+                        { key: "data-line2", classes: ["Hide"] }
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-hide1", classes: ["Show"] },
+                    ],
+                    remove: [
+                        { key: "data-hide1", classes: ["Hide"] },
+                    ]
+                },
+            ],
+            "pageOverlay"
+        )
     }
 
     static InitialiseInteractiveContent() {
@@ -648,7 +729,7 @@ class AppService {
 
     static ActivateFirstPage() {
         // Activate and transition page 1
-        App.activePage = App.pages.ddd;
+        App.activePage = App.pages.dispatchActionHandling1;
         App.activePage.background?.usingTransition(1, "ease-in", 0);
         App.activePage.background?.withFadeIn();
         App.activePage.background?.show();
@@ -684,7 +765,7 @@ class AppService {
         }
 
         App.store.appModel["handlers"].observableData.title = "Handlers";
-        
+
         if (App.elements.AppModelAppStructure instanceof CCFrameworkElement) {
             App.elements.AppModelAppStructure.setPlacement(null, null, "50vmin", "50vmin", "1.5vmin");
             App.elements.AppModelAppStructure.solvedImageStylingClassList?.add("Rotating");
