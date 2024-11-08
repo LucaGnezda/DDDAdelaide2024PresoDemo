@@ -509,6 +509,7 @@ class AppService {
             ],
             "pageOverlay"
         )
+        App.pageContent.observables1.setAnimation(defineBasicAnimationSeries(3), "pageOverlay");
         App.pageContent.observables2.setAnimation(defineBasicAnimationSeries(7), "pageOverlay");
         App.pageContent.dispatchActionHandling1.setAnimation(
             [
@@ -530,10 +531,26 @@ class AppService {
                 },
                 {
                     add: [
-                        { key: "data-peek3", classes: ["Peek"] },
+                        { key: "data-line1", classes: ["Show"] },
                     ],
                     remove: [
-                        { key: "data-peek3", classes: ["UnPeek"] },
+                        { key: "data-line1", classes: ["Hide"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-line2", classes: ["Show"] }
+                    ],
+                    remove: [
+                        { key: "data-line2", classes: ["Hide"] }
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-hide1", classes: ["Show"] },
+                    ],
+                    remove: [
+                        { key: "data-hide1", classes: ["Hide"] },
                     ]
                 },
             ],
@@ -712,7 +729,7 @@ class AppService {
 
     static ActivateFirstPage() {
         // Activate and transition page 1
-        App.activePage = App.pages.ddd;
+        App.activePage = App.pages.dispatchActionHandling1;
         App.activePage.background?.usingTransition(1, "ease-in", 0);
         App.activePage.background?.withFadeIn();
         App.activePage.background?.show();

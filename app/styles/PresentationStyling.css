@@ -654,6 +654,10 @@ li.LeftHalf {
     margin: auto;
 }
 
+.Gap4 {
+    gap: 4vmin;
+}
+
 .Fadeable.Show {
     opacity: 1;
 
@@ -1403,7 +1407,6 @@ li.LeftHalf {
     position: absolute;
     background-image: url("../assets/images/MindExplosion.jpg");
     border-radius: 4vmin;
-    background-clip: border-box;
     width: 50% !important;
     height: 50% !important;
     left: 0;
@@ -1425,7 +1428,6 @@ li.LeftHalf {
     background-image: url("../assets/images/DHH.jpg");
     border-top-left-radius: 2vmin;
     border-top-right-radius: 2vmin;
-    background-clip: border-box;
 }
 
 .Peekable{
@@ -1451,15 +1453,30 @@ li.LeftHalf {
 
 .FluxApp {
     background-image: url("../assets/images/flux.png");
-    background-clip: border-box;
 }
 
 .TheWrongFlux {
     background-image: url("../assets/images/TheWrongFlux.png");
-    background-clip: border-box;
 }
 
 .AmIDunning {
-    background-image: url("../assets/images/TheWrongFlux.png");
-    background-clip: border-box;
+    position: absolute;
+    background-image: url("../assets/images/AmIDunning.png");
+    width: 50% !important;
+    height: 50% !important;
+    border-radius: 2vmin;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.UncleBen {
+    background-image: url("../assets/images/UncleBen.jpg");
+    width: 48vmin !important;
+    height: 48vmin !important;
+    border-top-left-radius: 2vmin;
+    border-top-right-radius: 2vmin;
+    margin-top: 5vmin;
 }
