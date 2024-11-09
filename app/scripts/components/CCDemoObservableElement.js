@@ -165,11 +165,12 @@ class CCDemoObservableElement extends CCObservableBase {
     
     /**
      * Callback for update button click event
+     * @param {MouseEvent} clickEvent 
      */
-    updateButtonClick() {
+    updateButtonClick(clickEvent) {
         this.observableData.clickCount += 1;
         if (this.#propertybag.updateCallback) {
-            this.#propertybag.updateCallback();
+            this.#propertybag.updateCallback(clickEvent);
         } else {
             Log.fatal("No update callback has been registered", "", this)
         }
@@ -177,11 +178,12 @@ class CCDemoObservableElement extends CCObservableBase {
     
     /**
      * Callback for reset button click event
+     * @param {MouseEvent} clickEvent 
      */
-    resetButtonClick() {
+    resetButtonClick(clickEvent) {
         this.observableData.clickCount = 0;
         if (this.#propertybag.resetCallback) {
-            this.#propertybag.resetCallback();           
+            this.#propertybag.resetCallback(clickEvent);           
         } else {
             Log.fatal("No update callback has been registered", "", this)
         }

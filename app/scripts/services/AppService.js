@@ -776,8 +776,8 @@ class AppService {
         App.components.demoObservingElement3 = document.getElementById("DemoObservingElement3");
 
         if (App.components.demoObservableElement instanceof CCDemoObservableElement) {
-            let updateCallback = App.dispatcher?.newEventDispatchCallback("DemoObservableElement_UpdateButton_Click");
-            let resetCallback = App.dispatcher?.newEventDispatchCallback("DemoObservableElement_ResetButton_Click");
+            let updateCallback = App.dispatcher?.newEventDispatchCallback("DemoObservableElement_UpdateButton_Click", true);
+            let resetCallback = App.dispatcher?.newEventDispatchCallback("DemoObservableElement_ResetButton_Click", true);
             if (updateCallback && resetCallback) {
                 App.components.demoObservableElement.updateCallback = updateCallback;
                 App.components.demoObservableElement.resetCallback = resetCallback;
