@@ -112,6 +112,7 @@ class AppService {
         factory.newBackground("hubBackground");
         factory.newBackground("sectionBackground1");
         factory.newBackground("demoBackground");
+        factory.newBackground("outroBackground");
 
         // Define Pages Content
         factory.newPageContent("ddd");
@@ -146,6 +147,10 @@ class AppService {
 
         factory.newPageContent("demo");
 
+        factory.newPageContent("outro1");
+        factory.newPageContent("outro2");
+        factory.newPageContent("outro3");
+
         // Define Pages
         factory.newPageNode("ddd");
         factory.newPageNode("title");
@@ -179,6 +184,10 @@ class AppService {
 
         factory.newPageNode("demo");
 
+        factory.newPageNode("outro1");
+        factory.newPageNode("outro2");
+        factory.newPageNode("outro3");
+
         // Configure Backgrounds
         App.backgrounds.dddBackground.setContentClass("DDDPageBackground");
         App.backgrounds.dddBackground.setContentPositionRange(1, 1);
@@ -197,6 +206,9 @@ class AppService {
 
         App.backgrounds.demoBackground.setContentClass("PageBackground");
         App.backgrounds.demoBackground.setContentPositionRange(1, 1);
+
+        App.backgrounds.outroBackground.setContentClass("PageBackground");
+        App.backgrounds.outroBackground.setContentPositionRange(1.6, 1);
 
         // Configure Pages
         App.pages.ddd.setPageContentAndBackground(App.pageContent.ddd, App.backgrounds.dddBackground, 0.0, 0, null);
@@ -230,6 +242,10 @@ class AppService {
         App.pages.dataBinding1.setPageContentAndBackground(App.pageContent.dataBinding1, App.backgrounds.sectionBackground1, 0.4, 0, null);
 
         App.pages.demo.setPageContentAndBackground(App.pageContent.demo, App.backgrounds.demoBackground, 0.0, 0, null);
+
+        App.pages.outro1.setPageContentAndBackground(App.pageContent.outro1, App.backgrounds.outroBackground, 0.0, 0, null);
+        App.pages.outro2.setPageContentAndBackground(App.pageContent.outro2, App.backgrounds.outroBackground, 0.2, 0, null);
+        App.pages.outro3.setPageContentAndBackground(App.pageContent.outro3, App.backgrounds.outroBackground, 0.4, 0, null);
 
         // Interrelate Pages with transitions
         App.pages.ddd.setNextPage(App.pages.title, PageTransition.Fade, PageTransition.Fade, 1.25);
@@ -268,6 +284,10 @@ class AppService {
         App.pages.dataBinding1.setNextPage(App.pages.hub, PageTransition.ZoomOut, null, 1.75);
 
         App.pages.demo.setPreviousPage(App.pages.hub, PageTransition.ZoomOut, 1.75);
+        App.pages.demo.setNextPage(App.pages.outro1, PageTransition.Fade, PageTransition.Fade, 1.25);
+
+        App.pages.outro1.setNextPage(App.pages.outro2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+        App.pages.outro2.setNextPage(App.pages.outro3, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
     }
 
     static LoadPresentationContent() {
@@ -424,6 +444,18 @@ class AppService {
                     ],
                     remove: []
                 },
+                {
+                    add: [],
+                    remove: []
+                },
+                {
+                    add: [],
+                    remove: []
+                },
+                {
+                    add: [],
+                    remove: []
+                },
             ]
         )
 
@@ -555,6 +587,40 @@ class AppService {
                 },
             ],
             "pageOverlay"
+        )
+
+        App.pageContent.outro1.setAnimation(
+            [
+                {
+                    add: [],
+                    remove: [
+                        { key: "data-photo1", classes: ["OffScreen"] },
+                    ]
+                },
+                {
+                    add: [
+                        { key: "data-shake", classes: ["Shake"] },
+                    ],
+                    remove: [
+                        { key: "data-photo2", classes: ["FarOffScreen"] },
+                    ]
+                },
+            ]
+        )
+
+        App.backgrounds.outroBackground.setAnimation(
+            [
+                {
+                    add: [],
+                    remove: []
+                },
+                {
+                    add: [
+                        { classes: ["Shake"] }
+                    ],
+                    remove: []
+                },
+            ]
         )
     }
 

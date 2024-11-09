@@ -36,6 +36,17 @@
     font-style: italic;
 }
 
+@font-face{
+     font-family: "Bad Script";
+     src: 
+         url("./BadScript-Regular.woff")format("woff"),
+         url("./BadScript-Regular.woff2")format("woff2"),
+         url("./BadScript-Regular.ttf")format("truetype");
+     font-weight:normal;
+     font-style:normal;
+     font-display:swap;
+ }
+
 @font-face {
      font-family: 'Segoe UI';
      src: url('../fonts/SegUIVar.ttf') format('truetype');
