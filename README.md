@@ -1,4 +1,5 @@
-![Language](https://img.shields.io/badge/HTML-5%2B-E34F26.svg?logo=html5) ![Language](https://img.shields.io/badge/CSS3-2024%2B-1572B6.svg?logo=css3) ![Language](https://img.shields.io/badge/JavaScript-ES2023%2B-F7DF1E.svg?logo=javascript) ![Code Size](https://shields.io/github/languages/code-size/LucaGnezda/DDDAdelaide2024PresoDemo)
+![Language](https://img.shields.io/badge/HTML-5%2B-E34F26.svg?logo=html5) ![Language](https://img.shields.io/badge/CSS3-2024%2B-1572B6.svg?logo=css3) ![Language](https://img.shields.io/badge/JavaScript-ES2023%2B-F7DF1E.svg?logo=javascript) 
+![Code Size](https://shields.io/github/languages/code-size/LucaGnezda/DDDAdelaide2024PresoDemo) ![Message](https://img.shields.io/badge/build-status-not-required-%3A%29-green)
 
 # DDD Adelaide 2024 Conference - Presentation & Demo
 ## About
@@ -21,4 +22,10 @@ But it does actually come with some of the niceties you'd hope for, such as:
 - Improved logging
 - etc.
 
-After having a talk voted in by popular vote for DDD Adelaide 2024, Solomon and I built this codebase on top of the Hostless Web Framework.  specifically, took these foundations and build a fully formed presentation for the 2024 
+## How to run
+This bit is easy ... and kind of cool.
+1. Download or CLone the Repo.
+2. Open Index.HTML in your Browser (That's it, literally).
+
+## Comparability
+At time of building this codebase, to get some of the cool transitions working without timer events, We've used a bunch of 2024 features in CSS, such as discrete transitions and starting-style rules. As at November 2024, this is fully supported in Chromium based Browsers, and it might work in Safari too (haven't tested), but it won't yet work well in firefox until they finish implementing discrete-transitions from display: none.
