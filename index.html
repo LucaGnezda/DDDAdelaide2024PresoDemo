@@ -3,9 +3,6 @@
     <head>
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline';" />
 
-        <!-- Data -->
-        <script defer src="./app/data/PresentationDefinition.js"></script>
-
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="./app/assets/fonts/Fonts.css">
 
@@ -64,6 +61,9 @@
         <script defer src="./app/scripts/services/PresentationFactory.js"></script>
 
         <script defer src="./app/scripts/helpers/Helpers.js"></script>
+
+        <!-- Data -->
+        <script defer src="./app/data/PresentationDefinition.js"></script>
 
     </head>
     <body onload="AppService.Initialise()" data-body>
@@ -674,74 +674,75 @@
                     </ul>
                 </div>
             </data>
-        </div>
-        <data value="outro1">
-            <div class="PageTitle" data-shake>Let's tell the kids!</div>
-            <div class="PageContents VerticalCentreFlex PositionContents" data-contents data-shake>
-                <div class="IntroPhotoContainer Container1 OffScreen"><div class="IntroPhoto Gentle" data-photo1><img class="IntroPhotoA" src="./app/assets/images/Grunthal.png"><p class="PhotoScript">Lunch @ Grunthal, Verdun</p></div></div>
-                <div class="IntroPhotoContainer Container6 FarOffScreen"><div class="IntroPhoto Photo7 Crash" data-photo2></div></div>
-            </div>
-        </data>
-        <data value="outro2">
-            <div class="PageTitle">So what is the moral of this story?</div>
-            <div class="PageContents VerticalCentreFlexNarrow">
-                <ol class="L">
-                    <li>Teenage years are rough on everyone.</li>
-                    <li>Sometimes journeys take you where you should be, rather than where you're trying to go.</li>
-                    <li>When everything we build is work related, we can forget the simple love of our craft.</li>
-                    <li>But when we immerse ourselves in that craft for a personal pursuit, there is a deeper appreciation, understanding, and joy to be found.</li>
-                </ol>
-                <p class="L">So, let me close with a fitting quote from a craftsperson I follow online.</p>
-                <div class="FlexCols Gap5">
-                    <div class="Flex">
-                        <img src="./app/assets/images/ENCurtis.jpg" class="ENCurtis">
-                    </div>
-                    <div class="Flex TextCentre">
-                        <p class="L Yellow">"Go make a thing."</p>
-                        <p class="XXS Yellow">Eric Curtis - Woodworker, Artist, Educator, YouTuber, Chucklehead</p>
-                    </div>
+            <data value="outro1">
+                <div class="PageTitle" data-shake>Let's tell the kids!</div>
+                <div class="PageContents VerticalCentreFlex PositionContents" data-contents data-shake>
+                    <div class="IntroPhotoContainer Container1 OffScreen"><div class="IntroPhoto Gentle" data-photo1><img class="IntroPhotoA" src="./app/assets/images/Grunthal.png"><p class="PhotoScript">Lunch @ Grunthal, Verdun</p></div></div>
+                    <div class="IntroPhotoContainer Container6 FarOffScreen"><div class="IntroPhoto Photo7 Crash" data-photo2></div></div>
                 </div>
-            </div>
-        </data>
-        <data value="outro3">
-            <div class="PageTitle">Thank you & Q&A</div>
-            <div class="PageContents VerticalCentreFlex">
-                <div class="FlexCols SpacedEvenly VContain">
-                    <div class="FlexRows SpacedEvenly VContain Gap5">
-                        <div class="FlexCols Flex JustifyStart Expand"><div class="LucaSq"></div><div class="LucaQR"></div><div class="Square"><p class="S">Luca<br/>Gnezda</p></div></div>
-                        <div class="FlexCols Flex JustifyStart Expand"><div class="SolomonSq"></div><div class="SolomonQR"></div><div class="Square"><p class="S">Solomon<br/>Laing</p></div></div>
-                        <div class="FlexCols Flex JustifyStart Expand"><div class="Square TaptuSq"></div><div class="TaptuQR"></div><div class="Square HFoHSq"></div></div>
-                    </div>
-                    <div class="FlexRows SpacedEvenly VContain Gap5">
-                        <div class="FlexCols Flex JustifyEnd Expand">
-                            <div class="DoubleSquare">
-                                <p class="S Densest">
-                                    <span class="Green">A Hostless Web Framework</span><br/>
-                                    <span class="XXS">GitHub Project</span>
-                                </p>
-                                <p class="XS Green">The code described today.</p>
-                                <p class="XS Green">Yours to enjoy or share with as you wish.</p>
-                            </div>
-                            <div class="FrameworkQR"></div>
+            </data>
+            <data value="outro2">
+                <div class="PageTitle">So what is the moral of this story?</div>
+                <div class="PageContents Inset">
+                    <ol class="L">
+                        <li class="Fadeable Hide" data-line1>Teenage years are rough on everyone.</li>
+                        <li class="Fadeable Hide" data-line2>Sometimes journeys take you where you should be, rather than where you're trying to go.</li>
+                        <li class="Fadeable Hide" data-line3>There are some awesome parts of JavaScript, that can get overlooked, when we build everything with advanced commercial frameworks.</li>
+                        <li class="Fadeable Hide" data-line4>We can sometimes forget the simple love of our craft, when everything we build is work related</li>
+                        <li class="Fadeable Hide" data-line5>But when we immerse ourselves in that craft for a personal pursuit, there is a deeper appreciation, understanding, and joy to be found.</li>
+                    </ol>
+                    <p class="L Fadeable Hide" data-line6>So, let me close with a fitting quote from another who loves their craft.</p>
+                    <div class="FlexCols Gap5 Centre Fadeable Hide"  data-line7>
+                        <div>
+                            <img src="./app/assets/images/ENCurtis.jpg" class="ENCurtis">
                         </div>
-                        <div class="FlexCols Flex JustifyEnd Expand">
-                            <div class="DoubleSquare">
-                                <p class="S Densest">
-                                    <span class="Green">(This) Presentation Codebase</span><br/>
-                                    <span class="XXS">GitHub Project</span>
-                                </p>
-                                <p class="XS Green">An example using the framework above.</p>
-                            </div>
-                            <div class="PresoQR"></div>
+                        <div class="TextCentre">
+                            <p class="L Yellow">"Go make a thing."</p>
+                            <p class="XXS Yellow">Eric Curtis - Woodworker, Artist, Educator, YouTuber, Chucklehead</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </data>
+            <data value="outro3">
+                <div class="PageTitle">Thank you & Q&A</div>
+                <div class="PageContents VerticalCentreFlex">
+                    <div class="FlexCols SpacedEvenly VContain">
+                        <div class="FlexRows SpacedEvenly VContain Gap5">
+                            <div class="FlexCols Flex JustifyStart Expand"><div class="LucaSq"></div><div class="LucaQR"></div><div class="Square"><p class="S">Luca<br/>Gnezda</p></div></div>
+                            <div class="FlexCols Flex JustifyStart Expand"><div class="SolomonSq"></div><div class="SolomonQR"></div><div class="Square"><p class="S">Solomon<br/>Laing</p></div></div>
+                            <div class="FlexCols Flex JustifyStart Expand"><div class="Square TaptuSq"></div><div class="TaptuQR"></div><div class="Square HFoHSq"></div></div>
+                        </div>
+                        <div class="FlexRows SpacedEvenly VContain Gap5">
+                            <div class="FlexCols Flex JustifyEnd Expand">
+                                <div class="DoubleSquare">
+                                    <p class="S Densest">
+                                        <span class="Green">A Hostless Web Framework</span><br/>
+                                        <span class="XXS">GitHub Project</span>
+                                    </p>
+                                    <p class="XS Green">The code described today.</p>
+                                    <p class="XS Green">Yours to enjoy or share with as you wish.</p>
+                                </div>
+                                <div class="FrameworkQR"></div>
+                            </div>
+                            <div class="FlexCols Flex JustifyEnd Expand">
+                                <div class="DoubleSquare">
+                                    <p class="S Densest">
+                                        <span class="Green">(This) Presentation Codebase</span><br/>
+                                        <span class="XXS">GitHub Project</span>
+                                    </p>
+                                    <p class="XS Green">An example using the framework above.</p>
+                                </div>
+                                <div class="PresoQR"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </data>
         </div>
         </data>
         <div class="CCPresentationRoot">
-            <div id="BackgroundsContainer" class="PresentationBackgroundsContainer"></div>
-            <div id="PagesContainer" class="PresentationPagesContainer"></div>
+            <div id="BackgroundsContainer" class="PresentationBackgroundsContainer Hide"></div>
+            <div id="PagesContainer" class="PresentationPagesContainer Hide"></div>
         </div>
     </body>
 </html>

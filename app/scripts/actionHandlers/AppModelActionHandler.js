@@ -363,7 +363,7 @@ class AppModelActionHandler {
 
     /**
      * Handles zooming into a section
-     * @param {AppPages} section 
+     * @param {PageNodeId} section 
      * @returns {void}
      */
     ZoomInToSection(section) {

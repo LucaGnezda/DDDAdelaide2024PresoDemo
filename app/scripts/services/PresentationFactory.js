@@ -41,7 +41,7 @@ class PresentationFactory {
 
     /**
      * Creates a new {@link PageNode} element and appends it to the given library
-     * @param {AppPages} name
+     * @param {PageNodeId} name
      * @returns {PageNode?}
      */
     newPageNode(name) {
@@ -61,8 +61,8 @@ class PresentationFactory {
 
     /**
      * Creates a new {@link CCPageContent} element and appends it to the given library
-     * @param {AppPageContents} name
-     * @returns {HTMLElement?}
+     * @param {PageContentId} name
+     * @returns {CCPageContent?}
      */
     newPageContent(name) {
         if (this.#intoPageContentLibrary != null && this.#intoPageContentLibrary.hasOwnProperty(name)) {
@@ -84,13 +84,13 @@ class PresentationFactory {
             this.#addPageContentToDOMElement.appendChild(component);
         }
 
-        return component;
+        return /** @type {CCPageContent} */ (component);
     }
 
     /**
      * Creates a new {@link CCBackground} element and appends it to the given library
-     * @param {AppBackgrounds} name
-     * @returns {HTMLElement?}
+     * @param {PageBackgroundId} name
+     * @returns {CCBackground?}
      */
     newBackground(name) {
         if (this.#intoBackgroundLibrary != null && this.#intoBackgroundLibrary.hasOwnProperty(name)) {
@@ -112,6 +112,6 @@ class PresentationFactory {
             this.#addBackgroundToDOMElement.appendChild(component);
         }
 
-        return component;
+        return /** @type {CCBackground} */ (component);
     }
 }

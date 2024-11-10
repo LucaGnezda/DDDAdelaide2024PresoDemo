@@ -29,7 +29,7 @@ body {
     background: #000000;
     margin: 0px;
     overflow: hidden;
-    /*user-select: none;*/
+    user-select: none;
     height: 100vh;
     width: 100vw;
 }
@@ -53,6 +53,10 @@ p {
     opacity: 1;
 }
 
+.PresentationBackgroundsContainer.Hide {
+    opacity: 0;
+}
+
 .PresentationPagesContainer {
     width: 100%;
     height: 100%;
@@ -61,6 +65,10 @@ p {
     top: -0%;
     overflow: hidden;
     opacity: 1;
+}
+
+.PresentationPagesContainer.Hide {
+    opacity: 0;
 }
 
 .PageBackground {
@@ -111,13 +119,12 @@ p {
     justify-content: center;
 }
 
-.PageContents.VerticalCentreFlexNarrow {
+.PageContents.Inset {
     height: 100vh;
-    width: 66vw;
+    width: 70vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding-top: 6vmin;
 }
 
 .PageContents.Dense,
@@ -662,6 +669,12 @@ li.LeftHalf {
 
 .SpacedEvenly {
     justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+.Centre {
+    justify-content: center;
     align-items: center;
     align-content: center;
 }

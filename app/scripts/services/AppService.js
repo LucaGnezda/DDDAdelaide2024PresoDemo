@@ -18,9 +18,8 @@ class AppService {
         AppService.LoadStore();
 
         // Define Presentation
-        AppService.DefinePresentation();
+        AppService.DefinePresentation(presentationDefinition);
         AppService.LoadPresentationContent();
-        AppService.DefineInPageAnimations();
         AppService.InitialiseInteractiveContent();
 
         AppService.ActivateFirstPage();
@@ -102,19 +101,116 @@ class AppService {
         App.store.addObservable("demo");
     }
 
-    static DefinePresentation() {
+    
+    /**
+     * method to build the Presentiation structure from a definition.
+     * @param {PresentationDefinition} [def]
+     */
+    static DefinePresentation(def) {
         let factory = new PresentationFactory(App.pages, App.pageContent, App.backgrounds, App.elements.pagesContainer, App.elements.backgroundsContainer);
 
+        if (def == null) {
+            Log.fatal(`No definition provided`, "PRESENTATION", this);
+            return;
+        }
+
+        // Load Background Definitions
+        def.backgrounds.forEach(backgroundDef => {
+            let background = factory.newBackground(backgroundDef.objectId);
+            if (background != null) {
+                background.setContentClass(backgroundDef.contentClass);
+                background.setContentPositionRange(backgroundDef.pageSlidingRangeX, backgroundDef.pageSlidingRangeY);
+            } else {
+                Log.fatal(`Factory unable to provision background`, "PRESENTATION", this);
+            }
+        });
+
+        // Load Page Content Definitions
+        def.contentPages.forEach(contentPageDef => {
+            let pageContent = factory.newPageContent(contentPageDef.objectId);
+            if (pageContent == null) {
+                Log.fatal(`Factory unable to provision page contents`, "PRESENTATION", this);
+            }
+        });
+
+        // Load Page Node Definitions
+        def.pageNodes.forEach(pageNodeDef => {
+            let pageNode = factory.newPageNode(pageNodeDef.objectId);
+            if (pageNode != null) {
+                pageNode.setPageContentAndBackground(
+                    App.pageContent[pageNodeDef.pageContentId], 
+                    App.backgrounds[pageNodeDef.backgroundId], 
+                    pageNodeDef.backgroundPagingPosX, 
+                    pageNodeDef.backgroundPagingPosY, 
+                    pageNodeDef.backgroundTransformer,
+                    pageNodeDef.includeBackgroundAnimation
+                );
+            } else {
+                Log.fatal(`Factory unable to provision pageNode`, "PRESENTATION", this);
+            }
+        });
+
+        // Load Bidirectional Transition Definitions
+        def.bidirectionalTransitions.forEach(transitionDef => {
+            let pageNode = App.pages[transitionDef.pageNodeId];
+            pageNode.setNextPage(
+                App.pages[transitionDef.destinationPageNodeId],
+                transitionDef.forwardTransition,
+                transitionDef.backTransition,
+                transitionDef.duration
+            );
+        });
+
+        // Load Unidirectional Back Transitions Definitions
+        def.backOnlyTransitions.forEach(transitionDef => {
+            let pageNode = App.pages[transitionDef.pageNodeId];
+            pageNode.setPreviousPage(
+                App.pages[transitionDef.destinationPageNodeId],
+                transitionDef.backTransition,
+                transitionDef.duration
+            );
+        });
+
+        // Load Basic Page Reveal Animations
+        def.basicPageRevealAnimations.forEach(animationDef => {
+            let pageContent = App.pageContent[animationDef.pageContentId];
+
+            pageContent.setAnimation(
+                defineBasicAnimationSeries(animationDef.revealSteps), 
+                ((animationDef.pageOverlay) ? "pageOverlay" : undefined)
+            );
+        });
+
+        // Load Custom Page Animations
+        def.customPageAnimations.forEach(animationDef => {
+            let pageContent = App.pageContent[animationDef.pageContentId];
+
+            pageContent.setAnimation(
+                animationDef.animation, 
+                ((animationDef.pageOverlay) ? "pageOverlay" : undefined)
+            );
+        });
+
+        // Load Custom Background Animations
+        def.customBackgroundAnimations.forEach(animationDef => {
+            let background = App.backgrounds[animationDef.backgroundId];
+
+            background.setAnimation(animationDef.animation);
+        });
+
         // Define & configure Backgrounds
+        /*
         factory.newBackground("dddBackground");
         factory.newBackground("titleBackground");
         factory.newBackground("introBackground");
         factory.newBackground("hubBackground");
-        factory.newBackground("sectionBackground1");
+        factory.newBackground("sectionBackground");
         factory.newBackground("demoBackground");
         factory.newBackground("outroBackground");
+        */
 
         // Define Pages Content
+        /*
         factory.newPageContent("ddd");
         factory.newPageContent("title");
         factory.newPageContent("dddSponsors");
@@ -150,8 +246,10 @@ class AppService {
         factory.newPageContent("outro1");
         factory.newPageContent("outro2");
         factory.newPageContent("outro3");
+        */
 
         // Define Pages
+        /*
         factory.newPageNode("ddd");
         factory.newPageNode("title");
         factory.newPageNode("dddSponsors");
@@ -187,8 +285,10 @@ class AppService {
         factory.newPageNode("outro1");
         factory.newPageNode("outro2");
         factory.newPageNode("outro3");
+        */
 
         // Configure Backgrounds
+        /*
         App.backgrounds.dddBackground.setContentClass("DDDPageBackground");
         App.backgrounds.dddBackground.setContentPositionRange(1, 1);
 
@@ -201,16 +301,19 @@ class AppService {
         App.backgrounds.hubBackground.setContentClass("PageBackground");
         App.backgrounds.hubBackground.setContentPositionRange(1, 1);
 
-        App.backgrounds.sectionBackground1.setContentClass("PageBackground");
-        App.backgrounds.sectionBackground1.setContentPositionRange(3, 1);
+        App.backgrounds.sectionBackground.setContentClass("PageBackground");
+        App.backgrounds.sectionBackground.setContentPositionRange(3, 1);
 
         App.backgrounds.demoBackground.setContentClass("PageBackground");
         App.backgrounds.demoBackground.setContentPositionRange(1, 1);
 
         App.backgrounds.outroBackground.setContentClass("PageBackground");
         App.backgrounds.outroBackground.setContentPositionRange(1.6, 1);
+        */
+
 
         // Configure Pages
+        /*
         App.pages.ddd.setPageContentAndBackground(App.pageContent.ddd, App.backgrounds.dddBackground, 0.0, 0, null);
         App.pages.title.setPageContentAndBackground(App.pageContent.title, App.backgrounds.titleBackground, 0.0, 0, null);
         App.pages.dddSponsors.setPageContentAndBackground(App.pageContent.dddSponsors, App.backgrounds.dddBackground, 0.0, 0, null);
@@ -222,32 +325,34 @@ class AppService {
 
         App.pages.hub.setPageContentAndBackground(App.pageContent.hub, App.backgrounds.hubBackground, 0.0, 0, null);
 
-        App.pages.logging1.setPageContentAndBackground(App.pageContent.logging1, App.backgrounds.sectionBackground1, 0.0, 0, null);
+        App.pages.logging1.setPageContentAndBackground(App.pageContent.logging1, App.backgrounds.sectionBackground, 0.0, 0, null);
 
-        App.pages.components1.setPageContentAndBackground(App.pageContent.components1, App.backgrounds.sectionBackground1, 0.0, 0, null);
-        App.pages.components2.setPageContentAndBackground(App.pageContent.components2, App.backgrounds.sectionBackground1, 0.3, 0, null);
+        App.pages.components1.setPageContentAndBackground(App.pageContent.components1, App.backgrounds.sectionBackground, 0.0, 0, null);
+        App.pages.components2.setPageContentAndBackground(App.pageContent.components2, App.backgrounds.sectionBackground, 0.3, 0, null);
 
-        App.pages.observables1.setPageContentAndBackground(App.pageContent.observables1, App.backgrounds.sectionBackground1, 0.0, 0, null);
-        App.pages.observables2.setPageContentAndBackground(App.pageContent.observables2, App.backgrounds.sectionBackground1, 0.3, 0, null);
+        App.pages.observables1.setPageContentAndBackground(App.pageContent.observables1, App.backgrounds.sectionBackground, 0.0, 0, null);
+        App.pages.observables2.setPageContentAndBackground(App.pageContent.observables2, App.backgrounds.sectionBackground, 0.3, 0, null);
 
-        App.pages.store1.setPageContentAndBackground(App.pageContent.store1, App.backgrounds.sectionBackground1, 0.0, 0, null);
-        App.pages.store2.setPageContentAndBackground(App.pageContent.store2, App.backgrounds.sectionBackground1, 0.3, 0, null);
+        App.pages.store1.setPageContentAndBackground(App.pageContent.store1, App.backgrounds.sectionBackground, 0.0, 0, null);
+        App.pages.store2.setPageContentAndBackground(App.pageContent.store2, App.backgrounds.sectionBackground, 0.3, 0, null);
 
-        App.pages.eventBinding1.setPageContentAndBackground(App.pageContent.eventBinding1, App.backgrounds.sectionBackground1, 0.4, 0, null);
+        App.pages.eventBinding1.setPageContentAndBackground(App.pageContent.eventBinding1, App.backgrounds.sectionBackground, 0.4, 0, null);
 
-        App.pages.dispatchActionHandling1.setPageContentAndBackground(App.pageContent.dispatchActionHandling1, App.backgrounds.sectionBackground1, 0.0, 0, null);
-        App.pages.dispatchActionHandling2.setPageContentAndBackground(App.pageContent.dispatchActionHandling2, App.backgrounds.sectionBackground1, 0.3, 0, null);
-        App.pages.dispatchActionHandling3.setPageContentAndBackground(App.pageContent.dispatchActionHandling3, App.backgrounds.sectionBackground1, 0.6, 0, null);
+        App.pages.dispatchActionHandling1.setPageContentAndBackground(App.pageContent.dispatchActionHandling1, App.backgrounds.sectionBackground, 0.0, 0, null);
+        App.pages.dispatchActionHandling2.setPageContentAndBackground(App.pageContent.dispatchActionHandling2, App.backgrounds.sectionBackground, 0.3, 0, null);
+        App.pages.dispatchActionHandling3.setPageContentAndBackground(App.pageContent.dispatchActionHandling3, App.backgrounds.sectionBackground, 0.6, 0, null);
 
-        App.pages.dataBinding1.setPageContentAndBackground(App.pageContent.dataBinding1, App.backgrounds.sectionBackground1, 0.4, 0, null);
+        App.pages.dataBinding1.setPageContentAndBackground(App.pageContent.dataBinding1, App.backgrounds.sectionBackground, 0.4, 0, null);
 
         App.pages.demo.setPageContentAndBackground(App.pageContent.demo, App.backgrounds.demoBackground, 0.0, 0, null);
 
         App.pages.outro1.setPageContentAndBackground(App.pageContent.outro1, App.backgrounds.outroBackground, 0.0, 0, null);
-        App.pages.outro2.setPageContentAndBackground(App.pageContent.outro2, App.backgrounds.outroBackground, 0.2, 0, null);
+        App.pages.outro2.setPageContentAndBackground(App.pageContent.outro2, App.backgrounds.outroBackground, 0.2, 0, null, false);
         App.pages.outro3.setPageContentAndBackground(App.pageContent.outro3, App.backgrounds.outroBackground, 0.4, 0, null);
+        */
 
         // Interrelate Pages with transitions
+        /*
         App.pages.ddd.setNextPage(App.pages.title, PageTransition.Fade, PageTransition.Fade, 1.25);
         App.pages.title.setNextPage(App.pages.dddSponsors, PageTransition.Fade, PageTransition.Fade, 1.25);
         App.pages.dddSponsors.setNextPage(App.pages.intro1, PageTransition.Fade, PageTransition.Fade, 1.25);
@@ -288,6 +393,7 @@ class AppService {
 
         App.pages.outro1.setNextPage(App.pages.outro2, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
         App.pages.outro2.setNextPage(App.pages.outro3, PageTransition.FadeSlideLeft, PageTransition.FadeSlideRight, 1.25);
+        */
     }
 
     static LoadPresentationContent() {
@@ -326,6 +432,7 @@ class AppService {
 
     static DefineInPageAnimations() {
         // Add animations to Pages
+        /*
         App.pageContent.title.setAnimation(
             [
                 {
@@ -339,7 +446,9 @@ class AppService {
                 },
             ]
         )
+        */
 
+        /*
         App.backgrounds.titleBackground.setAnimation(
             [
                 {
@@ -350,7 +459,9 @@ class AppService {
                 },
             ]
         )
+        */
 
+        /*
         App.pageContent.intro2.setAnimation(
             [
                 {
@@ -415,7 +526,9 @@ class AppService {
                 },
             ]
         )
+        */
 
+        /*
         App.backgrounds.introBackground.setAnimation(
             [
                 {
@@ -458,7 +571,9 @@ class AppService {
                 },
             ]
         )
+        */
 
+        /*
         App.pageContent.intro3.setAnimation(
             [
                 {
@@ -487,9 +602,11 @@ class AppService {
                 },
             ]
         )
+        */
 
         // overlay definition
-        App.pageContent.intro1.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
+        //App.pageContent.intro1.setAnimation(defineBasicAnimationSeries(4), "pageOverlay");
+        /*
         App.pageContent.intro4.setAnimation(
             [
                 {
@@ -541,8 +658,10 @@ class AppService {
             ],
             "pageOverlay"
         )
-        App.pageContent.observables1.setAnimation(defineBasicAnimationSeries(3), "pageOverlay");
-        App.pageContent.observables2.setAnimation(defineBasicAnimationSeries(7), "pageOverlay");
+        */
+        //App.pageContent.observables1.setAnimation(defineBasicAnimationSeries(3), "pageOverlay");
+        //App.pageContent.observables2.setAnimation(defineBasicAnimationSeries(7), "pageOverlay");
+        /*
         App.pageContent.dispatchActionHandling1.setAnimation(
             [
                 {
@@ -588,7 +707,9 @@ class AppService {
             ],
             "pageOverlay"
         )
+        */
 
+        /*
         App.pageContent.outro1.setAnimation(
             [
                 {
@@ -607,7 +728,9 @@ class AppService {
                 },
             ]
         )
+        */
 
+        /*
         App.backgrounds.outroBackground.setAnimation(
             [
                 {
@@ -622,6 +745,9 @@ class AppService {
                 },
             ]
         )
+        */
+
+        //App.pageContent.outro2.setAnimation(defineBasicAnimationSeries(7));
     }
 
     static InitialiseInteractiveContent() {
@@ -794,6 +920,7 @@ class AppService {
     }
 
     static ActivateFirstPage() {
+        
         // Activate and transition page 1
         App.activePage = App.pages.ddd;
         App.activePage.background?.usingTransition(1, "ease-in", 0);
@@ -802,6 +929,11 @@ class AppService {
         App.activePage.content?.usingTransition(1, "ease-in", 0);
         App.activePage.content?.withFadeIn();
         App.activePage.content?.show();
+
+        // Show the core divs
+        App.elements.backgroundsContainer?.classList.remove("Hide");
+        App.elements.pagesContainer?.classList.remove("Hide");
+        
     }
 
     static SolveAppModel() {
