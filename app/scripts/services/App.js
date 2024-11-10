@@ -4,26 +4,6 @@
  * @public
  */
 class App {
-    /**
-     * @typedef {'ddd'|'title'|'dddSponsors'|'intro1'|'intro2'|'intro3'|'intro4'|'hub'|'logging1'|'components1'|'components2'|'observables1'|'observables2'|'store1'|'store2'|'eventBinding1'|'dispatchActionHandling1'|'dispatchActionHandling2'|'dispatchActionHandling3'|'dataBinding1'|'demo'|'outro1'|'outro2'|'outro3'} AppPages
-     */
-
-    /**
-     * @typedef {'dddBackground'|'titleBackground'|'introBackground'|'hubBackground'|'sectionBackground1'|'demoBackground'|'outroBackground'} AppBackgrounds
-     */
-
-    /**
-     * @typedef {AppPages} AppPageContents
-     */
-
-    /**
-     * @typedef {'demoObservableElement'|'demoObservingElement1'|'demoObservingElement2'|'demoObservingElement3'} AppComponents
-     */
-
-    /**
-     * @typedef {'pagesContainer'|'backgroundsContainer'|'AppModelAppStructure'|'appModelComponents'|'appModelEventBindings'|'appModelActionDispatch'|'appModelHandlers'|'appModelStore'|'appModelDataBindings'|'appModelObservables'|'appModelLogging'|'appModelHelpers'|'solveIcon'} AppElements
-     */
-
     // Flux Pattern objects
     /**
      * @static
@@ -76,21 +56,21 @@ class App {
         solveIcon: null,
     };
 
-    // Referecned components
+    // Referenced components
     /**
-     * @type {LimitedDictionary<AppPageContents,CCPageContent>}
+     * @type {LimitedDictionary<PageContentId,CCPageContent>}
      */
-    static pageContent = /** @type {LimitedDictionary<AppPageContents,CCPageContent>} */ ({});
+    static pageContent = /** @type {LimitedDictionary<PageContentId,CCPageContent>} */ ({});
 
     /**
-     * @type {LimitedDictionary<AppBackgrounds, CCBackground>}
+     * @type {LimitedDictionary<PageBackgroundId, CCBackground>}
      */
-    static backgrounds = /** @type {LimitedDictionary<AppBackgrounds, CCBackground>} */ ({});
+    static backgrounds = /** @type {LimitedDictionary<PageBackgroundId, CCBackground>} */ ({});
 
     /**
-     * @type {LimitedDictionary<AppPages, PageNode>}
+     * @type {LimitedDictionary<PageNodeId, PageNode>}
      */
-    static pages = /** @type {LimitedDictionary<AppPages, PageNode>} */ ({});
+    static pages = /** @type {LimitedDictionary<PageNodeId, PageNode>} */ ({});
 
     /**
      * @type {LimitedDictionary<AppComponents, CCBase | CCObservableBase>}

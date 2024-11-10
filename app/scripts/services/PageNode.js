@@ -43,6 +43,11 @@ class PageNode {
     #backgroundTransitionBack = PageTransition.None;
 
     /**
+     * @type {boolean}
+     */
+    #includeBackgroundAnimation = true;
+
+    /**
      * @type {CCPageContent?}
      */
     #pageContent = null;
@@ -143,6 +148,10 @@ class PageNode {
         return this.#backgroundTransformer;
     }
 
+    get includeBackgroundAnimation() {
+        return this.#includeBackgroundAnimation;
+    }
+
     /*
      * Public Methods
      */
@@ -175,14 +184,21 @@ class PageNode {
      * Sets the page content and background for the node
      * @param {CCPageContent} pageContent
      * @param {CCBackground} background
-     * @param {number} pageX
-     * @param {number} pageY
+     * @param {number?} pageX
+     * @param {number?} pageY
      * @param {string?} transformerClass
+     * @param {boolean?} includeBackgroundAnimation
      * @returns {void}
      */
-    setPageContentAndBackground(pageContent, background, pageX, pageY, transformerClass) {
+    setPageContentAndBackground(pageContent, background, pageX, pageY, transformerClass, includeBackgroundAnimation) {
+
+        if (pageX == null) { pageX = 0; }
+        if (pageY == null) { pageY = 0; }
+        if (includeBackgroundAnimation == null) { includeBackgroundAnimation = true; }
+
         this.setPageContent(pageContent);
         this.setBackground(background, pageX, pageY, transformerClass);
+        this.#includeBackgroundAnimation = includeBackgroundAnimation;
     }
 
     /**

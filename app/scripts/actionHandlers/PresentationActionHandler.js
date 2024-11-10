@@ -45,10 +45,14 @@ class PresentationActionHandler {
     animatePage(payload) {
         if (payload.inReverse) {
             payload.activePage.content?.stepAnimationBack();
-            payload.activePage.background?.stepAnimationBack();
+            if (payload.activePage.includeBackgroundAnimation) {
+                payload.activePage.background?.stepAnimationBack();
+            }
         } else {
             payload.activePage.content?.stepAnimationForward();
-            payload.activePage.background?.stepAnimationForward();
+            if (payload.activePage.includeBackgroundAnimation) {
+                payload.activePage.background?.stepAnimationForward();
+            }
         }
     }
 
@@ -118,7 +122,7 @@ class PresentationActionHandler {
 
     /**
      * Zooms into a given page
-     * @param {AppPages} section
+     * @param {PageNodeId} section
      * @returns {void}
      */
     ZoomInToSection(section) {
