@@ -25,8 +25,8 @@ But it does actually come with some of the niceties you'd hope for, such as:
 
 ## How to run
 This bit is easy ... and kind of cool.
-1. Download or CLone the Repo.
-2. Open Index.HTML in your Browser (That's it, literally).
+1. Download or clone the repo.
+2. Open index.html in your Browser (That's it, literally).
 
 ## Compatibility
 At time of building this codebase, to get some of the cool transitions working without timer events, We've used a bunch of 2024 features in CSS, such as discrete transitions and starting-style rules. As at November 2024, this is fully supported in Chromium based Browsers, and it might work in Safari too (haven't tested), but it won't yet work well in firefox until they finish implementing discrete-transitions from display: none.
