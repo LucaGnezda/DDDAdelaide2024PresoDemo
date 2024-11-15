@@ -1597,9 +1597,10 @@ li.LeftHalf {
 .AmIDunning {
     position: absolute;
     background-image: url("../assets/images/AmIDunning.png");
-    width: 50% !important;
-    height: 50% !important;
+    width: 70% !important;
+    height: 70% !important;
     border-radius: 2vmin;
+    transform: rotate(90deg);
     left: 0;
     right: 0;
     top: 0;
