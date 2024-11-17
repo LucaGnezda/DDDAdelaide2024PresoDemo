@@ -1600,7 +1600,6 @@ li.LeftHalf {
     width: 70% !important;
     height: 70% !important;
     border-radius: 2vmin;
-    transform: rotate(90deg);
     left: 0;
     right: 0;
     top: 0;
