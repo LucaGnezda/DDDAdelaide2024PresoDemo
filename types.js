@@ -1,20 +1,25 @@
 /**
+ * List of valid Page Content Ids (to minimise indexing errors while coding)
  * @typedef {'ddd'|'title'|'dddSponsors'|'intro1'|'intro2'|'intro3'|'intro4'|'hub'|'logging1'|'components1'|'components2'|'observables1'|'observables2'|'store1'|'store2'|'eventBinding1'|'dispatchActionHandling1'|'dispatchActionHandling2'|'dispatchActionHandling3'|'dataBinding1'|'demo'|'outro1'|'outro2'|'outro3'} PageContentId
  */
 
 /**
+ * List of valid Page Background Ids (to minimise indexing errors while coding)
  * @typedef {'dddBackground'|'titleBackground'|'introBackground'|'hubBackground'|'sectionBackground'|'demoBackground'|'outroBackground'} PageBackgroundId
  */
 
 /**
- * @typedef {'ddd'|'title'|'dddSponsors'|'intro1'|'intro2'|'intro3'|'intro4'|'hub'|'logging1'|'components1'|'components2'|'observables1'|'observables2'|'store1'|'store2'|'eventBinding1'|'dispatchActionHandling1'|'dispatchActionHandling2'|'dispatchActionHandling3'|'dataBinding1'|'demo'|'outro1'|'outro2'|'outro3'} PageNodeId
+ * List of valid Page Node Ids (to minimise indexing errors while coding)
+* @typedef {'ddd'|'title'|'dddSponsors'|'intro1'|'intro2'|'intro3'|'intro4'|'hub'|'logging1'|'components1'|'components2'|'observables1'|'observables2'|'store1'|'store2'|'eventBinding1'|'dispatchActionHandling1'|'dispatchActionHandling2'|'dispatchActionHandling3'|'dataBinding1'|'demo'|'outro1'|'outro2'|'outro3'} PageNodeId
  */
 
 /**
+ * List of valid Demo Elements (to minimise indexing errors while coding)
  * @typedef {'demoObservableElement'|'demoObservingElement1'|'demoObservingElement2'|'demoObservingElement3'} AppComponents
  */
 
 /**
+ * List of valid UI elements (to minimise indexing errors while coding)
  * @typedef {'pagesContainer'|'backgroundsContainer'|'AppModelAppStructure'|'appModelComponents'|'appModelEventBindings'|'appModelActionDispatch'|'appModelHandlers'|'appModelStore'|'appModelDataBindings'|'appModelObservables'|'appModelLogging'|'appModelHelpers'|'solveIcon'} AppElements
  */
 
