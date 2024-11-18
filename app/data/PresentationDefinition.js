@@ -777,9 +777,11 @@ const presentationDefinition = {
                 {
                     add: [
                         { key: "data-line1", classes: ["Show"] },
+                        { key: "data-hide1", classes: ["Show"] },
                     ],
                     remove: [
                         { key: "data-line1", classes: ["Hide"] },
+                        { key: "data-hide1", classes: ["Hide"] },
                     ]
                 },
                 {
@@ -788,14 +790,6 @@ const presentationDefinition = {
                     ],
                     remove: [
                         { key: "data-line2", classes: ["Hide"] }
-                    ]
-                },
-                {
-                    add: [
-                        { key: "data-hide1", classes: ["Show"] },
-                    ],
-                    remove: [
-                        { key: "data-hide1", classes: ["Hide"] },
                     ]
                 },
             ]
