@@ -1597,8 +1597,8 @@ li.LeftHalf {
 .AmIDunning {
     position: absolute;
     background-image: url("../assets/images/AmIDunning.png");
-    width: 50% !important;
-    height: 50% !important;
+    width: 70% !important;
+    height: 70% !important;
     border-radius: 2vmin;
     left: 0;
     right: 0;
