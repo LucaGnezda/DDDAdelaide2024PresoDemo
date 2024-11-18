@@ -1,0 +1,1617 @@
+@keyframes Shake {
+    0% { transform: translate(0.1vmin, 0.1vmin) rotate(0deg); }
+    10% { transform: translate(-0.1vmin, -0.2vmin) rotate(-1deg); }
+    20% { transform: translate(-0.3vmin, 0vmin) rotate(1deg); }
+    30% { transform: translate(0.3vmin, 0.2vmin) rotate(0deg); }
+    40% { transform: translate(0.1vmin, -0.1vmin) rotate(1deg); }
+    50% { transform: translate(-0.1vmin, 0.2vmin) rotate(-1deg); }
+    60% { transform: translate(-0.3vmin, 0.1vmin) rotate(0deg); }
+    70% { transform: translate(0.3vmin, 0.1vmin) rotate(-1deg); }
+    80% { transform: translate(-0.1vmin, -0.1vmin) rotate(1deg); }
+    90% { transform: translate(0.1vmin, 0.2vmin) rotate(0deg); }
+    100% { transform: translate(0.1vmin, -0.2vmin) rotate(-1deg); }
+}
+
+
+:root {
+    --colourBlue: #238ddd;                 /* var(--colourBlue) */
+    --colourGreen: #32bea6;                /* var(--colourGreen) */
+    --colourIce: #9cdcfe;                  /* var(--colourIce) */
+    --colourYellow: #fffdab;               /* var(--colourYellow) */
+    --colourRed: #e74856;                  /* var(--colourRed) */
+    --colourCharcoal: #323436;             /* var(--colourCharcoal) */
+    --colourDDDDarkSteelBlue: #3E5668;     /* var(--colourDDDDarkSteelBlue) */
+    --colourDDDTeal: #1BA5A6;              /* var(--colourDDDTeal) */
+    --colourDDDTan: #f3ebe0;               /* var(--colourDDDTan) */
+}
+
+body {
+    background: #000000;
+    margin: 0px;
+    overflow: hidden;
+    user-select: none;
+    height: 100vh;
+    width: 100vw;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.ContentSource {
+    display: none;
+}
+
+.PresentationBackgroundsContainer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: -0%;
+    top: -0%;
+    overflow: hidden;
+    opacity: 1;
+}
+
+.PresentationBackgroundsContainer.Hide {
+    opacity: 0;
+}
+
+.PresentationPagesContainer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: -0%;
+    top: -0%;
+    overflow: hidden;
+    opacity: 1;
+}
+
+.PresentationPagesContainer.Hide {
+    opacity: 0;
+}
+
+.PageBackground {
+    background: url("../assets/images/DarkNetwork.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--colourCharcoal);
+    opacity: 0.5;
+    position: absolute;
+    transition: all 1.0s ease-in-out;
+}
+
+.TestTransformer1 {
+    transform: scale(0.5);
+}
+
+.TestTransformer2 {
+    transform: rotate(20deg);
+}
+
+.PageTitle {
+    color: #ffffff;
+    padding: 5vmin 0vmin 0vmin 0vmin;
+    font-size: 8vmin;
+    text-align: center;
+    font-family: "Alpha Echo";
+}
+
+.PageContents {
+    color: #ffffff;
+    font-size: 4vmin;
+    padding: 0vmin 8vmin 0vmin 8vmin;
+    font-family: "Nunito";
+    line-height: normal;
+    margin: 1.6vmin 0vmin 1.6vmin 0vmin;
+    /* padding: 1.6vmin 8vmin; */
+    height: 100vh;
+    width: 90vw;
+}
+
+.PageContents.VerticalCentreFlex {
+    height: 100vh;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.PageContents.Inset {
+    height: 100vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    padding-top: 6vmin;
+}
+
+.PageContents.Dense,
+p.Dense {
+    line-height: 1.3;
+}
+
+.PageContents.Denser,
+p.Denser {
+    line-height: 1.25;
+}
+
+.PageContents.Densest,
+p.Densest {
+    line-height: 1.2;
+}
+
+
+
+/* Extra Large (full size) fonts */
+p,
+P.XL,
+span.XL {
+    font-size: 4vmin;
+    margin: 1.6vmin 0vmin 1.6vmin 0vmin;
+    /* padding: 1.6vmin 0vmin 1.6vmin 0vmin; */
+}
+
+p.Indent0,
+P.XL.Indent0 {
+    font-size: 4vmin;
+    padding-left: 0vmin;
+}
+
+p.Indent1,
+P.XL.Indent1 {
+    font-size: 4vmin;
+    padding-left: 8vmin;
+}
+
+p.Indent2,
+P.XL.Indent2 {
+    font-size: 4vmin;
+    padding-left: 16vmin;
+}
+
+p.Indent3,
+P.XL.Indent3 {
+    font-size: 4vmin;
+    padding-left: 24vmin;
+}
+
+ol,
+ol.XL,
+ul,
+ul.XL {
+    font-size: 4vmin;
+    margin-block: 1.6vmin 1.6vmin;
+}
+
+ol,
+ol.Indent0,
+ol.XL.Indent0,
+ul,
+ul.Indent0,
+ul.XL.Indent0 {
+    padding-inline-start: 6.4vmin;
+}
+
+ol.Indent1,
+ol.XL.Indent1,
+ul.Indent1,
+ul.XL.Indent1 {
+    padding-inline-start: 14.4vmin;
+}
+
+ol.Indent2,
+ol.XL.Indent2,
+ul.Indent2,
+ul.XL.Indent2 {
+    padding-inline-start: 22.4vmin;
+}
+
+ol > li,
+ol.XL > li,
+ul > li,
+ul.XL > li {
+    padding-left: 1.6vmin;
+}
+
+/* Large fonts */
+P.L,
+span.L {
+    font-size: 3.5vmin;
+    margin: 1.4vmin 0vmin 1.4vmin 0vmin;
+    /* padding: 1.4vmin 0vmin 1.4vmin 0vmin; */
+}
+
+P.L.Indent0 {
+    font-size: 3.5vmin;
+    padding-left: 0vmin;
+}
+
+P.L.Indent1 {
+    font-size: 3.5vmin;
+    padding-left: 7vmin;
+}
+
+P.L.Indent2 {
+    font-size: 3.5vmin;
+    padding-left: 14vmin;
+}
+
+P.L.Indent3 {
+    font-size: 3.5vmin;
+    padding-left: 21vmin;
+}
+
+ol.L,
+ul.L {
+    font-size: 3.5vmin;
+    margin-block: 1.4vmin 1.4vmin;
+}
+
+ol.L,
+ol.L.Indent0,
+ul.L,
+ul.L.Indent0 {
+    padding-inline-start: 5.6vmin;
+}
+
+ol.L.Indent1,
+ul.L.Indent1 {
+    padding-inline-start: 12.6vmin;
+}
+
+ol.L.Indent2,
+ul.L.Indent2 {
+    padding-inline-start: 19.6vmin;
+}
+
+ol.L > li,
+ul.L > li {
+    padding-left: 1.4vmin;
+}
+
+/* Medium fonts */
+P.M,
+span.M {
+    font-size: 3vmin;
+    margin: 1.2vmin 0vmin 1.2vmin 0vmin;
+    /* padding: 1.2vmin 0vmin 1.2vmin 0vmin; */
+}
+
+P.M.Indent0 {
+    font-size: 3vmin;
+    padding-left: 0vmin;
+}
+
+P.M.Indent1 {
+    font-size: 3vmin;
+    padding-left: 6vmin;
+}
+
+P.M.Indent2 {
+    font-size: 3vmin;
+    padding-left: 12vmin;
+}
+
+P.M.Indent3 {
+    font-size: 3vmin;
+    padding-left: 18vmin;
+}
+
+ol.M,
+ul.M {
+    font-size: 3vmin;
+    margin-block: 1.2vmin 1.2vmin;
+}
+
+ol.M,
+ol.M.Indent0,
+ul.M,
+ul.M.Indent0 {
+    padding-inline-start: 4.8vmin;
+}
+
+ol.M.Indent1,
+ul.M.Indent1 {
+    padding-inline-start: 10.8vmin;
+}
+
+ol.M.Indent2,
+ul.M.Indent2 {
+    padding-inline-start: 16.8vmin;
+}
+
+ol.M > li,
+ul.M > li {
+    padding-left: 1.2vmin;
+}
+
+/* Small fonts */
+P.S,
+span.S {
+    font-size: 2.5vmin;
+    margin: 1vmin 0vmin 1vmin 0vmin;
+    /* padding: 1vmin 0vmin 1vmin 0vmin; */
+}
+
+P.S.Indent0 {
+    font-size: 2.5vmin;
+    padding-left: 0vmin;
+}
+
+P.S.Indent1 {
+    font-size: 2.5vmin;
+    padding-left: 5vmin;
+}
+
+P.S.Indent2 {
+    font-size: 2.5vmin;
+    padding-left: 10vmin;
+}
+
+P.S.Indent3 {
+    font-size: 2.5vmin;
+    padding-left: 15vmin;
+}
+
+ol.S,
+ul.S {
+    font-size: 2.5vmin;
+    margin-block: 1vmin 1vmin;
+}
+
+ol.S,
+ol.S.Indent0,
+ul.S,
+ul.S.Indent0 {
+    padding-inline-start: 4vmin;
+}
+
+ol.S.Indent1,
+ul.S.Indent1 {
+    padding-inline-start: 9vmin;
+}
+
+ol.S.Indent2,
+ul.S.Indent2 {
+    padding-inline-start: 14vmin;
+}
+
+ol.S > li,
+ul.S > li {
+    padding-left: 1vmin;
+}
+
+/* Extra Small fonts */
+P.XS,
+span.XS {
+    font-size: 2vmin;
+    margin: 0.8vmin 0vmin 0.8vmin 0vmin;
+    /* padding: 0.8vmin 0vmin 0.8vmin 0vmin; */
+}
+
+P.XS.Indent0 {
+    font-size: 2vmin;
+    padding-left: 0vmin;
+}
+
+P.XS.Indent1 {
+    font-size: 2vmin;
+    padding-left: 4vmin;
+}
+
+P.XS.Indent2 {
+    font-size: 2vmin;
+    padding-left: 8vmin;
+}
+
+P.XS.Indent3 {
+    font-size: 2vmin;
+    padding-left: 12vmin;
+}
+
+ol.XS,
+ul.XS {
+    font-size: 2vmin;
+    margin-block: 0.8vmin 0.8vmin;
+}
+
+ol.XS,
+ol.XS.Indent0,
+ul.XS,
+ul.XS.Indent0 {
+    padding-inline-start: 3.2vmin;
+}
+
+ol.XS.Indent1,
+ul.XS.Indent1 {
+    padding-inline-start: 7.2vmin;
+}
+
+ol.XS.Indent2,
+ul.XS.Indent2 {
+    padding-inline-start: 11.2vmin;
+}
+
+ol.XS > li,
+ul.XS > li {
+    padding-left: 0.8vmin;
+}
+
+/* XXS (smallest) fonts */
+P.XXS,
+span.XXS {
+    font-size: 1.5vmin;
+    margin: 0.3vmin 0vmin 0.3vmin 0vmin;
+    /* padding: 0.3vmin 0vmin 0.3vmin 0vmin; */
+}
+
+P.XXS.Indent0 {
+    font-size: 1.5vmin;
+    padding-left: 0vmin;
+}
+
+P.XXS.Indent1 {
+    font-size: 1.5vmin;
+    padding-left: 3vmin;
+}
+
+P.XXS.Indent2 {
+    font-size: 1.5vmin;
+    padding-left: 6vmin;
+}
+
+P.XXS.Indent3 {
+    font-size: 1.5vmin;
+    padding-left: 9vmin;
+}
+
+ol.XXS,
+ul.XXS {
+    font-size: 1.5vmin;
+    margin-block: 0.3vmin 0.3vmin;
+}
+
+ol.XXS,
+ol.XXS.Indent0,
+ul.XXS,
+ul.XXS.Indent0 {
+    padding-inline-start: 2.4vmin;
+}
+
+ol.XXS.Indent1,
+ul.XXS.Indent1 {
+    padding-inline-start: 5.4vmin;
+}
+
+ol.XXS.Indent2,
+ul.XXS.Indent2 {
+    padding-inline-start: 8.4vmin;
+}
+
+ol.XXS > li,
+ul.XXS > li {
+    padding-left: 0.3vmin;
+}
+
+/* List Markers */
+li.Tick,
+li.Cross {
+    list-style: none;
+    position: relative;
+}
+
+li.Tick::before,
+li.Cross::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-repeat: no-repeat;
+}
+
+li.Tick::before {
+    background-image: url("../assets/svg/tick.svg");
+    filter: brightness(0) saturate(100%) invert(58%) sepia(87%) saturate(315%) hue-rotate(120deg) brightness(92%) contrast(95%);
+}
+
+li.Cross::before {
+    background-image: url("../assets/svg/cross.svg");
+    filter: brightness(0) saturate(100%) invert(32%) sepia(91%) saturate(1216%) hue-rotate(325deg) brightness(97%) contrast(87%);
+}
+
+ul li.Tick::before,
+ul li.Cross::before,
+ul.XL li.Tick::before,
+ul.XL li.Cross::before {
+    left: -3.9vmin;
+    top: 1.35vmin;
+    height: 2.8vmin;
+}
+
+ul.L li.Tick::before,
+ul.L li.Cross::before {
+    left: -3.45vmin;
+    top: 1.225vmin;
+    height: 2.45vmin;
+}
+
+ul.M li.Tick::before,
+ul.M li.Cross::before {
+    left: -3vmin;
+    top: 1.1vmin;
+    height: 2.1vmin;
+}
+
+ul.S li.Tick::before,
+ul.S li.Cross::before {
+    left: -2.6vmin;
+    top: 0.85vmin;
+    height: 1.75vmin;
+}
+
+ul.XS li.Tick::before,
+ul.XS li.Cross::before {
+    left: -2.2vmin;
+    top: 0.7vmin;
+    height: 1.4vmin;
+}
+
+ul.XXS li.Tick::before,
+ul.XXS li.Cross::before {
+    left: -1.75vmin;
+    top: 0.5vmin;
+    height: 1.05vmin;
+}
+
+/* Content Colours & Fonts */
+p.Green,
+ul.Green,
+li.Green,
+span.Green {
+    color: var(--colourGreen)
+}
+
+p.Blue,
+ul.Blue,
+li.Blue,
+span.Blue {
+    color: var(--colourBlue);
+}
+
+p.Red,
+ul.Red,
+li.Red,
+span.Red {
+    color: var(--colourRed);
+}
+
+p.Ice,
+ul.Ice,
+li.Ice,
+span.Ice {
+    color: var(--colourIce);
+}
+
+p.Yellow,
+ul.Yellow,
+li.Yellow,
+span.Yellow {
+    color: #dfd549;
+}
+
+p.Code,
+ul.Code,
+li.Code,
+span.Code {
+    font-family: Consolas;
+}
+
+p.Left60,
+ul.Left60,
+li.Left60 {
+    width: 60%;
+}
+
+p.LeftHalf,
+ul.LeftHalf,
+li.LeftHalf {
+    width: 50%;
+}
+
+.Fadeable {
+    transition: all 0.5s ease-in-out;
+    transition-behavior: allow-discrete;
+}
+
+.FlexCols {
+    display: flex;
+    flex-direction: row;
+}
+
+.FlexRows {
+    display: flex;
+    flex-direction: column;
+}
+
+.Flex {
+    flex: 1 1 auto;
+}
+
+.Fixed {
+    flex: 0 0 auto;
+}
+
+.Expand {
+    width: 100%;
+    height: 100%;
+}
+
+.Contain {
+    width: auto;
+    height: auto;
+}
+
+.VContain {
+    width: 100%;
+    height: auto;
+}
+
+.HContain {
+    width: auto;
+    height: 100%;
+}
+
+.TextCentre {
+    text-align: center;
+}
+
+.SpacedEvenly {
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+}
+
+.Centre {
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.JustifyStart {
+    justify-content: start;
+    align-items: center;
+}
+
+.JustifyEnd {
+    justify-content: end;
+    align-items: center;
+}
+
+.PositionContents {
+    position: relative;
+    margin: auto;
+}
+
+.Gap4 {
+    gap: 4vmin;
+}
+
+.Fadeable.Show {
+    opacity: 1;
+
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.Fadeable.Hide {
+    display: none;
+    opacity: 0;
+}
+
+.PresentationButton {
+    align-self: self-end;
+    display: flex;
+    flex-direction: row;
+    width: 30vmin;
+    height: 4vmin;
+    padding: 1vmin;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1vmin;
+    font-weight: 600;
+    font-size: 2.5vmin;
+    color: #111111;
+    transition: opacity 1s ease;
+    opacity: 0;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.PresentationButton.Filled {
+    background: #42a768;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.5);
+}
+
+.PresentationButton.Filled:hover:not(.Disabled) {
+    background: #368d57;
+}
+
+.PresentationButton.Filled:active:not(.Disabled) {
+    background: #2c7749;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.5);
+}
+
+.PresentationButton.Show {
+    opacity: 1;
+}
+
+.PresentationButton.Disabled {
+    opacity: 0.5;
+    box-shadow: none;
+}
+
+.DiagramContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    height: 90vmin;
+}
+
+.Diagram {
+    width: 80vmin;
+    height: 80vmin;
+    position: relative;
+}
+
+.DiagramFont {
+    font-family: "Alpha Echo";
+    white-space: nowrap;
+    text-align: center;
+}
+
+.SolveIcon {
+    position: absolute;
+    bottom: 2vmin;
+    left: 2vmin;
+    width: 4vmin;
+    height: 4vmin;
+    background-image: url("../assets/svg/puzzle.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(393%) hue-rotate(228deg) brightness(108%) contrast(102%);
+    transition-behavior: allow-discrete;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    opacity: 0.7;
+}
+
+.SolveIcon.Hide {
+    display: none;
+    opacity: 0;
+
+}
+
+.OverlayIndicator {
+    position: absolute;
+    bottom: 2vmin;
+    right: 2vmin;
+    width: 3vmin;
+    height: 3vmin;
+    background-image: url("../assets/svg/about.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(393%) hue-rotate(228deg) brightness(108%) contrast(102%);
+    opacity: 0.7;
+}
+
+.DemoPage {
+    display: flex;
+    flex-direction: column;
+    gap: 10vmin;
+    justify-content: center;
+}
+
+.DemoPage .Section {
+    display: flex;
+    flex-direction: row;
+    gap: 10vmin;
+}
+
+.ComponentVennA {
+    position: relative;
+    left: 5vmin;
+    width: 20vmin;
+    height: 20vmin;
+    background-color: var(--colourGreen);
+    border-radius: 50%;
+    mix-blend-mode: lighten;
+    opacity: 0.5;
+}
+
+.ComponentVennB {
+    position: relative;
+    left: -5vmin;
+    width: 20vmin;
+    height: 20vmin;
+    background-color: var(--colourBlue);
+    border-radius: 50%;
+    mix-blend-mode: lighten;
+    opacity: 0.5;
+}
+
+.VennALabel {
+    position: absolute;
+    text-align: center;
+    left: 25%;
+    top: 10vmin;
+    transform: translate(-50%, -50%);
+    margin: 0vmin;
+}
+
+.VennBLabel {
+    position: absolute;
+    text-align: center;
+    left: 75%;
+    top: 10vmin;
+    transform: translate(-50%, -50%);
+    margin: 0vmin;
+}
+
+.VennABLabel {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    top: 10vmin;
+    transform: translate(-50%, -50%);
+    margin: 0vmin;
+}
+
+.PresentationTitle {
+    color: #ffffff;
+    padding: 0vmin 10vmin 0vmin 10vmin;
+    font-size: 8vmin;
+    text-align: center;
+    font-family: "Alpha Echo";
+    position: relative;
+}
+
+.PresentationTitleWTF {
+    color: var(--colourYellow);
+    padding: 0vmin 0vmin 0vmin 0vmin;
+    font-size: 20vmin;
+    text-align: center;
+    font-family: "Italian Revolution";
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    transform: translateY(-62%) translateX(0%) rotateZ(7deg);
+    text-shadow: 2px 5px 8px #000000;
+    transition: all 0.5s ease-in;
+}
+
+.PresentationTitleWTF.OffScreen {
+    transform: scale(10) translate(-25%, -100%);
+}
+
+.PresentationSubtitle {
+    color: var(--colourGreen);
+    padding: 0vmin 0vmin 0vmin 0vmin;
+    font-size: 4vmin;
+    text-align: center;
+    transition: all 0.5s ease-in-out 1.0s;
+    opacity: 1;
+}
+
+.PresentationSubtitle.Hide {
+    opacity: 0;
+    transition: all 0.5s ease-in-out 0s;
+}
+
+.Shake {
+    animation: Shake 0.3s 0.4s;
+}
+
+.Luca {
+    height: 42vmin;
+    width: 30vmin;
+    background-image: url("../assets/images/Luca.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.LucaSq {
+    height: 20vmin;
+    width: 20vmin;
+    background-image: url("../assets/images/Luca.jpg");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.LucaQR {
+    height: 20vmin;
+    width: 20vmin;
+    background-image: url("../assets/images/LucaQR.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.Solomon {
+    height: 42vmin;
+    width: 30vmin;
+    background-image: url("../assets/images/Solomon.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.SolomonSq {
+    height: 20vmin;
+    width: 20vmin;
+    background-image: url("../assets/images/Solomon.jpg");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.SolomonQR {
+    height: 20vmin;
+    width: 20vmin;
+    background-image: url("../assets/images/SolomonQR.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.Taptu {
+    height: 10vmin;
+    width: 30vmin;
+    background-image: url("../assets/svg/TaptuOnDark.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.Square {
+    height: 20vmin;
+    width: 20vmin;
+    background-color: var(--colourCharcoal);
+    box-sizing: border-box;
+    padding: 1vmin 2.5vmin 1vmin 2.5vmin;
+}
+
+.Square.TaptuSq {
+    background-image: url("../assets/svg/TaptuOnDark.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.Square.HFoHSq {
+    background-image: url("../assets/svg/HFoH.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+}
+
+.TaptuQR {
+    height: 20vmin;
+    width: 20vmin;
+    background-image: url("../assets/images/TaptuQR.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.HFoH {
+    height: 10vmin;
+    width: 30vmin;
+    background-image: url("../assets/svg/HFoH.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.Gap5 {
+    gap: 5vmin;
+}
+
+.DoubleSquare {
+    height: 20vmin;
+    width: 40vmin;
+    background-color: var(--colourCharcoal);
+    box-sizing: border-box;
+    padding: 1vmin 2.5vmin 1vmin 2.5vmin;
+}
+
+.FrameworkQR {
+    height: 20vmin;
+    width: 20vmin;
+    background-image: url("../assets/images/HostlessWebFrameworkGitHubQR.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.PresoQR {
+    height: 20vmin;
+    width: 20vmin;
+    background-image: url("../assets/images/PresoGitHubQR.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.IntroPhotoContainer {
+    position: absolute;
+    display: block;
+}
+
+.IntroPhotoContainer.Container1 {
+    width: 60vmin;
+    height: 60vmin;
+    transform: translateX(-20vmin) translateY(-10vmin) rotate(-5deg);
+}
+
+.IntroPhotoContainer.Container2 {
+    width: 60vmin;
+    height: 60vmin;
+    transform: translateX(20vmin) translateY(-5vmin) rotate(4deg);
+}
+
+.IntroPhotoContainer.Container3 {
+    width: 60vmin;
+    height: 60vmin;
+    transform: translateX(0vmin) translateY(0vmin) rotate(0deg);
+}
+
+.IntroPhotoContainer.Container4 {
+    width: 60vmin;
+    height: 60vmin;
+    transform: translateX(-20vmin) translateY(5vmin) rotate(-5deg);
+}
+
+.IntroPhotoContainer.Container5 {
+    width: 50vmin;
+    height: 50vmin;
+    transform: translateX(20vmin) translateY(0vmin) rotate(4deg);
+}
+
+.IntroPhotoContainer.Container6 {
+    width: 100vmin;
+    height: 100vmin;
+    transform: translateX(0vmin) translateY(0vmin) rotate(0deg);
+}
+
+.IntroPhoto {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(5px 5px 8px #00000080);
+    opacity: 1;
+}
+
+.IntroPhoto.OffScreen {
+    opacity: 0;
+    transform: scale(2) translate(-25%, -25%);
+}
+
+.IntroPhoto.FarOffScreen {
+    opacity: 0;
+    transform: scale(4) translate(-50%, -50%);
+}
+
+.IntroPhoto.Gentle {
+    transition: all 1.0s ease-out;
+}
+
+.IntroPhoto.Crash {
+    transition: all 0.4s ease-in;
+}
+
+.IntroPhotoA {
+    width: 60vmin;
+    height: auto;
+    border-radius: 0.5vmin;
+    border-top: 3vmin solid #ffffff;
+    border-left: 1.5vmin solid #ffffff;
+    border-bottom: 8vmin solid #ffffff;
+    border-right: 1.5vmin solid #ffffff;
+}
+
+.IntroPhotoB {
+    width: 50vmin;
+    height: auto;
+    border-radius: 0.5vmin;
+    border-top: 3vmin solid #ffffff;
+    border-left: 1.5vmin solid #ffffff;
+    border-bottom: 8vmin solid #ffffff;
+    border-right: 1.5vmin solid #ffffff;
+}
+
+.IntroPhotoC {
+    width: 100vmin;
+    height: auto;
+}
+
+.PhotoScript {
+    font-family: "Bad Script";
+    font-weight: 600;
+    font-size: 3vmin;
+    position: relative;
+    top: -9.5vmin;
+    left: 6vmin;
+    color: var(--colourCharcoal);
+}
+
+.IntroPhoto.Photo6 {
+    background-image: url("../assets/images/IntroPhoto6.jpg");
+}
+
+.IntroPhoto.Photo7 {
+    background-image: url("../assets/images/Roblox.jpg");
+}
+
+.SpeechBubble {
+    position: absolute;
+    width: 15vmin;
+    height: 15vmin;
+    transition: transform 3.0s ease-in-out;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0;
+    line-height: 13vmin;
+    text-align: center;
+}
+
+.SpeechBubble.Bubble1 {
+    background-image: url("../assets/svg/speech-bubble-filled.svg");
+    transform: translateX(7vmin) translateY(-10vmin);
+}
+
+.SpeechBubble.Motion1 {
+    opacity: 1;
+    transform: translateX(14vmin) translateY(-12vmin);
+}
+
+.SpeechBubble.Bubble2 {
+    background-image: url("../assets/svg/speech-bubble-filled.svg");
+    transform: translateX(7vmin) translateY(7vmin);
+}
+
+.SpeechBubble.Motion2 {
+    opacity: 1;
+    transform: translateX(-7vmin) translateY(5vmin);
+}
+
+.SpeechBubble.Bubble3 {
+    background-image: url("../assets/svg/speech-bubble-filled.svg");
+    transform: translateX(-17vmin) translateY(-14vmin);
+}
+
+.SpeechBubble.Motion3 {
+    opacity: 1;
+    transform: translateX(-7vmin) translateY(-16vmin);
+}
+
+.SpeechBubbleText {
+    display: inline-block;
+    line-height: 1.5vmin;
+    color: #000000;
+    font-size: 1.5vmin;
+    text-align: center;
+    font-family: "Alpha Echo";
+    vertical-align: middle;
+}
+
+.IntroIcon {
+    position: absolute;
+    display: block;
+    width: 30vmin;
+    height: 30vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+}
+
+.IntroIcon.Icon1 {
+    transform: translateX(-25vmin) translateY(-25vmin);
+    background-image: url("../assets/svg/idea.svg");
+}
+
+.IntroIcon.Icon2 {
+    transform: translateX(25vmin) translateY(-15vmin);
+    background-image: url("../assets/svg/business-presentation.svg");
+}
+
+.IntroIcon.Icon3 {
+    transform: translateX(-25vmin) translateY(10vmin);
+    background-image: url("../assets/svg/game.svg");
+}
+
+.IntroIcon.Icon4 {
+    transform: translateX(25vmin) translateY(20vmin);
+    background-image: url("../assets/svg/celebration.svg");
+}
+
+.IntroIcon.Hide {
+    opacity: 0;
+}
+
+.ENCurtis {
+    width: 10vmin;
+    height: 10vmin;
+}
+
+.DDDPageBackground {
+    background-color: var(--colourDDDTan);
+    opacity: 1;
+    position: absolute;
+    transition: all 1.0s ease-in-out;
+}
+
+.DDDLogo {
+    flex: 1 1 auto;
+    margin: 15vmin 0vmin 0vmin 3vmin;
+    width: 100%;
+    max-width: 100%;
+    background-image: url("../assets/svg/DDD.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.DDDSocialsText {
+    font-family: "Segoe UI";
+    font-weight: 600;
+    color: var(--colourDDDDarkSteelBlue);
+    font-size: 4vmin;
+    margin: 2vmin 0vmin 13vmin 0vmin;
+}
+
+.DDDGoldSponsorsSection {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+}
+
+.DDDTeir2SponsorsSection {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    gap: 5vmin;
+    margin-top: 3vmin;
+}
+
+.DDDSASponsorsSection {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.DDDSilverSponsorsSection {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.DDDSupportingSponsorsSection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3vmin;
+}
+
+.DDDGoldSponsorsTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+}
+
+.DDDGoldSponsorsTitleLine {
+    border-top:1px solid var(--colourDDDTeal);
+    width: 15vmin;
+    height: 1px;
+    flex: 1 1 auto;
+}
+
+.DDDGoldSponsorsTitle {
+    color:var(--colourDDDTeal);
+    font-family: "Segoe UI";
+    font-weight: 700;
+    font-size: 5.3333vmin;
+    flex: 0 0 auto;
+}
+
+.DDDGoldSponsors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 9vmin;
+    height: 15vmin;
+}
+
+.DDDGoldSponsorLogo {
+    height: 100%;
+    width: 30vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.DDDSASponsorsTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+}
+
+.DDDSASponsorsTitleLine {
+    border-top:1px solid var(--colourDDDTeal);
+    width: 15vmin;
+    height: 1px;
+    flex: 1 1 auto;
+}
+
+.DDDSASponsorsTitle {
+    color:var(--colourDDDTeal);
+    font-family: "Segoe UI";
+    font-weight: 700;
+    font-size: 3.6vmin;
+    flex: 0 0 auto;
+}
+
+.DDDSASponsors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4vmin;
+    height: 12vmin;
+    justify-content: center;
+}
+
+.DDDSASponsorLogo {
+    height: 100%;
+    width: 15vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.DDDSilverSponsorsTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+}
+
+.DDDSilverSponsorsTitleLine {
+    border-top:1px solid var(--colourDDDTeal);
+    width: 15vmin;
+    height: 1px;
+    flex: 1 1 auto;
+}
+
+.DDDSilverSponsorsTitle {
+    color:var(--colourDDDTeal);
+    font-family: "Segoe UI";
+    font-weight: 700;
+    font-size: 3.6vmin;
+    flex: 0 0 auto;
+}
+
+.DDDSilverSponsors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8vmin;
+    height: 12vmin;
+    justify-content: center;
+}
+
+.DDDSilverSponsorLogo {
+    height: 100%;
+    width: 23vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.DDDSupportingSponsorsTitleRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vmin;
+}
+
+.DDDSupportingSponsorsTitleLine {
+    border-top:1px solid var(--colourDDDTeal);
+    width: 15vmin;
+    height: 1px;
+    flex: 1 1 auto;
+}
+
+.DDDSupportingSponsorsTitle {
+    color:var(--colourDDDTeal);
+    font-family: "Segoe UI";
+    font-weight: 700;
+    font-size: 3.6vmin;
+    flex: 0 0 auto;
+}
+
+.DDDSupportingSponsors {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12vmin;
+    height: 12vmin;
+    justify-content: center;
+}
+
+.DDDSupportingSponsorLogo {
+    height: 100%;
+    width: 16vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.UoALogo {
+    background-image: url("../assets/svg/UoA.svg");
+}
+
+.RAALogo {
+    background-image: url("../assets/svg/RAA.svg");
+    max-height: 75%;
+}
+
+.OctopusDeployLogo {
+    background-image: url("../assets/svg/OctopusDeploy.svg");
+}
+
+.MaxmineLogo {
+    background-image: url("../assets/svg/Maxmine.svg");
+}
+
+.OzRunwaysLogo {
+    background-image: url("../assets/svg/OzRunways.svg");
+}
+
+.TiimelyLogo {
+    background-image: url("../assets/images/Tiimely.jpg");
+    max-height: 75%;
+    width: 12vmin;
+}
+
+.QuoteRiteLogo {
+    background-image: url("../assets/svg/QuoteRite.svg");
+}
+
+.AligentLogo {
+    background-image: url("../assets/images/Aligent.png");
+}
+
+.RDSLogo {
+    background-image: url("../assets/svg/RDS.svg");
+}
+
+.TaptuLogo {
+    background-image: url("../assets/svg/Taptu.svg");
+}
+
+.SixPivotLogo {
+    background-image: url("../assets/svg/SixPivot.svg");
+}
+
+.IntopiaLogo {
+    background-image: url("../assets/svg/Intopia.svg");
+}
+
+.EncodeTalentLogo {
+    background-image: url("../assets/svg/EncodeTalent.svg");
+    width: 14vmin;
+}
+
+.MantelGroupLogo {
+    background-image: url("../assets/svg/MantelGroup.svg");
+}
+
+.MindExplosion {
+    position: absolute;
+    background-image: url("../assets/images/MindExplosion.jpg");
+    border-radius: 4vmin;
+    width: 50% !important;
+    height: 50% !important;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.InsertImage {
+    height: 16vmin;
+    width: 16vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.DHH {
+    background-image: url("../assets/images/DHH.jpg");
+    border-top-left-radius: 2vmin;
+    border-top-right-radius: 2vmin;
+}
+
+.Peekable{
+    transition: all 0.5s ease-in-out;
+    transition-behavior: allow-discrete;
+    background-size: cover;
+}
+
+.UnPeek {
+    max-height: 0px;
+    margin-top: 16vmin;
+}
+
+.Peek {
+    max-height: 16vmin;
+    margin-top: 0px;
+
+    @starting-style {
+        max-height:0px;
+        margin-top: 16vmin;
+    }
+}
+
+.FluxApp {
+    background-image: url("../assets/images/flux.png");
+}
+
+.TheWrongFlux {
+    background-image: url("../assets/images/TheWrongFlux.png");
+}
+
+.AmIDunning {
+    position: absolute;
+    background-image: url("../assets/images/AmIDunning.png");
+    width: 70% !important;
+    height: 70% !important;
+    border-radius: 2vmin;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.UncleBen {
+    background-image: url("../assets/images/UncleBen.jpg");
+    width: 48vmin !important;
+    height: 48vmin !important;
+    border-top-left-radius: 2vmin;
+    border-top-right-radius: 2vmin;
+    margin-top: 5vmin;
+}

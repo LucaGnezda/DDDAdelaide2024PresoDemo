@@ -1,0 +1,18 @@
+.CCDemoObservingElement{
+    display: flex;
+    width: 10vmin;
+    height: 10vmin;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(130, 123, 120, 0.8);
+    border-radius: 4vmin;
+    border: rgba(130, 123, 120, 1) 3px solid;
+}
+
+.CCDemoObservingElement.Active {
+    background-color: rgba(50, 230, 100, 0.8);   
+}
+
+.CCDemoObservingElement .ObservingElementId {
+    font-size: medium;
+}

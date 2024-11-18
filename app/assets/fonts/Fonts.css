@@ -1,0 +1,65 @@
+@font-face{
+    font-family: "Alpha Echo";
+    src: url("./alph.ttf")format("truetype");
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+}
+
+@font-face{
+     font-family: "Italian Revolution";
+     src: 
+         url("./Italian Revolution.woff")format("woff"),
+         url("./Italian Revolution.ttf")format("truetype");
+     font-weight:normal;
+     font-style:normal;
+     font-display:swap;
+ }
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/Nunito-Variable.woff2') format('woff2'),
+         url('../fonts/Nunito-Variable.woff') format('woff'),
+         url('../fonts/Nunito-Variable.ttf') format('truetype');
+    font-weight: 200 1000;
+    font-display: swap;
+    font-style: normal;
+  }
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/Nunito-VariableItalic.woff2') format('woff2'),
+         url('../fonts/Nunito-VariableItalic.woff') format('woff'),
+         url('../fonts/Nunito-VariableItalic.ttf') format('truetype');
+    font-weight: 200 1000;
+    font-display: swap;
+    font-style: italic;
+}
+
+@font-face{
+     font-family: "Bad Script";
+     src: 
+         url("./BadScript-Regular.woff")format("woff"),
+         url("./BadScript-Regular.woff2")format("woff2"),
+         url("./BadScript-Regular.ttf")format("truetype");
+     font-weight:normal;
+     font-style:normal;
+     font-display:swap;
+ }
+
+@font-face {
+     font-family: 'Segoe UI';
+     src: url('../fonts/SegUIVar.ttf') format('truetype');
+     font-weight: 200 1000;
+     font-display: swap;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'Segoe UI';
+     src: url('../fonts/SegUIVar.ttf') format('truetype');
+     font-weight: 200 1000;
+     font-display: swap;
+     font-style: italic;
+}
+

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline';" />
+
+        <!-- Styles -->
+        <link rel="stylesheet" type="text/css" href="./app/assets/fonts/Fonts.css">
+
+        <link rel="stylesheet" type="text/css" href="./app/styles/PresentationStyling.css">
+
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCBackground.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCDemoObservableElement.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCDemoObservingElement.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCFrameworkElement.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCPageContent.css">
+
+        <!-- Framework -->
+        <script defer src="./framework/scripts/customComponents/CCBase.js"></script>
+        <script defer src="./framework/scripts/customComponents/CCObservableBase.js"></script>
+
+        <script defer src="./framework/scripts/fluxPattern/Action.js"></script>
+        <script defer src="./framework/scripts/fluxPattern/Dispatcher.js"></script>
+        <script defer src="./framework/scripts/fluxPattern/Store.js"></script>
+
+        <script defer src="./framework/scripts/observables/ObservableEnums.js"></script>
+        <script defer src="./framework/scripts/observables/Observable.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableCore.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableDataEvent.js"></script>
+        <script defer src="./framework/scripts/observables/ObservablesDictionary.js"></script>
+
+        <script defer src="./framework/scripts/logging/LoggingEnums.js"></script>
+        <script defer src="./framework/scripts/logging/Log.js"></script>
+
+        <script defer src="./framework/scripts/helpers/Helpers.js"></script>
+
+        <!-- Enums -->
+        <script defer src="./app/scripts/enums/FrameworkElementState.js"></script>
+        <script defer src="./app/scripts/enums/TransitionEffects.js"></script>
+
+        <!-- ActionHandlers -->
+        <script defer src="./app/scripts/actionHandlers/AppModelActionHandler.js"></script>
+        <script defer src="./app/scripts/actionHandlers/PresentationActionHandler.js"></script>
+        <script defer src="./app/scripts/actionHandlers/DemoActionHandler.js"></script>
+
+        <!-- Bindings -->
+        <script defer src="./app/scripts/bindings/StoreToComponentBindings.js"></script>
+
+        <!-- Components -->
+        <script defer src="./app/scripts/components/CCBackground.js"></script>
+        <script defer src="./app/scripts/components/CCDemoObservableElement.js"></script>
+        <script defer src="./app/scripts/components/CCDemoObservingElement.js"></script>
+        <script defer src="./app/scripts/components/CCFrameworkElement.js"></script>
+        <script defer src="./app/scripts/components/CCPageContent.js"></script>
+
+        <!-- Services -->
+        <script defer src="./app/scripts/services/AnimatorService.js"></script>
+        <script defer src="./app/scripts/services/App.js"></script>
+        <script defer src="./app/scripts/services/AppService.js"></script>
+        <script defer src="./app/scripts/services/ComponentRegistry.js"></script>
+        <script defer src="./app/scripts/services/PageNode.js"></script>
+        <script defer src="./app/scripts/services/PresentationFactory.js"></script>
+
+        <script defer src="./app/scripts/helpers/Helpers.js"></script>
+
+        <!-- Data -->
+        <script defer src="./app/data/PresentationDefinition.js"></script>
+
+    </head>
+    <body onload="AppService.Initialise()" data-body>
+        <div id="ContentSource" class="ContentSource">
+            <data value="ddd">
+                <div class="PageContents VerticalCentreFlex">
+                    <div class="DDDLogo"></div>
+                    <p class="DDDSocialsText">#DDDAdelaide / @DDDAdelaide</p>
+                </div>
+            </data>
+            <data value="title">
+                <div class="PageContents VerticalCentreFlex" data-contents>
+                    <div class="PresentationTitle">Webapps without a server<div class="PresentationTitleWTF OffScreen" data-flyin>???</div></div>
+                    <div class="PresentationSubtitle Hide" data-subtitle>A personal JavaScript Odyssey</div>
+                </div>
+            </data>
+            <data value="dddSponsors">
+                <div class="PageContents VerticalCentreFlex">
+                    <div class="DDDGoldSponsorsSection">
+                        <div class="DDDGoldSponsorsTitleRow">
+                            <div class="DDDGoldSponsorsTitleLine"></div>
+                            <div class="DDDGoldSponsorsTitle">GOLD SPONSORS</div>
+                            <div class="DDDGoldSponsorsTitleLine"></div>
+                        </div>
+                        <div class="DDDGoldSponsors">
+                            <div class="DDDGoldSponsorLogo UoALogo"></div>
+                            <div class="DDDGoldSponsorLogo RAALogo"></div>
+                            <div class="DDDGoldSponsorLogo OctopusDeployLogo"></div>
+                        </div>
+                    </div>
+                    <div class="DDDTeir2SponsorsSection">
+                        <div class="DDDSASponsorsSection">
+                            <div class="DDDSASponsorsTitleRow">
+                                <div class="DDDSASponsorsTitleLine"></div>
+                                <div class="DDDSASponsorsTitle">SA SPONSORS</div>
+                                <div class="DDDSASponsorsTitleLine"></div>
+                            </div>
+                            <div class="DDDSASponsors">
+                                <div class="DDDSASponsorLogo MaxmineLogo"></div>
+                                <div class="DDDSASponsorLogo OzRunwaysLogo"></div>
+                                <div class="DDDSASponsorLogo TiimelyLogo"></div>
+                            </div>
+                            <div class="DDDSASponsors">
+                                <div class="DDDSASponsorLogo QuoteRiteLogo"></div>
+                                <div class="DDDSASponsorLogo AligentLogo"></div>
+                                <div class="DDDSASponsorLogo RDSLogo"></div>
+                            </div>
+                        </div>
+                        <div class="DDDSilverSponsorsSection">
+                            <div class="DDDSilverSponsorsTitleRow">
+                                <div class="DDDSilverSponsorsTitleLine"></div>
+                                <div class="DDDSilverSponsorsTitle">SILVER SPONSORS</div>
+                                <div class="DDDSilverSponsorsTitleLine"></div>
+                            </div>
+                            <div class="DDDSilverSponsors">
+                                <div class="DDDSilverSponsorLogo TaptuLogo"></div>
+                                <div class="DDDSilverSponsorLogo SixPivotLogo"></div>
+                            </div>
+                            <div class="DDDSilverSponsors">
+                                <div class="DDDSilverSponsorLogo IntopiaLogo"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="DDDSupportingSponsorsSection">
+                        <div class="DDDSupportingSponsorsTitleRow">
+                            <div class="DDDSupportingSponsorsTitleLine"></div>
+                            <div class="DDDSupportingSponsorsTitle">WITH SUPPORT FROM</div>
+                            <div class="DDDSupportingSponsorsTitleLine"></div>
+                        </div>
+                        <div class="DDDSupportingSponsors">
+                            <div class="DDDSupportingSponsorLogo EncodeTalentLogo"></div>
+                            <div class="DDDSupportingSponsorLogo MantelGroupLogo"></div>
+                        </div>
+                    </div>
+                </div>
+            </data>
+            <data value="intro1" data-hasoverlay>
+                <div class="PageTitle">Hi, it's great to meet you</div>
+                <div class="PageContents VerticalCentreFlex">
+                    <div class="FlexCols SpacedEvenly VContain">
+                        <div class="FlexRows Flex SpacedEvenly Expand"><div class="Luca"></div></div>
+                        <div class="FlexRows Flex SpacedEvenly Expand"><div class="Solomon"></div></div>
+                        <div class="FlexRows Flex FlexRows SpacedEvenly Expand">
+                            <div class="FlexCols Flex SpacedEvenly Expand"><div class="Taptu"></div></div>
+                            <div class="FlexCols Flex SpacedEvenly Expand"><div class="HFoH"></div></div>
+                        </div>
+                    </div>
+                    <div class="FlexCols SpacedEvenly VContain">
+                        <div class="FlexRows Flex SpacedEvenly Expand">
+                            <p class="XS Green">Luca Gnezda</p>
+                            <div class="LucaQR"></div>
+                        </div>
+                        <div class="FlexRows Flex SpacedEvenly Expand">
+                            <p class="XS Green">Solomon Laing</p>
+                            <div class="SolomonQR"></div>
+                        </div>
+                        <div class="FlexRows Flex JustifyEnd Expand">
+                            <div class="TaptuQR"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="intro1_overlay">
+                <div class="PageTitle">An Aside</div>
+                <div class="PageContents">
+                    <p class="L">Allow me to interject here.</p>
+                    <div class="Fadeable Hide" data-line1>
+                        <p class="M Indent1">I'm here to contrast Luca's experience, this was his brain child which he graciously invited me to explore.</p>
+                        <p class="M Indent1">Although he built this, I did help extend it, and I learnt a bunch along the way.</p>
+                    </div>
+                    <p class="L Fadeable Hide" data-line2="">How?</p>
+                    <div class="Fadeable Hide" data-line3>
+                        <p class="M Indent1">I'll pipe up every now and then and insert some interesting idea, note or learning from this experience.</p>
+                        <p class="M Indent1">Hopefully you'll all get a chuckle or two out of it.</p>
+                    </div>
+                    <p class="Fadeable Hide L Green" data-line4>Let's Go!</p>
+                </div>
+            </data>
+            <data value="intro2">
+                <div class="PageTitle" data-shake>And so it begins...</div>
+                <div class="PageContents VerticalCentreFlex PositionContents" data-contents data-shake>
+                    <div class="IntroPhotoContainer Container1 OffScreen"><div class="IntroPhoto Gentle" data-photo1><img class="IntroPhotoA" src="./app/assets/images/IntroPhoto1.jpg"><p class="PhotoScript">NZ & Skiing</p></div></div>
+                    <div class="IntroPhotoContainer Container2 OffScreen"><div class="IntroPhoto Gentle" data-photo2><img class="IntroPhotoA" src="./app/assets/images/IntroPhoto2.jpg"><p class="PhotoScript">Lego Projects</p></div></div>
+                    <div class="IntroPhotoContainer Container3 OffScreen"><div class="IntroPhoto Gentle" data-photo3><img class="IntroPhotoA" src="./app/assets/images/IntroPhoto3.jpg"><p class="PhotoScript">Soccer / Adelaide United</p></div></div>
+                    <div class="IntroPhotoContainer Container4 OffScreen"><div class="IntroPhoto Gentle" data-photo4><img class="IntroPhotoA" src="./app/assets/images/IntroPhoto4.jpg"><p class="PhotoScript">Japan!</p></div></div>
+                    <div class="IntroPhotoContainer Container5 OffScreen"><div class="IntroPhoto Gentle" data-photo5><img class="IntroPhotoB" src="./app/assets/images/IntroPhoto5.jpg"><p class="PhotoScript">D&D</p></div></div>
+                    <div class="IntroPhotoContainer Container6 FarOffScreen"><div class="IntroPhoto Photo6 Crash" data-photo6></div></div>
+                    <div class="SpeechBubble Bubble1" data-motion1><span class="SpeechBubbleText">Go away,<br/>I'm busy</span></div>
+                    <div class="SpeechBubble Bubble2" data-motion2><span class="SpeechBubbleText">No, I don't<br/>want to<br/>leave<br/>my room</span></div>
+                    <div class="SpeechBubble Bubble3" data-motion3><span class="SpeechBubbleText">*GRUNT*</span></div>
+                </div>
+            </data>
+            <data value="intro3">
+                <div class="PageTitle">I know what we'll do...</div>
+                <div class="PageContents VerticalCentreFlex PositionContents">
+                    <div class="IntroIcon Icon1 Hide" data-icon1></div>
+                    <div class="IntroIcon Icon2 Hide" data-icon2></div>
+                    <div class="IntroIcon Icon3 Hide" data-icon3></div>
+                    <div class="IntroIcon Icon4 Hide" data-icon4></div>
+                </div>
+            </data>
+            <data value="intro4" data-hasoverlay>
+                <div class="PageTitle">The rules...</div>
+                <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">A coding environment that's highly interactive, rewards quickly, uses common tech, is easy to learn, and without any of the developer complexities that get in the way of a good time.</p>
+                    <ul class="M">
+                        <li class="Tick">Let's use HTML, CSS & JavaScript.</li>
+                    </ul>
+                    <p class="L">But we'll go back to the basics. This means:</p>
+                    <ul class="M">
+                        <li class="Cross">No servers. It should run perfectly from the local filesystem.</li>
+                        <li class="Cross">No build steps. The experience should be edit > save > run.</li>
+                        <li class="Cross">No external libraries. Everything must be self-contained so they can gradually learn the whole.</li>
+                    </ul>
+                    <p class="L">But this  means:</p>
+                    <ul class="M">
+                        <li class="Cross">No package imports.</li>
+                        <li class="Cross">No TypeScript.</li>
+                        <li class="Cross">No GitHub repo shortcuts</li>
+                    </ul>
+                    <p class="L Blue">Far out ... where do I even begin?</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="intro4_overlay">
+                <div class="PageTitle">Off to a good start!</div>
+                <div class="PageContents">
+                    <p class="L">I'm an Angular developer, I usually use VS Code and Neovim btw, I'm used to Typescript, Types, an LSP.</p>
+                    <p class="L Yellow Fadeable Hide" data-line1>Hold Up! Your telling me...</p>
+                    <div class="FlexCols">
+                        <div class="Flex">
+                            <p class="M Indent1 Fadeable Hide" data-line2>No building? What even is that? How does one... No Build?</p>
+                            <p class="M Indent1 Fadeable Hide" data-line2>Just plain old javascript? Isn't that like some ancient runic alphabet?</p>
+                            <p class="M Indent1 Fadeable Hide" data-line2>And that means, no type checking?!?</p>
+                            <p class="M Indent1 Fadeable Hide" data-line2>So what do I do?</p>
+                        </div>
+                        <div class="Flex">
+                            <div class="DHH InsertImage Peekable UnPeek" data-peek1></div>
+                        </div>
+                    </div>
+                    <p class="L Green Fadeable Hide" data-line3>JSDoc!</p>
+                </div>
+            </data>
+            <data value="logging1" data-hasoverlay>
+                <div class="PageTitle">Logging</div>
+                <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We need to be able to figure out what's going on in the code; tracing, debugging and reporting errors, with well formatted and categorised console output.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li class="Tick">Not hard, do it now, while debugging observables.</li>
+                        <li class="Tick">Adding it everywhere later will be a real drag.</li>
+                    </ul>
+                    <p class="L"><b>Simply put:</b></p>
+                    <ul class="M">
+                        <li>A drop in replacement for <span class="Ice Code">console.log()</span>.</li>
+                        <li>Switchable logging levels</li>
+                    </ul>
+                    <p class="L">Easy .. we'll be done by lunchtime.</p>
+                    <p class="M Indent1 Green">Let's take a look at the result.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="logging1_overlay">
+                <div class="PageTitle">Types and Errors</div>
+                <div class="PageContents">
+                    <p class="L">Null Checking?</p>
+                    <ul class="M">
+                        <li>JSDoc forced the catching of a bunch of potential null errors.</li>
+                        <li>We caught them all, then realised that we were introducing some undefined behaviours.
+                            <p class="S Ice Code Indent1">App.bootstrap();</p>
+                            <p class="S Ice Code Indent1">if (!App.store) {</p>
+                            <p class="S Ice Code Indent2">// what should happen here?</p>
+                            <p class="S Ice Code Indent1">}</p>
+                            <p class="S Ice Code Indent1">// continue program (with the assumption the store is initialised)</p>
+                        </li>
+                    </ul>
+                    <p class="L">Javascript, now with <span class="Code">Log.fatal()</span>!</p>
+                    <ul>
+                        <li>In some cases, you actually want things to fail (bootstrapping, etc).</li>
+                        <li>So why not extend the Logging to include a fatal option which throws.
+                            <p class="S Ice Code Indent1">Log.fatal("An error has occured", "the category of the error", &lt;some object&gt;); // we decided this should</p>
+                        </li>
+                    </ul>
+                </div>
+            </data>
+            <data value="components1">
+                <div class="PageTitle">Components</div>
+                <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We want to handle patterned elements of user interface in a consistent way.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <div class="FlexCols">
+                        <div class="Flex">
+                            <ul class="M">
+                                <li>There are two component types that can functionally overlap.</li>
+                                <ul class="S">
+                                    <li>Those that consume and present data.</li>
+                                    <li>Those that respond to the user and propagate events.</li>
+                                </ul>
+                                <li>They need to encapsulate and abstract away presentation logic.</li>
+                                <li>But shouldn't be application logic or application data aware.</li>
+                                <li class="Tick">Yes, there is a piece of magic we can use ... Custom Elements.</li>
+                            </ul>
+                        </div>
+                        <div class="Fixed PositionContents FlexCols">
+                            <div class="ComponentVennA"></div>
+                            <div class="ComponentVennB"></div>
+                            <p class="XXS VennALabel">Consume &<br/>Present</p>
+                            <p class="XXS VennABLabel">Both</p>
+                            <p class="XXS VennBLabel">Respond &<br/>Propagate</p>
+                        </div>
+                    </div>
+                    <p class="L"><b>Simply put:</b></p>
+                    <ul class="M">
+                        <li>We can define our own html tags, attaching logic via a paired class that inherits from HTMLElement.</li>
+                        <li>All we need to do is register the tag and class pair with the window object.</li>
+                    </ul>
+                    <p class="L">Easy .. we'll be done by lunchtime.</p>
+                </div>
+            </data>
+            <data value="components2" data-hasoverlay>
+                <div class="PageTitle">Components</div>
+                <div class="PageContents">
+                    <p class="L">Hmmm ...</p>
+                    <ul class="M">
+                        <li class="Cross">Yes, custom elements have attributes that can be observable, but that's no good for handling complex data.
+                            <p class="XS Ice Code Indent1">&lt;cc-myelement myattribute="foo"&gt;</p>
+                        </li>
+                        <li class="Tick">Oh wait ... we've solved this already... Observables to the rescue again.
+                            <p class="XS Ice Code Indent1">myelement.observableData.equipment = {...}</p>
+                        </li>
+                        <li class="Cross">But that's a lot of observable boilerplate, the kids won't follow that.</li>
+                        <li class="Tick">Oh wait ... Base classes to the rescue.</li>
+                        <li class="Cross">What you can't initialise the element's inner html in the constructor?</li>
+                        <li class="Tick">Oh I see ... we're supposed to use a render pattern against callback events.
+                            <p class="XS Ice Code Indent1">connectedCallback() {</p>
+                            <p class="XS Ice Code Indent2">render();</p>
+                            <p class="XS Ice Code Indent1">}</p>
+                        </li>
+                        <li class="Tick">Which is actually awesome, because the observable data change callback can follow the same pattern.</li>
+                    </ul>
+                    <p class="L">A mere weekend later ... </p>
+                    <p class="M Indent1 Green">Let's take a look at the result.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="components2_overlay">
+                <div class="PageTitle">The Importance of Foundations</div>
+                <div class="PageContents">
+                    <p class="L Fadeable" data-line1>Skill Issue?</p>
+                    <p class="M Indent1 Fadeable" data-line1>I'm a framework Andy.</p>
+                    <p class="M Indent1 Fadeable" data-line1>I had no idea custom components existed.</p>
+                    <p class="M Indent1 Fadeable" data-line1>They are a tool I would never have reached for.</p>
+                    <p class="L Fadeable" data-line1>Where I find Joy.</p>
+                    <p class="M Indent1 Fadeable" data-line1>Exploration and experimentation.</p>
+                    <p class="M Indent1 Fadeable" data-line1>Maybe make a framework? Or not.</p>
+                    <p class="M Indent1 Fadeable" data-line1>Plain old Javascript to do some pretty amazing stuff. Who knew?</p>
+                    <div class="MindExplosion InsertImage Hide Fadeable" data-line2></div>
+                </div>
+            </data>
+            <data value="observables1" data-hasoverlay>
+                <div class="PageTitle">Observables</div>
+                <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We want to be able to identify some data structures as observable. The data should be able to take any form, and when changed, should fire events in response, describing that change.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li class="Cross">There isn't a simple JavaScript answer for this.</li>
+                        <li class="Tick">But there is a piece of magic we can use ... Proxies.</li>
+                    </ul>
+                    <p class="L"><b>Simply put:</b></p>
+                    <ul class="M">
+                        <li>A proxy is a smart object used in place of your original object.</li>
+                        <li>Gives us the ability to intercept key actions such as get and set.</li>
+                        <li>Proxies effectively wrap the original object, and its interceptors allow us to to clever things as the underlying object is accessed and manipulated.</li>
+                    </ul>
+                    <p class="L">Easy .. we'll be done by lunchtime.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="observables1_overlay">
+                <div class="PageTitle">The Man in The Middle</div>
+                <div class="PageContents">
+                    <div class="FlexCols">
+                        <div class="Flex">
+                            <p class="L">So, Proxies.</p>
+                            <p class="M Indent1">Yeah, I have no idea either.</p>
+                            <p class="M Indent1">Isn't a proxy a networking concept?</p>
+                            <p class="M Indent1">I know what a reverse proxy is... </p>
+                            <p class="M Indent1">I guess I'll look this up later.</p>
+                            <p class="L Green Fadeable Hide" data-line1>Proxies are Magic!</p>
+                            <p class="M Indent1 Fadeable Hide" data-line1>They're extremely powerful.</p>
+                            <p class="M Indent1 Fadeable Hide" data-line2>Something about power and responsibility...</p>
+                            <p class="M Indent1 Fadeable Hide" data-line3>They are notoriously frustrating to debug.</p>
+                        </div>
+                        <div class="Flex">
+                            <div class="UncleBen InsertImage Fadeable Hide" data-line2></div>
+                        </div>
+                    </div>
+                </div>
+            </data>
+            <data value="observables2" data-hasoverlay>
+                <div class="PageTitle">Observables</div>
+                <div class="PageContents">
+                    <p class="L">Ha, not even close...</p>
+                    <p class="L">It needs to:</p>
+                    <ul class="M">
+                        <li class="Tick">Feel like a standard data structure.</li>
+                        <li class="Tick">Handle nested structures and arrays... in fact, anything we might want to put there.</li>
+                        <li class="Tick">Handle subscribing objects and their callbacks.</li>
+                        <li class="Tick">Pass back informative events about what's changing.</li>
+                        <li class="Tick">Handle immediate, batch and force trigger notifications.</li>
+                        <li class="Tick">Be able to be disabled, so it can stay silent during initialisation.</li>
+                        <li class="Tick">Only fire events when real changes occur.</li>
+                    </ul>
+                    <p class="L">And most importantly of all...</p>
+                    <ul class="M">
+                        <li class="Tick">Package it up into a nice, neat, easy to use solution the kids will be able to figure out.</li>
+                    </ul>
+                    <p class="L">A mere two weekends later ... </p>
+                    <p class="M Indent1 Green">Let's take a look at the result.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="observables2_overlay">
+                <div class="PageTitle">Deep Compare in Javascript</div>
+                <div class="PageContents">
+                    <p class="L">That's doing some pretty heavy lifting, isn't it?</p>
+                    <ul class="L">
+                        <li class="Tick"><span class="Blue">"Only fire events when real changes occur."</span></li>
+                    </ul>
+                    <p class="L">Yes, yes it is.</p>
+                    <p class="L">The issues:</p>
+                    <ul class="M">
+                        <li>We need to be able to track whether an object has changed.</li>
+                        <li>We don't want to propegate changes on every set, only on actual value updates.</li>
+                        <li>Do we actually need a proper deep compare implementation?</li>
+                        <li class="Fadeable Hide" data-line1>No we don't.</li>
+                    </ul>
+                    <p class="Fadeable Hide L" data-line2>Observe (hehe) the following:</p>
+                    <div class="Fadeable Hide" data-line3>
+                        <p class="S Indent1"><span class="Ice Code ">const allKeys = new Set();</span> <span class="Fadeable Hide" data-line4>← Removes duplicates and gives us something to make into an array.</span></p>
+                        <p class="S Indent1"><span class="Ice Code ">JSON.stringify(obj, (key, _) => (allKeys.add(key), key));</span> <span class="Fadeable Hide" data-line5>← Populates the set (some trickery here with the replacer).</span></p>
+                        <p class="S Indent1"><span class="Ice Code ">return JSON.stringify(obj, Array.from(allKeys).sort());</span> <span class="Fadeable Hide" data-line6>← Returns a JSON string of all props (and sub props) in lexicographical order.</span></p>
+                    </div>
+                    <p class="Fadeable Hide L Green Indent3" data-line7>MAGIC!</p>
+                </div>
+            </data>
+            <data value="store1">
+                <div class="PageTitle">Store</div>
+                <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We now want to use observables manage data in our app. We should be able to organise our data across any number of structures, both singular and as individualised named collections.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li>Not too hard, now we have our fancy observables building blocks.</li>
+                        <li>But we still need to set it up in a clean, easy to use form.</li>
+                    </ul>
+                    <p class="L">It needs to:</p>
+                    <ul class="M">
+                        <li class="Tick">Expose the subscription functionality.</li>
+                        <li class="Tick">Expose the Notification Mode (Batch, Immediate, Forced) functionality.</li>
+                        <li class="Tick">Expose the Notification Status (Active, Inactive) functionality.</li>
+                        <li class="Tick">Have a dictionary form, for things like list collections.</li>
+                        <li class="Tick">Have a single object form. that can hold properties, arrays, and the like.</li>
+                    </ul>
+                    <p class="L">Easy .. we'll be done by lunchtime.</p>
+                </div>
+            </data>
+            <data value="store2">
+                <div class="PageTitle">Store</div>
+                <div class="PageContents">
+                    <p class="L">Well after some debugging... a mere weekend later, we can:</p>
+                    <ul class="M">
+                        <li>Define a store.
+                            <p class="XS Ice Code Indent1">App.store = new Store();</p>
+                        </li>
+                        <li>Instantiate named observables within the store
+                            <p class="XS Ice Code Indent1">App.store.addObservables("Settings");</p>
+                            <p class="XS Ice Code Indent1">App.store.Settings.observableData.logLevel = {...};</p>
+                        </li>
+                        <li>Instantiate named dictionaries, as a collection of named observables within the store.
+                            <p class="XS Ice Code Indent1">App.store.addObservablesDictionary("ForniteTeam");</p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam.add("EllaSmella");</p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam.add("DrV");</p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam.add("Aga007");</p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam["Aga007"].observableData.equipment = {...};</p>
+                        </li>
+                        <li>Subscribe
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam["DrV"].addSubscriber(MyComponent, OnDataChange_Callback);</p>
+                        </li>
+                        <li>Emit
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam.emitNotifications(); <span class="XS Green Code Indent1"> // if set to manual</span></p>
+                            <p class="XS Ice Code Indent1">App.store.ForniteTeam["Aga007"].observableData.equipment = {...}; <span class="XS Green Code Indent1">// when immediate</span></p>
+                        </li>
+                    </ul>
+                    <p class="M Indent1 Green">Let's take a look at the result.</p>
+                </div>
+            </data>
+            <data value="eventBinding1">
+                <div class="PageTitle">Event Bindings</div>
+                <div class="PageContents">
+                    <p class="L">Ok ... but where do we get the actions from?</p>
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We need a way of separating concerns between components and the dispatcher (neither should need to know about the other), while still being able to trigger actions.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li>Callbacks ... to the rescue!</li>
+                        <li>As long as we build our components to accept custom callbacks, and we pass relevant information to these callbacks, then these can act as adapters between the two.</li>
+                        <li>Even better, the dispatcher can autogenerate generic callbacks for us, that can bind to anything. For example,
+                            <p class="XS Ice Code Indent1">MyComponent.changeWeaponCallback = App.dispatcher.newEventDispatchCallback("ChangeWeapon");<span class="XS Green Code Indent1"> // for simple events</span></p>
+                            <p class="XS Ice Code Indent1">MyComponent.changeWeaponCallback = App.dispatcher.newArgsDispatchCallback("ChangeWeapon");<span class="XS Green Code Indent1"> // for more custom data</span></p>
+                        </li>
+                </div>
+            </data>
+            <data value="dispatchActionHandling1" data-hasoverlay>
+                <div class="PageTitle">Logic & Flow Control</div>
+                <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We want logic to sit between UI events and the store. Let's go retro and recreate a Facebook Flux inspired pattern. I've never had a chance to use the OG, let alone build one.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li>Circa 2013 Facebook was struggling with multiple UI elements needing access to singleton data.</li>
+                        <li>So, they invented Flux, essentially a cyclic event/action based flow control.</li>
+                        <li>I'm going to add a little twist and formalise the boundary between the store and logic.</li>
+                        <li>Actually, when you break it down ... it starts to feel like old school late 90s C++ windows event loop programming.</li>
+                    </ul>
+                    <p class="L"><b>Simply put:</b></p>
+                    <ul class="M">
+                        <li>When an event fires, we convert this into an <span class=Green>Action</span> (more about this in a moment).</li>
+                        <li>We <span class=Green>Dispatch</span> this action to all active Handlers (logic modules in front of parts of the store).</li>
+                        <li>Each <span class=Green>Handler</span> decides what it wants to do with the action, updating store items as required.</li>
+                    </ul>
+                    <p class="L">Easy .. we'll be done by lunchtime.</p>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="dispatchActionHandling1_overlay">
+                <div class="PageTitle">Yup, it's a skill issue...</div>
+                <div class="PageContents">
+                    <p class="L">I don't mean to be a broken record here but...</p>
+                    <div class="FlexCols">
+                        <div class="Flex">
+                            <p class="L">Which flux?</p>
+                            <p class="M Indent1">No, not the nightlight...</p>
+                            <p class="M Indent1">I've done some soldering before, but I doubt that's what he means.</p>
+                            <p class="L Fadeable Hide" data-line1>Consider me humbled.</p>
+                            <p class="M Indent1 Fadeable Hide" data-line1>I thought I knew a lot more than I do.</p>
+                            <p class="M Indent1 Fadeable Hide" data-line1>For more see, Dunning & Kruger (1999).</p>
+                            <p class="L Fadeable Hide" data-line2>I relish the opportunity to learn.</p>
+                        </div>
+                        <div class="FlexRows Gap4">
+                            <div class="FluxApp InsertImage Peekable UnPeek" data-peek1></div>
+                            <div class="TheWrongFlux InsertImage Peekable UnPeek" data-peek2></div>
+                        </div>
+                    </div>
+                    <div class="AmIDunning InsertImage Fadeable Hide" data-hide1></div>
+                </div>
+            </data>
+            <data value="dispatchActionHandling2">
+                <div class="PageTitle">Dispatching Actions</div>
+                <div class="PageContents">
+                    <p class="L">Ok, I'm having fun with this ...</p>
+                    <ul class="M">
+                        <li>Create a dispatcher class that we can instantiate
+                            <p class="XS Ice Code Indent1">App.dispatcher = new Dispatcher();</p>
+                        </li>
+                        <li>Allow store handlers to register as listeners, with the function name to be called
+                            <p class="XS Ice Code Indent1">App.dispatcher.addDispatchHandler(new MyActionHandler(), "route");</p>
+                        </li>
+                        <li>Define an action, which has a type and a payload from the event (or other info we want to pass in).
+                            <p class="XS Ice Code Indent1">let action = new Action(actionType, payload);</p>
+                        </li>
+                        <li>Define a dispatch method that will pass actions to all the registered handlers
+                            <p class="XS Ice Code Indent1">App.dispatcher.dispatch(action);</p>
+                        </li>
+                    </ul>
+                </div>
+            </data>
+            <data value="dispatchActionHandling3">
+                <div class="PageTitle">Handling Actions</div>
+                <div class="PageContents">
+                    <p class="L">Which makes each handler just an implementation specific for each application ...</p>
+                    <ul class="M">
+                        <li>Define a handler class
+                            <p class="XS Ice Code Indent1">class MyActionHandler { ... }</p>
+                        </li>
+                        <li>add a routing method into the handler class
+                            <p class="XS Ice Code Indent1">route(action) {</p>
+                            <p class="XS Ice Code Indent2">switch (action.type) {
+                            <p class="XS Ice Code Indent3">case "ChangeWeapon": this.changeWeapon(action.payload); break;
+                            <p class="XS Ice Code Indent3">...</p>
+                            <p class="XS Ice Code Indent2">}</p>
+                            <p class="XS Ice Code Indent1">}</p>
+                        </li>
+                        <li>Then add logic methods that do things
+                            <p class="XS Ice Code Indent1">changeWeapon(payload) {</p>
+                            <p class="XS Ice Code Indent2">App.store.fortniteTeam["EllaSmella"].observableData.weapon = payload.weapon;
+                            <p class="XS Ice Code Indent2">App.store.emitNotifications();
+                            <p class="XS Ice Code Indent1">}</p>
+                        </li>
+                    </ul>
+                </div>
+            </data>
+            <data value="dataBinding1">
+                <div class="PageTitle">Data Binding</div>
+                <div class="PageContents">
+                    <p class="L"><b>Goal:</b></p>
+                    <p class="L Green">We also need a way of separating concerns between components and the store (neither should need to know about the other), while still being able to respond to store updates.</p>
+                    <p class="L"><b>Key points:</b></p>
+                    <ul class="M">
+                        <li>Callbacks ... to the rescue!</li>
+                        <li>As long as we build our components to accept custom callbacks, and these are what we register with the store, then these can act as adapters between the two.</li>
+                        <li>For example
+                            <p class="XS Ice Code Indent1">App.store.fortniteTeam["Aga007"].addSubscriber(MyComponent, TeamMember_OnDataChange);<span class="XS Green Code Indent1"> // for simple events</span></p>
+                        </li>
+                        <li>and
+                            <p class="XS Ice Code Indent1">TeamMember_OnDataChange() {</p>
+                            <p class="XS Green Code Indent2">// copy each store property across to the component</p>
+                            <p class="XS Ice Code Indent2">for (let [key, value] of Object.entries(this.observableData)) {</p>
+                            <p class="XS Ice Code Indent3">this.observableData[key] = event.originatingObject.observableData[key];</p>
+                            <p class="XS Ice Code Indent2">}</p>
+                            <p class="XS Ice Code Indent1">}</p>
+                        </li>
+                    </ul>
+                </div>
+            </data>
+            <data value="hub">
+                <div class="PageTitle">Designing a WebApp For Fun</div>
+                <div class="PageContents DiagramContainer">
+                    <div id="AppModel" class="Diagram"></div>
+                    <div id="SolveIcon" class="SolveIcon"></div>
+                </div>
+            </data>
+            <data value="demo" data-hasoverlay>
+                <div class="PageTitle">Demo</div>
+                <div class="PageContents DemoPage">
+                    <div class="DemoPage Section">
+                        <cc-demoObservableElement id="DemoObservableElement"></cc-demoObservableElement>
+                    </div>
+                    <div class="DemoPage Section">
+                        <cc-demoObservingElement id="DemoObservingElement1" [data-input-threshold]="3" [data-input-color]="red"></cc-demoObservingElement>
+                        <cc-demoObservingElement id="DemoObservingElement2" [data-input-threshold]="5" [data-input-color]="blue"></cc-demoObservingElement>
+                        <cc-demoObservingElement id="DemoObservingElement3" [data-input-threshold]="7" [data-input-color]="green"></cc-demoObservingElement>
+                    </div>
+                </div>
+                <div class="OverlayIndicator"></div>
+            </data>
+            <data value="demo_overlay">
+                <div class="PageTitle">This Demo</div>
+                <div class="PageContents">
+                    <p class="L">The goal here is to exemplify the systems working.</p>
+                    <p class="M">The setup.</p>
+                    <ul class="S">
+                        <li>This example shows two components.</li>
+                        <li>1 instance of an <span class="Blue">observable</span> input component.</li>
+                        <li>3 instances of <span class="Blue">observing</span> output component.</li>
+                    </ul>
+                    <p class="M">Running it.</p>
+                    <ul class="S">
+                        <li>The observable component connects to the store and updates it.</li>
+                        <li>The observable component also handles its own internal observable state.</li>
+                        <li>The observing components each take two inputs, one for a trigger value, another for colour.</li>
+                    </ul>
+                </div>
+            </data>
+            <data value="outro1">
+                <div class="PageTitle" data-shake>Let's tell the kids!</div>
+                <div class="PageContents VerticalCentreFlex PositionContents" data-contents data-shake>
+                    <div class="IntroPhotoContainer Container1 OffScreen"><div class="IntroPhoto Gentle" data-photo1><img class="IntroPhotoA" src="./app/assets/images/Grunthal.png"><p class="PhotoScript">Lunch @ Grunthal, Verdun</p></div></div>
+                    <div class="IntroPhotoContainer Container6 FarOffScreen"><div class="IntroPhoto Photo7 Crash" data-photo2></div></div>
+                </div>
+            </data>
+            <data value="outro2">
+                <div class="PageTitle">So what is the moral of this story?</div>
+                <div class="PageContents Inset">
+                    <ol class="L">
+                        <li class="Fadeable Hide" data-line1>Teenage years are rough on everyone.</li>
+                        <li class="Fadeable Hide" data-line2>Sometimes journeys take you where you should be, rather than where you're trying to go.</li>
+                        <li class="Fadeable Hide" data-line3>There are some awesome parts of JavaScript, that can get overlooked, when we build everything with advanced commercial frameworks.</li>
+                        <li class="Fadeable Hide" data-line4>We can sometimes forget the simple love of our craft, when everything we build is work related</li>
+                        <li class="Fadeable Hide" data-line5>But when we immerse ourselves in that craft for a personal pursuit, there is a deeper appreciation, understanding, and joy to be found.</li>
+                    </ol>
+                    <p class="L Fadeable Hide" data-line6>So, let me close with a fitting quote from another who loves their craft.</p>
+                    <div class="FlexCols Gap5 Centre Fadeable Hide"  data-line7>
+                        <div>
+                            <img src="./app/assets/images/ENCurtis.jpg" class="ENCurtis">
+                        </div>
+                        <div class="TextCentre">
+                            <p class="L Yellow">"Go make a thing."</p>
+                            <p class="XXS Yellow">Eric Curtis - Woodworker, Artist, Educator, YouTuber, Chucklehead</p>
+                        </div>
+                    </div>
+                </div>
+            </data>
+            <data value="outro3">
+                <div class="PageTitle">Thank you & Q&A</div>
+                <div class="PageContents VerticalCentreFlex">
+                    <div class="FlexCols SpacedEvenly VContain">
+                        <div class="FlexRows SpacedEvenly VContain Gap5">
+                            <div class="FlexCols Flex JustifyStart Expand"><div class="LucaSq"></div><div class="LucaQR"></div><div class="Square"><p class="S">Luca<br/>Gnezda</p></div></div>
+                            <div class="FlexCols Flex JustifyStart Expand"><div class="SolomonSq"></div><div class="SolomonQR"></div><div class="Square"><p class="S">Solomon<br/>Laing</p></div></div>
+                            <div class="FlexCols Flex JustifyStart Expand"><div class="Square TaptuSq"></div><div class="TaptuQR"></div><div class="Square HFoHSq"></div></div>
+                        </div>
+                        <div class="FlexRows SpacedEvenly VContain Gap5">
+                            <div class="FlexCols Flex JustifyEnd Expand">
+                                <div class="DoubleSquare">
+                                    <p class="S Densest">
+                                        <span class="Green">A Hostless Web Framework</span><br/>
+                                        <span class="XXS">GitHub Project</span>
+                                    </p>
+                                    <p class="XS Green">The code described today.</p>
+                                    <p class="XS Green">Yours to enjoy or share with as you wish.</p>
+                                </div>
+                                <div class="FrameworkQR"></div>
+                            </div>
+                            <div class="FlexCols Flex JustifyEnd Expand">
+                                <div class="DoubleSquare">
+                                    <p class="S Densest">
+                                        <span class="Green">(This) Presentation Codebase</span><br/>
+                                        <span class="XXS">GitHub Project</span>
+                                    </p>
+                                    <p class="XS Green">An example using the framework above.</p>
+                                </div>
+                                <div class="PresoQR"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </data>
+        </div>
+        </data>
+        <div class="CCPresentationRoot">
+            <div id="BackgroundsContainer" class="PresentationBackgroundsContainer Hide"></div>
+            <div id="PagesContainer" class="PresentationPagesContainer Hide"></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,106 @@
+cc-background {
+    display: contents;
+}
+
+.CCBackgroundRoot {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: -0%;
+    top: -0%;
+    overflow: hidden;
+    opacity: 1;
+    transition-behavior: allow-discrete;
+}
+
+.CCBackgroundRoot.WithFadeIn {
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.CCBackgroundRoot.WithFadeOut {
+    opacity: 0;
+}
+
+.CCBackgroundRoot.EnterFromLeft {
+    @starting-style {
+        left: -100%;
+    }
+}
+
+.CCBackgroundRoot.EnterFromRight {
+    @starting-style {
+        left: 100%;
+    }
+}
+
+.CCBackgroundRoot.EnterFromTop {
+    @starting-style {
+        top: -100%;
+    }
+}
+
+.CCBackgroundRoot.EnterFromBottom {
+    @starting-style {
+        top: 100%;
+    }
+}
+
+.CCBackgroundRoot.ExitToLeft {
+    left: -100%;
+}
+
+.CCBackgroundRoot.ExitToRight {
+    left: 100%;
+}
+
+.CCBackgroundRoot.ExitToTop {
+    top: -100%;
+}
+
+.CCBackgroundRoot.ExitToBottom {
+    top: 100%;
+}
+
+.CCBackgroundRoot.Hide {
+    display: none;
+}
+
+.CCBackgroundTransformer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-behavior: allow-discrete;
+}
+
+.CCBackgroundTransformer.WithZoomInEntry {
+    @starting-style {
+        transform: scale(0.1, 0.1);
+    }
+}
+
+.CCBackgroundTransformer.WithZoomOutEntry {
+    @starting-style {
+        transform: scale(10, 10);
+    }
+}
+
+.CCBackgroundTransformer.WithZoomInExit {
+    transform: scale(10, 10);
+}
+
+.CCBackgroundTransformer.WithZoomOutExit {
+    transform: scale(0.1, 0.1);
+}
+
+
+.CCBackgroundContent {
+    background: url("../../assets/TaptuBrand.svg");
+    background-size: 100% auto;
+    background-position: center;
+    width: 400%;
+    height: 200%;
+    position: relative;
+    transition-behavior: allow-discrete;
+}
