@@ -449,7 +449,7 @@
                     <p class="Fadeable Hide L" data-line2>Observe (hehe) the following:</p>
                     <div class="Fadeable Hide" data-line3>
                         <p class="S Indent1"><span class="Ice Code ">const allKeys = new Set();</span> <span class="Fadeable Hide" data-line4>← Removes duplicates and gives us something to make into an array.</span></p>
-                        <p class="S Indent1"><span class="Ice Code ">JSON.stringify(obj, (key, _) => (allKeys.add(key), key));</span> <span class="Fadeable Hide" data-line5>← Populates the set (some trickery here with the replacer).</span></p>
+                        <p class="S Indent1"><span class="Ice Code ">JSON.stringify(obj, (key, value) => (allKeys.add(key), value));</span> <span class="Fadeable Hide" data-line5>← Populates the set (some trickery with the replacer).</span></p>
                         <p class="S Indent1"><span class="Ice Code ">return JSON.stringify(obj, Array.from(allKeys).sort());</span> <span class="Fadeable Hide" data-line6>← Returns a JSON string of all props (and sub props) in lexicographical order.</span></p>
                     </div>
                     <p class="Fadeable Hide L Green Indent3" data-line7>MAGIC!</p>
