@@ -1,12 +1,16 @@
 .CCDemoObservingElement{
     display: flex;
-    width: 10vmin;
-    height: 10vmin;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(130, 123, 120, 0.8);
+    width: 14vmin;
+    height: 14vmin;
+    flex-direction: column;
+    background-color: rgba(66, 66, 66, 0.5);
     border-radius: 4vmin;
-    border: rgba(130, 123, 120, 1) 3px solid;
+    border: var(--colourBlue) 3px solid;
+    padding: 3vmin;
+}
+
+.CCDemoObservingElement p {
+    color: var(--colourBlue);
 }
 
 .CCDemoObservingElement.Active {
@@ -14,5 +18,11 @@
 }
 
 .CCDemoObservingElement .ObservingElementId {
-    font-size: medium;
+    color: white;
+    font-size: 3vmin;
+}
+
+.CCDemoObservingElement .ObservingElementIdContainer {
+    display: flex;
+    justify-content: center;
 }

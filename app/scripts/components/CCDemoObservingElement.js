@@ -6,7 +6,7 @@
 class CCDemoObservingElement extends CCBase {
     /**
      * Definitions for internal elements
-     * @typedef {('root'|'id')} DemoObservingElementElement
+     * @typedef {('root'|'id'|'title')} DemoObservingElementElement
      */
     
     /**
@@ -24,6 +24,7 @@ class CCDemoObservingElement extends CCBase {
     #elements = {
         root: null,
         id: null,
+        title: null,
     }
     
     /**
@@ -40,7 +41,12 @@ class CCDemoObservingElement extends CCBase {
      * @property {string} #htmlTemplate  
      */
     static #htmlTemplate = `
-        <div class="CCDemoObservingElement" data-element-root> <p class="ObservingElementId" data-element-id></p> </div>
+        <div class="CCDemoObservingElement" data-element-root>
+            <p data-element-title class="M Green">Observing</p>
+            <div class="ObservingElementIdContainer">
+                <p class="ObservingElementId" data-element-id></p>
+            </div>
+        </div>
     `
 
     constructor() {
@@ -66,6 +72,7 @@ class CCDemoObservingElement extends CCBase {
             let fragment = getDOMFragmentFromString(CCDemoObservingElement.#htmlTemplate);
             this.#elements.root = fragment.querySelector('[data-element-root]');
             this.#elements.id = fragment.querySelector('[data-element-id]');
+            this.#elements.title = fragment.querySelector('[data-element-title]');
             this.appendChild(fragment);
         }
     }
@@ -95,11 +102,7 @@ class CCDemoObservingElement extends CCBase {
      * @returns {void}
      */
     render() {
-        if (!this.#elements.root) {
-            return;
-        }
-        
-        if (!this.#elements.id) {
+        if (!this.#elements.root || !this.#elements.id || !this.#elements.title) {
             return;
         }
         
@@ -107,8 +110,12 @@ class CCDemoObservingElement extends CCBase {
 
         if (this.#propertyBag.count % this.#propertyBag.threshold == 0 && this.#propertyBag.count != 0 && CSS.supports('color', this.#propertyBag.color)) {
             this.#elements.root.style.backgroundColor = this.#propertyBag.color;
+            this.#elements.root.style.borderColor = this.#propertyBag.color;
+            this.#elements.title.style.color = 'white';
         } else {
             this.#elements.root.style.backgroundColor = "";
+            this.#elements.root.style.borderColor = 'var(--colourBlue)'; // default
+            this.#elements.title.style.color = 'var(--colourBlue)'; // default
         }
     }
     

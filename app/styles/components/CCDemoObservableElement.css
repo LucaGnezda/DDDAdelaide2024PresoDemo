@@ -2,14 +2,20 @@
     display: flex;
     gap: 5vmin;
     flex-flow: column;
-    align-items: center;
     border-radius: 4vmin;
-    border: rgba(130, 123, 120, 1) 3px solid;
+    border: var(--colourGreen) 3px solid;
     padding: 6vmin;
 }
 
 .CCDemoObservableElement li {
     list-style: none;
+    margin: auto;
+}
+
+.CCDemoObservableElement p {
+    color: var(--colourGreen);
+    margin: 0;
+    padding: 0;
 }
 
 .CCDemoObservableElement .ObservableElementButtons {
@@ -17,3 +23,20 @@
     gap: 5vmin;
 }
 
+.CCDemoObservableElement .DemoResetButton.Filled {
+    background: #5c5c5c;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.5);
+}
+
+.CCDemoObservableElement .DemoResetButton.Filled:hover:not(.Disabled) {
+    background: #4b4b4b;
+}
+
+.CCDemoObservableElement .DemoResetButton.Filled:active:not(.Disabled) {
+    background: #363636;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.5);
+}
+
+.CCDemoObservableElement .DemoButton.Filled {
+    color: white;
+}
