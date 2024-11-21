@@ -52,8 +52,6 @@ class AppService {
         }
 
         document.body.addEventListener("keydown", this.keydownCallback);
-        //document.body.addEventListener("click", this.clickCallback);
-        //document.body.addEventListener('contextmenu', this.clickCallback);
         document.body.addEventListener('mousedown', this.clickCallback);
         document.addEventListener('contextmenu', event => event.preventDefault());
 
