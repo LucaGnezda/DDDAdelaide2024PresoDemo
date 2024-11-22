@@ -130,7 +130,7 @@ class CCFrameworkElement extends CCObservableBase {
             this.#elements.title = fragment.querySelector('[data-element-title]');
             this.#elements.titleStyling = fragment.querySelector('[data-element-titlestyling]');
 
-            fragment.firstChild?.addEventListener("click", /** @type {Function} */(this.clickCallback).bind(this));
+            fragment.firstChild?.addEventListener("mousedown", /** @type {Function} */(this.clickCallback).bind(this));
             
             this.appendChild(fragment);
             
