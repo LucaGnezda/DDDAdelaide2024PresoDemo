@@ -41,9 +41,10 @@ class CCDemoObservableElement extends CCObservableBase {
      */
     static #htmlTemplate = `
         <div class="CCDemoObservableElement" data-element-root> 
+            <p>Observable</p>
             <div class="ObservableElementButtons">
-                <div data-element-button-update id="DemoUpdateButton" class="PresentationButton Filled Show">Update</div>
-                <div data-element-button-reset id="DemoResetButton" class="PresentationButton Filled Show">Reset</div>
+                <div data-element-button-update id="DemoUpdateButton" class="PresentationButton DemoButton Filled Show">Increment</div>
+                <div data-element-button-reset id="DemoResetButton" class="PresentationButton DemoButton DemoResetButton Filled Show">Reset</div>
             </div>
             <li data-element-count></li>
         </div>
@@ -74,7 +75,7 @@ class CCDemoObservableElement extends CCObservableBase {
      * @param {Function} fn 
      */
     set resetCallback(fn) {
-        this.#elements.resetButton?.addEventListener("click", this.resetButtonClick.bind(this), true);
+        this.#elements.resetButton?.addEventListener("mousedown", this.resetButtonClick.bind(this), true);
         this.#propertybag.resetCallback = fn;
     }
     
@@ -82,7 +83,7 @@ class CCDemoObservableElement extends CCObservableBase {
      * @param {Function} fn 
      */
     set updateCallback(fn) {
-        this.#elements.updateButton?.addEventListener("click", this.updateButtonClick.bind(this), true);
+        this.#elements.updateButton?.addEventListener("mousedown", this.updateButtonClick.bind(this), true);
         this.#propertybag.updateCallback = fn;
     }
     

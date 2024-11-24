@@ -550,7 +550,7 @@ const presentationDefinition = {
         {
             "pageContentId": "outro2",
             "pageOverlay": false,
-            "revealSteps": 7
+            "revealSteps": 8
         }, 
         {
             "pageContentId": "intro1",
@@ -777,9 +777,15 @@ const presentationDefinition = {
                 {
                     add: [
                         { key: "data-line1", classes: ["Show"] },
+                        { key: "data-hide1", classes: ["Show"] },
+                        { key: "data-peek1", classes: ["Hide"] },
+                        { key: "data-peek2", classes: ["Hide"] },
                     ],
                     remove: [
                         { key: "data-line1", classes: ["Hide"] },
+                        { key: "data-hide1", classes: ["Hide"] },
+                        { key: "data-peek1", classes: ["Peek"] },
+                        { key: "data-peek2", classes: ["Peek"] },
                     ]
                 },
                 {
@@ -788,14 +794,6 @@ const presentationDefinition = {
                     ],
                     remove: [
                         { key: "data-line2", classes: ["Hide"] }
-                    ]
-                },
-                {
-                    add: [
-                        { key: "data-hide1", classes: ["Show"] },
-                    ],
-                    remove: [
-                        { key: "data-hide1", classes: ["Hide"] },
                     ]
                 },
             ]

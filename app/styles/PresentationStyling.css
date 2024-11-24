@@ -895,7 +895,7 @@ li.LeftHalf {
     right: 0%;
     transform: translateY(-62%) translateX(0%) rotateZ(7deg);
     text-shadow: 2px 5px 8px #000000;
-    transition: all 0.5s ease-in;
+    transition: all 0.4s ease-in;
 }
 
 .PresentationTitleWTF.OffScreen {
@@ -1599,12 +1599,12 @@ li.LeftHalf {
     background-image: url("../assets/images/AmIDunning.png");
     width: 70% !important;
     height: 70% !important;
-    border-radius: 2vmin;
+    border-radius: 4vmin;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    margin: auto;
+    margin: 18vmin -12vmin auto auto;
 }
 
 .UncleBen {

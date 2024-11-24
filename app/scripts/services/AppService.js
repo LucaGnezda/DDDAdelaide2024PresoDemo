@@ -52,7 +52,8 @@ class AppService {
         }
 
         document.body.addEventListener("keydown", this.keydownCallback);
-        document.body.addEventListener("click", this.clickCallback);
+        document.body.addEventListener('mousedown', this.clickCallback);
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
         App.pageNavigationCallback = App.dispatcher.newEventDispatchCallback("App_PageTransition");
         App.pageAnimationCallback = App.dispatcher.newEventDispatchCallback("App_PageAnimation");
@@ -372,7 +373,7 @@ class AppService {
 
         // Goto demo button
         App.elements.solveIcon = document.getElementById("SolveIcon");
-        App.elements.solveIcon?.addEventListener("click", App.dispatcher.newEventDispatchCallback("Hub_SolveIcon_OnClick", true));
+        App.elements.solveIcon?.addEventListener("mousedown", App.dispatcher.newEventDispatchCallback("Hub_SolveIcon_OnClick", true));
 
         // @ts-ignore getElementById gets a HTMLElement, which is technically our CC but the type is wrong.
         App.components.demoObservableElement = document.getElementById("DemoObservableElement");
@@ -588,42 +589,138 @@ class AppService {
     }
 
     /**
-     * @param {MouseEvent} clickEvent
+     * @param {MouseEvent} mouseEvent
      * @returns {void}
      */
-    static clickCallback(clickEvent) {
+    static clickCallback(mouseEvent) {
         Log.debug(`${this.constructor.name} captured click event`, "APPSERVICE");
 
-        if (App.activePage?.content?.overlayState == 'open') {
-            return;
-        }
+        if (mouseEvent.button == 0 ) { // Left click
+            if (App.activePage?.content?.overlayState == 'open' && App.pageOverlayCallback) {
+                if (!App.activePage.content.hasForwardAnimationsRemaining("pageOverlay")) {
+                    return;
+                }
 
-        if (App.activePage?.content?.hasForwardAnimationsRemaining() && App.pageAnimationCallback) {
-            /** @type {AnimateContentPageOverlayEvent} */
-            let event = {
-                originatingObject: this,
-                originatingEvent: clickEvent,
-                activePage: App.activePage,
-                inReverse: false,
-                usingAction: 'animate',
-                withDuration: 1
-            };
+                /** @type AnimateContentPageOverlayEvent */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: mouseEvent,
+                    activePage: App.activePage,
+                    inReverse: false,
+                    usingAction: 'animate',
+                    withDuration: 1
+                };
 
-            App.pageAnimationCallback(event);
-
-        } else if (App.activePage?.nextPage != null && App.activePage.transitionForward && App.activePage.transitionForwardDuration && App.pageNavigationCallback != null) {
-            /** @type {TransitionContentPageEvent} */
-            let event = {
-                originatingObject: this,
-                originatingEvent: clickEvent,
-                transitionFromPage: App.activePage,
-                transitionToPage: App.activePage.nextPage,
-                usingTransition: App.activePage.transitionForward,
-                withDuration: App.activePage.transitionForwardDuration,
-                inReverse: false
+                App.pageOverlayCallback(event)
+                return;
             }
 
-            App.pageNavigationCallback(event);
+            if (App.activePage?.content?.hasForwardAnimationsRemaining() && App.pageAnimationCallback) {
+
+
+                /** @type {AnimateContentPageEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: mouseEvent,
+                    activePage: App.activePage,
+                    inReverse: false
+                }
+
+                App.pageAnimationCallback(event);
+
+            }
+            else if (App.activePage?.nextPage != null && App.activePage.transitionForward && App.activePage.transitionForwardDuration && App.pageNavigationCallback != null) {
+                /** @type {TransitionContentPageEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: mouseEvent,
+                    transitionFromPage: App.activePage,
+                    transitionToPage: App.activePage.nextPage,
+                    usingTransition: App.activePage.transitionForward,
+                    withDuration: App.activePage.transitionForwardDuration,
+                    inReverse: false
+                }
+
+                App.pageNavigationCallback(event);
+
+            }
+        }
+        else if (mouseEvent.button == 2) { // right click
+
+            mouseEvent.preventDefault(); // stop the context menu opening
+
+            if (App.activePage?.content?.overlayState == 'open' && App.pageOverlayCallback) {
+                if (!App.activePage.content.hasBackAnimationsRemaining("pageOverlay")) {
+                    return;
+                }
+
+                /** @type {AnimateContentPageOverlayEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: mouseEvent,
+                    activePage: App.activePage,
+                    inReverse: true,
+                    usingAction: 'animate',
+                    withDuration: 1
+                };
+
+                App.pageOverlayCallback(event)
+                return;
+            }
+
+            if (App.activePage?.content?.hasBackAnimationsRemaining() && App.pageAnimationCallback) {
+                /** @type {AnimateContentPageEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: mouseEvent,
+                    activePage: App.activePage,
+                    inReverse: true
+                }
+
+                App.pageAnimationCallback(event);
+
+            } else if (App.activePage?.previousPage != null && App.activePage.transitionBack && App.activePage.transitionBackDuration && App.pageNavigationCallback != null) {
+                /** @type {TransitionContentPageEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: mouseEvent,
+                    transitionFromPage: App.activePage,
+                    transitionToPage: App.activePage.previousPage,
+                    usingTransition: App.activePage.transitionBack,
+                    withDuration: App.activePage.transitionBackDuration,
+                    inReverse: true
+                }
+
+                App.pageNavigationCallback(event);
+            }
+        } else if (mouseEvent.button == 4) { // secondary high click
+            if (App.activePage?.content?.hasOverlay && App.pageOverlayCallback) {
+                /** @type {AnimateContentPageOverlayEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: mouseEvent,
+                    activePage: App.activePage,
+                    inReverse: false,
+                    usingAction: 'open',
+                    withDuration: 1
+                };
+
+                App.pageOverlayCallback(event)
+            }
+        } else if (mouseEvent.button == 3) { // secondary low click
+            if (App.activePage?.content?.hasOverlay && App.pageOverlayCallback) {
+                /** @type {AnimateContentPageOverlayEvent} */
+                let event = {
+                    originatingObject: this,
+                    originatingEvent: mouseEvent,
+                    activePage: App.activePage,
+                    inReverse: false,
+                    usingAction: 'close',
+                    withDuration: 1
+                };
+
+                App.pageOverlayCallback(event)
+            }
         }
     }
 }
